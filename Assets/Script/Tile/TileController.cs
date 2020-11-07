@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class TileController : MonoBehaviour
 {
-    public virtual void WhenPlayerStop(PlayerController player)
-    {
+    public int index;
 
+    public virtual IEnumerator OnPlayerPass(PlayerController player)
+    {
+        yield return new WaitForSeconds(0.05f);
+    }
+
+    public virtual IEnumerator OnPlayerStop(PlayerController player)
+    {
+        yield return null;
     }
 }

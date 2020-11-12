@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    int position = 0;
+    [HideInInspector]
+    public int position = 0;
 
     public PlayerControlerCanvas canvas;
 
@@ -13,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public GameManager manager;
 
     public Material normal, transparent;
+
+    public TileController currentTile;
 
     public void Awake()
     {
@@ -27,8 +30,8 @@ public class PlayerController : MonoBehaviour
 
     public void StartMovePlayer()
     {
-        int dice1 = ThrowDice();
-        int dice2 = ThrowDice();
+        int dice1 = 1;//ThrowDice();
+        int dice2 = 2;// ThrowDice();
 
         Debug.Log("Dice value 1: " + dice1 + " - 2: " + dice2);
 
@@ -42,7 +45,7 @@ public class PlayerController : MonoBehaviour
     public int ThrowDice()
     {
         //return 6;
-        return Random.Range(1,7);
+        return Random.Range(1, 7);
     }
 
     public IEnumerator MovePlayer(int valueDice)
@@ -52,9 +55,9 @@ public class PlayerController : MonoBehaviour
         {
             TileController tile = boardController.tileControllers.Find(t => t.index == i);
 
-            if(i+1 >= boardController.tileControllers.Count)
+            if (i + 1 >= boardController.tileControllers.Count)
             {
-                var tempDest = dest - i; 
+                var tempDest = dest - i;
                 i = -1;
                 dest = tempDest;
             }
@@ -62,17 +65,23 @@ public class PlayerController : MonoBehaviour
             Vector3 targetPos = tile.transform.position;
             targetPos.y = this.transform.position.y;
 
-            while (Vector3.Distance(transform.position, targetPos) > 0.01f)
-            {
-                float step = 3.5f * Time.deltaTime;
-                transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
-                yield return new WaitForSeconds(0.001f);
-            }
+            yield return Move(targetPos);
 
             position = i;
+            currentTile = tile;
             yield return tile.OnPlayerPass(this);
         }
 
+    }
+
+    public IEnumerator Move(Vector3 targetPos)
+    {
+        while (Vector3.Distance(transform.position, targetPos) > 0.01f)
+        {
+            float step = 3.5f * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+            yield return new WaitForSeconds(0.001f);
+        }
     }
 
     public IEnumerator TurnCorner()
@@ -94,7 +103,7 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeMaterial(bool transparent)
     {
-        if(transparent)
+        if (transparent)
         {
             this.transform.GetComponent<MeshRenderer>().material = this.transparent;
         }
@@ -102,5 +111,32 @@ public class PlayerController : MonoBehaviour
         {
             this.transform.GetComponent<MeshRenderer>().material = normal;
         }
+    }
+
+    public IEnumerator RepositionInTile(int index, int amount)
+    {
+        Vector3 newPos = currentTile.transform.position;
+        newPos.y = this.transform.position.y;
+        if (index % 2 == 0)
+        {
+            newPos.z -= 0.2f;
+        }
+        else
+        {
+            newPos.z += 0.2f;
+        }
+        if(amount>2)
+        {
+            if (index < 2)
+            {
+                newPos.x -= 0.2f;
+            }
+            else
+            {
+                newPos.x += 0.2f;
+            }
+        }
+
+        yield return Move(newPos);
     }
 }

@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
         }
         yield return move;
 
+        yield return TestPlayerOnSameHouse(player);
+
         foreach (var aux in otherP)
         {
             aux.ChangeMaterial(false);
@@ -42,5 +44,21 @@ public class GameManager : MonoBehaviour
             currentPlayer = currentPlayer + 1 < (players.Count) ? currentPlayer + 1 : 0;
 
         StartRound(players[currentPlayer]);
+    }
+
+    public IEnumerator TestPlayerOnSameHouse(PlayerController newPlayer)
+    {
+        //Op1 Movimento no mesmo bloco
+        var playersInSamePos = players.FindAll(n => n.position == newPlayer.position);
+        if(playersInSamePos.Count>1)
+        {
+            for (int i = 0; i < playersInSamePos.Count; i++)
+            {
+                PlayerController aux = (PlayerController)playersInSamePos[i];
+                yield return aux.RepositionInTile(i, playersInSamePos.Count);
+            }
+            yield return newPlayer.RepositionInTile(playersInSamePos.Count-1, playersInSamePos.Count);
+            yield return new WaitForSeconds(0.2f);
+        }
     }
 }

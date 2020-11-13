@@ -6,6 +6,8 @@ public class TileController : MonoBehaviour
 {
     public int index;
 
+    public Tile tile;
+
     public virtual IEnumerator OnPlayerPass(PlayerController player)
     {
         yield return new WaitForSeconds(0.05f);

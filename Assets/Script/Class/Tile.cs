@@ -2,17 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tile : MonoBehaviour
+[System.Serializable]
+[CreateAssetMenu(fileName = "Tile", menuName = "Monopoly/Tile", order = 0)]
+public class Tile : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string nameTile;
 }

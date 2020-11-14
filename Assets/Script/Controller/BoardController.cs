@@ -16,4 +16,33 @@ public class BoardController : MonoBehaviour
         }
         tileControllers.Sort((a, b) => { return a.index.CompareTo(b.index); });
     }
+
+    [ContextMenu("Load county details")]
+    public void LoadAllCountryDetails()
+    {
+        foreach(Transform aux in this.transform)
+        {
+            if(aux.GetComponent<TileController>())
+            {
+                var tile = aux.GetComponent<TileController>().tile as TileBuyable_Country;
+                if (tile != null)
+                {
+                    aux.Find("Price").GetComponent<TextMesh>().text = ConfigureMoney((int)tile.price);
+                    aux.Find("CountryFlag").GetComponent<SpriteRenderer>().sprite = tile.flag;
+                }
+            }
+        }
+    }
+
+    public string ConfigureMoney(int money)
+    {
+        if (money > 100)
+        {
+            return string.Format($"{money / 1000:#,##0K}");
+        }
+        else
+        {
+            return money.ToString();
+        }
+    }
 }

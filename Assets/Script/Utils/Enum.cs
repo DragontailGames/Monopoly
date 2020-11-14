@@ -15,6 +15,17 @@ public class Enum : MonoBehaviour
         luckyTry,
         none
     };
+
+    public enum tradingBlock
+    {
+        sulamericano,
+        americano,
+        europeu,
+        asiatico,
+        africano,
+        orientemedio,
+        eslavo
+    };
 }
 
 

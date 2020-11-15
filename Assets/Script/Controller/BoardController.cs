@@ -27,6 +27,8 @@ public class BoardController : MonoBehaviour
                 var tile = aux.GetComponent<TileController>().tile as TileBuyable_Country;
                 if (tile != null)
                 {
+                    Color backcolor = SettingsManager.instance.colorSettings.tradingBlockColor.Find(n => n.tradingBlock == tile.tradingBlock).color;
+                    aux.GetComponent<SpriteRenderer>().color = backcolor;
                     aux.Find("Price").GetComponent<TextMesh>().text = ConfigureMoney((int)tile.price);
                     aux.Find("CountryFlag").GetComponent<SpriteRenderer>().sprite = tile.flag;
                 }

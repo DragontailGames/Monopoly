@@ -16,18 +16,11 @@ public class PlayerControlerCanvas : MonoBehaviour
     {
         //this.icon.sprite = icon;
         this.playerName.text = playerName;
-        ConfigureMoney(money);
+        this.playerMoney.text = "$" + Math.ConfigureMoney(money);
     }
 
-    public void ConfigureMoney(int money)
+    public void UpdateMoney(int money)
     {
-        if (money > 10000)
-        {
-            this.playerMoney.text = "$" + string.Format($"{money / 1000:#,##0K}");
-        }
-        else
-        {
-            this.playerMoney.text = "$" + money;
-        }
+        this.playerMoney.text = "$" + Math.ConfigureMoney(money);
     }
 }

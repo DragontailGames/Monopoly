@@ -6,4 +6,6 @@ using UnityEngine.UI;
 public class CanvasManager : MonoBehaviour
 {
     public Button btnThrowDice;
+
+    public BuyableMenuController buyableMenu;
 }

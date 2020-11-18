@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
 
     public TileController currentTile;
 
+    public int currentMoney = 3000000;
+
     public void Awake()
     {
         manager.players.Add(this);
@@ -25,7 +27,7 @@ public class PlayerController : MonoBehaviour
     public void Start()
     {
         //StartCoroutine(MovePlayer());
-        canvas.ConfigureUI(null, "Player_" + Random.Range(1000, 9999), 3000000);
+        canvas.ConfigureUI(null, "Player_" + Random.Range(1000, 9999), currentMoney);
     }
 
     public void StartMovePlayer()
@@ -71,6 +73,7 @@ public class PlayerController : MonoBehaviour
             currentTile = tile;
             yield return tile.OnPlayerPass(this);
         }
+        yield return currentTile.OnPlayerStop(this);
 
     }
 
@@ -138,5 +141,11 @@ public class PlayerController : MonoBehaviour
         }
 
         yield return Move(newPos);
+    }
+
+    public void DebitValue(int value)
+    {
+        currentMoney -= value;
+        canvas.UpdateMoney(currentMoney);
     }
 }

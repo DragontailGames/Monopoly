@@ -18,6 +18,8 @@ public class BuyableMenuController : MonoBehaviour
     [SerializeField]
     private List<Sprite> icon = new List<Sprite>();
 
+    bool clicked = false;
+
     public IEnumerator SetupMenu(TileController_Country tile, PlayerController player)
     {
         if(tile.owner == player || tile.owner == null)
@@ -49,22 +51,19 @@ public class BuyableMenuController : MonoBehaviour
 
             Button buyButton = buy.GetComponentInChildren<Button>();
 
+            int level = i;
+
             buyButton.onClick.RemoveAllListeners();
             buyButton.onClick.AddListener(() =>
             {
                 clicked = true;
                 player.DebitValue(fullPrice);
+                tile.BuyTile(player, level);
 
                 focusPanel.SetActive(false);
             });
         }
-        yield return new WaitUntil(() => WaitForClick());
+        yield return new WaitUntil(() => clicked == true);
     }
 
-    bool clicked = false;
-
-    public bool WaitForClick()
-    {
-        return clicked;
-    }
 }

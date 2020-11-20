@@ -31,6 +31,11 @@ public static class Math
         return basePrice * ((float)rentOfPrice[contructionLevel] / 100);
     }
 
+    public static float GetHostileTakeoverPrice(float price)
+    {
+        return price * 2;
+    }
+
     public static string ConfigureMoney(int money)
     {
         if (money > 100)

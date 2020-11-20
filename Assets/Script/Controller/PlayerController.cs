@@ -148,4 +148,10 @@ public class PlayerController : MonoBehaviour
         currentMoney -= value;
         canvas.UpdateMoney(currentMoney);
     }
+
+    public void CreditValue(int value)
+    {
+        currentMoney += value;
+        canvas.UpdateMoney(currentMoney);
+    }
 }

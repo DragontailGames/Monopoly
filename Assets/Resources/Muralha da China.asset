@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c5b86d2bc51e94c9834560f2ce4406, type: 3}
-  m_Name: Tile Buyable
+  m_Script: {fileID: 11500000, guid: c0b2dfc2cf3a99b4cb421d5bf1ae5f0c, type: 3}
+  m_Name: Muralha da China
   m_EditorClassIdentifier: 
-  nameTile: 
-  price: 0
+  nameTile: Muralha da China
+  price: 200000
+  icon: {fileID: 21300000, guid: fa574a6de7aa43d4e8e896cc1e717185, type: 3}

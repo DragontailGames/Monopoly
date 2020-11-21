@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
 
     public int currentMoney = 3000000;
 
+    public int wondersInControl;
+
     public void Awake()
     {
         manager.players.Add(this);
@@ -32,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
     public void StartMovePlayer()
     {
-        int dice1 = 1;//ThrowDice();
+        int dice1 = 3;//ThrowDice();
         int dice2 = 2;//ThrowDice();
 
         Debug.Log("Dice value 1: " + dice1 + " - 2: " + dice2);

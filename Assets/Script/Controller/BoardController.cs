@@ -8,6 +8,12 @@ public class BoardController : MonoBehaviour
 
     public GameObject board;
 
+    public List<GameObject> countryChildPrefab = new List<GameObject>();
+
+    public List<GameObject> wonderChildPrefab = new List<GameObject>();
+
+    public SettingsManager settingsManager;
+
     private void Start()
     {
         foreach(TileController aux in board.transform.GetComponentsInChildren<TileController>())
@@ -19,18 +25,55 @@ public class BoardController : MonoBehaviour
 
     [ContextMenu("Load county details")]
     public void LoadAllCountryDetails()
-    {
+    { 
         foreach(Transform aux in this.transform)
         {
+            
             if(aux.GetComponent<TileController>())
             {
-                var tile = aux.GetComponent<TileController>().tile as TileBuyable_Country;
-                if (tile != null)
+                if (aux.name.EndsWith("Country"))
                 {
-                    Color backcolor = SettingsManager.instance.colorSettings.tradingBlockColor.Find(n => n.tradingBlock == tile.tradingBlock).color;
-                    aux.GetComponent<SpriteRenderer>().color = backcolor;
-                    aux.Find("Price").GetComponent<TextMesh>().text = Math.ConfigureMoney((int)tile.price);
-                    aux.Find("CountryFlag").GetComponent<SpriteRenderer>().sprite = tile.flag;
+                    foreach (var temp in countryChildPrefab)
+                    {
+                        if (!aux.Find(temp.name))
+                        {
+                            GameObject obj = Instantiate(temp, aux);
+                            obj.transform.name = temp.name;
+                        }
+                    }
+
+                    var tile = aux.GetComponent<TileController>().tile as TileBuyable_Country;
+                    if (tile != null)
+                    {
+                        ColorSettings colorSettings = settingsManager.colorSettings;
+                        Color backcolor = colorSettings.tradingBlockColor.Find(n => n.tradingBlock == tile.tradingBlock).color;
+                        aux.GetComponent<SpriteRenderer>().color = backcolor;
+                        aux.Find("Price").GetComponent<TextMesh>().text = Math.ConfigureMoney((int)tile.price);
+                        aux.Find("CountryFlag").GetComponent<SpriteRenderer>().sprite = tile.flag;
+                    }
+
+                }
+                if (aux.name.EndsWith("Wonder"))
+                {
+                    foreach (var temp in wonderChildPrefab)
+                    {
+                        if (!aux.Find(temp.name))
+                        {
+                            GameObject obj = Instantiate(temp, aux);
+                            obj.transform.name = temp.name;
+                        }
+                    }
+
+                    var tile = aux.GetComponent<TileController>().tile as TileBuyable_Wonder;
+                    if (tile != null)
+                    {
+                        ColorSettings colorSettings = settingsManager.colorSettings;
+                        Color backcolor = colorSettings.wonderBackColor;
+                        aux.GetComponent<SpriteRenderer>().color = backcolor;
+                        aux.Find("Price").GetComponent<TextMesh>().text = Math.ConfigureMoney((int)tile.price);
+                        aux.Find("IconWonder").GetComponent<SpriteRenderer>().sprite = tile.icon;
+                    }
+
                 }
             }
         }

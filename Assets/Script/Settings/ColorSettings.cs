@@ -7,6 +7,8 @@ using UnityEngine;
 public class ColorSettings : ScriptableObject
 {
     public List<ColorByTradingBlock> tradingBlockColor = new List<ColorByTradingBlock>();
+
+    public Color wonderBackColor;
 }
 
 [System.Serializable]

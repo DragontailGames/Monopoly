@@ -6,5 +6,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Tile Wonder", menuName = "Monopoly/Tile Wonder", order = 3)]
 public class TileBuyable_Wonder : TileBuyable
 {
-    public Sprite flag;
+    public Sprite icon;
 }

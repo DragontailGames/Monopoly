@@ -2,12 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileController_Country : TileController
+public class TileController_Country : TileController_Buyable
 {
-    public CanvasManager canvas;
-
-    public PlayerController owner;
-
     public int level;
 
     private Transform buildingParent;
@@ -17,14 +13,8 @@ public class TileController_Country : TileController
         buildingParent = this.transform.Find("Building");
     }
 
-    public override IEnumerator OnPlayerStop(PlayerController player)
+    public void UpgradeLevel(int level)
     {
-        yield return canvas.buyableMenu.SetupMenu(this, player);
-    }
-
-    public void BuyTile(PlayerController owner, int level)
-    {
-        this.owner = owner;
         this.level = level;
 
         SetupBuilding();

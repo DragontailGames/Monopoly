@@ -28,7 +28,7 @@ public static class Math
 
     public static float GetRentPrice(float basePrice, int contructionLevel)
     {
-        return basePrice * ((float)rentOfPrice[contructionLevel] / 100);
+        return (float)(basePrice * ((float)rentOfPrice[contructionLevel] / 100));
     }
 
     public static float GetHostileTakeoverPrice(float price)
@@ -46,5 +46,20 @@ public static class Math
         {
             return money.ToString();
         }
+    }
+
+    public static int GetWonderPrice()
+    {
+        return 200000;
+    }
+
+    public static int GetWonderRentPrice(int wonders)
+    {
+        return 50000 * wonders;
+    }
+
+    public static int GetHostileWonderTakeoverPrice()
+    {
+        return 1000000;
     }
 }

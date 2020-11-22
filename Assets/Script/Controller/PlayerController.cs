@@ -34,8 +34,8 @@ public class PlayerController : MonoBehaviour
 
     public void StartMovePlayer()
     {
-        int dice1 = 3;//ThrowDice();
-        int dice2 = 2;//ThrowDice();
+        int dice1 = 5;//ThrowDice();
+        int dice2 = 6;//ThrowDice();
 
         Debug.Log("Dice value 1: " + dice1 + " - 2: " + dice2);
 

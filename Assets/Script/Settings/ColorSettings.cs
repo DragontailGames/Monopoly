@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-[CreateAssetMenu(fileName = "Color Settings", menuName = "Monopoly/Color Settings", order = 4)]
+[CreateAssetMenu(fileName = "Color Settings", menuName = "Monopoly/Color Settings", order = 7)]
 public class ColorSettings : ScriptableObject
 {
     public List<ColorByTradingBlock> tradingBlockColor = new List<ColorByTradingBlock>();

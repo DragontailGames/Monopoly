@@ -24,7 +24,8 @@ public class Enum : MonoBehaviour
         asiatico,
         africano,
         orientemedio,
-        eslavo
+        eslavo,
+        oceanico
     };
 }
 

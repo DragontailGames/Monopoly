@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public List<PlayerController> players = new List<PlayerController>();
 
+    public BoardController board;
+
     int currentPlayer = 0;
 
     public CanvasManager canvasManager;
@@ -17,11 +19,19 @@ public class GameManager : MonoBehaviour
 
     public void StartRound(PlayerController player)
     {
-        canvasManager.btnThrowDice.interactable = true;
-        canvasManager.btnThrowDice.onClick.RemoveAllListeners();
-        canvasManager.btnThrowDice.onClick.AddListener(player.StartMovePlayer);
-        canvasManager.btnThrowDice.onClick.AddListener(() => canvasManager.btnThrowDice.interactable = false);
-        canvasManager.btnThrowDice.image.color = player.GetComponent<MeshRenderer>().materials[0].color;
+        if (player.canTeleport)
+        {
+            board.SetupTeleportBoard(player);
+            canvasManager.btnThrowDice.image.color = player.GetComponent<MeshRenderer>().materials[0].color;
+        }
+        else
+        {
+            canvasManager.btnThrowDice.interactable = true;
+            canvasManager.btnThrowDice.onClick.RemoveAllListeners();
+            canvasManager.btnThrowDice.onClick.AddListener(player.StartMovePlayer);
+            canvasManager.btnThrowDice.onClick.AddListener(() => canvasManager.btnThrowDice.interactable = false);
+            canvasManager.btnThrowDice.image.color = player.GetComponent<MeshRenderer>().materials[0].color;
+        }
     }
 
     public IEnumerator OnMovePlayer(PlayerController player, Coroutine move, bool doubleDice)

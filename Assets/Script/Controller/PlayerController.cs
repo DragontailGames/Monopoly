@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
 
     public int wondersInControl;
 
+    public bool canTeleport = false;
+
     public void Awake()
     {
         manager.players.Add(this);
@@ -34,8 +36,8 @@ public class PlayerController : MonoBehaviour
 
     public void StartMovePlayer()
     {
-        int dice1 = 5;//ThrowDice();
-        int dice2 = 6;//ThrowDice();
+        int dice1 = 15;//ThrowDice();
+        int dice2 = 1;//ThrowDice();
 
         Debug.Log("Dice value 1: " + dice1 + " - 2: " + dice2);
 
@@ -155,5 +157,16 @@ public class PlayerController : MonoBehaviour
     {
         currentMoney += value;
         canvas.UpdateMoney(currentMoney);
+    }
+
+    public void TeleportPlayer(TileController tile)
+    {
+        Vector3 newPos = tile.transform.position;
+        newPos.y = this.transform.position.y;
+        this.transform.position = newPos;
+        currentTile = tile;
+        position = tile.index;
+        canTeleport = false;
+        StartCoroutine(manager.OnMovePlayer(this, StartCoroutine(MovePlayer(0)), false));
     }
 }

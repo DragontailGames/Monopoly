@@ -774,6 +774,7 @@ GameObject:
   - component: {fileID: 45083633}
   - component: {fileID: 45083634}
   - component: {fileID: 45083635}
+  - component: {fileID: 45083636}
   m_Layer: 0
   m_Name: Tile30_Wonder
   m_TagString: Untagged
@@ -862,8 +863,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 30
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
+--- !u!65 &45083636
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45083632}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000005, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: -0.00000047683716, y: 0, z: 0}
 --- !u!1 &56017244
 GameObject:
   m_ObjectHideFlags: 0
@@ -2417,6 +2433,7 @@ GameObject:
   - component: {fileID: 153725826}
   - component: {fileID: 153725827}
   - component: {fileID: 153725828}
+  - component: {fileID: 153725829}
   m_Layer: 0
   m_Name: Tile31_Country
   m_TagString: Untagged
@@ -2506,9 +2523,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 31
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
   level: 0
+--- !u!65 &153725829
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153725825}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000005, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: -0.00000071525574, y: 0, z: 0}
 --- !u!1 &181600520
 GameObject:
   m_ObjectHideFlags: 0
@@ -3798,6 +3830,7 @@ GameObject:
   - component: {fileID: 282867490}
   - component: {fileID: 282867489}
   - component: {fileID: 282867491}
+  - component: {fileID: 282867492}
   m_Layer: 0
   m_Name: Tile5_Wonder
   m_TagString: Untagged
@@ -3886,8 +3919,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 5
   tile: {fileID: 11400000, guid: e9c2ebb67bc7e2c49818e4b79dcf8b4d, type: 2}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
+--- !u!65 &282867492
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282867488}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0, y: -0.0000009536743, z: 0}
 --- !u!1 &286274220
 GameObject:
   m_ObjectHideFlags: 0
@@ -4089,6 +4137,7 @@ GameObject:
   - component: {fileID: 291188381}
   - component: {fileID: 291188382}
   - component: {fileID: 291188383}
+  - component: {fileID: 291188384}
   m_Layer: 0
   m_Name: Tile29_Country
   m_TagString: Untagged
@@ -4178,9 +4227,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 29
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
   level: 0
+--- !u!65 &291188384
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291188380}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000005, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: -0.00000023841858, y: 0, z: 0}
 --- !u!1 &293166866
 GameObject:
   m_ObjectHideFlags: 0
@@ -4384,6 +4448,7 @@ GameObject:
   - component: {fileID: 302533852}
   - component: {fileID: 302533851}
   - component: {fileID: 302533853}
+  - component: {fileID: 302533854}
   m_Layer: 0
   m_Name: Tile22_Country
   m_TagString: Untagged
@@ -4473,9 +4538,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 22
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
   level: 0
+--- !u!65 &302533854
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302533850}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0, y: 0.0000009536743, z: 0}
 --- !u!1 &309235912
 GameObject:
   m_ObjectHideFlags: 0
@@ -6595,6 +6675,7 @@ GameObject:
   - component: {fileID: 441873746}
   - component: {fileID: 441873747}
   - component: {fileID: 441873748}
+  - component: {fileID: 441873749}
   m_Layer: 0
   m_Name: Tile15_Country
   m_TagString: Untagged
@@ -6684,9 +6765,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 15
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
   level: 0
+--- !u!65 &441873749
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441873745}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000005, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0.00000071525574, y: 0, z: 0}
 --- !u!1 &445855760
 GameObject:
   m_ObjectHideFlags: 0
@@ -7388,6 +7484,7 @@ GameObject:
   - component: {fileID: 462789821}
   - component: {fileID: 462789822}
   - component: {fileID: 462789823}
+  - component: {fileID: 462789824}
   m_Layer: 0
   m_Name: Tile12_Country
   m_TagString: Untagged
@@ -7477,9 +7574,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 12
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
   level: 0
+--- !u!65 &462789824
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462789820}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000005, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &478666865
 GameObject:
   m_ObjectHideFlags: 0
@@ -8779,6 +8891,7 @@ GameObject:
   - component: {fileID: 560841914}
   - component: {fileID: 560841913}
   - component: {fileID: 560841915}
+  - component: {fileID: 560841916}
   m_Layer: 0
   m_Name: Tile0_CornerStart
   m_TagString: Untagged
@@ -8865,6 +8978,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   tile: {fileID: 0}
+  tileIsTeleported: 0
+  playerToTeleport: {fileID: 0}
+--- !u!65 &560841916
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560841912}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0, y: -0.0000009536743, z: 0}
 --- !u!1 &561811772
 GameObject:
   m_ObjectHideFlags: 0
@@ -9881,6 +10009,7 @@ GameObject:
   - component: {fileID: 602402202}
   - component: {fileID: 602402203}
   - component: {fileID: 602402204}
+  - component: {fileID: 602402205}
   m_Layer: 0
   m_Name: Tile26_Country
   m_TagString: Untagged
@@ -9970,9 +10099,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 26
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
   level: 0
+--- !u!65 &602402205
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602402201}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000005, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0.00000047683716, y: 0, z: 0}
 --- !u!1 &610678352
 GameObject:
   m_ObjectHideFlags: 0
@@ -10816,6 +10960,7 @@ GameObject:
   - component: {fileID: 685451192}
   - component: {fileID: 685451191}
   - component: {fileID: 685451193}
+  - component: {fileID: 685451194}
   m_Layer: 0
   m_Name: Tile1_Country
   m_TagString: Untagged
@@ -10905,9 +11050,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 1
   tile: {fileID: 11400000, guid: 3add21c34c45a4c488c97a0062423b71, type: 2}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
   level: 0
+--- !u!65 &685451194
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685451190}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0, y: -0.0000009536743, z: 0}
 --- !u!1 &696329261
 GameObject:
   m_ObjectHideFlags: 0
@@ -11053,6 +11213,7 @@ GameObject:
   - component: {fileID: 705174694}
   - component: {fileID: 705174693}
   - component: {fileID: 705174695}
+  - component: {fileID: 705174696}
   m_Layer: 0
   m_Name: Tile23_Country
   m_TagString: Untagged
@@ -11142,9 +11303,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 23
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
   level: 0
+--- !u!65 &705174696
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705174692}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0, y: 0.0000009536743, z: 0}
 --- !u!1 &720948801
 GameObject:
   m_ObjectHideFlags: 0
@@ -12385,6 +12561,7 @@ GameObject:
   - component: {fileID: 849500754}
   - component: {fileID: 849500755}
   - component: {fileID: 849500756}
+  - component: {fileID: 849500757}
   m_Layer: 0
   m_Name: Tile25_Wonder
   m_TagString: Untagged
@@ -12473,8 +12650,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 25
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
+--- !u!65 &849500757
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849500753}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000005, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0.00000071525574, y: 0, z: 0}
 --- !u!1 &863077643
 GameObject:
   m_ObjectHideFlags: 0
@@ -13423,6 +13615,7 @@ GameObject:
   - component: {fileID: 921294059}
   - component: {fileID: 921294058}
   - component: {fileID: 921294060}
+  - component: {fileID: 921294061}
   m_Layer: 0
   m_Name: Tile7_Country
   m_TagString: Untagged
@@ -13512,9 +13705,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 7
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
   level: 0
+--- !u!65 &921294061
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921294057}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0, y: -0.0000009536743, z: 0}
 --- !u!1 &923769306
 GameObject:
   m_ObjectHideFlags: 0
@@ -14084,6 +14292,7 @@ GameObject:
   - component: {fileID: 974903385}
   - component: {fileID: 974903386}
   - component: {fileID: 974903387}
+  - component: {fileID: 974903388}
   m_Layer: 0
   m_Name: Tile14_Wonder
   m_TagString: Untagged
@@ -14172,8 +14381,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 14
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
+--- !u!65 &974903388
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974903384}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000005, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0.00000047683716, y: 0, z: 0}
 --- !u!1 &990958777
 GameObject:
   m_ObjectHideFlags: 0
@@ -14185,6 +14409,7 @@ GameObject:
   - component: {fileID: 990958778}
   - component: {fileID: 990958779}
   - component: {fileID: 990958780}
+  - component: {fileID: 990958781}
   m_Layer: 0
   m_Name: Tile11_Lucky
   m_TagString: Untagged
@@ -14272,8 +14497,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 11
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   luckyEffect: {fileID: 236681037}
   luckyMenuController: {fileID: 1537900030}
+--- !u!65 &990958781
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990958777}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000005, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: -0.00000023841858, y: 0, z: 0}
 --- !u!1 &992431307
 GameObject:
   m_ObjectHideFlags: 0
@@ -15745,6 +15985,7 @@ MonoBehaviour:
   currentTile: {fileID: 0}
   currentMoney: 3000000
   wondersInControl: 0
+  canTeleport: 0
 --- !u!136 &1030978703
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -16452,6 +16693,7 @@ MonoBehaviour:
   currentTile: {fileID: 0}
   currentMoney: 3000000
   wondersInControl: 0
+  canTeleport: 0
 --- !u!136 &1110025425
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -17972,6 +18214,7 @@ GameObject:
   - component: {fileID: 1196906001}
   - component: {fileID: 1196906000}
   - component: {fileID: 1196906002}
+  - component: {fileID: 1196906003}
   m_Layer: 0
   m_Name: Tile18_Wonder
   m_TagString: Untagged
@@ -18060,8 +18303,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 18
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
+--- !u!65 &1196906003
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196905999}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0, y: 0.0000009536743, z: 0}
 --- !u!1 &1204644359
 GameObject:
   m_ObjectHideFlags: 0
@@ -20290,6 +20548,7 @@ GameObject:
   - component: {fileID: 1321272045}
   - component: {fileID: 1321272046}
   - component: {fileID: 1321272047}
+  - component: {fileID: 1321272048}
   m_Layer: 0
   m_Name: Tile13_Country
   m_TagString: Untagged
@@ -20379,9 +20638,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 13
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
   level: 0
+--- !u!65 &1321272048
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321272044}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000005, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0.00000023841858, y: 0, z: 0}
 --- !u!1 &1333938986
 GameObject:
   m_ObjectHideFlags: 0
@@ -20488,6 +20762,7 @@ GameObject:
   - component: {fileID: 1341263033}
   - component: {fileID: 1341263034}
   - component: {fileID: 1341263035}
+  - component: {fileID: 1341263036}
   m_Layer: 0
   m_Name: Tile24_CornerJail
   m_TagString: Untagged
@@ -20574,6 +20849,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 24
   tile: {fileID: 0}
+  tileIsTeleported: 0
+  playerToTeleport: {fileID: 0}
+--- !u!65 &1341263036
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341263032}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0, y: -0.0000009536743, z: 0}
 --- !u!1 &1347985979
 GameObject:
   m_ObjectHideFlags: 0
@@ -22175,6 +22465,7 @@ GameObject:
   - component: {fileID: 1415692519}
   - component: {fileID: 1415692518}
   - component: {fileID: 1415692520}
+  - component: {fileID: 1415692521}
   m_Layer: 0
   m_Name: Tile21_Country
   m_TagString: Untagged
@@ -22264,9 +22555,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 21
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
   level: 0
+--- !u!65 &1415692521
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415692517}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0, y: 0.0000009536743, z: 0}
 --- !u!1 &1418153547
 GameObject:
   m_ObjectHideFlags: 0
@@ -22278,6 +22584,7 @@ GameObject:
   - component: {fileID: 1418153548}
   - component: {fileID: 1418153549}
   - component: {fileID: 1418153550}
+  - component: {fileID: 1418153551}
   m_Layer: 0
   m_Name: Tile27_Country
   m_TagString: Untagged
@@ -22367,9 +22674,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 27
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
   level: 0
+--- !u!65 &1418153551
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418153547}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000005, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0.00000023841858, y: 0, z: 0}
 --- !u!1 &1418538063
 GameObject:
   m_ObjectHideFlags: 0
@@ -22476,6 +22798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players: []
+  board: {fileID: 479801770}
   canvasManager: {fileID: 1757711527}
 --- !u!4 &1420617877
 Transform:
@@ -22864,6 +23187,7 @@ GameObject:
   - component: {fileID: 1436996103}
   - component: {fileID: 1436996102}
   - component: {fileID: 1436996104}
+  - component: {fileID: 1436996105}
   m_Layer: 0
   m_Name: Tile20_Lucky
   m_TagString: Untagged
@@ -22951,8 +23275,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 20
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   luckyEffect: {fileID: 236681037}
   luckyMenuController: {fileID: 1537900030}
+--- !u!65 &1436996105
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436996101}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0, y: 0.0000009536743, z: 0}
 --- !u!1 &1438048282
 GameObject:
   m_ObjectHideFlags: 0
@@ -24183,6 +24522,7 @@ GameObject:
   - component: {fileID: 1482467705}
   - component: {fileID: 1482467704}
   - component: {fileID: 1482467706}
+  - component: {fileID: 1482467707}
   m_Layer: 0
   m_Name: Tile8_CornerJail
   m_TagString: Untagged
@@ -24269,6 +24609,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 8
   tile: {fileID: 0}
+  tileIsTeleported: 0
+  playerToTeleport: {fileID: 0}
+--- !u!65 &1482467707
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482467703}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0, y: -0.0000009536743, z: 0}
 --- !u!1 &1490623724
 GameObject:
   m_ObjectHideFlags: 0
@@ -24310,6 +24665,7 @@ MonoBehaviour:
   currentTile: {fileID: 0}
   currentMoney: 3000000
   wondersInControl: 0
+  canTeleport: 0
 --- !u!136 &1490623726
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -24533,6 +24889,7 @@ GameObject:
   - component: {fileID: 1504302494}
   - component: {fileID: 1504302493}
   - component: {fileID: 1504302495}
+  - component: {fileID: 1504302496}
   m_Layer: 0
   m_Name: Tile3_Country
   m_TagString: Untagged
@@ -24622,9 +24979,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 3
   tile: {fileID: 11400000, guid: 882c9f572fe9a1844820d203f80a512b, type: 2}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
   level: 0
+--- !u!65 &1504302496
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504302492}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0, y: -0.0000009536743, z: 0}
 --- !u!1001 &1515786257
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26754,6 +27126,7 @@ GameObject:
   - component: {fileID: 1622719357}
   - component: {fileID: 1622719356}
   - component: {fileID: 1622719358}
+  - component: {fileID: 1622719359}
   m_Layer: 0
   m_Name: Tile17_Country
   m_TagString: Untagged
@@ -26843,9 +27216,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 17
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
   level: 0
+--- !u!65 &1622719359
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622719355}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0, y: 0.0000009536743, z: 0}
 --- !u!1 &1627050648
 GameObject:
   m_ObjectHideFlags: 0
@@ -29144,6 +29532,7 @@ GameObject:
   - component: {fileID: 1785151781}
   - component: {fileID: 1785151782}
   - component: {fileID: 1785151783}
+  - component: {fileID: 1785151784}
   m_Layer: 0
   m_Name: Tile28_Lucky
   m_TagString: Untagged
@@ -29231,8 +29620,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 28
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   luckyEffect: {fileID: 236681037}
   luckyMenuController: {fileID: 1537900030}
+--- !u!65 &1785151784
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785151780}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000005, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1795069723
 GameObject:
   m_ObjectHideFlags: 0
@@ -29968,6 +30372,7 @@ GameObject:
   - component: {fileID: 1821049079}
   - component: {fileID: 1821049078}
   - component: {fileID: 1821049080}
+  - component: {fileID: 1821049081}
   m_Layer: 0
   m_Name: Tile16_CornerVacation
   m_TagString: Untagged
@@ -30015,7 +30420,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 995e99f757707444caf7adc6236dc2ea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7b86a2858351ecd4bb39359e73c6af46, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -30054,6 +30459,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 16
   tile: {fileID: 0}
+  tileIsTeleported: 0
+  playerToTeleport: {fileID: 0}
+  board: {fileID: 0}
+--- !u!65 &1821049081
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821049077}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0, y: 0.0000009536743, z: 0}
 --- !u!1 &1821936350
 GameObject:
   m_ObjectHideFlags: 0
@@ -30162,6 +30583,7 @@ GameObject:
   - component: {fileID: 1826169012}
   - component: {fileID: 1826169011}
   - component: {fileID: 1826169013}
+  - component: {fileID: 1826169014}
   m_Layer: 0
   m_Name: Tile2_Country
   m_TagString: Untagged
@@ -30251,9 +30673,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 2
   tile: {fileID: 11400000, guid: c6f105bca8e06284e864cc21f3a52d87, type: 2}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
   level: 0
+--- !u!65 &1826169014
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826169010}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0, y: -0.0000009536743, z: 0}
 --- !u!1 &1831227909
 GameObject:
   m_ObjectHideFlags: 0
@@ -30614,6 +31051,7 @@ MonoBehaviour:
   currentTile: {fileID: 0}
   currentMoney: 3000000
   wondersInControl: 0
+  canTeleport: 0
 --- !u!1 &1860395334
 GameObject:
   m_ObjectHideFlags: 0
@@ -31330,6 +31768,7 @@ GameObject:
   - component: {fileID: 1907086083}
   - component: {fileID: 1907086082}
   - component: {fileID: 1907086084}
+  - component: {fileID: 1907086085}
   m_Layer: 0
   m_Name: Tile6_Country
   m_TagString: Untagged
@@ -31419,9 +31858,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 6
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
   level: 0
+--- !u!65 &1907086085
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907086081}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0, y: -0.0000009536743, z: 0}
 --- !u!1001 &1911051884
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31789,6 +32243,7 @@ GameObject:
   - component: {fileID: 1928950491}
   - component: {fileID: 1928950492}
   - component: {fileID: 1928950493}
+  - component: {fileID: 1928950494}
   m_Layer: 0
   m_Name: Tile9_Country
   m_TagString: Untagged
@@ -31878,9 +32333,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 9
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
   level: 0
+--- !u!65 &1928950494
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928950490}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000005, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: -0.00000071525574, y: 0, z: 0}
 --- !u!1 &1946965669
 GameObject:
   m_ObjectHideFlags: 0
@@ -32404,6 +32874,7 @@ GameObject:
   - component: {fileID: 1998385215}
   - component: {fileID: 1998385214}
   - component: {fileID: 1998385216}
+  - component: {fileID: 1998385217}
   m_Layer: 0
   m_Name: Tile4_Country
   m_TagString: Untagged
@@ -32493,9 +32964,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 4
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
   level: 0
+--- !u!65 &1998385217
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998385213}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0, y: -0.0000009536743, z: 0}
 --- !u!1 &1999529991
 GameObject:
   m_ObjectHideFlags: 0
@@ -32813,6 +33299,7 @@ GameObject:
   - component: {fileID: 2018767299}
   - component: {fileID: 2018767300}
   - component: {fileID: 2018767301}
+  - component: {fileID: 2018767302}
   m_Layer: 0
   m_Name: Tile10_Country
   m_TagString: Untagged
@@ -32902,9 +33389,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 10
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
   level: 0
+--- !u!65 &2018767302
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018767298}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000005, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: -0.00000047683716, y: 0, z: 0}
 --- !u!1 &2028213682
 GameObject:
   m_ObjectHideFlags: 0
@@ -33013,6 +33515,7 @@ GameObject:
   - component: {fileID: 2032124612}
   - component: {fileID: 2032124611}
   - component: {fileID: 2032124613}
+  - component: {fileID: 2032124614}
   m_Layer: 0
   m_Name: Tile19_Country
   m_TagString: Untagged
@@ -33102,9 +33605,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 19
   tile: {fileID: 0}
+  tileIsTeleported: 1
+  playerToTeleport: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
   level: 0
+--- !u!65 &2032124614
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2032124610}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5000004, z: 0.20000005}
+  m_Center: {x: 0, y: 0.0000009536743, z: 0}
 --- !u!1 &2034646239
 GameObject:
   m_ObjectHideFlags: 0

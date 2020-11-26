@@ -28,7 +28,7 @@ public class TileController : MonoBehaviour
     {
         if (playerToTeleport && tileIsTeleported)
         {
-            playerToTeleport.TeleportPlayer(this);
+            playerToTeleport.TravelPlayer(this);
             boardController.ResetPlayerToTeleport();
         }
     }

@@ -37,7 +37,7 @@ public class BuyableRentWonderMenuController : MonoBehaviour
             this.gameObject.SetActive(false);
         });
 
-        int hostilePrice = Math.GetHostileWonderTakeoverPrice();
+        int hostilePrice = Math.hostileWonderTakeoverPrice;
 
         Transform payHostile = hostileTakeoverPanel.transform.GetChild(0).Find("Buy");
 
@@ -50,7 +50,7 @@ public class BuyableRentWonderMenuController : MonoBehaviour
         {
             clicked = true;
             player.DebitValue(hostilePrice);
-            tile.owner.CreditValue(Math.GetWonderPrice());
+            tile.owner.CreditValue(Math.wonderPrice);
             tile.owner = player;
 
             this.gameObject.SetActive(false);

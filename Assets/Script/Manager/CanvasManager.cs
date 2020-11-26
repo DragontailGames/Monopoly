@@ -8,4 +8,6 @@ public class CanvasManager : MonoBehaviour
     public Button btnThrowDice;
 
     public BuyableMenuController buyableMenu;
+
+    public JailMenuController jailMenuController;
 }

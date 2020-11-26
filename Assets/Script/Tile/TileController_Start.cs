@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class TileController_Start : TileController
 {
+    public int startMoney;
+
     public override IEnumerator OnPlayerPass(PlayerController player)
     {
-       // base.OnPlayerPass(player);
+        // base.OnPlayerPass(player);
+        player.CreditValue(startMoney);
         yield return player.TurnCorner();
     }
 

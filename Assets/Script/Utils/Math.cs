@@ -21,6 +21,12 @@ public static class Math
         50
     };
 
+    public static int jailPrice = 200000;
+
+    public static int wonderPrice = 200000;
+
+    public static int hostileWonderTakeoverPrice = 1000000;
+
     public static float GetContructionPrice(float basePrice, int contructionLevel)
     {
         return basePrice * (1.0f + (float)percentageOfPrice[contructionLevel] / 100);
@@ -48,18 +54,8 @@ public static class Math
         }
     }
 
-    public static int GetWonderPrice()
-    {
-        return 200000;
-    }
-
     public static int GetWonderRentPrice(int wonders)
     {
         return 50000 * wonders;
-    }
-
-    public static int GetHostileWonderTakeoverPrice()
-    {
-        return 1000000;
     }
 }

@@ -15,6 +15,8 @@ public class BoardController : MonoBehaviour
 
     public SettingsManager settingsManager;
 
+    public TileController_Jail jail;
+
     private void Start()
     {
         foreach(TileController aux in board.transform.GetComponentsInChildren<TileController>())

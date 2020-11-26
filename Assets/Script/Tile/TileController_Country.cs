@@ -27,6 +27,7 @@ public class TileController_Country : TileController_Buyable
             aux.gameObject.SetActive(false);
         }
 
-        buildingParent.GetChild(level - 1).gameObject.SetActive(true);
+        if(level != 0)
+            buildingParent.GetChild(level - 1).gameObject.SetActive(true);
     }
 }

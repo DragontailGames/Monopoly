@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,36 +9,60 @@ public class GameManager : MonoBehaviour
 
     public BoardController board;
 
-    int currentPlayer = 0;
+    [HideInInspector]
+    public int currentPlayer = 0;
 
     public CanvasManager canvasManager;
 
     public void Start()
     {
-        StartRound(players[currentPlayer]);
+        players.Sort((a, b) => (a.transform.GetSiblingIndex().CompareTo(b.transform.GetSiblingIndex())));
+        StartCoroutine(StartRound());
     }
 
-    public void StartRound(PlayerController player)
+    public IEnumerator StartRound()
     {
-        if (player.canTeleport)
+        PlayerController player = players[currentPlayer];
+        Debug.Log(player.name);
+        if (player.inJail)
         {
-            board.SetupTeleportBoard(player);
-            canvasManager.btnThrowDice.image.color = player.GetComponent<MeshRenderer>().materials[0].color;
+            player.jailRow++;
+            if(player.jailRow>2)
+            {
+                player.inJail = false;
+                StartCoroutine(StartRound());
+                yield break;
+            }
+            yield return canvasManager.jailMenuController.ShowCanvasPlayer(player);
+            if(player.inJail)
+            {
+                NextPlayer();
+                ConfigDice(players[currentPlayer]);
+            }
+            else
+            {
+                StartCoroutine(StartRound());
+            }
         }
         else
         {
-            canvasManager.btnThrowDice.interactable = true;
-            canvasManager.btnThrowDice.onClick.RemoveAllListeners();
-            canvasManager.btnThrowDice.onClick.AddListener(player.StartMovePlayer);
-            canvasManager.btnThrowDice.onClick.AddListener(() => canvasManager.btnThrowDice.interactable = false);
-            canvasManager.btnThrowDice.image.color = player.GetComponent<MeshRenderer>().materials[0].color;
+            if (player.canTeleport)
+            {
+                board.SetupTeleportBoard(player);
+                canvasManager.btnThrowDice.image.color = player.GetComponent<MeshRenderer>().materials[0].color;
+            }
+            else
+            {
+                yield return new WaitForSeconds(0.2f);
+                ConfigDice(player);
+            }
         }
     }
 
-    public IEnumerator OnMovePlayer(PlayerController player, Coroutine move, bool doubleDice)
+    public IEnumerator OnMovePlayer(PlayerMoveController player, IEnumerator move, bool doubleDice)
     {
-        var otherP = players.FindAll(i => i != player);
-        foreach(var aux in otherP)
+        var otherP = players.FindAll(i => i != player.playerController);
+        foreach (var aux in otherP)
         {
             aux.ChangeMaterial(true);
         }
@@ -50,25 +75,40 @@ public class GameManager : MonoBehaviour
             aux.ChangeMaterial(false);
         }
 
-        if(!doubleDice)
-            currentPlayer = currentPlayer + 1 < (players.Count) ? currentPlayer + 1 : 0;
+        if (!doubleDice)
+            NextPlayer();
 
-        StartRound(players[currentPlayer]);
+        StartCoroutine(StartRound());
     }
 
-    public IEnumerator TestPlayerOnSameHouse(PlayerController newPlayer)
+    public IEnumerator TestPlayerOnSameHouse(PlayerMoveController newPlayer)
     {
         //Op1 Movimento no mesmo bloco
-        var playersInSamePos = players.FindAll(n => n.position == newPlayer.position);
+        var playersInSamePos = players.FindAll(n => n.moveController.position == newPlayer.position);
         if(playersInSamePos.Count>1)
         {
             for (int i = 0; i < playersInSamePos.Count; i++)
             {
                 PlayerController aux = (PlayerController)playersInSamePos[i];
-                yield return aux.RepositionInTile(i, playersInSamePos.Count);
+                yield return aux.moveController.RepositionInTile(i, playersInSamePos.Count);
             }
             yield return newPlayer.RepositionInTile(playersInSamePos.Count-1, playersInSamePos.Count);
             yield return new WaitForSeconds(0.2f);
         }
+    }
+
+    public void ConfigDice(PlayerController player)
+    {
+
+        canvasManager.btnThrowDice.interactable = true;
+        canvasManager.btnThrowDice.onClick.RemoveAllListeners();
+        canvasManager.btnThrowDice.onClick.AddListener(player.moveController.StartMovePlayer);
+        canvasManager.btnThrowDice.onClick.AddListener(() => canvasManager.btnThrowDice.interactable = false);
+        canvasManager.btnThrowDice.image.color = player.GetComponent<MeshRenderer>().materials[0].color;
+    }
+
+    public void NextPlayer()
+    {
+        currentPlayer = currentPlayer + 1 < (players.Count) ? currentPlayer + 1 : 0;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class PlayerControlerCanvas : MonoBehaviour
+public class PlayerControllerCanvas : MonoBehaviour
 {
     public Image icon;
 
@@ -22,5 +22,15 @@ public class PlayerControlerCanvas : MonoBehaviour
     public void UpdateMoney(int money)
     {
         this.playerMoney.text = "$" + Math.ConfigureMoney(money);
+    }
+
+    public void StartRound()
+    {
+
+    }
+
+    public void EndRound()
+    {
+
     }
 }

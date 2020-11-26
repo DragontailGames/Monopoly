@@ -20,7 +20,7 @@ public class BuyableWonderMenuController : MonoBehaviour
 
         var content = wonderPanel.transform.GetChild(0);
 
-        int price = (int)Math.GetWonderPrice();
+        int price = Math.wonderPrice;
 
         Transform title = content.transform.Find("Title");
         Transform icon = content.transform.Find("Icon");

@@ -36,7 +36,7 @@ public class BuyableRentMenuController : MonoBehaviour
             this.gameObject.SetActive(false);
         });
 
-        int hostilePrice = (int)Math.GetHostileTakeoverPrice((int)Math.GetContructionPrice(tileBuyable.price, tile.level, tile.level));
+        int hostilePrice = (int)Math.GetHostileTakeoverPrice((int)Math.GetContructionPrice(tileBuyable.price, tile.level));
 
         Transform payHostile = hostileTakeoverPanel.transform.GetChild(0).Find("Buy");
         payHostile.GetComponentInChildren<TextMeshProUGUI>().text = "Compra hostil por $" + Math.ConfigureMoney(rentPrice);
@@ -47,7 +47,7 @@ public class BuyableRentMenuController : MonoBehaviour
         hostileButton.onClick.AddListener(() =>
         {
             clicked = true;
-            int creditValue = (int)Math.GetContructionPrice(tileBuyable.price, tile.level, tile.level);
+            int creditValue = (int)Math.GetContructionPrice(tileBuyable.price, tile.level);
             player.TransferMoney(hostilePrice, creditValue, tile.owner);
             tile.owner = player;
 
@@ -65,5 +65,6 @@ public class BuyableRentMenuController : MonoBehaviour
     public void CloseButton()
     {
         clicked = true;
+        this.gameObject.SetActive(false);
     }
 }

@@ -77,6 +77,7 @@ public class BuyableHouseMenuController : MonoBehaviour
     public void CloseButton()
     {
         clicked = true;
+        this.gameObject.SetActive(false);
     }
 
 }

@@ -39,6 +39,12 @@ public static class Math
 
         return constructionPrice;
     }
+    public static float GetContructionPrice(float basePrice, int contructionLevel)
+    {
+        float constructionPrice = basePrice * (1.0f + (float)percentageOfPrice[contructionLevel] / 100);
+
+        return constructionPrice;
+    }
 
     public static float GetRentPrice(float basePrice, int contructionLevel)
     {
@@ -75,7 +81,7 @@ public static class Math
         if(btile.GetType() == typeof(TileController_Country))
         {
             TileController_Country country = btile as TileController_Country;
-            return (int)(GetContructionPrice(b.price, country.level, 0) * percentage);
+            return (int)(GetContructionPrice(b.price, country.level) * percentage);
         }
         else
         {

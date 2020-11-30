@@ -55,5 +55,6 @@ public class BuyableWonderMenuController : MonoBehaviour
     public void CloseButton()
     {
         clicked = true;
+        this.gameObject.SetActive(false);
     }
 }

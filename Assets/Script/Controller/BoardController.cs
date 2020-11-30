@@ -71,11 +71,12 @@ public class BoardController : MonoBehaviour
                 {
                     foreach (var temp in countryChildPrefab)
                     {
-                        if (!aux.Find(temp.name))
+                        if(aux.Find(temp.name))
                         {
-                            GameObject obj = Instantiate(temp, aux);
-                            obj.transform.name = temp.name;
+                            DestroyImmediate(aux.Find(temp.name).gameObject);
                         }
+                        GameObject obj = Instantiate(temp, aux);
+                        obj.transform.name = temp.name;
                     }
 
                     var tile = aux.GetComponent<TileController>().tile as TileBuyable_Country;

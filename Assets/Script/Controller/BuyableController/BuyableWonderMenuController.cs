@@ -38,11 +38,22 @@ public class BuyableWonderMenuController : MonoBehaviour
             clicked = true;
             player.DebitValue(price);
             tile.BuyTile(player);
+            player.firstBuy = true;
             player.wondersInControl++;
 
             this.gameObject.SetActive(false);
         });
 
+        if (player.currentMoney <= price)
+            buyButton.interactable = false;
+        else
+            buyButton.interactable = true;
+
         yield return new WaitUntil(() => clicked == true);
+    }
+
+    public void CloseButton()
+    {
+        clicked = true;
     }
 }

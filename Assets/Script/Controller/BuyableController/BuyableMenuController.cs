@@ -6,8 +6,7 @@ using UnityEngine.UI;
 
 public class BuyableMenuController : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject focusPanel;
+    public GameObject focusPanel;
 
     public BuyableHouseMenuController buyableHouseMenuController;
 

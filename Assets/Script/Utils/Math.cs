@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,14 +28,21 @@ public static class Math
 
     public static int hostileWonderTakeoverPrice = 1000000;
 
-    public static float GetContructionPrice(float basePrice, int contructionLevel)
+    public static float GetContructionPrice(float basePrice, int contructionLevel, int currentLevel)
     {
-        return basePrice * (1.0f + (float)percentageOfPrice[contructionLevel] / 100);
+        float constructionPrice = basePrice * (1.0f + (float)percentageOfPrice[contructionLevel] / 100);
+
+        if(currentLevel>0)
+        {
+            constructionPrice -= basePrice * (1.0f + (float)percentageOfPrice[currentLevel] / 100);
+        }
+
+        return constructionPrice;
     }
 
     public static float GetRentPrice(float basePrice, int contructionLevel)
     {
-        return (float)(basePrice * ((float)rentOfPrice[contructionLevel] / 100));
+        return basePrice * ((float)rentOfPrice[contructionLevel] / 100);
     }
 
     public static float GetHostileTakeoverPrice(float price)
@@ -57,5 +65,22 @@ public static class Math
     public static int GetWonderRentPrice(int wonders)
     {
         return 50000 * wonders;
+    }
+
+    internal static int GetMortgagePrice(TileController_Buyable btile)
+    {
+        float percentage = 0.75f;
+        TileBuyable b = btile.tile as TileBuyable;
+
+        if(btile.GetType() == typeof(TileController_Country))
+        {
+            TileController_Country country = btile as TileController_Country;
+            return (int)(GetContructionPrice(b.price, country.level, 0) * percentage);
+        }
+        else
+        {
+            return (int)(wonderPrice * percentage);
+        }
+
     }
 }

@@ -21,12 +21,24 @@ public class BuyableHouseMenuController : MonoBehaviour
 
         clicked = false;
 
-        for (int i = tile.level; i < 4; i++)
+        int startValue = tile.level;
+        if(tile.level<4 && tile.owner != null && tile.level > 0)
         {
+            startValue++;
+        }
+
+        foreach(var aux in buyablePanel)
+        {
+            aux.SetActive(false);
+        }
+
+        for (int i = startValue; i < 4; i++)
+        {
+            buyablePanel[i].SetActive(true);
             var tileBuyable = tile.tile as TileBuyable_Country;
             var content = buyablePanel[i].transform.GetChild(0);
 
-            int fullPrice = (int)Math.GetContructionPrice(tileBuyable.price, i);
+            int fullPrice = (int)Math.GetContructionPrice(tileBuyable.price, i, tile.level);
 
             Transform title = content.transform.Find("Title");
             Transform icon = content.transform.Find("Icon");
@@ -48,12 +60,23 @@ public class BuyableHouseMenuController : MonoBehaviour
                 clicked = true;
                 player.DebitValue(fullPrice);
                 tile.BuyTile(player);
+                player.firstBuy = true;
                 tile.UpgradeLevel(level);
 
                 this.gameObject.SetActive(false);
             });
+
+            if(player.currentMoney<=fullPrice)
+                buyButton.interactable = false;
+            else
+                buyButton.interactable = true;
         }
         yield return new WaitUntil(() => clicked == true);
+    }
+
+    public void CloseButton()
+    {
+        clicked = true;
     }
 
 }

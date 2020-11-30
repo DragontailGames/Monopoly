@@ -25,12 +25,10 @@ public class LuckyEffectManager : MonoBehaviour
     {
         if (value != 0)
         {
-            Debug.Log("Chegou 1");
             player.DebitValue(value);
         }
         else
         {
-            Debug.Log("Chegou 2");
             player.DebitValue((int)(player.currentMoney * ((float)percentage/100)));
         }
     }

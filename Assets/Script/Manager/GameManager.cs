@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
     public IEnumerator StartRound()
     {
         PlayerController player = players[currentPlayer];
-        Debug.Log(player.name);
         if (player.inJail)
         {
             player.jailRow++;
@@ -37,7 +36,7 @@ public class GameManager : MonoBehaviour
             if(player.inJail)
             {
                 NextPlayer();
-                ConfigDice(players[currentPlayer]);
+                StartCoroutine(ConfigDice(players[currentPlayer]));
             }
             else
             {
@@ -46,15 +45,14 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (player.canTeleport)
+            if (player.canTravel)
             {
-                board.SetupTeleportBoard(player);
+                board.SetupTravelBoard(player);
                 canvasManager.btnThrowDice.image.color = player.GetComponent<MeshRenderer>().materials[0].color;
             }
             else
             {
-                yield return new WaitForSeconds(0.2f);
-                ConfigDice(player);
+                StartCoroutine(ConfigDice(player));
             }
         }
     }
@@ -68,17 +66,24 @@ public class GameManager : MonoBehaviour
         }
         yield return move;
 
+        yield return player.playerController.CheckBankruptcy();
+
         yield return TestPlayerOnSameHouse(player);
 
-        foreach (var aux in otherP)
-        {
-            aux.ChangeMaterial(false);
-        }
+        ResetTransparentMaterial();
 
         if (!doubleDice)
             NextPlayer();
 
         StartCoroutine(StartRound());
+    }
+
+    public void ResetTransparentMaterial()
+    {
+        foreach (var aux in players)
+        {
+            aux.ChangeMaterial(false);
+        }
     }
 
     public IEnumerator TestPlayerOnSameHouse(PlayerMoveController newPlayer)
@@ -93,13 +98,12 @@ public class GameManager : MonoBehaviour
                 yield return aux.moveController.RepositionInTile(i, playersInSamePos.Count);
             }
             yield return newPlayer.RepositionInTile(playersInSamePos.Count-1, playersInSamePos.Count);
-            yield return new WaitForSeconds(0.2f);
         }
     }
 
-    public void ConfigDice(PlayerController player)
+    public IEnumerator ConfigDice(PlayerController player)
     {
-
+        yield return new WaitForSeconds(0.2f);
         canvasManager.btnThrowDice.interactable = true;
         canvasManager.btnThrowDice.onClick.RemoveAllListeners();
         canvasManager.btnThrowDice.onClick.AddListener(player.moveController.StartMovePlayer);
@@ -110,5 +114,10 @@ public class GameManager : MonoBehaviour
     public void NextPlayer()
     {
         currentPlayer = currentPlayer + 1 < (players.Count) ? currentPlayer + 1 : 0;
+    }
+
+    public void BeforePlayer()
+    {
+        currentPlayer = currentPlayer - 1 > 0 ? currentPlayer - 1 : players.Count;
     }
 }

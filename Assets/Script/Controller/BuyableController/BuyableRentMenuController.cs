@@ -6,11 +6,9 @@ using UnityEngine.UI;
 
 public class BuyableRentMenuController : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject rentPanel;
+    public GameObject rentPanel;
 
-    [SerializeField]
-    private GameObject hostileTakeoverPanel;
+    public GameObject hostileTakeoverPanel;
 
     bool clicked = false;
 
@@ -34,13 +32,11 @@ public class BuyableRentMenuController : MonoBehaviour
         rentButton.onClick.AddListener(() =>
         {
             clicked = true;
-            player.DebitValue(rentPrice);
-            tile.owner.CreditValue(rentPrice);
-
+            player.TransferMoney(rentPrice, rentPrice, tile.owner);
             this.gameObject.SetActive(false);
         });
 
-        int hostilePrice = (int)Math.GetHostileTakeoverPrice((int)Math.GetContructionPrice(tileBuyable.price, tile.level));
+        int hostilePrice = (int)Math.GetHostileTakeoverPrice((int)Math.GetContructionPrice(tileBuyable.price, tile.level, tile.level));
 
         Transform payHostile = hostileTakeoverPanel.transform.GetChild(0).Find("Buy");
         payHostile.GetComponentInChildren<TextMeshProUGUI>().text = "Compra hostil por $" + Math.ConfigureMoney(rentPrice);
@@ -51,13 +47,23 @@ public class BuyableRentMenuController : MonoBehaviour
         hostileButton.onClick.AddListener(() =>
         {
             clicked = true;
-            player.DebitValue(hostilePrice);
-            tile.owner.CreditValue((int)Math.GetContructionPrice(tileBuyable.price, tile.level));
+            int creditValue = (int)Math.GetContructionPrice(tileBuyable.price, tile.level, tile.level);
+            player.TransferMoney(hostilePrice, creditValue, tile.owner);
             tile.owner = player;
 
             this.gameObject.SetActive(false);
         });
 
+        if (player.currentMoney <= hostilePrice)
+            hostileButton.interactable = false;
+        else
+            hostileButton.interactable = true;
+
         yield return new WaitUntil(() => clicked == true);
+    }
+
+    public void CloseButton()
+    {
+        clicked = true;
     }
 }

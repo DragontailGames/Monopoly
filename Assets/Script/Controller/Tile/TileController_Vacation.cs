@@ -15,7 +15,7 @@ public class TileController_Vacation : TileController
 
     public override IEnumerator OnPlayerStop(PlayerController player)
     {
-        player.canTeleport = true;
+        player.canTravel = true;
         yield return null;
     }
 }

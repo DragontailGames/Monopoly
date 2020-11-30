@@ -56,6 +56,16 @@ public class BuyableRentWonderMenuController : MonoBehaviour
             this.gameObject.SetActive(false);
         });
 
+        if (player.currentMoney <= hostilePrice)
+            hostileButton.interactable = false;
+        else
+            hostileButton.interactable = true;
+
         yield return new WaitUntil(() => clicked == true);
+    }
+
+    public void CloseButton()
+    {
+        clicked = true;
     }
 }

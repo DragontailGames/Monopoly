@@ -27,19 +27,35 @@ public class BoardController : MonoBehaviour
         tileControllers.Sort((a, b) => { return a.index.CompareTo(b.index); });
     }
 
-    public void ResetPlayerToTeleport()
+    public void ResetAction()
     {
         foreach (var aux in tileControllers)
         {
-            aux.playerToTeleport = null;
+            aux.onClickAction = null;
         }
     }
 
-    public void SetupTeleportBoard(PlayerController player)
+    public void SetupTravelBoard(PlayerController player)
     {
         foreach(var aux in tileControllers)
         {
-            aux.SetupTeleport(player);
+            aux.SetupTravel(player);
+        }
+    }
+
+    public void SetupMortgageBoard(PlayerController player)
+    {
+        foreach (var aux in tileControllers)
+        {
+            aux.SetupMortgage(player);
+        }
+    }
+
+    public void ResetBoard()
+    {
+        foreach (var aux in tileControllers)
+        {
+            aux.ResetTile();
         }
     }
 

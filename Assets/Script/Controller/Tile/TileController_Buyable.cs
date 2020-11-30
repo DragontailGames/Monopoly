@@ -16,5 +16,6 @@ public class TileController_Buyable : TileController
     public void BuyTile(PlayerController owner)
     {
         this.owner = owner;
+        owner.properties.Add(this);
     }
 }

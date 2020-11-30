@@ -16,13 +16,15 @@ public class PlayerController : MonoBehaviour
 
     public TileController currentTile;
 
+    public List<TileController_Buyable> properties = new List<TileController_Buyable>();
+
     public int currentMoney = 3000000;
 
     [HideInInspector]
     public int wondersInControl;
 
     [HideInInspector]
-    public bool canTeleport = false;
+    public bool canTravel = false;
 
     [HideInInspector]
     public bool inJail = false;
@@ -31,6 +33,13 @@ public class PlayerController : MonoBehaviour
 
     public int jailRow = 0;
 
+    public int jailInTotal = 0;
+
+    public bool firstBuy = false;
+
+    public bool testedBankruptcy = false;
+
+    public List<Doubt> doubts = new List<Doubt>();
 
     public void Awake()
     {
@@ -46,6 +55,13 @@ public class PlayerController : MonoBehaviour
     {
         //return 6;
         return Random.Range(1, 7);
+    }
+
+    public void MortgagePropertie(TileController tileController)
+    {
+        TileController_Buyable btile = tileController as TileController_Buyable;
+        properties.Remove(btile);
+        CreditValue(Math.GetMortgagePrice(btile));
     }
 
     public IEnumerator TurnCorner()
@@ -79,14 +95,39 @@ public class PlayerController : MonoBehaviour
 
     public void DebitValue(int value)
     {
+        StartCoroutine(canvasController.DebitAnimation(value, currentMoney));
         currentMoney -= value;
-        canvasController.UpdateMoney(currentMoney);
     }
 
     public void CreditValue(int value)
     {
+        StartCoroutine(canvasController.CreditAnimation(value, currentMoney));
         currentMoney += value;
-        canvasController.UpdateMoney(currentMoney);
+    }
+
+    public void TransferMoney(int debitMoney, int creditMoney, PlayerController otherPlayer)
+    {
+        if(currentMoney-debitMoney<0)
+        {
+
+            doubts.Add(new Doubt()
+            {
+                value = debitMoney - currentMoney,
+                target = otherPlayer
+            });
+
+            creditMoney -= currentMoney;
+            otherPlayer.CreditValue(creditMoney);
+
+            this.DebitValue(currentMoney);
+
+        }
+        else
+        {
+            this.DebitValue(debitMoney);
+            otherPlayer.CreditValue(creditMoney);
+        }
+
     }
 
     public void TravelPlayer(TileController tile)
@@ -101,6 +142,7 @@ public class PlayerController : MonoBehaviour
         {
             value = tile.index - moveController.position;
         }
+        boardController.ResetBoard();
         StartCoroutine(manager.OnMovePlayer(moveController, moveController.MovePlayer(value), false));
     }
 
@@ -111,14 +153,77 @@ public class PlayerController : MonoBehaviour
         this.transform.position = newPos;
         currentTile = tile;
         moveController.position = tile.index;
-        canTeleport = false;
+        canTravel = false;
         //StartCoroutine(manager.OnMovePlayer(this, StartCoroutine(MovePlayer(0)), false));
     }
 
     public void GotoJail()
     {
+        this.jailInTotal++;
+        if(this.jailInTotal>4)
+        {
+            manager.BeforePlayer();
+            DeclareBankruptcy();
+        }
         this.inJail = true;
         this.jailRow = 0;
         this.TeleportPlayer(boardController.jail);
+    }
+
+    public void DeclareBankruptcy()
+    {
+        manager.players.Remove(this);
+        canvasController.DeclareBankruptcy();
+        foreach(var aux in properties)
+        {
+            aux.owner = null;
+        }
+        //DebitValue(this.currentMoney);
+        Destroy(this.gameObject);
+    }
+
+    public bool ExitingDoubts()
+    {
+        var existingDoubles = doubts.FindAll(n => n.value > 0);
+        return existingDoubles.Count>0;
+    }
+
+    public IEnumerator CheckBankruptcy()
+    {
+        testedBankruptcy = false;
+        if(ExitingDoubts())
+        {
+            if (properties.Count > 0)
+                boardController.SetupMortgageBoard(this);
+            else
+            {
+                DeclareBankruptcy();
+                boardController.ResetBoard();
+                testedBankruptcy = true;
+            }
+        }
+        else
+        {
+            boardController.ResetBoard();
+            testedBankruptcy = true;
+        }
+        yield return new WaitUntil (() => testedBankruptcy == true);
+    }
+
+    public void PayDoubts()
+    {
+        foreach(var aux in doubts)
+        {
+            TransferMoney(aux.value, aux.value, aux.target);
+            aux.value = 0;
+        }
+        for(int i = doubts.Count-1;i>=0;i--)
+        {
+            if (doubts[i].value<=0)
+            {
+                doubts.RemoveAt(i);
+            }
+        }
+        StartCoroutine(CheckBankruptcy());
     }
 }

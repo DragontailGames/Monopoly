@@ -9,6 +9,16 @@ public class TileController_Start : TileController
     public override IEnumerator OnPlayerPass(PlayerController player)
     {
         // base.OnPlayerPass(player);
+        if(!player.firstBuy)
+        {
+            var manager = player.manager;
+            player.DeclareBankruptcy();
+            manager.NextPlayer();
+            StopAllCoroutines();
+            manager.ResetTransparentMaterial();
+            yield return manager.StartRound();
+            yield break;
+        }
         player.CreditValue(startMoney);
         yield return player.TurnCorner();
     }

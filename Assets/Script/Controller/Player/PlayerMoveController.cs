@@ -33,6 +33,7 @@ public class PlayerMoveController : MonoBehaviour
             {
                 playerController.doubleRow = 0;
                 playerController.GotoJail();
+
                 playerController.manager.NextPlayer();
 
                 StartCoroutine(playerController.manager.StartRound());
@@ -93,8 +94,6 @@ public class PlayerMoveController : MonoBehaviour
             yield return new WaitForSeconds(0.001f);
         }
     }
-
-
 
     public IEnumerator RepositionInTile(int index, int amount)
     {

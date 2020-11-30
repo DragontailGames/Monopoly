@@ -401,7 +401,7 @@ RectTransform:
   - {fileID: 1245823929}
   - {fileID: 1418538064}
   m_Father: {fileID: 2145044927}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -943,7 +943,6 @@ MonoBehaviour:
   index: 30
   tile: {fileID: 11400000, guid: 0d917b9b6084d914c92699b4e50c75ea, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -1785,6 +1784,174 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 91716604}
   m_CullTransparentMesh: 0
+--- !u!1 &103440836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 103440837}
+  - component: {fileID: 103440840}
+  - component: {fileID: 103440839}
+  - component: {fileID: 103440838}
+  m_Layer: 5
+  m_Name: CloseButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &103440837
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103440836}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 451093596}
+  m_Father: {fileID: 2145044927}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 80, y: 80}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &103440838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103440836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 103440839}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11480648}
+        m_TargetAssemblyTypeName: BuyableHouseMenuController, Assembly-CSharp
+        m_MethodName: CloseButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1438048285}
+        m_TargetAssemblyTypeName: BuyableRentMenuController, Assembly-CSharp
+        m_MethodName: CloseButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 543202245}
+        m_TargetAssemblyTypeName: BuyableWonderMenuController, Assembly-CSharp
+        m_MethodName: CloseButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 896865490}
+        m_TargetAssemblyTypeName: BuyableRentWonderMenuController, Assembly-CSharp
+        m_MethodName: CloseButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &103440839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103440836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.6981132, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &103440840
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103440836}
+  m_CullTransparentMesh: 0
 --- !u!1 &110474806
 GameObject:
   m_ObjectHideFlags: 0
@@ -2604,7 +2771,6 @@ MonoBehaviour:
   index: 31
   tile: {fileID: 11400000, guid: 6f1e6539e8e3062488609a2afdeb4f9c, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -4275,7 +4441,6 @@ MonoBehaviour:
   index: 5
   tile: {fileID: 11400000, guid: e9c2ebb67bc7e2c49818e4b79dcf8b4d, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -4584,7 +4749,6 @@ MonoBehaviour:
   index: 29
   tile: {fileID: 11400000, guid: 2fec4af30154cf14792b014390efdfc1, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -4896,7 +5060,6 @@ MonoBehaviour:
   index: 22
   tile: {fileID: 11400000, guid: 5c520531cd4361e418fe8c78a4c9000b, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -6956,6 +7119,7 @@ MonoBehaviour:
   icon: {fileID: 866914646}
   playerName: {fileID: 393692633}
   playerMoney: {fileID: 917732557}
+  player: {fileID: 1110025424}
 --- !u!1001 &414860087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7208,7 +7372,6 @@ MonoBehaviour:
   index: 15
   tile: {fileID: 11400000, guid: def6db6eb1de14f4bad6bb1cbf69850b, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -7627,6 +7790,140 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 448295519}
   m_CullTransparentMesh: 0
+--- !u!1 &451093595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 451093596}
+  - component: {fileID: 451093598}
+  - component: {fileID: 451093597}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &451093596
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451093595}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 103440837}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &451093597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451093595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: X
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 68
+  m_fontSizeBase: 68
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &451093598
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451093595}
+  m_CullTransparentMesh: 0
 --- !u!1 &451229793
 GameObject:
   m_ObjectHideFlags: 0
@@ -8018,7 +8315,6 @@ MonoBehaviour:
   index: 12
   tile: {fileID: 11400000, guid: 7c339e3e60801ad428d9145d7179d503, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -8891,7 +9187,7 @@ RectTransform:
   m_Children:
   - {fileID: 1089092919}
   m_Father: {fileID: 2145044927}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -9428,7 +9724,6 @@ MonoBehaviour:
   index: 0
   tile: {fileID: 0}
   tileIsTeleported: 0
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   startMoney: 400000
 --- !u!65 &560841916
@@ -10551,7 +10846,6 @@ MonoBehaviour:
   index: 26
   tile: {fileID: 11400000, guid: 29fb3b10f14f05e4aa29368a28799418, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -10719,6 +11013,7 @@ MonoBehaviour:
   icon: {fileID: 2002431793}
   playerName: {fileID: 683592969}
   playerMoney: {fileID: 777936137}
+  player: {fileID: 1490623725}
 --- !u!1 &620054193
 GameObject:
   m_ObjectHideFlags: 0
@@ -11507,7 +11802,6 @@ MonoBehaviour:
   index: 1
   tile: {fileID: 11400000, guid: 3add21c34c45a4c488c97a0062423b71, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -11761,7 +12055,6 @@ MonoBehaviour:
   index: 23
   tile: {fileID: 11400000, guid: 0e4478b00da99ff4b9092e60a0106468, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -13363,7 +13656,6 @@ MonoBehaviour:
   index: 25
   tile: {fileID: 11400000, guid: 3b281b63eab398142af893387abf4c73, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -13693,7 +13985,7 @@ RectTransform:
   - {fileID: 772501796}
   - {fileID: 1905505096}
   m_Father: {fileID: 2145044927}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -14419,7 +14711,6 @@ MonoBehaviour:
   index: 7
   tile: {fileID: 11400000, guid: a91c976692c8a1b499ef1ea6bfdcfa24, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -15175,7 +15466,6 @@ MonoBehaviour:
   index: 14
   tile: {fileID: 11400000, guid: eccc4afc1c2463d44af9bdca7b974bf8, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -15292,7 +15582,6 @@ MonoBehaviour:
   index: 11
   tile: {fileID: 0}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   luckyEffect: {fileID: 236681037}
   luckyMenuController: {fileID: 1537900030}
@@ -16860,11 +17149,15 @@ MonoBehaviour:
   normal: {fileID: 2100000, guid: e8e16608a60352b469bdab063d60d3cc, type: 2}
   transparent: {fileID: 2100000, guid: 12bcc52fdbfe9f04b997881cf94e1ee0, type: 2}
   currentTile: {fileID: 0}
+  properties: []
   currentMoney: 3000000
   wondersInControl: 0
-  canTeleport: 0
+  canTravel: 0
   inJail: 0
-  doubleCombo: 0
+  doubleRow: 0
+  jailRow: 0
+  jailInTotal: 0
+  firstBuy: 0
 --- !u!136 &1030978703
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -17664,11 +17957,15 @@ MonoBehaviour:
   normal: {fileID: 2100000, guid: d842fda6ffac7284ab0acd30b2a25241, type: 2}
   transparent: {fileID: 2100000, guid: bacedf8012b29804db07cdb04e4ffb80, type: 2}
   currentTile: {fileID: 0}
+  properties: []
   currentMoney: 3000000
   wondersInControl: 0
-  canTeleport: 0
+  canTravel: 0
   inJail: 0
-  doubleCombo: 0
+  doubleRow: 0
+  jailRow: 0
+  jailInTotal: 0
+  firstBuy: 0
 --- !u!136 &1110025425
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -19434,7 +19731,6 @@ MonoBehaviour:
   index: 18
   tile: {fileID: 11400000, guid: ef105d33ff30b1b4ea56850ae5ea7802, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -21782,7 +22078,6 @@ MonoBehaviour:
   index: 13
   tile: {fileID: 11400000, guid: f94634e070896a942908975af79a8419, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -21994,7 +22289,6 @@ MonoBehaviour:
   index: 24
   tile: {fileID: 0}
   tileIsTeleported: 0
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 479801770}
   GotoJailTile: 1
 --- !u!65 &1341263036
@@ -23153,6 +23447,7 @@ MonoBehaviour:
   icon: {fileID: 259759129}
   playerName: {fileID: 316189011}
   playerMoney: {fileID: 91716606}
+  player: {fileID: 1854626012}
 --- !u!1 &1384297725
 GameObject:
   m_ObjectHideFlags: 0
@@ -23912,7 +24207,6 @@ MonoBehaviour:
   index: 21
   tile: {fileID: 11400000, guid: 7b29afbfc0e3e62498cc811de07de86c, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -24032,7 +24326,6 @@ MonoBehaviour:
   index: 27
   tile: {fileID: 11400000, guid: 5c11586f2d94c4947a7c94e7e220f10a, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -24157,6 +24450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   players: []
   board: {fileID: 479801770}
+  currentPlayer: 0
   canvasManager: {fileID: 1757711527}
 --- !u!4 &1420617877
 Transform:
@@ -24634,7 +24928,6 @@ MonoBehaviour:
   index: 20
   tile: {fileID: 0}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   luckyEffect: {fileID: 236681037}
   luckyMenuController: {fileID: 1537900030}
@@ -24683,7 +24976,7 @@ RectTransform:
   - {fileID: 867544965}
   - {fileID: 445855761}
   m_Father: {fileID: 2145044927}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -25973,7 +26266,6 @@ MonoBehaviour:
   index: 8
   tile: {fileID: 0}
   tileIsTeleported: 0
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 479801770}
   GotoJailTile: 0
 --- !u!65 &1482467707
@@ -26029,11 +26321,15 @@ MonoBehaviour:
   normal: {fileID: 2100000, guid: 8dc2ea05acdbb0f4789a2a366dbc2958, type: 2}
   transparent: {fileID: 2100000, guid: 031ba631ce8df8049b710610ed4ca736, type: 2}
   currentTile: {fileID: 0}
-  currentMoney: 3000000
+  properties: []
+  currentMoney: 230000
   wondersInControl: 0
-  canTeleport: 0
+  canTravel: 0
   inJail: 0
-  doubleCombo: 0
+  doubleRow: 0
+  jailRow: 0
+  jailInTotal: 0
+  firstBuy: 0
 --- !u!136 &1490623726
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -26126,7 +26422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 1490623725}
   position: 0
-  dice1: 3
+  dice1: 1
   dice2: 1
   doubleDice: 0
 --- !u!1 &1500049793
@@ -26365,7 +26661,6 @@ MonoBehaviour:
   index: 3
   tile: {fileID: 11400000, guid: 882c9f572fe9a1844820d203f80a512b, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -28827,7 +29122,6 @@ MonoBehaviour:
   index: 17
   tile: {fileID: 11400000, guid: aeb25ec1f82a800479f35b330d1e1725, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -30401,6 +30695,7 @@ MonoBehaviour:
   icon: {fileID: 1699692851}
   playerName: {fileID: 134688777}
   playerMoney: {fileID: 1441693630}
+  player: {fileID: 1030978702}
 --- !u!1 &1710625412
 GameObject:
   m_ObjectHideFlags: 0
@@ -31354,7 +31649,6 @@ MonoBehaviour:
   index: 28
   tile: {fileID: 0}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   luckyEffect: {fileID: 236681037}
   luckyMenuController: {fileID: 1537900030}
@@ -32194,7 +32488,6 @@ MonoBehaviour:
   index: 16
   tile: {fileID: 0}
   tileIsTeleported: 0
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   board: {fileID: 0}
 --- !u!65 &1821049081
@@ -32409,7 +32702,6 @@ MonoBehaviour:
   index: 2
   tile: {fileID: 11400000, guid: c6f105bca8e06284e864cc21f3a52d87, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -32786,11 +33078,15 @@ MonoBehaviour:
   normal: {fileID: 2100000, guid: 0296d83eca1f5a24db06e50502abed91, type: 2}
   transparent: {fileID: 2100000, guid: b3cbc646a399feb4e9b9d6dcacdd793b, type: 2}
   currentTile: {fileID: 0}
+  properties: []
   currentMoney: 3000000
   wondersInControl: 0
-  canTeleport: 0
+  canTravel: 0
   inJail: 0
-  doubleCombo: 0
+  doubleRow: 0
+  jailRow: 0
+  jailInTotal: 0
+  firstBuy: 0
 --- !u!114 &1854626013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32805,7 +33101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 1854626012}
   position: 0
-  dice1: 1
+  dice1: 2
   dice2: 1
   doubleDice: 0
 --- !u!1 &1860395334
@@ -33619,7 +33915,6 @@ MonoBehaviour:
   index: 6
   tile: {fileID: 11400000, guid: 7c684e37900d0ae4eb5de368426157c3, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -34099,7 +34394,6 @@ MonoBehaviour:
   index: 9
   tile: {fileID: 11400000, guid: f44a68980d7a3454a89b1c2b03ef5557, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -34731,7 +35025,6 @@ MonoBehaviour:
   index: 4
   tile: {fileID: 11400000, guid: 3da1efcc35f6aaa4993396b2bf2677be, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -35225,7 +35518,6 @@ MonoBehaviour:
   index: 10
   tile: {fileID: 11400000, guid: f198c8d807115094894ee5084fc1dab0, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -35442,7 +35734,6 @@ MonoBehaviour:
   index: 19
   tile: {fileID: 11400000, guid: 5c534b6fa0eddeb4e9bc3b19668d2aae, type: 2}
   tileIsTeleported: 1
-  playerToTeleport: {fileID: 0}
   boardController: {fileID: 0}
   owner: {fileID: 0}
   canvas: {fileID: 1757711527}
@@ -36986,6 +37277,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 103440837}
   - {fileID: 11480646}
   - {fileID: 1438048283}
   - {fileID: 543202243}

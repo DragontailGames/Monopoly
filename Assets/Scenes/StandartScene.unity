@@ -13852,7 +13852,7 @@ MonoBehaviour:
   transparent: {fileID: 2100000, guid: 12bcc52fdbfe9f04b997881cf94e1ee0, type: 2}
   currentTile: {fileID: 0}
   properties: []
-  currentMoney: 3000000
+  currentMoney: 20000
   wondersInControl: 0
   canTravel: 0
   inJail: 0
@@ -14679,7 +14679,7 @@ MonoBehaviour:
   transparent: {fileID: 2100000, guid: bacedf8012b29804db07cdb04e4ffb80, type: 2}
   currentTile: {fileID: 0}
   properties: []
-  currentMoney: 3000000
+  currentMoney: 20000
   wondersInControl: 0
   canTravel: 0
   inJail: 0
@@ -14781,7 +14781,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 1110025424}
   position: 0
-  dice1: 2
+  dice1: 3
   dice2: 1
   doubleDice: 0
 --- !u!1 &1112385226
@@ -20211,7 +20211,7 @@ MonoBehaviour:
   transparent: {fileID: 2100000, guid: 031ba631ce8df8049b710610ed4ca736, type: 2}
   currentTile: {fileID: 0}
   properties: []
-  currentMoney: 3000000
+  currentMoney: 20000
   wondersInControl: 0
   canTravel: 0
   inJail: 0
@@ -25923,9 +25923,9 @@ MonoBehaviour:
   wondersInControl: 0
   canTravel: 0
   inJail: 0
-  doubleRow: 2
+  doubleRow: 0
   jailRow: 0
-  jailInTotal: 3
+  jailInTotal: 0
   firstBuy: 0
   testedBankruptcy: 0
   doubts: []
@@ -25943,7 +25943,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 1854626012}
   position: 0
-  dice1: 3
+  dice1: 0
   dice2: 1
   doubleDice: 0
 --- !u!1 &1856984769

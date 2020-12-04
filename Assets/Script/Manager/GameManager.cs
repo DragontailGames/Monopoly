@@ -9,19 +9,45 @@ public class GameManager : MonoBehaviour
 
     public BoardController board;
 
-    [HideInInspector]
     public int currentPlayer = 0;
 
     public CanvasManager canvasManager;
+
+    Dictionary<Enum.tradingBlock, List<TileController_Country>> countryController = new Dictionary<Enum.tradingBlock, List<TileController_Country>>();
 
     public void Start()
     {
         players.Sort((a, b) => (a.transform.GetSiblingIndex().CompareTo(b.transform.GetSiblingIndex())));
         StartCoroutine(StartRound());
+
+        foreach (var aux in board.tileControllers)
+        {
+            if (aux.GetType() == typeof(TileController_Country))
+            {
+                var tcCountry = aux as TileController_Country;
+                var tbCountry = aux.tile as TileBuyable_Country;
+                if (countryController.ContainsKey(tbCountry.tradingBlock))
+                {
+                    countryController[tbCountry.tradingBlock].Add(tcCountry);
+                }
+                else
+                {
+                    countryController.Add(tbCountry.tradingBlock, new List<TileController_Country>()
+                    {
+                        tcCountry
+                    });
+                }
+            }
+        }
     }
 
     public IEnumerator StartRound()
     {
+        if(players.Count==1)
+        {
+            players[0].WinGame();
+            yield break; 
+        }
         PlayerController player = players[currentPlayer];
         if (player.inJail)
         {
@@ -128,9 +154,70 @@ public class GameManager : MonoBehaviour
     {
         currentPlayer = currentPlayer + 1 < (players.Count) ? currentPlayer + 1 : 0;
     }
-
-    public void BeforePlayer()
+    
+    public void CheckWinSide(PlayerController playerController)
     {
-        currentPlayer = currentPlayer - 1 > 0 ? currentPlayer - 1 : players.Count;
+        bool win = false;
+
+        if(!win)
+            ProcessSideTile(1,8, playerController, out win);
+        if (!win)
+            ProcessSideTile(9, 16, playerController, out win);
+        if (!win)
+            ProcessSideTile(17, 24, playerController, out win);
+        if (!win)
+            ProcessSideTile(25, 32, playerController, out win);
+
+        if(win)
+        {
+            playerController.WinGame();
+        }
+    }
+
+    public void ProcessSideTile(int start, int limit, PlayerController playerController, out bool win)
+    {
+        for (int i = start; i < limit; i++)
+        {
+            if (board.tileControllers[i].GetType() == typeof(TileController_Buyable))
+            {
+                var tb = board.tileControllers[i] as TileController_Buyable;
+                if (playerController != tb.owner)
+                {
+                    win = false;
+                    return;
+                }
+            }
+        }
+        win = true;
+    }
+
+    public void CheckWinBlocks(PlayerController playerController)
+    {
+        bool win = true;
+
+        int totalBlocks = 0;
+
+        foreach(var aux in countryController.Keys)
+        {
+            bool fullBlock = true;
+            foreach(var temp in countryController[aux])
+            {           
+                if (playerController != temp.owner)
+                {
+                    fullBlock = false;
+                    break;
+                }
+            }
+            if (fullBlock)
+            {
+                totalBlocks++;
+            }
+        }
+
+        if (totalBlocks>=4)
+        {
+            playerController.WinGame();
+            return;
+        }
     }
 }

@@ -53,7 +53,8 @@ public class PlayerMoveController : MonoBehaviour
         }
         if (!playerController.inJail)
         {
-            StartCoroutine(playerController.manager.OnMovePlayer(this, MovePlayer(valueDice), doubleDice));
+            //StartCoroutine(playerController.manager.OnMovePlayer(this, MovePlayer(valueDice), doubleDice));
+            StartCoroutine(playerController.manager.OnMovePlayer(this, MovePlayer(valueDice), true));
         }
     }
 

@@ -17,5 +17,7 @@ public class TileController_Buyable : TileController
     {
         this.owner = owner;
         owner.properties.Add(this);
+
+        owner.CheckWin();
     }
 }

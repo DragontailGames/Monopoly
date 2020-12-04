@@ -41,6 +41,8 @@ public class BuyableWonderMenuController : MonoBehaviour
             player.firstBuy = true;
             player.wondersInControl++;
 
+            player.WonderWin();
+
             this.gameObject.SetActive(false);
         });
 

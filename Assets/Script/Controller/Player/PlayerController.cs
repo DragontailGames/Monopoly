@@ -64,6 +64,20 @@ public class PlayerController : MonoBehaviour
         CreditValue(Math.GetMortgagePrice(btile));
     }
 
+    public void WonderWin()
+    {
+        if(wondersInControl>=5)
+        {
+            WinGame();
+        }
+    }
+
+    public void CheckWin()
+    {
+        manager.CheckWinSide(this);
+        manager.CheckWinBlocks(this);
+    }
+
     public IEnumerator TurnCorner()
     {
         var newRot = this.transform.rotation;
@@ -160,7 +174,7 @@ public class PlayerController : MonoBehaviour
         this.jailInTotal++;
         if(this.jailInTotal>4)
         {
-            manager.BeforePlayer();
+            manager.PlayerDefeated();
             DeclareBankruptcy();
         }
         this.inJail = true;
@@ -222,5 +236,10 @@ public class PlayerController : MonoBehaviour
             }
         }
         StartCoroutine(CheckBankruptcy());
+    }
+
+    public void WinGame()
+    {
+        Debug.Log("Player win game " + this.transform.name);
     }
 }

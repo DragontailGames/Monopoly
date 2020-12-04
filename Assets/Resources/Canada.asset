@@ -15,4 +15,4 @@ MonoBehaviour:
   nameTile: Canada
   price: 300000
   flag: {fileID: 21300000, guid: 64749186c31f9ec46810fa9289ba0381, type: 3}
-  tradingBlock: 0
+  tradingBlock: 1

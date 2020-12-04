@@ -72,10 +72,23 @@ public class GameManager : MonoBehaviour
 
         ResetTransparentMaterial();
 
-        if (!doubleDice)
+        if (!doubleDice && !playerDefetead)
             NextPlayer();
 
+        if(playerDefetead)
+        {
+            playerDefetead = false;
+            DestroyImmediate(player.gameObject);
+        }
+
         StartCoroutine(StartRound());
+    }
+
+    bool playerDefetead = false;
+
+    public void PlayerDefeated()
+    {
+        playerDefetead = true;
     }
 
     public void ResetTransparentMaterial()

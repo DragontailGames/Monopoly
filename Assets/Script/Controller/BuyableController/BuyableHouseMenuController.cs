@@ -47,7 +47,7 @@ public class BuyableHouseMenuController : MonoBehaviour
 
             title.GetComponent<TextMeshProUGUI>().text = constructionName[i];
             icon.GetComponent<Image>().sprite = iconHouse[i];
-            rentRate.GetComponent<TextMeshProUGUI>().text = "Rent rate: <b>$" + Math.ConfigureMoney((int)Math.GetRentPrice(fullPrice, i)) + "</b>";
+            rentRate.GetComponent<TextMeshProUGUI>().text = "Rent rate: <b>$" + Math.ConfigureMoney((int)Math.GetRentPrice(tileBuyable.price, i)) + "</b>";
             buy.GetComponentInChildren<TextMeshProUGUI>().text = "COMPRAR POR\n<size=32>$" + Math.ConfigureMoney(fullPrice) + "</size>";
 
             Button buyButton = buy.GetComponentInChildren<Button>();

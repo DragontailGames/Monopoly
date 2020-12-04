@@ -71,7 +71,7 @@ public class BoardController : MonoBehaviour
                 {
                     foreach (var temp in countryChildPrefab)
                     {
-                        if(aux.Find(temp.name))
+                        while(aux.Find(temp.name))
                         {
                             DestroyImmediate(aux.Find(temp.name).gameObject);
                         }

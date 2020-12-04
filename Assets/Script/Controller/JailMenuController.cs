@@ -17,6 +17,10 @@ public class JailMenuController : MonoBehaviour
         this.gameObject.SetActive(true);
         clicked = false;
 
+        btnPayJailPrice.GetComponentInChildren<TextMeshProUGUI>().text = "Pay<br><size=32>" + Math.ConfigureMoney(Math.jailPrice) + "</size>";
+        btnPayJailPrice.interactable = playerController.currentMoney >= Math.jailPrice;
+
+
         btnPayJailPrice.onClick.RemoveAllListeners();
         btnPayJailPrice.onClick.AddListener(() =>
         {
@@ -32,8 +36,6 @@ public class JailMenuController : MonoBehaviour
             clicked = true;
             int dice1 = playerController.ThrowDice();
             int dice2 = playerController.ThrowDice();
-
-            Debug.Log("Dice jail - " + dice1 + " - " + dice2);
 
             playerController.inJail = dice1 != dice2;
             this.gameObject.SetActive(false);

@@ -109,7 +109,6 @@ public class PlayerController : MonoBehaviour
     {
         if(currentMoney-debitMoney<0)
         {
-
             doubts.Add(new Doubt()
             {
                 value = debitMoney - currentMoney,
@@ -120,7 +119,6 @@ public class PlayerController : MonoBehaviour
             otherPlayer.CreditValue(creditMoney);
 
             this.DebitValue(currentMoney);
-
         }
         else
         {
@@ -178,8 +176,6 @@ public class PlayerController : MonoBehaviour
         {
             aux.owner = null;
         }
-        //DebitValue(this.currentMoney);
-        Destroy(this.gameObject);
     }
 
     public bool ExitingDoubts()
@@ -197,8 +193,9 @@ public class PlayerController : MonoBehaviour
                 boardController.SetupMortgageBoard(this);
             else
             {
-                DeclareBankruptcy();
+                manager.PlayerDefeated();
                 boardController.ResetBoard();
+                DeclareBankruptcy();
                 testedBankruptcy = true;
             }
         }

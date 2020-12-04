@@ -39,7 +39,7 @@ public class BuyableRentMenuController : MonoBehaviour
         int hostilePrice = (int)Math.GetHostileTakeoverPrice((int)Math.GetContructionPrice(tileBuyable.price, tile.level));
 
         Transform payHostile = hostileTakeoverPanel.transform.GetChild(0).Find("Buy");
-        payHostile.GetComponentInChildren<TextMeshProUGUI>().text = "Compra hostil por $" + Math.ConfigureMoney(rentPrice);
+        payHostile.GetComponentInChildren<TextMeshProUGUI>().text = "Compra hostil por $" + Math.ConfigureMoney(hostilePrice);
 
         Button hostileButton = payHostile.GetComponentInChildren<Button>();
 

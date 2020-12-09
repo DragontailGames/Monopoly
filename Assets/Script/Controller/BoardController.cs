@@ -84,7 +84,27 @@ public class BoardController : MonoBehaviour
                     {
                         ColorSettings colorSettings = settingsManager.colorSettings;
                         Color backcolor = colorSettings.tradingBlockColor.Find(n => n.tradingBlock == tile.tradingBlock).color;
-                        aux.GetComponent<SpriteRenderer>().color = backcolor;
+                        
+                        Material[] mtList = aux.Find("Plataforma").GetComponent<MeshRenderer>().sharedMaterials;
+                        List<Material> newList = new List<Material>();
+
+                        foreach(var auxMaterial in mtList)
+                        {
+                            if (auxMaterial.name == "TileColor")
+                            {
+                                var mat = new Material(auxMaterial);
+                                mat.color = backcolor;
+                                newList.Add(mat);
+                            }
+                            else
+                            {
+                                newList.Add(auxMaterial);
+                            }
+                        }
+
+                        aux.Find("Plataforma").GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
+
+                        //aux.GetComponent<SpriteRenderer>().color = backcolor;
                         aux.Find("Price").GetComponent<TextMesh>().text = Math.ConfigureMoney((int)tile.price);
                         aux.Find("CountryFlag").GetComponent<SpriteRenderer>().sprite = tile.flag;
                     }
@@ -94,19 +114,36 @@ public class BoardController : MonoBehaviour
                 {
                     foreach (var temp in wonderChildPrefab)
                     {
-                        if (!aux.Find(temp.name))
+                        while(aux.Find(temp.name))
                         {
-                            GameObject obj = Instantiate(temp, aux);
-                            obj.transform.name = temp.name;
+                            DestroyImmediate(aux.Find(temp.name).gameObject);
                         }
+                        GameObject obj = Instantiate(temp, aux);
+                        obj.transform.name = temp.name;
                     }
 
                     var tile = aux.GetComponent<TileController>().tile as TileBuyable_Wonder;
                     if (tile != null)
                     {
                         ColorSettings colorSettings = settingsManager.colorSettings;
+
                         Color backcolor = colorSettings.wonderBackColor;
-                        aux.GetComponent<SpriteRenderer>().color = backcolor;
+
+                        Material[] mtList = aux.Find("Plataforma").GetComponent<MeshRenderer>().sharedMaterials;
+                        List<Material> newList = new List<Material>();
+
+                        foreach (var auxMaterial in mtList)
+                        {
+                            if (auxMaterial.name == "TileColor")
+                            {
+                                auxMaterial.color = backcolor;
+                            }
+                            newList.Add(auxMaterial);
+                        }
+
+                        aux.Find("Plataforma").GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
+
+                        //aux.GetComponent<SpriteRenderer>().color = backcolor;
                         aux.Find("Price").GetComponent<TextMesh>().text = Math.ConfigureMoney((int)tile.price);
                         aux.Find("IconWonder").GetComponent<SpriteRenderer>().sprite = tile.icon;
                     }

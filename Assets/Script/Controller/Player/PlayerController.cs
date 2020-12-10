@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
 
     public List<Doubt> doubts = new List<Doubt>();
 
+    public Color mainColor;
+
     public void Awake()
     {
         manager.players.Add(this);
@@ -188,7 +190,7 @@ public class PlayerController : MonoBehaviour
         canvasController.DeclareBankruptcy();
         foreach(var aux in properties)
         {
-            aux.owner = null;
+            aux.Owner = null;
         }
     }
 
@@ -215,7 +217,6 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            boardController.ResetBoard();
             testedBankruptcy = true;
         }
         yield return new WaitUntil (() => testedBankruptcy == true);
@@ -240,6 +241,7 @@ public class PlayerController : MonoBehaviour
 
     public void WinGame()
     {
+        //Debug.Log((new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name);
         Debug.Log("Player win game " + this.transform.name);
     }
 }

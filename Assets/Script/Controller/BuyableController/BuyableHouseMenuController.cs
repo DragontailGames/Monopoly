@@ -22,7 +22,7 @@ public class BuyableHouseMenuController : MonoBehaviour
         clicked = false;
 
         int startValue = tile.level;
-        if(tile.level<4 && tile.owner != null && tile.level > 0)
+        if(tile.level<4 && tile.Owner != null && tile.level > 0)
         {
             startValue++;
         }

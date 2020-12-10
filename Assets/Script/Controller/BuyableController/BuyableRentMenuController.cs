@@ -32,7 +32,7 @@ public class BuyableRentMenuController : MonoBehaviour
         rentButton.onClick.AddListener(() =>
         {
             clicked = true;
-            player.TransferMoney(rentPrice, rentPrice, tile.owner);
+            player.TransferMoney(rentPrice, rentPrice, tile.Owner);
             this.gameObject.SetActive(false);
         });
 
@@ -48,8 +48,8 @@ public class BuyableRentMenuController : MonoBehaviour
         {
             clicked = true;
             int creditValue = (int)Math.GetContructionPrice(tileBuyable.price, tile.level);
-            player.TransferMoney(hostilePrice, creditValue, tile.owner);
-            tile.owner = player;
+            player.TransferMoney(hostilePrice, creditValue, tile.Owner);
+            tile.Owner = player;
 
             this.gameObject.SetActive(false);
         });

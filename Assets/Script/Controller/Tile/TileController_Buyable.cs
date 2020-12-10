@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class TileController_Buyable : TileController
 {
-    public PlayerController owner;
+    private PlayerController owner;
 
     public CanvasManager canvas;
+
+    public PlayerController Owner { get => this.owner; set { this.owner = value; OnBuy(this.owner); } }
 
     public override IEnumerator OnPlayerStop(PlayerController player)
     {
@@ -15,9 +17,15 @@ public class TileController_Buyable : TileController
 
     public void BuyTile(PlayerController owner)
     {
-        this.owner = owner;
+        this.Owner = owner;
         owner.properties.Add(this);
 
         owner.CheckWin();
+        OnBuy(owner);
+    }
+
+    public virtual void OnBuy(PlayerController owner)
+    {
+
     }
 }

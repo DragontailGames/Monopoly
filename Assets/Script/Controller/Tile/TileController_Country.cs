@@ -27,7 +27,24 @@ public class TileController_Country : TileController_Buyable
             aux.gameObject.SetActive(false);
         }
 
-        if(owner != null)
+        if(Owner != null)
             buildingParent.GetChild(level).gameObject.SetActive(true);
+    }
+
+    public override void OnBuy(PlayerController owner)
+    {
+        base.OnBuy(owner);
+        foreach (Transform aux in buildingParent)
+        {
+            if (owner != null)
+            {
+                aux.GetComponent<Outline>().enabled = true;
+                aux.GetComponent<Outline>().OutlineColor = owner.mainColor;
+            }
+            else
+            {
+                aux.GetComponent<Outline>().enabled = false;
+            }
+        }
     }
 }

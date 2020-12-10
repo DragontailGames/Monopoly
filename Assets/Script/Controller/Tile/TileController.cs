@@ -69,15 +69,41 @@ public class TileController : MonoBehaviour
 
     public void SetupOffTiles()
     {
-        var baseColor = this.GetComponent<SpriteRenderer>().color;
-        baseColor.a = 0.4f;
-        this.GetComponent<SpriteRenderer>().color = baseColor;
+        if (!this.transform.Find("Plataforma"))
+            return;
+
+        Material[] mtList = this.transform.Find("Plataforma").GetComponent<MeshRenderer>().sharedMaterials;
+        List<Material> newList = new List<Material>();
+
+        foreach (var auxMaterial in mtList)
+        {
+            var mat = new Material(auxMaterial);
+            var color = mat.color;
+            color.a = 0.4f;
+            mat.color = color;
+            newList.Add(mat);
+        }
+
+        this.transform.Find("Plataforma").GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
     }
 
     public void ResetTile()
     {
-        var baseColor = this.GetComponent<SpriteRenderer>().color;
-        baseColor.a = 1f;
-        this.GetComponent<SpriteRenderer>().color = baseColor;
+        if (!this.transform.Find("Plataforma"))
+            return;
+
+        Material[] mtList = this.transform.Find("Plataforma").GetComponent<MeshRenderer>().sharedMaterials;
+        List<Material> newList = new List<Material>();
+
+        foreach (var auxMaterial in mtList)
+        {
+            var mat = new Material(auxMaterial);
+            var color = mat.color;
+            color.a = 1.0f;
+            mat.color = color;
+            newList.Add(mat);
+        }
+
+        this.transform.Find("Plataforma").GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
     }
 }

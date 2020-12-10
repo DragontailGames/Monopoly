@@ -159,8 +159,10 @@ public class GameManager : MonoBehaviour
     {
         bool win = false;
 
-        if(!win)
-            ProcessSideTile(1,8, playerController, out win);
+        if (!win)
+        {
+            ProcessSideTile(1, 8, playerController, out win);
+        }
         if (!win)
             ProcessSideTile(9, 16, playerController, out win);
         if (!win)
@@ -170,7 +172,7 @@ public class GameManager : MonoBehaviour
 
         if(win)
         {
-            playerController.WinGame();
+           playerController.WinGame();
         }
     }
 
@@ -178,10 +180,13 @@ public class GameManager : MonoBehaviour
     {
         for (int i = start; i < limit; i++)
         {
-            if (board.tileControllers[i].GetType() == typeof(TileController_Buyable))
+            if (board.tileControllers[i].GetType() == typeof(TileController_Buyable) ||
+                board.tileControllers[i].GetType() == typeof(TileController_Country) ||
+                board.tileControllers[i].GetType() == typeof(TileController_Wonders))
             {
                 var tb = board.tileControllers[i] as TileController_Buyable;
-                if (playerController != tb.owner)
+
+                if (playerController != tb.Owner || tb.Owner == null)
                 {
                     win = false;
                     return;
@@ -193,8 +198,6 @@ public class GameManager : MonoBehaviour
 
     public void CheckWinBlocks(PlayerController playerController)
     {
-        bool win = true;
-
         int totalBlocks = 0;
 
         foreach(var aux in countryController.Keys)
@@ -202,7 +205,7 @@ public class GameManager : MonoBehaviour
             bool fullBlock = true;
             foreach(var temp in countryController[aux])
             {           
-                if (playerController != temp.owner)
+                if (playerController != temp.Owner)
                 {
                     fullBlock = false;
                     break;

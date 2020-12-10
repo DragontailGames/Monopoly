@@ -21,7 +21,7 @@ public class BuyableMenuController : MonoBehaviour
         focusPanel.SetActive(true);
         if (tile.GetType() == typeof(TileController_Country))
         {
-            if (tile.owner == player || tile.owner == null)
+            if (tile.Owner == player || tile.Owner == null)
             {
                 yield return buyableHouseMenuController.SetupUpgradeTile(tile as TileController_Country, player);
             }
@@ -33,7 +33,7 @@ public class BuyableMenuController : MonoBehaviour
         else
         {
 
-            if (tile.owner == player || tile.owner == null)
+            if (tile.Owner == player || tile.Owner == null)
             {
                 yield return buyableWonderMenuController.SetupWonderTile(tile as TileController_Wonders, player);
             }

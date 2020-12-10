@@ -19,7 +19,7 @@ public class BuyableRentWonderMenuController : MonoBehaviour
 
         var tileWonder = tile.tile as TileBuyable_Wonder;
 
-        int price = (int)Math.GetWonderRentPrice(tile.owner.wondersInControl);
+        int price = (int)Math.GetWonderRentPrice(tile.Owner.wondersInControl);
 
         Transform payRent = rentPanel.transform.GetChild(0).Find("Pay");
 
@@ -32,7 +32,7 @@ public class BuyableRentWonderMenuController : MonoBehaviour
         {
             clicked = true;
             player.DebitValue(price);
-            tile.owner.CreditValue(price);
+            tile.Owner.CreditValue(price);
 
             this.gameObject.SetActive(false);
         });
@@ -50,8 +50,8 @@ public class BuyableRentWonderMenuController : MonoBehaviour
         {
             clicked = true;
             player.DebitValue(hostilePrice);
-            tile.owner.CreditValue(Math.wonderPrice);
-            tile.owner = player;
+            tile.Owner.CreditValue(Math.wonderPrice);
+            tile.Owner = player;
 
             this.gameObject.SetActive(false);
         });

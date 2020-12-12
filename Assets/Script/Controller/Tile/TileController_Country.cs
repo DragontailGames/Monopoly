@@ -31,6 +31,8 @@ public class TileController_Country : TileController_Buyable
             buildingParent.GetChild(level).gameObject.SetActive(true);
     }
 
+    private Color baseColor;
+
     public override void OnBuy(PlayerController owner)
     {
         base.OnBuy(owner);
@@ -38,13 +40,35 @@ public class TileController_Country : TileController_Buyable
         {
             if (owner != null)
             {
-                aux.GetComponent<Outline>().enabled = true;
-                aux.GetComponent<Outline>().OutlineColor = owner.mainColor;
+                ChangeTileColor(aux.gameObject,owner, owner.mainColor);
             }
             else
             {
-                aux.GetComponent<Outline>().enabled = false;
+                ChangeTileColor(aux.gameObject, owner, baseColor);
             }
         }
+    }
+
+    public void ChangeTileColor(GameObject obj, PlayerController owner, Color color)
+    {
+        var mtList = obj.GetComponent<MeshRenderer>().sharedMaterials;
+        List<Material> newList = new List<Material>();
+
+        foreach (var auxMaterial in mtList)
+        {
+            if (auxMaterial.name == "PlayerMaterial")
+            {
+                var mat = new Material(auxMaterial);
+                baseColor = mat.color;
+                mat.color = color;
+                newList.Add(mat);
+            }
+            else
+            {
+                newList.Add(auxMaterial);
+            }
+        }
+
+        obj.GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
     }
 }

@@ -85,7 +85,7 @@ public class BoardController : MonoBehaviour
                         ColorSettings colorSettings = settingsManager.colorSettings;
                         Color backcolor = colorSettings.tradingBlockColor.Find(n => n.tradingBlock == tile.tradingBlock).color;
                         
-                        Material[] mtList = aux.Find("Plataforma").GetComponent<MeshRenderer>().sharedMaterials;
+                        Material[] mtList = aux.Find("Base").GetComponent<MeshRenderer>().sharedMaterials;
                         List<Material> newList = new List<Material>();
 
                         foreach(var auxMaterial in mtList)
@@ -102,7 +102,7 @@ public class BoardController : MonoBehaviour
                             }
                         }
 
-                        aux.Find("Plataforma").GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
+                        aux.Find("Base").GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
 
                         //aux.GetComponent<SpriteRenderer>().color = backcolor;
                         aux.Find("Price").GetComponent<TextMesh>().text = Math.ConfigureMoney((int)tile.price);
@@ -129,7 +129,7 @@ public class BoardController : MonoBehaviour
 
                         Color backcolor = colorSettings.wonderBackColor;
 
-                        Material[] mtList = aux.Find("Plataforma").GetComponent<MeshRenderer>().sharedMaterials;
+                        Material[] mtList = aux.Find("Base").GetComponent<MeshRenderer>().sharedMaterials;
                         List<Material> newList = new List<Material>();
 
                         foreach (var auxMaterial in mtList)
@@ -141,7 +141,7 @@ public class BoardController : MonoBehaviour
                             newList.Add(auxMaterial);
                         }
 
-                        aux.Find("Plataforma").GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
+                        aux.Find("Base").GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
 
                         //aux.GetComponent<SpriteRenderer>().color = backcolor;
                         aux.Find("Price").GetComponent<TextMesh>().text = Math.ConfigureMoney((int)tile.price);

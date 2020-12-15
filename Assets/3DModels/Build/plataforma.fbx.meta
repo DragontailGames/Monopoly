@@ -1,34 +1,9 @@
 fileFormatVersion: 2
 guid: 17c2e2d341ed1bd46b2de8291fc55da3
 ModelImporter:
-  serializedVersion: 20101
+  serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.041
-    second: {fileID: 2100000, guid: f038a17d6d810dc45b9da3da1c6cc7ae, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.042
-    second: {fileID: 2100000, guid: 4c10919333bac494a863010ef1e64301, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.043
-    second: {fileID: 2100000, guid: bbdc785333e887142bf65b21bf7bf934, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.044
-    second: {fileID: 2100000, guid: 2d1dc76450206224fa3cdfe0ff3f63eb, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.045
-    second: {fileID: 2100000, guid: 14a7a65705f07fa449a1c831ba2acd96, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -56,7 +31,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
@@ -120,6 +95,7 @@ ModelImporter:
   animationType: 2
   humanoidOversampling: 1
   avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

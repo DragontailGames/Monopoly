@@ -41,10 +41,12 @@ public class TileController_Country : TileController_Buyable
             if (owner != null)
             {
                 ChangeTileColor(aux.gameObject,owner, owner.mainColor);
+                transform.Find("CountryFlag").gameObject.SetActive(false);
             }
             else
             {
                 ChangeTileColor(aux.gameObject, owner, baseColor);
+                transform.Find("CountryFlag").gameObject.SetActive(true);
             }
         }
     }

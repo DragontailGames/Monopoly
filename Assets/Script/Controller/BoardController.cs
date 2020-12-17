@@ -145,7 +145,6 @@ public class BoardController : MonoBehaviour
 
                         //aux.GetComponent<SpriteRenderer>().color = backcolor;
                         aux.Find("Price").GetComponent<TextMesh>().text = Math.ConfigureMoney((int)tile.price);
-                        aux.Find("IconWonder").GetComponent<SpriteRenderer>().sprite = tile.icon;
                     }
 
                 }

@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2ec8e30e027d2b40a056885dc2df0aa, type: 3}
-  m_Name: Mexico
+  m_Name: Croacia
   m_EditorClassIdentifier: 
-  nameTile: Mexico
+  nameTile: Croacia
   price: 175000
-  flag: {fileID: 21300000, guid: 7d271210b2dd3384c8472a5fafbc4ee3, type: 3}
-  tradingBlock: 1
+  flag: {fileID: 21300000, guid: 4b5607cd8360d6e4e90a8f84a6393ca0, type: 3}
+  tradingBlock: 6
+  flagObject: {fileID: 0}

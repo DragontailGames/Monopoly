@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2ec8e30e027d2b40a056885dc2df0aa, type: 3}
-  m_Name: Inglaterra
+  m_Name: Argentina
   m_EditorClassIdentifier: 
-  nameTile: Inglaterra
-  price: 350000
-  flag: {fileID: 21300000, guid: f6d2bc1343f28844ab31c4fb7629118e, type: 3}
-  tradingBlock: 2
+  nameTile: Argentina
+  price: 200000
+  flag: {fileID: 21300000, guid: 060b224b55ab1e842b19e1110f2bcfb0, type: 3}
+  tradingBlock: 0
+  flagObject: {fileID: 0}

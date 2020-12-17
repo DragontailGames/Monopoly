@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2ec8e30e027d2b40a056885dc2df0aa, type: 3}
-  m_Name: Nova_Zelandia
+  m_Name: Australia
   m_EditorClassIdentifier: 
-  nameTile: Nova Zelandia
-  price: 200000
-  flag: {fileID: 21300000, guid: 5ce2f2b6c02fb9a428750ef25d6b6f76, type: 3}
+  nameTile: Australia
+  price: 250000
+  flag: {fileID: 21300000, guid: 53ecaf0b00e7f0949b82da498af37c31, type: 3}
   tradingBlock: 7
+  flagObject: {fileID: 0}

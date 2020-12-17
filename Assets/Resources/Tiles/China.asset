@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2ec8e30e027d2b40a056885dc2df0aa, type: 3}
-  m_Name: Madagascar
+  m_Name: China
   m_EditorClassIdentifier: 
-  nameTile: Madagascar
-  price: 75000
-  flag: {fileID: 21300000, guid: ff6ee78f75a46d14699002f9c71c9013, type: 3}
-  tradingBlock: 4
+  nameTile: China
+  price: 450000
+  flag: {fileID: 21300000, guid: 5cc580da239c0a247a46f2ebe0a2e901, type: 3}
+  tradingBlock: 3
+  flagObject: {fileID: 0}

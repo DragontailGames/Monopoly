@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2ec8e30e027d2b40a056885dc2df0aa, type: 3}
-  m_Name: Canada
+  m_Name: Venezuela
   m_EditorClassIdentifier: 
-  nameTile: Canada
-  price: 300000
-  flag: {fileID: 21300000, guid: 64749186c31f9ec46810fa9289ba0381, type: 3}
-  tradingBlock: 1
+  nameTile: Venezuela
+  price: 75000
+  flag: {fileID: 21300000, guid: 274e58728d714114c9e53ac0aaf6c0ab, type: 3}
+  tradingBlock: 0
+  flagObject: {fileID: 0}

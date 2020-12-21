@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class TileController_Jail : TileController
 {
-    public bool GotoJailTile = false;
-
     public override IEnumerator OnPlayerStop(PlayerController player)
     {
-        if(GotoJailTile)
-        {
-            player.GotoJail();
-        }
+        player.GotoJail();
         yield return null;
     }
 

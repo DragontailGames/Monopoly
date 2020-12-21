@@ -36,7 +36,7 @@ public class BuyableWonderMenuController : MonoBehaviour
         buyButton.onClick.AddListener(() =>
         {
             clicked = true;
-            player.DebitValue(price);
+            player.walletController.DebitValue(price);
             tile.BuyTile(player);
             player.firstBuy = true;
             player.wondersInControl++;
@@ -46,7 +46,7 @@ public class BuyableWonderMenuController : MonoBehaviour
             this.gameObject.SetActive(false);
         });
 
-        if (player.currentMoney <= price)
+        if (player.walletController.currentMoney <= price)
             buyButton.interactable = false;
         else
             buyButton.interactable = true;

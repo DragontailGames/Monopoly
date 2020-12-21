@@ -58,7 +58,7 @@ public class BuyableHouseMenuController : MonoBehaviour
             buyButton.onClick.AddListener(() =>
             {
                 clicked = true;
-                player.DebitValue(fullPrice);
+                player.walletController.DebitValue(fullPrice);
                 tile.BuyTile(player);
                 player.firstBuy = true;
                 tile.UpgradeLevel(level);
@@ -66,7 +66,7 @@ public class BuyableHouseMenuController : MonoBehaviour
                 this.gameObject.SetActive(false);
             });
 
-            if(player.currentMoney<=fullPrice)
+            if(player.walletController.currentMoney <=fullPrice)
                 buyButton.interactable = false;
             else
                 buyButton.interactable = true;

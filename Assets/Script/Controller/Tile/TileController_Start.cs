@@ -19,7 +19,7 @@ public class TileController_Start : TileController
             yield return manager.StartRound();
             yield break;
         }
-        player.CreditValue(startMoney);
+        player.walletController.CreditValue(startMoney);
         yield return player.TurnCorner();
     }
 

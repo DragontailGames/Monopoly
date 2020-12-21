@@ -15,10 +15,16 @@ public class GameManager : MonoBehaviour
 
     Dictionary<Enum.tradingBlock, List<TileController_Country>> countryController = new Dictionary<Enum.tradingBlock, List<TileController_Country>>();
 
+    public NetworkManagerMonopoly networkManagerMonopoly;
+
+    public void Awake()
+    {
+    }
+
     public void Start()
     {
-        players.Sort((a, b) => (a.transform.GetSiblingIndex().CompareTo(b.transform.GetSiblingIndex())));
-        StartCoroutine(StartRound());
+        players.Sort((a, b) => (a.playerNumber.CompareTo(b.playerNumber)));
+        //StartCoroutine(StartRound());
 
         foreach (var aux in board.tileControllers)
         {
@@ -92,7 +98,7 @@ public class GameManager : MonoBehaviour
         }
         yield return move;
 
-        yield return player.playerController.CheckBankruptcy();
+        yield return player.playerController.walletController.CheckBankruptcy();
 
         yield return TestPlayerOnSameHouse(player);
 

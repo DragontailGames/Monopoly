@@ -25,11 +25,11 @@ public class LuckyEffectManager : MonoBehaviour
     {
         if (value != 0)
         {
-            player.DebitValue(value);
+            player.walletController.DebitValue(value);
         }
         else
         {
-            player.DebitValue((int)(player.currentMoney * ((float)percentage/100)));
+            player.walletController.DebitValue((int)(player.walletController.currentMoney * ((float)percentage/100)));
         }
     }
 }

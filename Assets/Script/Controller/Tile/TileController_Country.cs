@@ -27,8 +27,21 @@ public class TileController_Country : TileController_Buyable
             aux.gameObject.SetActive(false);
         }
 
-        if(Owner != null)
-            buildingParent.GetChild(level).gameObject.SetActive(true);
+        if (Owner != null)
+        {
+            var construction = buildingParent.GetChild(level);
+            construction.gameObject.SetActive(true);
+
+            var flag = construction.GetChild(0);
+            TileBuyable_Country coutryTile = tile as TileBuyable_Country;
+
+            var newFlag = Instantiate(coutryTile.flagObject,construction);
+            newFlag.transform.position = flag.transform.position;
+            newFlag.transform.rotation = Quaternion.Euler(new Vector3(-90, 0, 140));
+            newFlag.transform.localScale = flag.transform.localScale;
+
+            Destroy(flag.gameObject);
+        }
     }
 
     private Color baseColor;

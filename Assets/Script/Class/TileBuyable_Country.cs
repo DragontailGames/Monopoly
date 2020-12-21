@@ -10,5 +10,5 @@ public class TileBuyable_Country : TileBuyable
 
     public Enum.tradingBlock tradingBlock;
 
-    public Material flagObject;
+    public GameObject flagObject;
 }

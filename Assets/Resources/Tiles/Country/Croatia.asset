@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2ec8e30e027d2b40a056885dc2df0aa, type: 3}
+  m_Name: Croatia
+  m_EditorClassIdentifier: 
+  nameTile: Croacia
+  price: 175000
+  flag: {fileID: 21300000, guid: 4b5607cd8360d6e4e90a8f84a6393ca0, type: 3}
+  tradingBlock: 6
+  flagObject: {fileID: 5469697936812734868, guid: 7f34b76f9a666694f94a1f260f12f460, type: 3}

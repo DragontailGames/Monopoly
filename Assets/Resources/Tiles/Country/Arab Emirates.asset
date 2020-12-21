@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2ec8e30e027d2b40a056885dc2df0aa, type: 3}
+  m_Name: Arab Emirates
+  m_EditorClassIdentifier: 
+  nameTile: Arabia Saudita
+  price: 200000
+  flag: {fileID: 21300000, guid: 06fc95a45b39758408c878c288807efd, type: 3}
+  tradingBlock: 5
+  flagObject: {fileID: 7569409680657152136, guid: 3f3e7a36f7a185b40a53cd960844df99, type: 3}

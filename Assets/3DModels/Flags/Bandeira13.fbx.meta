@@ -1,11 +1,16 @@
 fileFormatVersion: 2
-guid: 1f7a464d6941cd54f9be341eb1ff0a51
+guid: 9b62560bf9fb12b4882108cee1bf35a4
 ModelImporter:
-  serializedVersion: 20101
+  serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BAndeira
+    second: {fileID: 2100000, guid: 8a4336557ef4ded4d93aae50e028491b, type: 2}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -95,6 +100,7 @@ ModelImporter:
   animationType: 2
   humanoidOversampling: 1
   avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

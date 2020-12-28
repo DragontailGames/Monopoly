@@ -16,6 +16,42 @@ public class PlayerControllerCanvas : MonoBehaviour
 
     int interateValue = 3000;
 
+    public void ConfigurePosition()
+    {
+        RectTransform rect = this.GetComponent<RectTransform>();
+        switch (player.playerNumber)
+        {
+            case 0:
+                {
+                    rect.anchorMax = new Vector2(1, 0);
+                    rect.anchorMin = new Vector2(1, 0);
+                    rect.transform.position = new Vector2(-257,85);
+                    break;
+                }
+            case 1:
+                {
+                    rect.anchorMax = new Vector2(1, 1);
+                    rect.anchorMin = new Vector2(1, 1);
+                    rect.transform.position = new Vector2(-257, -85);
+                    break;
+                }
+            case 2:
+                {
+                    rect.anchorMax = new Vector2(0, 1);
+                    rect.anchorMin = new Vector2(0, 1);
+                    rect.transform.position = new Vector2(257, -85);
+                    break;
+                }
+            case 3:
+                {
+                    rect.anchorMax = new Vector2(0, 0);
+                    rect.anchorMin = new Vector2(0, 0);
+                    rect.transform.position = new Vector2(257, 85);
+                    break;
+                }
+        }
+    }
+
     public void ConfigureUI(Sprite icon, string playerName, int money)
     {
         //this.icon.sprite = icon;
@@ -71,14 +107,14 @@ public class PlayerControllerCanvas : MonoBehaviour
 
     public void CheckValueIsWrong()
     {
-        if(player.currentMoney>exibedMoney)
+        if(player.walletController.currentMoney >exibedMoney)
         {
-            int value = player.currentMoney - exibedMoney;
+            int value = player.walletController.currentMoney - exibedMoney;
             StartCoroutine(CreditAnimation(value, exibedMoney));
         }
-        else if(player.currentMoney<exibedMoney)
+        else if(player.walletController.currentMoney <exibedMoney)
         {
-            int value = exibedMoney - player.currentMoney;
+            int value = exibedMoney - player.walletController.currentMoney;
             StartCoroutine(DebitAnimation(value, exibedMoney));
         }
     }

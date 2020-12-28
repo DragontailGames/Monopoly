@@ -31,8 +31,8 @@ public class BuyableRentWonderMenuController : MonoBehaviour
         rentButton.onClick.AddListener(() =>
         {
             clicked = true;
-            player.DebitValue(price);
-            tile.Owner.CreditValue(price);
+            player.walletController.DebitValue(price);
+            tile.Owner.walletController.CreditValue(price);
 
             this.gameObject.SetActive(false);
         });
@@ -49,14 +49,14 @@ public class BuyableRentWonderMenuController : MonoBehaviour
         hostileButton.onClick.AddListener(() =>
         {
             clicked = true;
-            player.DebitValue(hostilePrice);
-            tile.Owner.CreditValue(Math.wonderPrice);
+            player.walletController.DebitValue(hostilePrice);
+            tile.Owner.walletController.CreditValue(Math.wonderPrice);
             tile.Owner = player;
 
             this.gameObject.SetActive(false);
         });
 
-        if (player.currentMoney <= hostilePrice)
+        if (player.walletController.currentMoney <= hostilePrice)
             hostileButton.interactable = false;
         else
             hostileButton.interactable = true;

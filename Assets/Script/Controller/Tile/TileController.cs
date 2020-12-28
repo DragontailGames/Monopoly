@@ -50,13 +50,13 @@ public class TileController : MonoBehaviour
             onClickAction = () =>
             {
                 player.MortgagePropertie(this);
-                if (player.ExitingDoubts())
+                if (player.walletController.ExitingDoubts())
                 {
-                    player.PayDoubts();
+                    player.walletController.PayDoubts();
                 }
                 else
                 {
-                    player.testedBankruptcy = true;
+                    player.walletController.testedBankruptcy = true;
                 }
                 onClickAction = null;
             };

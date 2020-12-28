@@ -1,24 +1,42 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject controllerCanvasPrefab;
+
+    [HideInInspector]
     public PlayerControllerCanvas canvasController;
 
+    [HideInInspector]
     public PlayerMoveController moveController;
 
+    [HideInInspector]
+    public PlayerWalletController walletController;
+
+    [HideInInspector]
+    public NetworkIdentity networkIdentity;
+
+    public Button btnThrowDice;
+
+    public int playerNumber;
+
+    [HideInInspector]
     public BoardController boardController;
 
+    [HideInInspector]
     public GameManager manager;
 
     public Material normal, transparent;
 
+    [HideInInspector]
     public TileController currentTile;
 
+    [HideInInspector]
     public List<TileController_Buyable> properties = new List<TileController_Buyable>();
-
-    public int currentMoney = 3000000;
 
     [HideInInspector]
     public int wondersInControl;
@@ -29,28 +47,43 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public bool inJail = false;
 
+    [HideInInspector]
     public int doubleRow = 0;
 
+    [HideInInspector]
     public int jailRow = 0;
 
+    [HideInInspector]
     public int jailInTotal = 0;
 
+    [HideInInspector]
     public bool firstBuy = false;
-
-    public bool testedBankruptcy = false;
-
-    public List<Doubt> doubts = new List<Doubt>();
 
     public Color mainColor;
 
-    public void Awake()
+    public void SetupStart()
     {
-        manager.players.Add(this);
-    }
+        walletController = this.GetComponent<PlayerWalletController>();
+        walletController.controller = this;
+        walletController.canvasController = canvasController;
 
-    public void Start()
-    {
-        canvasController.ConfigureUI(null, "Player_" + Random.Range(1000, 9999), currentMoney);
+        moveController = this.GetComponent<PlayerMoveController>();
+        moveController.playerController = this;
+
+        networkIdentity = this.GetComponent<NetworkIdentity>();
+
+        manager = FindObjectOfType<GameManager>();
+        boardController = FindObjectOfType<BoardController>();
+
+        //btnThrowDice = manager.canvasManager.btnThrow;
+
+        GameObject objCanvas = Instantiate(controllerCanvasPrefab, manager.canvasManager.transform);
+        canvasController = objCanvas.GetComponent<PlayerControllerCanvas>();
+        canvasController.player = this;
+        canvasController.ConfigurePosition();
+        canvasController.ConfigureUI(null, "Player_" + networkIdentity.netId, walletController.currentMoney);
+
+        manager.NewPlayer(this);
     }
 
     public int ThrowDice()
@@ -59,11 +92,28 @@ public class PlayerController : MonoBehaviour
         return Random.Range(1, 7);
     }
 
+    public IEnumerator ConfigDice()
+    {
+        yield return new WaitForSeconds(0.2f);
+        this.btnThrowDice.interactable = true;
+
+        if (this.networkIdentity.isLocalPlayer)
+            this.btnThrowDice.gameObject.SetActive(true);
+
+        this.btnThrowDice.onClick.RemoveAllListeners();
+        this.btnThrowDice.onClick.AddListener(() => {
+            this.moveController.StartMovePlayer();
+            this.btnThrowDice.interactable = false;
+            this.btnThrowDice.gameObject.SetActive(false);
+        });
+        this.btnThrowDice.image.color = this.GetComponent<MeshRenderer>().materials[0].color;
+    }
+
     public void MortgagePropertie(TileController tileController)
     {
         TileController_Buyable btile = tileController as TileController_Buyable;
         properties.Remove(btile);
-        CreditValue(Math.GetMortgagePrice(btile));
+        walletController.CreditValue(Math.GetMortgagePrice(btile));
     }
 
     public void WonderWin()
@@ -107,41 +157,6 @@ public class PlayerController : MonoBehaviour
         {
             this.transform.GetComponent<MeshRenderer>().material = normal;
         }
-    }
-
-    public void DebitValue(int value)
-    {
-        StartCoroutine(canvasController.DebitAnimation(value, currentMoney));
-        currentMoney -= value;
-    }
-
-    public void CreditValue(int value)
-    {
-        StartCoroutine(canvasController.CreditAnimation(value, currentMoney));
-        currentMoney += value;
-    }
-
-    public void TransferMoney(int debitMoney, int creditMoney, PlayerController otherPlayer)
-    {
-        if(currentMoney-debitMoney<0)
-        {
-            doubts.Add(new Doubt()
-            {
-                value = debitMoney - currentMoney,
-                target = otherPlayer
-            });
-
-            creditMoney -= currentMoney;
-            otherPlayer.CreditValue(creditMoney);
-
-            this.DebitValue(currentMoney);
-        }
-        else
-        {
-            this.DebitValue(debitMoney);
-            otherPlayer.CreditValue(creditMoney);
-        }
-
     }
 
     public void TravelPlayer(TileController tile)
@@ -188,55 +203,10 @@ public class PlayerController : MonoBehaviour
     {
         manager.players.Remove(this);
         canvasController.DeclareBankruptcy();
-        foreach(var aux in properties)
+        foreach (var aux in properties)
         {
             aux.Owner = null;
         }
-    }
-
-    public bool ExitingDoubts()
-    {
-        var existingDoubles = doubts.FindAll(n => n.value > 0);
-        return existingDoubles.Count>0;
-    }
-
-    public IEnumerator CheckBankruptcy()
-    {
-        testedBankruptcy = false;
-        if(ExitingDoubts())
-        {
-            if (properties.Count > 0)
-                boardController.SetupMortgageBoard(this);
-            else
-            {
-                manager.PlayerDefeated();
-                boardController.ResetBoard();
-                DeclareBankruptcy();
-                testedBankruptcy = true;
-            }
-        }
-        else
-        {
-            testedBankruptcy = true;
-        }
-        yield return new WaitUntil (() => testedBankruptcy == true);
-    }
-
-    public void PayDoubts()
-    {
-        foreach(var aux in doubts)
-        {
-            TransferMoney(aux.value, aux.value, aux.target);
-            aux.value = 0;
-        }
-        for(int i = doubts.Count-1;i>=0;i--)
-        {
-            if (doubts[i].value<=0)
-            {
-                doubts.RemoveAt(i);
-            }
-        }
-        StartCoroutine(CheckBankruptcy());
     }
 
     public void WinGame()

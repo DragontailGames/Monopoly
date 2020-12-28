@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,16 +20,22 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public NetworkIdentity networkIdentity;
 
+    public Button btnThrowDice;
+
     public int playerNumber;
 
+    [HideInInspector]
     public BoardController boardController;
 
+    [HideInInspector]
     public GameManager manager;
 
     public Material normal, transparent;
 
+    [HideInInspector]
     public TileController currentTile;
 
+    [HideInInspector]
     public List<TileController_Buyable> properties = new List<TileController_Buyable>();
 
     [HideInInspector]
@@ -40,17 +47,21 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public bool inJail = false;
 
+    [HideInInspector]
     public int doubleRow = 0;
 
+    [HideInInspector]
     public int jailRow = 0;
 
+    [HideInInspector]
     public int jailInTotal = 0;
 
+    [HideInInspector]
     public bool firstBuy = false;
 
     public Color mainColor;
 
-    public void Awake()
+    public void SetupStart()
     {
         walletController = this.GetComponent<PlayerWalletController>();
         walletController.controller = this;
@@ -61,24 +72,41 @@ public class PlayerController : MonoBehaviour
 
         networkIdentity = this.GetComponent<NetworkIdentity>();
 
-        manager = GameObject.FindObjectOfType<GameManager>();
-        manager.players.Add(this);
-        playerNumber = manager.players.FindIndex(n => n == this);
-    }
+        manager = FindObjectOfType<GameManager>();
+        boardController = FindObjectOfType<BoardController>();
 
-    public void Start()
-    {
+        //btnThrowDice = manager.canvasManager.btnThrow;
+
         GameObject objCanvas = Instantiate(controllerCanvasPrefab, manager.canvasManager.transform);
         canvasController = objCanvas.GetComponent<PlayerControllerCanvas>();
         canvasController.player = this;
         canvasController.ConfigurePosition();
         canvasController.ConfigureUI(null, "Player_" + networkIdentity.netId, walletController.currentMoney);
+
+        manager.NewPlayer(this);
     }
 
     public int ThrowDice()
     {
         //return 6;
         return Random.Range(1, 7);
+    }
+
+    public IEnumerator ConfigDice()
+    {
+        yield return new WaitForSeconds(0.2f);
+        this.btnThrowDice.interactable = true;
+
+        if (this.networkIdentity.isLocalPlayer)
+            this.btnThrowDice.gameObject.SetActive(true);
+
+        this.btnThrowDice.onClick.RemoveAllListeners();
+        this.btnThrowDice.onClick.AddListener(() => {
+            this.moveController.StartMovePlayer();
+            this.btnThrowDice.interactable = false;
+            this.btnThrowDice.gameObject.SetActive(false);
+        });
+        this.btnThrowDice.image.color = this.GetComponent<MeshRenderer>().materials[0].color;
     }
 
     public void MortgagePropertie(TileController tileController)

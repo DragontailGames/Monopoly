@@ -17,14 +17,9 @@ public class GameManager : MonoBehaviour
 
     public NetworkManagerMonopoly networkManagerMonopoly;
 
-    public void Awake()
-    {
-    }
-
     public void Start()
     {
         players.Sort((a, b) => (a.playerNumber.CompareTo(b.playerNumber)));
-        //StartCoroutine(StartRound());
 
         foreach (var aux in board.tileControllers)
         {
@@ -44,6 +39,22 @@ public class GameManager : MonoBehaviour
                     });
                 }
             }
+        }
+    }
+
+    public void NewPlayer(PlayerController newPlayer)
+    {
+        newPlayer.playerNumber = players.Count;
+        players.Add(newPlayer);
+
+        foreach (var aux in players)
+        {
+            StartCoroutine(aux.moveController.RepositionInTile(aux.playerNumber, players.Count));
+        }
+
+        if (players.Count>=2)
+        {
+            StartCoroutine(StartRound());
         }
     }
 
@@ -68,7 +79,7 @@ public class GameManager : MonoBehaviour
             if(player.inJail)
             {
                 NextPlayer();
-                StartCoroutine(ConfigDice(players[currentPlayer]));
+                StartCoroutine(players[currentPlayer].ConfigDice());
             }
             else
             {
@@ -80,11 +91,12 @@ public class GameManager : MonoBehaviour
             if (player.canTravel)
             {
                 board.SetupTravelBoard(player);
-                canvasManager.btnThrowDice.image.color = player.GetComponent<MeshRenderer>().materials[0].color;
+                player.btnThrowDice.image.color = player.GetComponent<MeshRenderer>().materials[0].color;
             }
             else
             {
-                StartCoroutine(ConfigDice(player));
+                Debug.Log("Teste amaralo maduro");
+                StartCoroutine(player.ConfigDice());
             }
         }
     }
@@ -144,16 +156,6 @@ public class GameManager : MonoBehaviour
             }
             yield return newPlayer.RepositionInTile(playersInSamePos.Count-1, playersInSamePos.Count);
         }
-    }
-
-    public IEnumerator ConfigDice(PlayerController player)
-    {
-        yield return new WaitForSeconds(0.2f);
-        canvasManager.btnThrowDice.interactable = true;
-        canvasManager.btnThrowDice.onClick.RemoveAllListeners();
-        canvasManager.btnThrowDice.onClick.AddListener(player.moveController.StartMovePlayer);
-        canvasManager.btnThrowDice.onClick.AddListener(() => canvasManager.btnThrowDice.interactable = false);
-        canvasManager.btnThrowDice.image.color = player.GetComponent<MeshRenderer>().materials[0].color;
     }
 
     public void NextPlayer()

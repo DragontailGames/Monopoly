@@ -15,14 +15,12 @@ public class NetworkManagerMonopoly : NetworkManager
 
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
-        Vector3 pos = startTile.position;
-        pos.y = 0.3f;
+        Vector3 pos = new Vector3(startTile.position.x,0.3f,startTile.position.z);
         GameObject player = Instantiate(playerPrefab, pos, Quaternion.identity);
         NetworkServer.AddPlayerForConnection(conn, player);
         PlayerController playerController = player.GetComponent<PlayerController>();
         playerController.currentTile = startTile.GetComponent<TileController>();
-        StartCoroutine(playerController.moveController.RepositionInTile(playerController.playerNumber, numPlayers));
-
+        playerController.SetupStart();
     }
 
     public override void OnServerDisconnect(NetworkConnection conn)

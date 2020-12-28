@@ -114,23 +114,26 @@ public class PlayerMoveController : MonoBehaviour
         index += 1;
         Vector3 newPos = playerController.currentTile.transform.position;
         newPos.y = this.transform.position.y;
-        if (index % 2 == 0)
+        if (amount > 1)
         {
-            newPos.z -= 0.2f;
-        }
-        else
-        {
-            newPos.z += 0.2f;
-        }
-        if (amount > 2)
-        {
-            if (index < 2)
+            if (index % 2 == 0)
             {
-                newPos.x -= 0.2f;
+                newPos.z -= 0.2f;
             }
             else
             {
-                newPos.x += 0.2f;
+                newPos.z += 0.2f;
+            }
+            if (amount > 2)
+            {
+                if (index < 2)
+                {
+                    newPos.x -= 0.2f;
+                }
+                else
+                {
+                    newPos.x += 0.2f;
+                }
             }
         }
         return newPos;

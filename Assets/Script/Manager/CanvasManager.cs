@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
 {
-    public Button btnThrowDice;
+    public Button btnThrow;
 
     public BuyableMenuController buyableMenu;
 

@@ -13,6 +13,5 @@ public class PlayerControllerNetwork : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-        Debug.Log("Teste " + ComponentIndex);
     }
 }

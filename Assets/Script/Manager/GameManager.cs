@@ -13,9 +13,7 @@ public class GameManager : MonoBehaviour
 
     public CanvasManager canvasManager;
 
-    Dictionary<Enum.tradingBlock, List<TileController_Country>> countryController = new Dictionary<Enum.tradingBlock, List<TileController_Country>>();
-
-    public NetworkManagerMonopoly networkManagerMonopoly;
+    Dictionary<EnumDt.tradingBlock, List<TileController_Country>> countryController = new Dictionary<EnumDt.tradingBlock, List<TileController_Country>>();
 
     public void Start()
     {

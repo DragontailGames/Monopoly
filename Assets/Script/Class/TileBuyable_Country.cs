@@ -8,7 +8,7 @@ public class TileBuyable_Country : TileBuyable
 {
     public Sprite flag;
 
-    public Enum.tradingBlock tradingBlock;
+    public EnumDt.tradingBlock tradingBlock;
 
     public GameObject flagObject;
 }

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -16,9 +15,6 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector]
     public PlayerWalletController walletController;
-
-    [HideInInspector]
-    public NetworkIdentity networkIdentity;
 
     public Button btnThrowDice;
 
@@ -70,8 +66,6 @@ public class PlayerController : MonoBehaviour
         moveController = this.GetComponent<PlayerMoveController>();
         moveController.playerController = this;
 
-        networkIdentity = this.GetComponent<NetworkIdentity>();
-
         manager = FindObjectOfType<GameManager>();
         boardController = FindObjectOfType<BoardController>();
 
@@ -81,7 +75,7 @@ public class PlayerController : MonoBehaviour
         canvasController = objCanvas.GetComponent<PlayerControllerCanvas>();
         canvasController.player = this;
         canvasController.ConfigurePosition();
-        canvasController.ConfigureUI(null, "Player_" + networkIdentity.netId, walletController.currentMoney);
+        //canvasController.ConfigureUI(null, "Player_" + networkIdentity.netId, walletController.currentMoney)PEDRO;
 
         manager.NewPlayer(this);
     }
@@ -97,8 +91,8 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         this.btnThrowDice.interactable = true;
 
-        if (this.networkIdentity.isLocalPlayer)
-            this.btnThrowDice.gameObject.SetActive(true);
+        //if (this.networkIdentity.isLocalPlayer)
+        this.btnThrowDice.gameObject.SetActive(true);
 
         this.btnThrowDice.onClick.RemoveAllListeners();
         this.btnThrowDice.onClick.AddListener(() => {
@@ -113,7 +107,7 @@ public class PlayerController : MonoBehaviour
     {
         TileController_Buyable btile = tileController as TileController_Buyable;
         properties.Remove(btile);
-        walletController.CreditValue(Math.GetMortgagePrice(btile));
+        walletController.CreditValue(MathDt.GetMortgagePrice(btile));
     }
 
     public void WonderWin()

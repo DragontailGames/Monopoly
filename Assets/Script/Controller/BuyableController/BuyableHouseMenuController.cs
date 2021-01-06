@@ -38,7 +38,7 @@ public class BuyableHouseMenuController : MonoBehaviour
             var tileBuyable = tile.tile as TileBuyable_Country;
             var content = buyablePanel[i].transform.GetChild(0);
 
-            int fullPrice = (int)Math.GetContructionPrice(tileBuyable.price, i, tile.level);
+            int fullPrice = (int)MathDt.GetContructionPrice(tileBuyable.price, i, tile.level);
 
             Transform title = content.transform.Find("Title");
             Transform icon = content.transform.Find("Icon");
@@ -47,8 +47,8 @@ public class BuyableHouseMenuController : MonoBehaviour
 
             title.GetComponent<TextMeshProUGUI>().text = constructionName[i];
             icon.GetComponent<Image>().sprite = iconHouse[i];
-            rentRate.GetComponent<TextMeshProUGUI>().text = "Rent rate: <b>$" + Math.ConfigureMoney((int)Math.GetRentPrice(tileBuyable.price, i)) + "</b>";
-            buy.GetComponentInChildren<TextMeshProUGUI>().text = "COMPRAR POR\n<size=32>$" + Math.ConfigureMoney(fullPrice) + "</size>";
+            rentRate.GetComponent<TextMeshProUGUI>().text = "Rent rate: <b>$" + MathDt.ConfigureMoney((int)MathDt.GetRentPrice(tileBuyable.price, i)) + "</b>";
+            buy.GetComponentInChildren<TextMeshProUGUI>().text = "COMPRAR POR\n<size=32>$" + MathDt.ConfigureMoney(fullPrice) + "</size>";
 
             Button buyButton = buy.GetComponentInChildren<Button>();
 

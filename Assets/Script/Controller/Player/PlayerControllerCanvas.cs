@@ -56,7 +56,7 @@ public class PlayerControllerCanvas : MonoBehaviour
     {
         //this.icon.sprite = icon;
         this.playerName.text = playerName;
-        this.playerMoney.text = "$" + Math.ConfigureMoney(money);
+        this.playerMoney.text = "$" + MathDt.ConfigureMoney(money);
     }
 
     public IEnumerator DebitAnimation(int value, int totalValue, IEnumerator startBefore = null)
@@ -124,7 +124,7 @@ public class PlayerControllerCanvas : MonoBehaviour
     public IEnumerator UpdateMoney(int money)
     {
         exibedMoney = money;
-        this.playerMoney.text = "$" + Math.ConfigureMoney(money);
+        this.playerMoney.text = "$" + MathDt.ConfigureMoney(money);
         yield return true;
     }
 

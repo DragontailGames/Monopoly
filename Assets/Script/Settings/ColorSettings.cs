@@ -14,6 +14,6 @@ public class ColorSettings : ScriptableObject
 [System.Serializable]
 public class ColorByTradingBlock
 {
-    public Enum.tradingBlock tradingBlock = Enum.tradingBlock.sulamericano;
+    public EnumDt.tradingBlock tradingBlock = EnumDt.tradingBlock.sulamericano;
     public Color color;
 }

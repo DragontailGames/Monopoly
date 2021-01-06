@@ -105,7 +105,7 @@ public class BoardController : MonoBehaviour
                         aux.Find("Base").GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
 
                         //aux.GetComponent<SpriteRenderer>().color = backcolor;
-                        aux.Find("Price").GetComponent<TextMesh>().text = Math.ConfigureMoney((int)tile.price);
+                        aux.Find("Price").GetComponent<TextMesh>().text = MathDt.ConfigureMoney((int)tile.price);
                         aux.Find("CountryFlag").GetComponent<SpriteRenderer>().sprite = tile.flag;
                     }
 
@@ -144,7 +144,7 @@ public class BoardController : MonoBehaviour
                         aux.Find("Base").GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
 
                         //aux.GetComponent<SpriteRenderer>().color = backcolor;
-                        aux.Find("Price").GetComponent<TextMesh>().text = Math.ConfigureMoney((int)tile.price);
+                        aux.Find("Price").GetComponent<TextMesh>().text = MathDt.ConfigureMoney((int)tile.price);
                     }
 
                 }

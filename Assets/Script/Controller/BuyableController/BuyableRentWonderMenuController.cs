@@ -19,11 +19,11 @@ public class BuyableRentWonderMenuController : MonoBehaviour
 
         var tileWonder = tile.tile as TileBuyable_Wonder;
 
-        int price = (int)Math.GetWonderRentPrice(tile.Owner.wondersInControl);
+        int price = (int)MathDt.GetWonderRentPrice(tile.Owner.wondersInControl);
 
         Transform payRent = rentPanel.transform.GetChild(0).Find("Pay");
 
-        payRent.GetComponentInChildren<TextMeshProUGUI>().text = "Pagar aluguel de $" + Math.ConfigureMoney(price);
+        payRent.GetComponentInChildren<TextMeshProUGUI>().text = "Pagar aluguel de $" + MathDt.ConfigureMoney(price);
 
         Button rentButton = payRent.GetComponentInChildren<Button>();
 
@@ -37,11 +37,11 @@ public class BuyableRentWonderMenuController : MonoBehaviour
             this.gameObject.SetActive(false);
         });
 
-        int hostilePrice = Math.hostileWonderTakeoverPrice;
+        int hostilePrice = MathDt.hostileWonderTakeoverPrice;
 
         Transform payHostile = hostileTakeoverPanel.transform.GetChild(0).Find("Buy");
 
-        payHostile.GetComponentInChildren<TextMeshProUGUI>().text = "Compra hostil por $" + Math.ConfigureMoney(hostilePrice);
+        payHostile.GetComponentInChildren<TextMeshProUGUI>().text = "Compra hostil por $" + MathDt.ConfigureMoney(hostilePrice);
 
         Button hostileButton = payHostile.GetComponentInChildren<Button>();
 
@@ -50,7 +50,7 @@ public class BuyableRentWonderMenuController : MonoBehaviour
         {
             clicked = true;
             player.walletController.DebitValue(hostilePrice);
-            tile.Owner.walletController.CreditValue(Math.wonderPrice);
+            tile.Owner.walletController.CreditValue(MathDt.wonderPrice);
             tile.Owner = player;
 
             this.gameObject.SetActive(false);

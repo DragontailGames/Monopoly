@@ -20,7 +20,7 @@ public class BuyableWonderMenuController : MonoBehaviour
 
         var content = wonderPanel.transform.GetChild(0);
 
-        int price = Math.wonderPrice;
+        int price = MathDt.wonderPrice;
 
         Transform title = content.transform.Find("Title");
         Transform icon = content.transform.Find("Icon");
@@ -28,7 +28,7 @@ public class BuyableWonderMenuController : MonoBehaviour
 
         title.GetComponent<TextMeshProUGUI>().text = tileWonder.nameTile;
         icon.GetComponent<Image>().sprite = tileWonder.icon;
-        buy.GetComponentInChildren<TextMeshProUGUI>().text = "COMPRAR POR\n<size=32>$" + Math.ConfigureMoney(price) + "</size>";
+        buy.GetComponentInChildren<TextMeshProUGUI>().text = "COMPRAR POR\n<size=32>$" + MathDt.ConfigureMoney(price) + "</size>";
 
         Button buyButton = buy.GetComponent<Button>();
 

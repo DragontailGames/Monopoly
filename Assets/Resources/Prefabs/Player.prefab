@@ -218,10 +218,8 @@ GameObject:
   - component: {fileID: 6836158312323646949}
   - component: {fileID: 6836158312323646948}
   - component: {fileID: 6836158312323646951}
-  - component: {fileID: 1365365170434080486}
-  - component: {fileID: 2058959229}
-  - component: {fileID: 6156326086618127741}
-  - component: {fileID: 6338261691477128631}
+  - component: {fileID: 761782861618706759}
+  - component: {fileID: 4581950532853687176}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -324,7 +322,7 @@ MonoBehaviour:
   canvasController: {fileID: 0}
   moveController: {fileID: 6836158312323646948}
   walletController: {fileID: 0}
-  networkIdentity: {fileID: 0}
+  photonView: {fileID: 0}
   btnThrowDice: {fileID: 546223192006868173}
   playerNumber: 0
   boardController: {fileID: 0}
@@ -375,7 +373,7 @@ MonoBehaviour:
   currentMoney: 3000000
   testedBankruptcy: 0
   doubts: []
---- !u!114 &1365365170434080486
+--- !u!114 &761782861618706759
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -384,14 +382,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 6836158312323646958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  m_AssetId: 
-  hasSpawned: 0
---- !u!114 &2058959229
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 4581950532853687176}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &4581950532853687176
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -400,48 +405,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6836158312323646958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50a33e4bc71eaaf4fb99f74a4f0938e4, type: 3}
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
---- !u!114 &6156326086618127741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6836158312323646958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  clientAuthority: 1
-  localPositionSensitivity: 0.01
-  localRotationSensitivity: 0.01
-  localScaleSensitivity: 0.01
---- !u!114 &6338261691477128631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6836158312323646958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  clientAuthority: 1
-  localPositionSensitivity: 0.01
-  localRotationSensitivity: 0.01
-  localScaleSensitivity: 0.01
-  target: {fileID: 546223192006868174}
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &8185573077399418492
 GameObject:
   m_ObjectHideFlags: 0

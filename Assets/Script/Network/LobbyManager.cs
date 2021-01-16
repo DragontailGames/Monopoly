@@ -14,6 +14,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     private TextMeshProUGUI txt_PlayerCount;
 
+    void Awake()
+    {
+        // #Critical
+        // this makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same room sync their level automatically
+        PhotonNetwork.AutomaticallySyncScene = true;
+    }
+
     public void btn_ConnectToLobbyNormal()
     {
         popupWaitingPlayers.SetActive(true);
@@ -38,7 +45,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        PhotonNetwork.AutomaticallySyncScene = false;
         PhotonNetwork.NickName = "Player_" + Random.Range(0000, 9999);
 
         TypedLobby typedLobby = new TypedLobby("NormalPlayer", LobbyType.Default);
@@ -82,24 +88,23 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         PhotonNetwork.Disconnect();
     }
 
-    public override void OnPlayerLeftRoom(Player otherPlayer)
-    {
-        popupWaitingPlayers.SetActive(false);
-    }
-
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        txt_Waiting.text = PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
+        txt_PlayerCount.text = PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
+
+        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == 2/*PhotonNetwork.CurrentRoom.MaxPlayers*/)
+        {
+            GotoAdventurePhoton();
+        }
     }
 
-    public void GotoAdventurePhton()
+    public void GotoAdventurePhoton()
     {
         PhotonNetwork.CurrentRoom.IsVisible = false;
-        PhotonNetwork.LoadLevel("MultiplayerScene");
+        PhotonNetwork.LoadLevel("GameScene");
     }
 
     #region Fail Logs
-
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
@@ -112,6 +117,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("<color=red>Erro ao tentar entrar em sala " + message + "</color>");
         popupWaitingPlayers.SetActive(false);
+    }
+
+    public override void OnLeftRoom()
+    {
+        popupWaitingPlayers.SetActive(false);
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        txt_Waiting.text = PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
     }
 
     #endregion

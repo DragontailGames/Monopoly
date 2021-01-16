@@ -18960,15 +18960,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b427ff8dce21c4b9b35c3a3c22db36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controllerCanvasPrefab: {fileID: 0}
   canvasController: {fileID: 1706451654}
   moveController: {fileID: 1030978707}
+  walletController: {fileID: 0}
+  btnThrowDice: {fileID: 0}
+  playerNumber: 0
   boardController: {fileID: 479801770}
   manager: {fileID: 1420617876}
   normal: {fileID: 2100000, guid: e8e16608a60352b469bdab063d60d3cc, type: 2}
   transparent: {fileID: 2100000, guid: 12bcc52fdbfe9f04b997881cf94e1ee0, type: 2}
   currentTile: {fileID: 0}
   properties: []
-  currentMoney: 3000000
   wondersInControl: 0
   canTravel: 0
   inJail: 0
@@ -18976,8 +18979,6 @@ MonoBehaviour:
   jailRow: 0
   jailInTotal: 0
   firstBuy: 0
-  testedBankruptcy: 0
-  doubts: []
   mainColor: {r: 0.77254903, g: 0.32941177, b: 0.07058824, a: 1}
 --- !u!136 &1030978703
 CapsuleCollider:
@@ -20298,15 +20299,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b427ff8dce21c4b9b35c3a3c22db36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controllerCanvasPrefab: {fileID: 0}
   canvasController: {fileID: 405967342}
   moveController: {fileID: 1110025429}
+  walletController: {fileID: 0}
+  btnThrowDice: {fileID: 0}
+  playerNumber: 0
   boardController: {fileID: 479801770}
   manager: {fileID: 1420617876}
   normal: {fileID: 2100000, guid: d842fda6ffac7284ab0acd30b2a25241, type: 2}
   transparent: {fileID: 2100000, guid: bacedf8012b29804db07cdb04e4ffb80, type: 2}
   currentTile: {fileID: 0}
   properties: []
-  currentMoney: 3000000
   wondersInControl: 0
   canTravel: 0
   inJail: 0
@@ -20314,8 +20318,6 @@ MonoBehaviour:
   jailRow: 0
   jailInTotal: 0
   firstBuy: 0
-  testedBankruptcy: 0
-  doubts: []
   mainColor: {r: 0.84313726, g: 0.85882354, b: 0.05882353, a: 1}
 --- !u!136 &1110025425
 CapsuleCollider:
@@ -20412,6 +20414,50 @@ MonoBehaviour:
   dice1: 0
   dice2: 0
   doubleDice: 0
+--- !u!1 &1119199162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1119199164}
+  - component: {fileID: 1119199163}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1119199163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119199162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5d8428e70f4a5f4fb0859147ed94b70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMultiplayer: 0
+--- !u!4 &1119199164
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119199162}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1125042152
 GameObject:
   m_ObjectHideFlags: 0
@@ -24219,7 +24265,7 @@ SpriteRenderer:
   m_Size: {x: 0.01, y: 0.01}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &1341263035
@@ -27201,7 +27247,7 @@ SpriteRenderer:
   m_Size: {x: 0.01, y: 0.01}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1482467705
@@ -27376,15 +27422,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b427ff8dce21c4b9b35c3a3c22db36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controllerCanvasPrefab: {fileID: 0}
   canvasController: {fileID: 618559975}
   moveController: {fileID: 1490623730}
+  walletController: {fileID: 0}
+  btnThrowDice: {fileID: 0}
+  playerNumber: 0
   boardController: {fileID: 479801770}
   manager: {fileID: 1420617876}
   normal: {fileID: 2100000, guid: 8dc2ea05acdbb0f4789a2a366dbc2958, type: 2}
   transparent: {fileID: 2100000, guid: 031ba631ce8df8049b710610ed4ca736, type: 2}
   currentTile: {fileID: 0}
   properties: []
-  currentMoney: 3000000
   wondersInControl: 0
   canTravel: 0
   inJail: 0
@@ -27392,8 +27441,6 @@ MonoBehaviour:
   jailRow: 0
   jailInTotal: 0
   firstBuy: 0
-  testedBankruptcy: 0
-  doubts: []
   mainColor: {r: 0.8018868, g: 0.35933605, b: 0.7838969, a: 1}
 --- !u!136 &1490623726
 CapsuleCollider:
@@ -29044,6 +29091,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9e195807b6e8725418ebf8e89d10820d, type: 3}
       propertyPath: m_Name
       value: PLACA MONTADA TESTE  (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9e195807b6e8725418ebf8e89d10820d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e195807b6e8725418ebf8e89d10820d, type: 3}
@@ -32560,7 +32611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558073c54feb9f0438662c4171acf10d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btnThrowDice: {fileID: 1544704566}
+  btnThrow: {fileID: 0}
   buyableMenu: {fileID: 1254450972}
   jailMenuController: {fileID: 215220381}
 --- !u!1 &1779636483
@@ -33168,7 +33219,7 @@ SpriteRenderer:
   m_Size: {x: 0.01, y: 0.01}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1821049079
@@ -33752,15 +33803,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b427ff8dce21c4b9b35c3a3c22db36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controllerCanvasPrefab: {fileID: 0}
   canvasController: {fileID: 1379702201}
   moveController: {fileID: 1854626013}
+  walletController: {fileID: 0}
+  btnThrowDice: {fileID: 0}
+  playerNumber: 0
   boardController: {fileID: 479801770}
   manager: {fileID: 1420617876}
   normal: {fileID: 2100000, guid: 0296d83eca1f5a24db06e50502abed91, type: 2}
   transparent: {fileID: 2100000, guid: b3cbc646a399feb4e9b9d6dcacdd793b, type: 2}
   currentTile: {fileID: 0}
   properties: []
-  currentMoney: 3000000
   wondersInControl: 0
   canTravel: 0
   inJail: 0
@@ -33768,8 +33822,6 @@ MonoBehaviour:
   jailRow: 0
   jailInTotal: 0
   firstBuy: 0
-  testedBankruptcy: 0
-  doubts: []
   mainColor: {r: 0.9150943, g: 0.3496351, b: 0.3496351, a: 1}
 --- !u!114 &1854626013
 MonoBehaviour:
@@ -36665,6 +36717,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8acc9a3b6f970bc4ea86000e1bae4daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  googleSheetId: 
+  termData:
+    languageIndicies: []
+    termTranslations: []
 --- !u!4 &2060381325
 Transform:
   m_ObjectHideFlags: 0

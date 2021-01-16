@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,6 +18,9 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public PlayerWalletController walletController;
 
+    [HideInInspector]
+    public PhotonView photonView;
+
     public Button btnThrowDice;
 
     public int playerNumber;
@@ -28,7 +33,6 @@ public class PlayerController : MonoBehaviour
 
     public Material normal, transparent;
 
-    [HideInInspector]
     public TileController currentTile;
 
     [HideInInspector]
@@ -57,8 +61,19 @@ public class PlayerController : MonoBehaviour
 
     public Color mainColor;
 
-    public void SetupStart()
+    public Player player;
+
+    public void SetupStart(Player player)
     {
+        photonView = this.GetComponent<PhotonView>();
+        photonView.RPC("SetupStart_CMD", RpcTarget.All, player);
+    }
+    
+    [PunRPC]
+    public void SetupStart_CMD(Player player)
+    {
+        this.player = player;
+
         walletController = this.GetComponent<PlayerWalletController>();
         walletController.controller = this;
         walletController.canvasController = canvasController;
@@ -69,7 +84,7 @@ public class PlayerController : MonoBehaviour
         manager = FindObjectOfType<GameManager>();
         boardController = FindObjectOfType<BoardController>();
 
-        //btnThrowDice = manager.canvasManager.btnThrow;
+        btnThrowDice = manager.canvasManager.btnThrow;
 
         GameObject objCanvas = Instantiate(controllerCanvasPrefab, manager.canvasManager.transform);
         canvasController = objCanvas.GetComponent<PlayerControllerCanvas>();
@@ -77,7 +92,28 @@ public class PlayerController : MonoBehaviour
         canvasController.ConfigurePosition();
         //canvasController.ConfigureUI(null, "Player_" + networkIdentity.netId, walletController.currentMoney)PEDRO;
 
+        playerNumber = player.ActorNumber;
+        this.transform.name = "Player_" + player.ActorNumber;
+
+        if(player.IsLocal)
+        {
+            Color color = Random.ColorHSV();
+            photonView.RPC("SetupMaterial", RpcTarget.All, new Vector3(color.r, color.g, color.b));
+        }
+
         manager.NewPlayer(this);
+
+    }
+
+    [PunRPC]
+    public void SetupMaterial(Vector3 color)
+    {
+        this.mainColor = new Color(color.x, color.y, color.z);
+        var mat = this.GetComponent<MeshRenderer>().sharedMaterials[0];
+        mat.color = this.mainColor;
+        List<Material> mats = new List<Material>();
+        mats.Add(mat);
+        this.GetComponent<MeshRenderer>().sharedMaterials = mats.ToArray();
     }
 
     public int ThrowDice()
@@ -96,11 +132,17 @@ public class PlayerController : MonoBehaviour
 
         this.btnThrowDice.onClick.RemoveAllListeners();
         this.btnThrowDice.onClick.AddListener(() => {
-            this.moveController.StartMovePlayer();
+            photonView.RPC("StartMovePlayer_CMD", RpcTarget.All);
             this.btnThrowDice.interactable = false;
             this.btnThrowDice.gameObject.SetActive(false);
         });
-        this.btnThrowDice.image.color = this.GetComponent<MeshRenderer>().materials[0].color;
+        this.btnThrowDice.image.color = mainColor;
+    }
+
+    [PunRPC]
+    public void StartMovePlayer_CMD()
+    {
+        this.moveController.StartMovePlayer();
     }
 
     public void MortgagePropertie(TileController tileController)

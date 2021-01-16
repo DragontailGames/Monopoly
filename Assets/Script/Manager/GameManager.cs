@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     Dictionary<EnumDt.tradingBlock, List<TileController_Country>> countryController = new Dictionary<EnumDt.tradingBlock, List<TileController_Country>>();
 
+    public NetworkManager networkManager;
+
     public void Start()
     {
         players.Sort((a, b) => (a.playerNumber.CompareTo(b.playerNumber)));
@@ -47,13 +49,19 @@ public class GameManager : MonoBehaviour
 
         foreach (var aux in players)
         {
-            StartCoroutine(aux.moveController.RepositionInTile(aux.playerNumber, players.Count));
+            if (networkManager.IsMaster)
+            {
+                aux.currentTile = networkManager.startTile.GetComponent<TileController>();
+                StartCoroutine(aux.moveController.RepositionInTile(aux.playerNumber, players.Count));
+            }
         }
 
-        if (players.Count>=2)
+        if (players.Count == networkManager.GetPlayerNetworkCount)
         {
             StartCoroutine(StartRound());
         }
+
+
     }
 
     public IEnumerator StartRound()
@@ -93,7 +101,6 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Teste amaralo maduro");
                 StartCoroutine(player.ConfigDice());
             }
         }

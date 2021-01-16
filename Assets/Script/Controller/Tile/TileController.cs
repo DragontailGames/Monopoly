@@ -16,6 +16,8 @@ public class TileController : MonoBehaviour
 
     public UnityAction onClickAction;
 
+    public float offsetZ = -1.7f;
+
     public virtual IEnumerator OnPlayerPass(PlayerController player)
     {
         yield return new WaitForSeconds(0.05f);

@@ -9,15 +9,46 @@ using UnityEngine.Events;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
-    // Start is called before the first frame update
-    void Start()
+    public Transform startTile;
+
+    public Player[] GetPlayerList
     {
-        
+        get { return PhotonNetwork.PlayerList; }
     }
 
-    // Update is called once per frame
-    void Update()
+    public int GetPlayerNetworkCount
     {
-        
+        get { return PhotonNetwork.PlayerList.Length; }
+    }
+
+    public bool IsMaster
+    {
+        get { return PhotonNetwork.IsMasterClient; }
+    }
+
+    void Start()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+            {
+                CreatePlayer(startTile.position);
+            }
+        }
+    }
+
+    public void CreatePlayer(Vector3 position)
+    {
+
+        Player player = PhotonNetwork.LocalPlayer;
+        position.y = 0.35f;
+        GameObject playerGO = PhotonNetwork.Instantiate("Prefabs/Player", position, Quaternion.identity);
+        PlayerController playerController = playerGO.GetComponent<PlayerController>();
+
+        playerController.SetupStart(player);
+
+        //Player test = SaveAndLoad.instance.ConfigPlayer(SaveAndLoad.instance.PlayerFromJson((string)player.CustomProperties["Player"]));
+        player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Index", player.ActorNumber } });
+
     }
 }

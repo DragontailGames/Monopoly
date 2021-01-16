@@ -30,8 +30,6 @@ public class PlayerMoveController : MonoBehaviour
         dice1 = playerController.ThrowDice();
         dice2 = playerController.ThrowDice();
 
-        Debug.Log("Dice value 1: " + dice1 + " - 2: " + dice2);
-
         doubleDice = dice1 == dice2;
 
         if(doubleDice)
@@ -62,7 +60,6 @@ public class PlayerMoveController : MonoBehaviour
         if (!playerController.inJail)
         {
             StartCoroutine(playerController.manager.OnMovePlayer(this, MovePlayer(valueDice), doubleDice));
-            //StartCoroutine(playerController.manager.OnMovePlayer(this, MovePlayer(valueDice), true));
         }
     }
 
@@ -113,7 +110,10 @@ public class PlayerMoveController : MonoBehaviour
     {
         index += 1;
         Vector3 newPos = playerController.currentTile.transform.position;
+
+        newPos.z += playerController.currentTile.offsetZ;
         newPos.y = this.transform.position.y;
+
         if (amount > 1)
         {
             if (index % 2 == 0)

@@ -66,11 +66,11 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator StartRound()
     {
-        if(players.Count==1)
+        /*if(players.Count==1)
         {
             players[0].WinGame();
             yield break; 
-        }
+        }*/
         PlayerController player = players[currentPlayer];
         if (player.inJail)
         {

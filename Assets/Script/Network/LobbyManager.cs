@@ -79,6 +79,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         Debug.Log("<color=green>Entrou na sala " + PhotonNetwork.CurrentRoom.Name + "</color>");
         txt_Waiting.text = "Waiting for another players...";
         txt_PlayerCount.text = PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
+        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == 1/*PhotonNetwork.CurrentRoom.MaxPlayers*/)
+        {
+            GotoAdventurePhoton();
+        }
     }
 
     public void btn_LeftRoom()
@@ -92,7 +96,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         txt_PlayerCount.text = PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
 
-        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == 2/*PhotonNetwork.CurrentRoom.MaxPlayers*/)
+        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == 1/*PhotonNetwork.CurrentRoom.MaxPlayers*/)
         {
             GotoAdventurePhoton();
         }

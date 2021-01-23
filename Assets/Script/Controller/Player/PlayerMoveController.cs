@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class PlayerMoveController : MonoBehaviour
 {
@@ -9,10 +10,6 @@ public class PlayerMoveController : MonoBehaviour
 
     [HideInInspector]
     public int position = 0;
-
-    public int dice1 = 15;//ThrowDice();
-
-    public int dice2 = 9;//ThrowDice();
 
     [HideInInspector]
     public bool doubleDice = false;
@@ -25,11 +22,8 @@ public class PlayerMoveController : MonoBehaviour
         }
     }
 
-    public void StartMovePlayer()
+    public void StartMovePlayer(int dice1, int dice2)
     {
-        dice1 = playerController.ThrowDice();
-        dice2 = playerController.ThrowDice();
-
         doubleDice = dice1 == dice2;
 
         if(doubleDice)
@@ -77,10 +71,26 @@ public class PlayerMoveController : MonoBehaviour
                 dest = tempDest;
             }
 
-            Vector3 targetPos = tile.transform.position;
-            targetPos.y = this.transform.position.y;
+            Vector3 newPos = tile.GetPosition();
 
-            yield return Move(targetPos);
+            if (MathDt.IsBetween(this.transform.rotation.eulerAngles.y, 80, 100))
+            {
+                newPos.x += tile.offsetZ;
+            }
+            else if (MathDt.IsBetween(this.transform.rotation.eulerAngles.y, 170, 190))
+            {
+                newPos.z -= tile.offsetZ;
+            }
+            else if (MathDt.IsBetween(this.transform.rotation.eulerAngles.y, 260, 280))
+            {
+                newPos.x += tile.offsetZ;
+            }
+            else
+            {
+                newPos.z -= tile.offsetZ;
+            }
+
+            yield return Move(newPos);
 
             position = i;
             playerController.currentTile = tile;
@@ -95,10 +105,16 @@ public class PlayerMoveController : MonoBehaviour
     {
         while (Vector3.Distance(transform.position, targetPos) > 0.01f)
         {
-            float step = 3.5f * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+            playerController.photonView.RPC("Move_CMD", RpcTarget.All, targetPos);
             yield return new WaitForSeconds(0.001f);
         }
+    }
+
+    [PunRPC]
+    public void Move_CMD(Vector3 targetPos)
+    {
+        float step = 3.5f * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
     }
 
     public IEnumerator RepositionInTile(int index, int amount)

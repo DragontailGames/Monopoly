@@ -16,7 +16,7 @@ public class TileController : MonoBehaviour
 
     public UnityAction onClickAction;
 
-    public float offsetZ = -1.7f;
+    public float offsetZ = -0.17f;
 
     public virtual IEnumerator OnPlayerPass(PlayerController player)
     {
@@ -107,5 +107,13 @@ public class TileController : MonoBehaviour
         }
 
         this.transform.Find("Plataforma").GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
+    }
+
+    public Vector3 GetPosition()
+    {
+        Vector3 newPos = this.transform.position;
+        newPos.y = 0.35f;
+
+        return newPos;
     }
 }

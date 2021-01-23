@@ -109,10 +109,11 @@ public class PlayerController : MonoBehaviour
     public void SetupMaterial(Vector3 color)
     {
         this.mainColor = new Color(color.x, color.y, color.z);
-        var mat = this.GetComponent<MeshRenderer>().sharedMaterials[0];
-        mat.color = this.mainColor;
+        var mat = this.GetComponent<MeshRenderer>().sharedMaterials;
+        var newMat = new Material(mat[0]);
+        newMat.color = this.mainColor;
         List<Material> mats = new List<Material>();
-        mats.Add(mat);
+        mats.Add(newMat);
         this.GetComponent<MeshRenderer>().sharedMaterials = mats.ToArray();
     }
 
@@ -127,22 +128,18 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         this.btnThrowDice.interactable = true;
 
-        //if (this.networkIdentity.isLocalPlayer)
-        this.btnThrowDice.gameObject.SetActive(true);
+        if (player.IsLocal)
+        {
+            this.btnThrowDice.gameObject.SetActive(true);
+        }
 
         this.btnThrowDice.onClick.RemoveAllListeners();
         this.btnThrowDice.onClick.AddListener(() => {
-            photonView.RPC("StartMovePlayer_CMD", RpcTarget.All);
+            this.moveController.StartMovePlayer(ThrowDice(), ThrowDice());
             this.btnThrowDice.interactable = false;
             this.btnThrowDice.gameObject.SetActive(false);
         });
         this.btnThrowDice.image.color = mainColor;
-    }
-
-    [PunRPC]
-    public void StartMovePlayer_CMD()
-    {
-        this.moveController.StartMovePlayer();
     }
 
     public void MortgagePropertie(TileController tileController)
@@ -168,9 +165,9 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator TurnCorner()
     {
-        var newRot = this.transform.rotation;
+        var newRot = this.transform.localEulerAngles;
         var startY = newRot.y;
-        var desiredAngle = Quaternion.Euler(newRot.x, newRot.y - 90, newRot.y);
+        var desiredAngle = Quaternion.Euler(newRot.x, newRot.y - 90, newRot.z);
 
         yield return new WaitUntil(() =>
         {

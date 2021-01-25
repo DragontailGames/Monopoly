@@ -1,14 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class PlayerWalletController : MonoBehaviour
 {
     [HideInInspector]
     public PlayerController controller;
-
-    [HideInInspector]
-    public PlayerControllerCanvas canvasController;
 
     public int currentMoney = 3000000;
 
@@ -18,13 +16,25 @@ public class PlayerWalletController : MonoBehaviour
 
     public void DebitValue(int value)
     {
-        StartCoroutine(canvasController.DebitAnimation(value, currentMoney));
+        controller.photonView.RPC("DebitValue_CMD", RpcTarget.All, value);
+    }
+
+    [PunRPC]
+    private void DebitValue_CMD(int value)
+    {
+        StartCoroutine(controller.canvasController.DebitAnimation(value, currentMoney));
         currentMoney -= value;
     }
 
     public void CreditValue(int value)
     {
-        StartCoroutine(canvasController.CreditAnimation(value, currentMoney));
+        controller.photonView.RPC("CreditValue_CMD", RpcTarget.All, value);
+    }
+
+    [PunRPC]
+    private void CreditValue_CMD(int value)
+    {
+        StartCoroutine(controller.canvasController.CreditAnimation(value, currentMoney));
         currentMoney += value;
     }
 

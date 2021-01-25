@@ -326,8 +326,6 @@ MonoBehaviour:
   playerNumber: 0
   boardController: {fileID: 0}
   manager: {fileID: 0}
-  normal: {fileID: 2100000, guid: 0296d83eca1f5a24db06e50502abed91, type: 2}
-  transparent: {fileID: 2100000, guid: b3cbc646a399feb4e9b9d6dcacdd793b, type: 2}
   currentTile: {fileID: 0}
   properties: []
   wondersInControl: 0
@@ -366,7 +364,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 6836158312323646949}
-  canvasController: {fileID: 0}
   currentMoney: 3000000
   testedBankruptcy: 0
   doubts: []

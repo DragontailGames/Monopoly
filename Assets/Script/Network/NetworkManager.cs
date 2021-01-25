@@ -6,6 +6,7 @@ using Photon.Realtime;
 using UnityEngine.SceneManagement;
 using ExitGames.Client.Photon;
 using UnityEngine.Events;
+using Photon.Pun.UtilityScripts;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
@@ -39,7 +40,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void CreatePlayer(Vector3 position)
     {
-
         Player player = PhotonNetwork.LocalPlayer;
         position.y = 0.35f;
         GameObject playerGO = PhotonNetwork.Instantiate("Prefabs/Player", position, Quaternion.identity);
@@ -48,7 +48,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         playerController.SetupStart(player);
 
         //Player test = SaveAndLoad.instance.ConfigPlayer(SaveAndLoad.instance.PlayerFromJson((string)player.CustomProperties["Player"]));
-        player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Index", player.ActorNumber } });
 
     }
 }

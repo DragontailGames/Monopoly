@@ -77,9 +77,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("<color=green>Entrou na sala " + PhotonNetwork.CurrentRoom.Name + "</color>");
+
+        PhotonNetwork.LocalPlayer.CustomProperties["Index"] = PhotonNetwork.LocalPlayer.ActorNumber;
+
         txt_Waiting.text = "Waiting for another players...";
         txt_PlayerCount.text = PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
-        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == 1/*PhotonNetwork.CurrentRoom.MaxPlayers*/)
+        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == 3/*PhotonNetwork.CurrentRoom.MaxPlayers*/)
         {
             GotoAdventurePhoton();
         }
@@ -96,7 +99,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         txt_PlayerCount.text = PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
 
-        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == 1/*PhotonNetwork.CurrentRoom.MaxPlayers*/)
+        newPlayer.CustomProperties["Index"] = newPlayer.ActorNumber;
+
+        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == 2/*PhotonNetwork.CurrentRoom.MaxPlayers*/)
         {
             GotoAdventurePhoton();
         }
@@ -130,7 +135,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        txt_Waiting.text = PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
+        txt_PlayerCount.text = PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
     }
 
     #endregion

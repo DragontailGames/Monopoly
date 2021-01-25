@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
+using Photon.Pun.UtilityScripts;
 
 public class PlayerController : MonoBehaviour
 {
@@ -30,8 +31,6 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector]
     public GameManager manager;
-
-    public Material normal, transparent;
 
     public TileController currentTile;
 
@@ -72,11 +71,15 @@ public class PlayerController : MonoBehaviour
     [PunRPC]
     public void SetupStart_CMD(Player player)
     {
+        playerNumber = (int)player.CustomProperties["Index"];
+        this.transform.name = "Player_" + playerNumber;
+
+        Debug.Log("-- " + playerNumber, this);
+
         this.player = player;
 
         walletController = this.GetComponent<PlayerWalletController>();
         walletController.controller = this;
-        walletController.canvasController = canvasController;
 
         moveController = this.GetComponent<PlayerMoveController>();
         moveController.playerController = this;
@@ -86,14 +89,12 @@ public class PlayerController : MonoBehaviour
 
         btnThrowDice = manager.canvasManager.btnThrow;
 
-        GameObject objCanvas = Instantiate(controllerCanvasPrefab, manager.canvasManager.transform);
+        GameObject objCanvas =  manager.canvasManager.playerCanvas[playerNumber -1];
+        objCanvas.SetActive(true);
         canvasController = objCanvas.GetComponent<PlayerControllerCanvas>();
         canvasController.player = this;
-        canvasController.ConfigurePosition();
-        //canvasController.ConfigureUI(null, "Player_" + networkIdentity.netId, walletController.currentMoney)PEDRO;
+        canvasController.ConfigureUI(null, "Player_" + playerNumber, walletController.currentMoney);
 
-        playerNumber = player.ActorNumber;
-        this.transform.name = "Player_" + player.ActorNumber;
 
         if(player.IsLocal)
         {
@@ -109,12 +110,13 @@ public class PlayerController : MonoBehaviour
     public void SetupMaterial(Vector3 color)
     {
         this.mainColor = new Color(color.x, color.y, color.z);
-        var mat = this.GetComponent<MeshRenderer>().sharedMaterials;
-        var newMat = new Material(mat[0]);
+
+        var newMat = new Material(this.GetComponent<MeshRenderer>().sharedMaterials[0]);
         newMat.color = this.mainColor;
-        List<Material> mats = new List<Material>();
-        mats.Add(newMat);
+        List<Material> mats = new List<Material>() { newMat };
         this.GetComponent<MeshRenderer>().sharedMaterials = mats.ToArray();
+
+        canvasController.icon.color = this.mainColor;
     }
 
     public int ThrowDice()
@@ -184,11 +186,13 @@ public class PlayerController : MonoBehaviour
     {
         if (transparent)
         {
-            this.transform.GetComponent<MeshRenderer>().material = this.transparent;
+            var transparentMainColor = mainColor;
+            transparentMainColor.a = 0.6f;
+            this.GetComponent<MeshRenderer>().sharedMaterials[0].color = transparentMainColor;
         }
         else
         {
-            this.transform.GetComponent<MeshRenderer>().material = normal;
+            this.GetComponent<MeshRenderer>().sharedMaterials[0].color = mainColor;
         }
     }
 

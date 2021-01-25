@@ -16,42 +16,6 @@ public class PlayerControllerCanvas : MonoBehaviour
 
     int interateValue = 3000;
 
-    public void ConfigurePosition()
-    {
-        RectTransform rect = this.GetComponent<RectTransform>();
-        switch (player.playerNumber)
-        {
-            case 0:
-                {
-                    rect.anchorMax = new Vector2(1, 0);
-                    rect.anchorMin = new Vector2(1, 0);
-                    rect.transform.position = new Vector2(-257,85);
-                    break;
-                }
-            case 1:
-                {
-                    rect.anchorMax = new Vector2(1, 1);
-                    rect.anchorMin = new Vector2(1, 1);
-                    rect.transform.position = new Vector2(-257, -85);
-                    break;
-                }
-            case 2:
-                {
-                    rect.anchorMax = new Vector2(0, 1);
-                    rect.anchorMin = new Vector2(0, 1);
-                    rect.transform.position = new Vector2(257, -85);
-                    break;
-                }
-            case 3:
-                {
-                    rect.anchorMax = new Vector2(0, 0);
-                    rect.anchorMin = new Vector2(0, 0);
-                    rect.transform.position = new Vector2(257, 85);
-                    break;
-                }
-        }
-    }
-
     public void ConfigureUI(Sprite icon, string playerName, int money)
     {
         //this.icon.sprite = icon;

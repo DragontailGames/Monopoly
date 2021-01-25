@@ -10,4 +10,6 @@ public class CanvasManager : MonoBehaviour
     public BuyableMenuController buyableMenu;
 
     public JailMenuController jailMenuController;
+
+    public GameObject[] playerCanvas;
 }

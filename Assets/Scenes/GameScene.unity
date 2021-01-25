@@ -7455,7 +7455,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &405967341
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11921,7 +11921,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &618559974
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24629,7 +24629,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1379702200
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30734,7 +30734,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1706451653
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31952,6 +31952,11 @@ MonoBehaviour:
   btnThrow: {fileID: 1544704566}
   buyableMenu: {fileID: 1254450972}
   jailMenuController: {fileID: 215220381}
+  playerCanvas:
+  - {fileID: 1379702199}
+  - {fileID: 618559973}
+  - {fileID: 405967340}
+  - {fileID: 1706451652}
 --- !u!1 &1779636483
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,10 +39,8 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public int wondersInControl;
 
-    [HideInInspector]
     public bool canTravel = false;
 
-    [HideInInspector]
     public bool inJail = false;
 
     [HideInInspector]
@@ -73,6 +71,9 @@ public class PlayerController : MonoBehaviour
 
         this.player = player;
 
+        playerNumber = photonView.ControllerActorNr;
+        this.transform.name = "Player_" + playerNumber;
+
         walletController = this.GetComponent<PlayerWalletController>();
         walletController.controller = this;
 
@@ -82,20 +83,7 @@ public class PlayerController : MonoBehaviour
         manager = FindObjectOfType<GameManager>();
         boardController = FindObjectOfType<BoardController>();
 
-        manager.NewPlayer(this);
-    }
-
-    public void ConfigUI()
-    {
-        photonView.RPC("ConfigUI_CMD", RpcTarget.All);
-    }
-
-    [PunRPC]
-    public void ConfigUI_CMD()
-    {
-        this.transform.name = "Player_" + playerNumber;
-
-        GameObject objCanvas = manager.canvasManager.playerCanvas[playerNumber];
+        GameObject objCanvas = manager.canvasManager.playerCanvas[playerNumber-1];
         objCanvas.SetActive(true);
         canvasController = objCanvas.GetComponent<PlayerControllerCanvas>();
         canvasController.ConfigureUI(null, "Player_" + playerNumber, walletController.currentMoney);
@@ -105,9 +93,13 @@ public class PlayerController : MonoBehaviour
 
         if (player.IsLocal)
         {
-            Color color = Random.ColorHSV();
+            Color color = new Color(
+                Random.Range(0.0f, 1.0f),
+                Random.Range(0.0f, 1.0f),
+                Random.Range(0.0f, 1.0f));
             photonView.RPC("SetupMaterial", RpcTarget.All, new Vector3(color.r, color.g, color.b));
         }
+        manager.NewPlayer(this);
     }
 
     [PunRPC]
@@ -140,6 +132,7 @@ public class PlayerController : MonoBehaviour
     [PunRPC]
     public void ConfigDice_CMD()
     {
+        Debug.Log("Chamou os dados", this);
         if (player.IsLocal)
         {
             this.btnThrowDice.interactable = true;
@@ -147,7 +140,12 @@ public class PlayerController : MonoBehaviour
 
             this.btnThrowDice.onClick.RemoveAllListeners();
             this.btnThrowDice.onClick.AddListener(() => {
-                this.moveController.StartMovePlayer(ThrowDice(), ThrowDice());
+
+                int dice1 = int.Parse(GameObject.Find("Dice 1").GetComponent<TMPro.TMP_InputField>().text);
+                int dice2 = int.Parse(GameObject.Find("Dice 2").GetComponent<TMPro.TMP_InputField>().text);
+
+                this.moveController.StartMovePlayer(dice1, dice2);
+                //PEDROthis.moveController.StartMovePlayer(ThrowDice(), ThrowDice());
                 this.btnThrowDice.interactable = false;
                 this.btnThrowDice.gameObject.SetActive(false);
             });
@@ -209,7 +207,11 @@ public class PlayerController : MonoBehaviour
 
     public void TravelPlayer(TileController tile)
     {
+        if (canTravel == false)
+            return;
+
         int value = 0;
+        canTravel = false;
 
         if (moveController.position>tile.index)
         {
@@ -220,31 +222,34 @@ public class PlayerController : MonoBehaviour
             value = tile.index - moveController.position;
         }
         boardController.ResetBoard();
-        StartCoroutine(manager.OnMovePlayer(moveController, moveController.MovePlayer(value), false));
-    }
 
-    public void TeleportPlayer(TileController tile)
-    {
-        Vector3 newPos = tile.transform.position;
-        newPos.y = this.transform.position.y;
-        this.transform.position = newPos;
-        currentTile = tile;
-        moveController.position = tile.index;
-        canTravel = false;
-        //StartCoroutine(manager.OnMovePlayer(this, StartCoroutine(MovePlayer(0)), false));
+        StartCoroutine(manager.OnMovePlayer(moveController, moveController.MovePlayer(value), false));
     }
 
     public void GotoJail()
     {
         this.jailInTotal++;
-        if(this.jailInTotal>4)
+        if (this.jailInTotal > 4)
         {
             manager.PlayerDefeated();
             DeclareBankruptcy();
         }
         this.inJail = true;
         this.jailRow = 0;
-        this.TeleportPlayer(boardController.jail);
+
+        photonView.RPC("SetCurrentTile_CMD", RpcTarget.All, boardController.jail.index);
+        photonView.RPC("TeleportToJail_CMD", RpcTarget.All);
+        moveController.position = boardController.jail.index;
+    }
+
+    [PunRPC]
+    public void TeleportToJail_CMD()
+    {
+        Vector3 newPos = boardController.jail.transform.position;
+        newPos.y = this.transform.position.y;
+        this.transform.position = newPos;
+
+        StartCoroutine(manager.TestPlayerOnSameHouse(this.moveController));
     }
 
     public void DeclareBankruptcy()
@@ -255,6 +260,12 @@ public class PlayerController : MonoBehaviour
         {
             aux.Owner = null;
         }
+    }
+
+    [PunRPC]
+    public void SetCurrentTile_CMD(int index)
+    {
+        currentTile = manager.board.tileControllers.Find(n => n.index == index);
     }
 
     public void WinGame()

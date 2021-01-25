@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class BoardController : MonoBehaviour
 {
+    public GameManager manager;
+
     public List<TileController> tileControllers = new List<TileController>();
 
     public GameObject board;

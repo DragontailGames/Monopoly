@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class TileController_Buyable : TileController
 {
@@ -17,11 +18,7 @@ public class TileController_Buyable : TileController
 
     public void BuyTile(PlayerController owner)
     {
-        this.Owner = owner;
-        owner.properties.Add(this);
-
-        owner.CheckWin();
-        OnBuy(owner);
+        owner.photonView.RPC("BuyTile_CMD", RpcTarget.All, this.index);
     }
 
     public virtual void OnBuy(PlayerController owner)

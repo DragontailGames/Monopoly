@@ -92,16 +92,6 @@ public class PlayerControllerCanvas : MonoBehaviour
         yield return true;
     }
 
-    public void StartRound()
-    {
-
-    }
-
-    public void EndRound()
-    {
-
-    }
-
     public void DeclareBankruptcy()
     {
         var imgs = this.GetComponentsInChildren<Image>();

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Photon.Pun;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,30 @@ public class GameManager : MonoBehaviour
     public NetworkManager networkManager;
 
     public void Start()
+    {
+        board.manager = this;
+    }
+
+    public void NewPlayer(PlayerController newPlayer)
+    {
+        players.Add(newPlayer);
+
+        foreach (var aux in players)
+        {
+            if (networkManager.IsMaster)
+            {
+                aux.photonView.RPC("SetCurrentTile_CMD", Photon.Pun.RpcTarget.All, networkManager.startTile.GetComponent<TileController>().index);
+                StartCoroutine(aux.moveController.RepositionInTile(aux.playerNumber, players.Count));
+            }
+        }
+
+        if (players.Count == networkManager.GetPlayerNetworkCount)
+        {
+            StartGame();
+        }
+    }
+
+    public void StartGame()
     {
         players.Sort((a, b) => (a.playerNumber.CompareTo(b.playerNumber)));
 
@@ -40,40 +65,28 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-    }
 
-    public void NewPlayer(PlayerController newPlayer)
-    {
-        newPlayer.playerNumber = players.Count;
-        players.Add(newPlayer);
-
-        foreach (var aux in players)
-        {
-            if (networkManager.IsMaster)
-            {
-                aux.currentTile = networkManager.startTile.GetComponent<TileController>();
-                StartCoroutine(aux.moveController.RepositionInTile(aux.playerNumber, players.Count));
-            }
-        }
-
-        newPlayer.ConfigUI();
-
-        if (players.Count == networkManager.GetPlayerNetworkCount)
-        {
-            StartCoroutine(StartRound());
-        }
+        StartCoroutine(StartRound());
     }
 
     public IEnumerator StartRound()
     {
-        /*if(players.Count==1)
+        PlayerController player = players[currentPlayer];
+
+        if(!player.player.IsLocal)
+        {
+            yield break;
+        }
+
+        if (players.Count==1)
         {
             players[0].WinGame();
             yield break; 
-        }*/
-        PlayerController player = players[currentPlayer];
+        }
+        Debug.Log("Começou");
         if (player.inJail)
         {
+            Debug.Log("Na cadeia");
             player.jailRow++;
             if(player.jailRow>2)
             {
@@ -82,10 +95,11 @@ public class GameManager : MonoBehaviour
                 yield break;
             }
             yield return canvasManager.jailMenuController.ShowCanvasPlayer(player);
-            if(player.inJail)
+            Debug.Log("Teste 1 " + player.inJail);
+            if (player.inJail)
             {
-                NextPlayer();
-                StartCoroutine(players[currentPlayer].ConfigDice());
+                Debug.Log("Teste 2 ");
+                player.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
             }
             else
             {
@@ -101,6 +115,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                Debug.Log("Chamou os dadinhos no meu pau");
                 StartCoroutine(player.ConfigDice());
             }
         }
@@ -122,15 +137,18 @@ public class GameManager : MonoBehaviour
         ResetTransparentMaterial();
 
         if (!doubleDice && !playerDefetead)
-            NextPlayer();
-
-        if(playerDefetead)
         {
-            playerDefetead = false;
-            DestroyImmediate(player.gameObject);
+            player.playerController.photonView.RPC("NextPlayer_CMD", Photon.Pun.RpcTarget.All);
         }
-
-        StartCoroutine(StartRound());
+        else
+        {
+            if (playerDefetead)
+            {
+                playerDefetead = false;
+                DestroyImmediate(player.gameObject);
+            }
+            StartCoroutine(StartRound());
+        }
     }
 
     bool playerDefetead = false;

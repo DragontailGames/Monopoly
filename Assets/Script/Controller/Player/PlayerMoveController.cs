@@ -35,9 +35,7 @@ public class PlayerMoveController : MonoBehaviour
                 playerController.doubleRow = 0;
                 playerController.GotoJail();
 
-                playerController.manager.NextPlayer();
-
-                StartCoroutine(playerController.manager.StartRound());
+                playerController.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
                 return;
             }
         }
@@ -94,7 +92,7 @@ public class PlayerMoveController : MonoBehaviour
             yield return Move(newPos);
 
             position = i;
-            playerController.currentTile = tile;
+            playerController.photonView.RPC("SetCurrentTile_CMD", RpcTarget.All, tile.index);
             yield return tile.OnPlayerPass(playerController);
         }
 
@@ -107,7 +105,7 @@ public class PlayerMoveController : MonoBehaviour
         int counts = 0;
         while (Vector3.Distance(transform.position, targetPos) > 0.01f)
         {
-            if(counts>100)
+            if(counts>200 && Vector3.Distance(transform.position, targetPos) > 0.1f)
             {
                 break;
             }
@@ -131,7 +129,6 @@ public class PlayerMoveController : MonoBehaviour
 
     public Vector3 GetRepositionInTile(int index, int amount)
     {
-        index += 1;
         Vector3 newPos = playerController.currentTile.transform.position;
 
         newPos.z += playerController.currentTile.offsetZ;
@@ -160,6 +157,13 @@ public class PlayerMoveController : MonoBehaviour
             }
         }
         return newPos;
+    }
+
+    [PunRPC]
+    public void NextPlayer_CMD() 
+    {
+        playerController.manager.NextPlayer();
+        StartCoroutine(playerController.manager.StartRound());
     }
 
 }

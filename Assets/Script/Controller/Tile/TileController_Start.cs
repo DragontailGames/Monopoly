@@ -8,15 +8,15 @@ public class TileController_Start : TileController
 
     public override IEnumerator OnPlayerPass(PlayerController player)
     {
-        // base.OnPlayerPass(player);
+        base.OnPlayerPass(player);
         if(!player.firstBuy)
         {
             var manager = player.manager;
             player.DeclareBankruptcy();
-            manager.NextPlayer();
+
             StopAllCoroutines();
             manager.ResetTransparentMaterial();
-            yield return manager.StartRound();
+            player.photonView.RPC("NextPlayer_CMD", Photon.Pun.RpcTarget.All);
             yield break;
         }
         player.walletController.CreditValue(startMoney);

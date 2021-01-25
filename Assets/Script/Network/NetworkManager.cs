@@ -29,13 +29,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
-            {
-                CreatePlayer(startTile.position);
-            }
-        }
+        CreatePlayer(startTile.position);
     }
 
     public void CreatePlayer(Vector3 position)

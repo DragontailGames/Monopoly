@@ -105,4 +105,26 @@ public class PlayerWalletController : MonoBehaviour
         }
         StartCoroutine(CheckBankruptcy());
     }
+
+    [PunRPC]
+    public void BuyTile_CMD(int index)
+    {
+        TileController_Buyable tile = controller.manager.board.tileControllers.Find(n => n.index == index) as TileController_Buyable;
+
+        tile.Owner = controller;
+        controller.properties.Add(tile);
+
+        controller.CheckWin();
+        tile.OnBuy(controller);
+    }
+
+    [PunRPC]
+    public void UpgradeLevel_CMD(int level, int index)
+    {
+        TileController_Country tile = controller.manager.board.tileControllers.Find(n => n.index == index) as TileController_Country;
+
+        tile.level = level;
+
+        tile.SetupBuilding();
+    }
 }

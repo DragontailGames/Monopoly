@@ -13,11 +13,9 @@ public class TileController_Country : TileController_Buyable
         buildingParent = this.transform.Find("Building");
     }
 
-    public void UpgradeLevel(int level)
+    public void UpgradeLevel(int level, PlayerController player)
     {
-        this.level = level;
-
-        SetupBuilding();
+        player.photonView.RPC("UpgradeLevel_CMD", Photon.Pun.RpcTarget.All, level, this.index);
     }
 
     public void SetupBuilding()

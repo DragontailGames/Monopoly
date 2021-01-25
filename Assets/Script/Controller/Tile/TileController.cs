@@ -81,7 +81,7 @@ public class TileController : MonoBehaviour
         {
             var mat = new Material(auxMaterial);
             var color = mat.color;
-            color.a = 0.4f;
+            color.a = 0.1f;
             mat.color = color;
             newList.Add(mat);
         }

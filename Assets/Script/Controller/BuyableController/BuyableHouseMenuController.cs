@@ -61,7 +61,7 @@ public class BuyableHouseMenuController : MonoBehaviour
                 player.walletController.DebitValue(fullPrice);
                 tile.BuyTile(player);
                 player.firstBuy = true;
-                tile.UpgradeLevel(level);
+                tile.UpgradeLevel(level, player);
 
                 this.gameObject.SetActive(false);
             });

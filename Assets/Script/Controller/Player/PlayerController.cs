@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public PlayerWalletController walletController;
 
-    [HideInInspector]
     public PhotonView photonView;
 
     public Button btnThrowDice;
@@ -64,17 +63,13 @@ public class PlayerController : MonoBehaviour
 
     public void SetupStart(Player player)
     {
-        photonView = this.GetComponent<PhotonView>();
-        photonView.RPC("SetupStart_CMD", RpcTarget.All, player);
+        this.GetComponent<PhotonView>().RPC("SetupStart_CMD", RpcTarget.All, player);
     }
     
     [PunRPC]
     public void SetupStart_CMD(Player player)
     {
-        playerNumber = (int)player.CustomProperties["Index"];
-        this.transform.name = "Player_" + playerNumber;
-
-        Debug.Log("-- " + playerNumber, this);
+        photonView = this.GetComponent<PhotonView>();
 
         this.player = player;
 
@@ -87,23 +82,32 @@ public class PlayerController : MonoBehaviour
         manager = FindObjectOfType<GameManager>();
         boardController = FindObjectOfType<BoardController>();
 
-        btnThrowDice = manager.canvasManager.btnThrow;
+        manager.NewPlayer(this);
+    }
 
-        GameObject objCanvas =  manager.canvasManager.playerCanvas[playerNumber -1];
+    public void ConfigUI()
+    {
+        photonView.RPC("ConfigUI_CMD", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void ConfigUI_CMD()
+    {
+        this.transform.name = "Player_" + playerNumber;
+
+        GameObject objCanvas = manager.canvasManager.playerCanvas[playerNumber];
         objCanvas.SetActive(true);
         canvasController = objCanvas.GetComponent<PlayerControllerCanvas>();
-        canvasController.player = this;
         canvasController.ConfigureUI(null, "Player_" + playerNumber, walletController.currentMoney);
+        canvasController.player = this;
 
+        btnThrowDice = manager.canvasManager.btnThrow;
 
-        if(player.IsLocal)
+        if (player.IsLocal)
         {
             Color color = Random.ColorHSV();
             photonView.RPC("SetupMaterial", RpcTarget.All, new Vector3(color.r, color.g, color.b));
         }
-
-        manager.NewPlayer(this);
-
     }
 
     [PunRPC]
@@ -115,6 +119,8 @@ public class PlayerController : MonoBehaviour
         newMat.color = this.mainColor;
         List<Material> mats = new List<Material>() { newMat };
         this.GetComponent<MeshRenderer>().sharedMaterials = mats.ToArray();
+
+        btnThrowDice.image.color = this.mainColor;
 
         canvasController.icon.color = this.mainColor;
     }
@@ -128,20 +134,25 @@ public class PlayerController : MonoBehaviour
     public IEnumerator ConfigDice()
     {
         yield return new WaitForSeconds(0.2f);
-        this.btnThrowDice.interactable = true;
+        photonView.RPC("ConfigDice_CMD", RpcTarget.All);
+    }
 
+    [PunRPC]
+    public void ConfigDice_CMD()
+    {
         if (player.IsLocal)
         {
+            this.btnThrowDice.interactable = true;
             this.btnThrowDice.gameObject.SetActive(true);
-        }
 
-        this.btnThrowDice.onClick.RemoveAllListeners();
-        this.btnThrowDice.onClick.AddListener(() => {
-            this.moveController.StartMovePlayer(ThrowDice(), ThrowDice());
-            this.btnThrowDice.interactable = false;
-            this.btnThrowDice.gameObject.SetActive(false);
-        });
-        this.btnThrowDice.image.color = mainColor;
+            this.btnThrowDice.onClick.RemoveAllListeners();
+            this.btnThrowDice.onClick.AddListener(() => {
+                this.moveController.StartMovePlayer(ThrowDice(), ThrowDice());
+                this.btnThrowDice.interactable = false;
+                this.btnThrowDice.gameObject.SetActive(false);
+            });
+            this.btnThrowDice.image.color = mainColor;
+        }
     }
 
     public void MortgagePropertie(TileController tileController)

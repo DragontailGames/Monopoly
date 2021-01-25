@@ -24,6 +24,7 @@ public class PlayerMoveController : MonoBehaviour
 
     public void StartMovePlayer(int dice1, int dice2)
     {
+        Debug.Log(dice1 + "-" + dice2);
         doubleDice = dice1 == dice2;
 
         if(doubleDice)
@@ -103,9 +104,15 @@ public class PlayerMoveController : MonoBehaviour
 
     public IEnumerator Move(Vector3 targetPos)
     {
+        int counts = 0;
         while (Vector3.Distance(transform.position, targetPos) > 0.01f)
         {
+            if(counts>100)
+            {
+                break;
+            }
             playerController.photonView.RPC("Move_CMD", RpcTarget.All, targetPos);
+            counts++;
             yield return new WaitForSeconds(0.001f);
         }
     }

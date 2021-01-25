@@ -56,12 +56,12 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        newPlayer.ConfigUI();
+
         if (players.Count == networkManager.GetPlayerNetworkCount)
         {
             StartCoroutine(StartRound());
         }
-
-
     }
 
     public IEnumerator StartRound()

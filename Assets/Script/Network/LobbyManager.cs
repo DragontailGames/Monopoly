@@ -82,7 +82,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         txt_Waiting.text = "Waiting for another players...";
         txt_PlayerCount.text = PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
-        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == 3/*PhotonNetwork.CurrentRoom.MaxPlayers*/)
+        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == 2/*PhotonNetwork.CurrentRoom.MaxPlayers*/)
         {
             GotoAdventurePhoton();
         }

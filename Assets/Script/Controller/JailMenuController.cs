@@ -36,7 +36,7 @@ public class JailMenuController : MonoBehaviour
             int dice1 = playerController.ThrowDice();
             int dice2 = playerController.ThrowDice();
 
-            Debug.Log("Jail dice1 " + dice1 + " - dice2 " + dice2);
+            StartCoroutine(playerController.manager.RollDice(dice1, dice2, playerController.playerNumber));
 
             playerController.inJail = dice1 != dice2;
             this.gameObject.SetActive(false);

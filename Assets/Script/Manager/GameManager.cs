@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
 
     public NetworkManager networkManager;
 
+    public GameObject dice1, dice2, dices;
+
     public void Start()
     {
         board.manager = this;
@@ -78,15 +80,13 @@ public class GameManager : MonoBehaviour
             yield break;
         }
 
-        if (players.Count==1)
+        if (players.Count == 1 && PhotonNetwork.CurrentLobby.Name != "BotGame")
         {
             players[0].WinGame();
             yield break; 
         }
-        Debug.Log("Começou");
         if (player.inJail)
         {
-            Debug.Log("Na cadeia");
             player.jailRow++;
             if(player.jailRow>2)
             {
@@ -95,10 +95,8 @@ public class GameManager : MonoBehaviour
                 yield break;
             }
             yield return canvasManager.jailMenuController.ShowCanvasPlayer(player);
-            Debug.Log("Teste 1 " + player.inJail);
             if (player.inJail)
             {
-                Debug.Log("Teste 2 ");
                 player.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
             }
             else
@@ -115,7 +113,6 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Chamou os dadinhos no meu pau");
                 StartCoroutine(player.ConfigDice());
             }
         }
@@ -253,5 +250,28 @@ public class GameManager : MonoBehaviour
             playerController.WinGame();
             return;
         }
+    }
+
+    public IEnumerator RollDice(int dice1Value, int dice2Value, int playerNumber)
+    {
+        Debug.Log("Rolou " + playerNumber);
+
+        int yStart =315;
+        float correction = 90 * (playerNumber - 1);
+        Debug.Log(correction);
+        dices.transform.rotation = Quaternion.Euler(new Vector3(0,yStart - correction, 0));
+
+        Animator dice1Animator = dice1.GetComponentInChildren<Animator>();
+        dice1.SetActive(true);
+        dice1Animator.SetInteger("RollNumber", dice1Value);
+
+        Animator dice2Animator = dice2.GetComponentInChildren<Animator>();
+        dice2.SetActive(true);
+        dice2Animator.SetInteger("RollNumber", dice2Value);
+
+        yield return new WaitForSeconds(0.4f * (dice1Value + dice2Value));
+
+        dice1.SetActive(false);
+        dice2.SetActive(false);
     }
 }

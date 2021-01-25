@@ -21,7 +21,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         PhotonNetwork.AutomaticallySyncScene = true;
     }
 
-    public void btn_ConnectToLobbyNormal()
+    public void ConnectToMaster()
     {
         popupWaitingPlayers.SetActive(true);
 
@@ -30,6 +30,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         txt_Waiting.text = "Connecting...";
         txt_PlayerCount.text = "";
+
 
         if (!PhotonNetwork.IsConnected)
         {
@@ -43,13 +44,29 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
     }
 
+    TypedLobby normalLobby = new TypedLobby("NormalPlayer", LobbyType.Default);
+    TypedLobby botLobby = new TypedLobby("BotGame", LobbyType.Default);
+    TypedLobby lobby;
+
+    public void btn_ConnectToLobbyNormal()
+    {
+        ConnectToMaster();
+
+        lobby = normalLobby;
+    }
+
+    public void btn_ConnectToLobbyBot()
+    {
+        ConnectToMaster();
+
+        lobby = botLobby;
+    }
+
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.NickName = "Player_" + Random.Range(0000, 9999);
 
-        TypedLobby typedLobby = new TypedLobby("NormalPlayer", LobbyType.Default);
-
-        PhotonNetwork.JoinLobby(typedLobby);
+        PhotonNetwork.JoinLobby(lobby);
     }
 
     public override void OnJoinedLobby()
@@ -78,13 +95,18 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("<color=green>Entrou na sala " + PhotonNetwork.CurrentRoom.Name + "</color>");
 
-        PhotonNetwork.LocalPlayer.CustomProperties["Index"] = PhotonNetwork.LocalPlayer.ActorNumber;
-
-        txt_Waiting.text = "Waiting for another players...";
-        txt_PlayerCount.text = PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
-        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == 2/*PhotonNetwork.CurrentRoom.MaxPlayers*/)
+        if (PhotonNetwork.CurrentLobby == botLobby)
         {
             GotoAdventurePhoton();
+        }
+        else
+        {
+            txt_Waiting.text = "Waiting for another players...";
+            txt_PlayerCount.text = PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
+            if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == 2/*PhotonNetwork.CurrentRoom.MaxPlayers*/)
+            {
+                GotoAdventurePhoton();
+            }
         }
     }
 
@@ -98,8 +120,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         txt_PlayerCount.text = PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
-
-        newPlayer.CustomProperties["Index"] = newPlayer.ActorNumber;
 
         if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == 2/*PhotonNetwork.CurrentRoom.MaxPlayers*/)
         {

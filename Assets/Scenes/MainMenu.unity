@@ -1695,8 +1695,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 810.00006, y: -390.58252}
-  m_SizeDelta: {x: 473.33334, y: 681.16504}
+  m_AnchoredPosition: {x: 810.00006, y: -389.8338}
+  m_SizeDelta: {x: 473.33334, y: 679.6676}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1063919941
 GameObject:
@@ -1943,8 +1943,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1333.3334, y: -390.58252}
-  m_SizeDelta: {x: 473.33334, y: 681.16504}
+  m_AnchoredPosition: {x: 1333.3334, y: -389.8338}
+  m_SizeDelta: {x: 473.33334, y: 679.6676}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1176809307
 GameObject:
@@ -2192,8 +2192,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 286.6667, y: -390.58252}
-  m_SizeDelta: {x: 473.33334, y: 681.16504}
+  m_AnchoredPosition: {x: 286.6667, y: -389.8338}
+  m_SizeDelta: {x: 473.33334, y: 679.6676}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1286893569
 GameObject:
@@ -2648,7 +2648,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1519347265}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 301617019}
+        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+        m_MethodName: btn_ConnectToLobbyBot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1519347265
 MonoBehaviour:
   m_ObjectHideFlags: 0

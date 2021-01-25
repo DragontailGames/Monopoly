@@ -132,7 +132,6 @@ public class PlayerController : MonoBehaviour
     [PunRPC]
     public void ConfigDice_CMD()
     {
-        Debug.Log("Chamou os dados", this);
         if (player.IsLocal)
         {
             this.btnThrowDice.interactable = true;
@@ -141,11 +140,12 @@ public class PlayerController : MonoBehaviour
             this.btnThrowDice.onClick.RemoveAllListeners();
             this.btnThrowDice.onClick.AddListener(() => {
 
-                int dice1 = int.Parse(GameObject.Find("Dice 1").GetComponent<TMPro.TMP_InputField>().text);
-                int dice2 = int.Parse(GameObject.Find("Dice 2").GetComponent<TMPro.TMP_InputField>().text);
+                int dice1 = ThrowDice();
+                int dice2 = ThrowDice();
+
+                StartCoroutine(manager.RollDice(dice1, dice2, playerNumber));
 
                 this.moveController.StartMovePlayer(dice1, dice2);
-                //PEDROthis.moveController.StartMovePlayer(ThrowDice(), ThrowDice());
                 this.btnThrowDice.interactable = false;
                 this.btnThrowDice.gameObject.SetActive(false);
             });

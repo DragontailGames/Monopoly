@@ -27,6 +27,12 @@ public class EnumDt : MonoBehaviour
         eslavo,
         oceanico
     };
+
+    public enum storeProductType
+    {
+        dice,
+        skin
+    };
 }
 
 

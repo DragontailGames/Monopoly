@@ -10,9 +10,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 {
     public GameObject popupWaitingPlayers;
 
-    private TextMeshProUGUI txt_Waiting;
+    public UserManager user;
 
-    private TextMeshProUGUI txt_PlayerCount;
+    public MatchActions actions;
 
     void Awake()
     {
@@ -24,13 +24,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void ConnectToMaster()
     {
         popupWaitingPlayers.SetActive(true);
-
-        txt_Waiting = popupWaitingPlayers.transform.GetChild(0).Find("txt_Waiting").GetComponent<TextMeshProUGUI>();
-        txt_PlayerCount = popupWaitingPlayers.transform.GetChild(0).Find("txt_PlayerCount").GetComponent<TextMeshProUGUI>();
-
-        txt_Waiting.text = "Connecting...";
-        txt_PlayerCount.text = "";
-
 
         if (!PhotonNetwork.IsConnected)
         {
@@ -44,9 +37,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
     }
 
-    TypedLobby normalLobby = new TypedLobby("NormalPlayer", LobbyType.Default);
+    TypedLobby normalLobby = new TypedLobby("NormalGame", LobbyType.Default);
     TypedLobby botLobby = new TypedLobby("BotGame", LobbyType.Default);
+    TypedLobby rankedLobby;
     TypedLobby lobby;
+
+    public void btn_OpenMatchPanel(GameObject myObject)
+    {
+        myObject.transform.parent.gameObject.SetActive(true);
+        myObject.SetActive(true);
+    }
 
     public void btn_ConnectToLobbyNormal()
     {
@@ -55,23 +55,35 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         lobby = normalLobby;
     }
 
-    public void btn_ConnectToLobbyBot()
+    public void btn_ConnectToLobbyCustom()
     {
         ConnectToMaster();
 
         lobby = botLobby;
     }
 
+    public void btn_ConnectToLobbyRanked(MatchActions matchActions, int bet)
+    {
+        rankedLobby = new TypedLobby("RankedGame_"+bet, LobbyType.Default);
+        actions = matchActions;
+
+        lobby = rankedLobby;
+
+        ConnectToMaster();
+    }
+
     public override void OnConnectedToMaster()
     {
-        PhotonNetwork.NickName = "Player_" + Random.Range(0000, 9999);
+        actions.onConnectedToMaster?.Invoke();
+        PhotonNetwork.NickName = user.nickname;
 
         PhotonNetwork.JoinLobby(lobby);
     }
 
     public override void OnJoinedLobby()
     {
-        Debug.Log("<color=blue>Entrou no lobby</color>");
+        actions.onJoinedLobby?.Invoke();
+        Debug.Log("<color=blue>Entrou no lobby " + PhotonNetwork.CurrentLobby.Name + ".</color>");
         JoinRoom();
     }
 
@@ -93,6 +105,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        actions.onJoinedRoom?.Invoke();
         Debug.Log("<color=green>Entrou na sala " + PhotonNetwork.CurrentRoom.Name + "</color>");
 
         if (PhotonNetwork.CurrentLobby == botLobby)
@@ -101,9 +114,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
         else
         {
-            txt_Waiting.text = "Waiting for another players...";
-            txt_PlayerCount.text = PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
-            if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == 2/*PhotonNetwork.CurrentRoom.MaxPlayers*/)
+            if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
             {
                 GotoAdventurePhoton();
             }
@@ -112,16 +123,19 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void btn_LeftRoom()
     {
-        PhotonNetwork.LeaveRoom();
-        PhotonNetwork.LeaveLobby();
-        PhotonNetwork.Disconnect();
+        if(PhotonNetwork.InRoom)
+            PhotonNetwork.LeaveRoom();
+        if (PhotonNetwork.InLobby)
+            PhotonNetwork.LeaveLobby();
+        if (PhotonNetwork.IsConnected)
+            PhotonNetwork.Disconnect();
+
+        actions.onLeftRoom?.Invoke();
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        txt_PlayerCount.text = PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
-
-        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == 2/*PhotonNetwork.CurrentRoom.MaxPlayers*/)
+        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
         {
             GotoAdventurePhoton();
         }
@@ -150,12 +164,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
-        popupWaitingPlayers.SetActive(false);
+        //popupWaitingPlayers.SetActive(false);
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        txt_PlayerCount.text = PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
+        //txt_PlayerCount.text = PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers;
     }
 
     #endregion

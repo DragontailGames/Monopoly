@@ -9,7 +9,7 @@ public class BaseManager : MonoBehaviour
 
     public void Awake()
     {
-        translation.afterTranslate = () => { SceneLoadManager.instance.gotoNext(); };
+        //translation.afterTranslate = () => { SceneLoadManager.instance.gotoNext(); };
     }
 
 }

@@ -33,6 +33,13 @@ public class EnumDt : MonoBehaviour
         dice,
         skin
     };
+
+    public enum botBehavior
+    {
+        economic,
+        normal,
+        rich
+    };
 }
 
 

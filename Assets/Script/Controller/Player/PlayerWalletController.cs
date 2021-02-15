@@ -2,17 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.Events;
 
 public class PlayerWalletController : MonoBehaviour
 {
     [HideInInspector]
     public PlayerController controller;
 
-    public int currentMoney = 3000000;
+    public int currentMoney;
 
     public bool testedBankruptcy = false;
 
     public List<Doubt> doubts = new List<Doubt>();
+
+    public UnityAction whenUpdateMoney;
+
+    public void Start()
+    {
+        currentMoney = MathDt.startMoney;
+    }
 
     public void DebitValue(int value)
     {
@@ -24,6 +32,7 @@ public class PlayerWalletController : MonoBehaviour
     {
         StartCoroutine(controller.canvasController.DebitAnimation(value, currentMoney));
         currentMoney -= value;
+        whenUpdateMoney?.Invoke();
     }
 
     public void CreditValue(int value)
@@ -36,6 +45,7 @@ public class PlayerWalletController : MonoBehaviour
     {
         StartCoroutine(controller.canvasController.CreditAnimation(value, currentMoney));
         currentMoney += value;
+        whenUpdateMoney?.Invoke();
     }
 
     public void TransferMoney(int debitMoney, int creditMoney, PlayerController otherPlayer)
@@ -59,6 +69,7 @@ public class PlayerWalletController : MonoBehaviour
             otherPlayer.walletController.CreditValue(creditMoney);
         }
 
+        whenUpdateMoney?.Invoke();
     }
 
     public bool ExitingDoubts()

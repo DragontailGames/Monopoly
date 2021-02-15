@@ -22,6 +22,8 @@ public static class MathDt
         50
     };
 
+    public static int startMoney = 3000000;
+
     public static int jailPrice = 200000;
 
     public static int wonderPrice = 200000;

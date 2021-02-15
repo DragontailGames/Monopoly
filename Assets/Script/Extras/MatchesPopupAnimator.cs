@@ -8,10 +8,10 @@ public class MatchesPopupAnimator : MonoBehaviour
 
     public void RightButton()
     {
-        foreach(var aux in this.GetComponentsInChildren<Animator>())
+        /*foreach(var aux in this.GetComponentsInChildren<Animator>())
         {
             aux.Play("Right", -1, 0f);
-        }
+        }*/
         if (gameType.gameSelected + 1 < gameType.transform.childCount)
         {
             gameType.gameSelected++;
@@ -20,14 +20,15 @@ public class MatchesPopupAnimator : MonoBehaviour
         {
             gameType.gameSelected = 0;
         }
+        EnableChild();
     }
 
     public void LeftButton()
     {
-        foreach (var aux in this.GetComponentsInChildren<Animator>())
+        /*foreach (var aux in this.GetComponentsInChildren<Animator>())
         {
             aux.Play("Left", -1, 0f);
-        }
+        }*/
         if (gameType.gameSelected - 1 > 0)
         {
             gameType.gameSelected--;
@@ -36,5 +37,15 @@ public class MatchesPopupAnimator : MonoBehaviour
         {
             gameType.gameSelected = gameType.transform.childCount-1;
         }
+        EnableChild();
+    }
+
+    public void EnableChild()
+    {
+        foreach (Transform aux in this.transform)
+        {
+            aux.gameObject.SetActive(false);
+        }
+        this.transform.GetChild(gameType.gameSelected).gameObject.SetActive(true);
     }
 }

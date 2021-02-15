@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using Dragontailgames.Utils;
 
-public class RankedPopupController : MonoBehaviour
+public class RankedMatchPanelController : MonoBehaviour
 {
     public SelectSpecialSkinController selectSpecialSkinController;
 

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[System.Serializable]
 public class MatchActions
 {
     public UnityAction onConnectedToMaster;
@@ -13,4 +12,6 @@ public class MatchActions
     public UnityAction onJoinedRoom;
 
     public UnityAction onLeftRoom;
+
+    public UnityAction onPlayerEnteredRoom;
 }

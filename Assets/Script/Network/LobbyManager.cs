@@ -23,7 +23,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void ConnectToMaster()
     {
-        popupWaitingPlayers.SetActive(true);
+        //popupWaitingPlayers.SetActive(true);
 
         if (!PhotonNetwork.IsConnected)
         {
@@ -48,8 +48,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         myObject.SetActive(true);
     }
 
-    public void btn_ConnectToLobbyNormal()
+    public GameObject enableAfterJoinRoom;
+
+    public TMP_InputField roomNameInput;
+
+    public void btn_ConnectToLobbyNormal(GameObject enableAfterJoinRoom)
     {
+        this.enableAfterJoinRoom = enableAfterJoinRoom;
+        this.roomName = roomNameInput.text;
+
         ConnectToMaster();
 
         lobby = normalLobby;
@@ -74,7 +81,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        actions.onConnectedToMaster?.Invoke();
+        actions?.onConnectedToMaster?.Invoke();
         PhotonNetwork.NickName = user.nickname;
 
         PhotonNetwork.JoinLobby(lobby);
@@ -82,10 +89,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
-        actions.onJoinedLobby?.Invoke();
+        actions?.onJoinedLobby?.Invoke();
         Debug.Log("<color=blue>Entrou no lobby " + PhotonNetwork.CurrentLobby.Name + ".</color>");
-        JoinRoom();
+        JoinRoom(roomName);
     }
+
 
     public void JoinRoom()
     {
@@ -103,9 +111,30 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinOrCreateRoom(name, roomOptions, null);
     }
 
+    public string roomName;
+
+    public void JoinRoom(string name)
+    {
+        if(string.IsNullOrEmpty(name))
+        {
+            JoinRoom();
+            return;
+        }
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.MaxPlayers = 4;
+        roomOptions.IsVisible = true;
+        roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "C0", 1 } };
+        roomOptions.CustomRoomPropertiesForLobby = new string[] { "C0" }; // this makes "C0" available in the lobby
+        PhotonNetwork.JoinOrCreateRoom(name, roomOptions, null);
+    }
+
     public override void OnJoinedRoom()
     {
-        actions.onJoinedRoom?.Invoke();
+        actions?.onJoinedRoom?.Invoke();
+
+        enableAfterJoinRoom.SetActive(true);
+
+        roomName = PhotonNetwork.CurrentRoom.Name;
         Debug.Log("<color=green>Entrou na sala " + PhotonNetwork.CurrentRoom.Name + "</color>");
 
         if (PhotonNetwork.CurrentLobby == botLobby)
@@ -130,16 +159,29 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsConnected)
             PhotonNetwork.Disconnect();
 
-        actions.onLeftRoom?.Invoke();
+        actions?.onLeftRoom?.Invoke();
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
+        actions?.onPlayerEnteredRoom?.Invoke();
         if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
         {
             GotoAdventurePhoton();
         }
     }
+
+    public int GetCurrentRoomPlayers()
+    {
+        return PhotonNetwork.CurrentRoom.PlayerCount;
+    }
+
+    public string GetPlayerNickname(int index)
+    {
+        return PhotonNetwork.PlayerList[index].NickName;
+    }
+
+    public bool IsMaster { get { return PhotonNetwork.IsMasterClient; } }
 
     public void GotoAdventurePhoton()
     {

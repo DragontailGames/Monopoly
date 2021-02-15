@@ -25,7 +25,8 @@ public class UserManager : MonoBehaviour
 
     public string nickname;
 
-    public Dice CurrentDice { get => this.currentDice; set 
+    public Dice CurrentDice 
+    { get => this.currentDice; set 
         { 
             this.currentDice = value;
             PlayerPrefs.SetString("currentDice", value.id);
@@ -52,10 +53,10 @@ public class UserManager : MonoBehaviour
             nickname = PlayerPrefs.GetString(usernamePlayerPrefs);
 
             coins = PlayerPrefs.GetInt(coinsPlayerPrefs);
-            txtCoins.text = MathDt.ConfigureCoins(coins);
+            //txtCoins.text = MathDt.ConfigureCoins(coins);
 
             diamonds = PlayerPrefs.GetInt(diamondsPlayerPrefs);
-            txtDiamonds.text = MathDt.ConfigureCoins(diamonds);
+            //txtDiamonds.text = MathDt.ConfigureCoins(diamonds);
 
             currentDice = ((Resources.FindObjectsOfTypeAll(typeof(Dice)) as Dice[]).ToList()).Find(n=>n.id == PlayerPrefs.GetString("currentDice"));
 
@@ -86,7 +87,7 @@ public class UserManager : MonoBehaviour
         if (this.coins + updateCoins >= 0)
         {
             this.coins += updateCoins;
-            txtCoins.text = MathDt.ConfigureCoins(coins);
+            //txtCoins.text = MathDt.ConfigureCoins(coins);
             PlayerPrefs.SetInt(coinsPlayerPrefs, coins);
         }
         else
@@ -112,7 +113,7 @@ public class UserManager : MonoBehaviour
             {
                 saveProduct += aux.id + "|";
             }
-            txtDiamonds.text = MathDt.ConfigureCoins(diamonds);
+            //txtDiamonds.text = MathDt.ConfigureCoins(diamonds);
             PlayerPrefs.SetInt(diamondsPlayerPrefs, diamonds);
             PlayerPrefs.SetString(productsPlayerPrefs, saveProduct.Remove(saveProduct.Length - 1));
             return true;

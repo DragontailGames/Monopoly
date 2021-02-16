@@ -14,7 +14,9 @@ public class JailMenuController : MonoBehaviour
 
     public IEnumerator ShowCanvasPlayer(PlayerController playerController)
     {
-        this.gameObject.SetActive(true);
+        if(!playerController.botController)
+            this.gameObject.SetActive(true);
+
         clicked = false;
 
         btnPayJailPrice.GetComponentInChildren<TextMeshProUGUI>().text = "Pay<br><size=32>" + MathDt.ConfigureMoney(MathDt.jailPrice) + "</size>";
@@ -42,6 +44,25 @@ public class JailMenuController : MonoBehaviour
             this.gameObject.SetActive(false);
         });
 
+        //BOT
+        if (playerController.botController)
+        {
+            yield return playerController.botController.ExecuteAction(() => 
+            {
+                clicked = true;
+                int dice1 = playerController.ThrowDice();
+                int dice2 = playerController.ThrowDice();
+
+                StartCoroutine(playerController.manager.RollDice(dice1, dice2, playerController.playerNumber));
+
+                playerController.inJail = dice1 != dice2;
+            },null,() => 
+            {
+                clicked = true;
+                playerController.walletController.DebitValue(MathDt.jailPrice);
+                playerController.inJail = false;
+            });
+        }
 
         yield return new WaitUntil(() => clicked == true);
     }

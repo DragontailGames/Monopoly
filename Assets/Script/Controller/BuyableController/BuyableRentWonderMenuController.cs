@@ -14,7 +14,9 @@ public class BuyableRentWonderMenuController : MonoBehaviour
 
     public IEnumerator SetupRentWonderTile(TileController_Wonders tile, PlayerController player)
     {
-        this.gameObject.SetActive(true);
+        if(!player.botController)
+            this.gameObject.SetActive(true);
+
         clicked = false;
 
         var tileWonder = tile.tile as TileBuyable_Wonder;
@@ -60,6 +62,23 @@ public class BuyableRentWonderMenuController : MonoBehaviour
             hostileButton.interactable = false;
         else
             hostileButton.interactable = true;
+
+        //BOT
+        if(player.botController)
+        {
+            yield return player.botController.ExecuteAction(()=> 
+            {
+                clicked = true;
+                player.walletController.DebitValue(price);
+                tile.Owner.walletController.CreditValue(price);
+            },null,()=> 
+            {
+                clicked = true;
+                player.walletController.DebitValue(hostilePrice);
+                tile.Owner.walletController.CreditValue(MathDt.wonderPrice);
+                tile.Owner = player;
+            });
+        }
 
         yield return new WaitUntil(() => clicked == true);
     }

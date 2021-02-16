@@ -14,6 +14,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public MatchActions actions;
 
+    [Tooltip("In Minutes per player in room (-1)")]
+    public int autoBotJoinAfter = 120;
+
+    private int fakeBots;
+
     void Awake()
     {
         // #Critical
@@ -48,13 +53,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         myObject.SetActive(true);
     }
 
-    public GameObject enableAfterJoinRoom;
-
     public TMP_InputField roomNameInput;
 
-    public void btn_ConnectToLobbyNormal(GameObject enableAfterJoinRoom)
+    public void btn_ConnectToLobbyNormal()
     {
-        this.enableAfterJoinRoom = enableAfterJoinRoom;
         this.roomName = roomNameInput.text;
 
         ConnectToMaster();
@@ -128,14 +130,20 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinOrCreateRoom(name, roomOptions, null);
     }
 
+    IEnumerator botAutoJoin;
+
     public override void OnJoinedRoom()
     {
         actions?.onJoinedRoom?.Invoke();
 
-        enableAfterJoinRoom.SetActive(true);
-
         roomName = PhotonNetwork.CurrentRoom.Name;
         Debug.Log("<color=green>Entrou na sala " + PhotonNetwork.CurrentRoom.Name + "</color>");
+
+        if(IsMaster)
+        {
+            botAutoJoin = BotAutoJoin();
+            StartCoroutine(botAutoJoin);
+        }
 
         if (PhotonNetwork.CurrentLobby == botLobby)
         {
@@ -169,6 +177,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             GotoAdventurePhoton();
         }
+        else
+        {
+            StopCoroutine(botAutoJoin);
+        }
     }
 
     public int GetCurrentRoomPlayers()
@@ -185,8 +197,29 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void GotoAdventurePhoton()
     {
+        PlayerPrefs.SetInt("Bots", fakeBots);
+
         PhotonNetwork.CurrentRoom.IsVisible = false;
         PhotonNetwork.LoadLevel("GameScene");
+    }
+
+    public IEnumerator BotAutoJoin()
+    {
+        yield return new WaitForSeconds(autoBotJoinAfter * (GetCurrentRoomPlayers() + fakeBots));
+        if (PhotonNetwork.CurrentRoom.PlayerCount + fakeBots < PhotonNetwork.CurrentRoom.MaxPlayers)
+        {
+            Debug.Log("Novo bot na sala");
+            fakeBots++;
+        }
+        if (PhotonNetwork.CurrentRoom.PlayerCount + fakeBots < PhotonNetwork.CurrentRoom.MaxPlayers)
+        {
+            botAutoJoin = BotAutoJoin();
+            StartCoroutine(botAutoJoin);
+        }
+        else
+        {
+            GotoAdventurePhoton();
+        }
     }
 
     #region Fail Logs

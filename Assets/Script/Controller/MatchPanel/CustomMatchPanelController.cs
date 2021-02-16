@@ -7,7 +7,7 @@ using Dragontailgames.Utils;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class NormalMatchPanelController : MonoBehaviour
+public class CustomMatchPanelController : MonoBehaviour
 {
     //public SelectSpecialSkinController selectSpecialSkinController;
 
@@ -92,7 +92,6 @@ public class NormalMatchPanelController : MonoBehaviour
     public void AddBotCMD()
     {
         bots.Add("Bot_Rich" + Random.Range(0000, 9999));
-
 
         for (int i = 0; i < bots.Count; i++)
         {

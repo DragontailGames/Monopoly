@@ -39,10 +39,74 @@ public class BoardController : MonoBehaviour
 
     public void SetupTravelBoard(PlayerController player)
     {
-        foreach(var aux in tileControllers)
+        //BOT
+        if (!player.botController)
         {
-            aux.SetupTravel(player);
+            foreach (var aux in tileControllers)
+            {
+                aux.SetupTravel(player);
+            }
         }
+        else
+        {
+            List<TileTeleportBot> tileCanTeleport = new List<TileTeleportBot>();
+
+            foreach(var aux in tileControllers)
+            {
+                if (aux.tileIsTeleported)
+                {
+                    int probability = 3;
+
+                    if (aux.GetType() == typeof(TileController_Buyable))
+                    {
+                        var b = aux as TileController_Buyable;
+                        if(b.Owner == null)
+                        {
+                            probability = 1;
+                        }
+                        else if(b.Owner == player)
+                        {
+                            probability = 2;
+                        }
+                        else
+                        {
+                            probability = 0;
+                        }
+                    }
+
+                    tileCanTeleport.Add(new TileTeleportBot()
+                    {
+                        tile = aux,
+                        probability = probability
+                    });
+                }
+            }
+
+            player.TravelPlayer(GetBestTileBot(tileCanTeleport));
+        }
+    }
+
+    public TileController GetBestTileBot(List<TileTeleportBot> tileCanTeleport)
+    {
+        TileController bestTile;
+
+        int randomProbability = UnityEngine.Random.Range(0, 100);
+        int probability = 1;
+
+        if(randomProbability<10)
+        {
+            probability = 3;
+        }
+        else if(randomProbability<30)
+        {
+            probability = 2;
+        }
+
+        var filtredList = tileCanTeleport.FindAll(n => n.probability == probability);
+
+        bestTile = filtredList[UnityEngine.Random.Range(0,filtredList.Count)].tile ;
+
+        return bestTile;
     }
 
     public void SetupMortgageBoard(PlayerController player)

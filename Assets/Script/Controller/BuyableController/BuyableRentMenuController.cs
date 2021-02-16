@@ -15,7 +15,10 @@ public class BuyableRentMenuController : MonoBehaviour
 
     public IEnumerator SetupRentTile(TileController_Country tile, PlayerController player)
     {
-        this.gameObject.SetActive(true);
+        if (!player.botController)
+        {
+            this.gameObject.SetActive(true);
+        }
 
         clicked = false;
 
@@ -58,6 +61,22 @@ public class BuyableRentMenuController : MonoBehaviour
             hostileButton.interactable = false;
         else
             hostileButton.interactable = true;
+
+        //BOT
+        if (player.botController)
+        {
+            yield return player.botController.ExecuteAction(() =>
+            {
+                clicked = true;
+                player.walletController.TransferMoney(rentPrice, rentPrice, tile.Owner);
+            }, null, () =>
+            {
+                clicked = true;
+                int creditValue = (int)MathDt.GetContructionPrice(tileBuyable.price, tile.level);
+                player.walletController.TransferMoney(hostilePrice, creditValue, tile.Owner);
+                tile.Owner = player;
+            });
+        }
 
         yield return new WaitUntil(() => clicked == true);
     }

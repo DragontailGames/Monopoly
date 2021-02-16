@@ -12,7 +12,7 @@ public class TileController_Lucky : TileController
     {
         TileLucky lucky = GetLuckyCard();
 
-        yield return luckyMenuController.LuckyStart(lucky);
+        yield return luckyMenuController.LuckyStart(lucky, player);
 
         luckyEffect.StartLucky(player, lucky);
     }

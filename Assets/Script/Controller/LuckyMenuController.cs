@@ -10,13 +10,19 @@ public class LuckyMenuController : MonoBehaviour
 
     bool clicked = false;
 
-    public IEnumerator LuckyStart(TileLucky lucky)
+    public IEnumerator LuckyStart(TileLucky lucky, PlayerController player)
     {
-        this.gameObject.SetActive(true);
+        if(!player.botController)
+            this.gameObject.SetActive(true);
 
         clicked = false;
 
         luckyDescription.text = lucky.text;
+
+        if (player.botController)
+        {
+            yield return player.botController.ExecuteAction(() => { clicked = true; });
+        }
 
         yield return new WaitUntil(() => clicked == true);
     }

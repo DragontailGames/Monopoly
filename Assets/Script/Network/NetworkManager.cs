@@ -19,7 +19,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public int GetPlayerNetworkCount
     {
-        get { return PhotonNetwork.PlayerList.Length; }
+        get { return PhotonNetwork.PlayerList.Length + PlayerPrefs.GetInt("Bots"); }
     }
 
     public bool IsMaster
@@ -30,16 +30,37 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     void Start()
     {
         CreatePlayer(startTile.position);
+
+        if(PhotonNetwork.IsMasterClient)
+        {
+            var bots = PlayerPrefs.GetInt("Bots");
+            var count = PhotonNetwork.PlayerList.Length + 1;
+            while(bots>0)
+            {
+                CreatePlayer(startTile.position, true, count);
+                bots--;
+                count ++;
+            }
+        }
     }
 
-    public void CreatePlayer(Vector3 position)
+    public void CreatePlayer(Vector3 position, bool isBot = false, int botNumber = 0)
     {
-        Player player = PhotonNetwork.LocalPlayer;
+        Player player = null;
         position.y = 0.35f;
-        GameObject playerGO = PhotonNetwork.Instantiate("Prefabs/Player", position, Quaternion.identity);
+        GameObject playerGO = PhotonNetwork.Instantiate("Prefabs/Player", position, Quaternion.Euler(new Vector3(0,180,0)));
         PlayerController playerController = playerGO.GetComponent<PlayerController>();
 
-        playerController.SetupStart(player);
+        if (isBot)
+        {
+            playerGO.AddComponent<BotController>();
+            player = new Player(botNumber);
+        }
+        else
+        {
+            player = PhotonNetwork.LocalPlayer;
+        }
+        playerController.SetupStart(player, isBot, botNumber);
 
         //Player test = SaveAndLoad.instance.ConfigPlayer(SaveAndLoad.instance.PlayerFromJson((string)player.CustomProperties["Player"]));
 

@@ -22,11 +22,24 @@ public static class MathDt
         50
     };
 
+    public static int startMoney = 3000000;
+
     public static int jailPrice = 200000;
 
     public static int wonderPrice = 200000;
 
     public static int hostileWonderTakeoverPrice = 1000000;
+
+    public static int[] betValue =
+    {
+        50,
+        100,
+        200,
+        500,
+        1000,
+        5000,
+        10000,
+    };
 
     public static float GetContructionPrice(float basePrice, int contructionLevel, int currentLevel)
     {
@@ -65,6 +78,30 @@ public static class MathDt
         else
         {
             return money.ToString();
+        }
+    }
+
+    public static string ConfigureCoins(int coin)
+    {
+        if (coin > 100000)
+        {
+            return string.Format($"{coin / 1000:#,##0K}");
+        }
+        else
+        {
+            return coin.ToString();
+        }
+    }
+
+    public static string ConfigureBet(int bet)
+    {
+        if (bet >= 1000)
+        {
+            return string.Format($"{bet / 1000:#,##0K}");
+        }
+        else
+        {
+            return bet.ToString();
         }
     }
 

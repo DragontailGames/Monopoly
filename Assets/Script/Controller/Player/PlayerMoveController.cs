@@ -24,7 +24,6 @@ public class PlayerMoveController : MonoBehaviour
 
     public void StartMovePlayer(int dice1, int dice2)
     {
-        Debug.Log(dice1 + "-" + dice2);
         doubleDice = dice1 == dice2;
 
         if(doubleDice)
@@ -61,6 +60,7 @@ public class PlayerMoveController : MonoBehaviour
         int dest = valueDice + position;
         for (int i = position + 1; i <= dest; i++)
         {
+            playerController.Animate_Walk();
             TileController tile = playerController.boardController.tileControllers.Find(t => t.index == i);
 
             if (i + 1 >= playerController.boardController.tileControllers.Count)

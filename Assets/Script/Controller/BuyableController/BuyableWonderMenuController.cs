@@ -12,7 +12,8 @@ public class BuyableWonderMenuController : MonoBehaviour
 
     public IEnumerator SetupWonderTile(TileController_Wonders tile, PlayerController player)
     {
-        this.gameObject.SetActive(true);
+        if(!player.botController)
+            this.gameObject.SetActive(true);
 
         clicked = false;
 
@@ -50,6 +51,21 @@ public class BuyableWonderMenuController : MonoBehaviour
             buyButton.interactable = false;
         else
             buyButton.interactable = true;
+
+        //BOT
+        if (player.botController)
+        {
+            yield return player.botController.ExecuteAction(() =>
+            {
+                clicked = true;
+                player.walletController.DebitValue(price);
+                tile.BuyTile(player);
+                player.firstBuy = true;
+                player.wondersInControl++;
+
+                player.WonderWin();
+            }, () => { });
+        }
 
         yield return new WaitUntil(() => clicked == true);
     }

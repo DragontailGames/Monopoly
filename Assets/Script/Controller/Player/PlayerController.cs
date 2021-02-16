@@ -59,20 +59,25 @@ public class PlayerController : MonoBehaviour
 
     public Player player;
 
-    public void SetupStart(Player player)
+    public BotController botController;
+
+    private Animator animator;
+
+    public void SetupStart(Player player, bool isBot = false, int botNumber = 0)
     {
-        this.GetComponent<PhotonView>().RPC("SetupStart_CMD", RpcTarget.All, player);
+        this.GetComponent<PhotonView>().RPC("SetupStart_CMD", RpcTarget.All, player, isBot, botNumber);
     }
     
     [PunRPC]
-    public void SetupStart_CMD(Player player)
+    public void SetupStart_CMD(Player player, bool isBot, int botNumber)
     {
         photonView = this.GetComponent<PhotonView>();
 
         this.player = player;
+        string nickname = string.IsNullOrEmpty(player?.NickName) ? Names.GetName() : player.NickName;
 
-        playerNumber = photonView.ControllerActorNr;
-        this.transform.name = "Player_" + playerNumber;
+        playerNumber = isBot ? botNumber : photonView.ControllerActorNr;
+        this.transform.name = nickname;
 
         walletController = this.GetComponent<PlayerWalletController>();
         walletController.controller = this;
@@ -86,19 +91,18 @@ public class PlayerController : MonoBehaviour
         GameObject objCanvas = manager.canvasManager.playerCanvas[playerNumber-1];
         objCanvas.SetActive(true);
         canvasController = objCanvas.GetComponent<PlayerControllerCanvas>();
-        canvasController.ConfigureUI(null, "Player_" + playerNumber, walletController.currentMoney);
+        canvasController.ConfigureUI(null, nickname, walletController.currentMoney);
         canvasController.player = this;
+
+        animator = this.transform.GetChild(0).GetComponent<Animator>();
 
         btnThrowDice = manager.canvasManager.btnThrow;
 
-        if (player.IsLocal)
-        {
-            Color color = new Color(
-                Random.Range(0.0f, 1.0f),
-                Random.Range(0.0f, 1.0f),
-                Random.Range(0.0f, 1.0f));
-            photonView.RPC("SetupMaterial", RpcTarget.All, new Vector3(color.r, color.g, color.b));
-        }
+        Color color = new Color(
+            Random.Range(0.0f, 1.0f),
+            Random.Range(0.0f, 1.0f),
+            Random.Range(0.0f, 1.0f));
+        photonView.RPC("SetupMaterial", RpcTarget.All, new Vector3(color.r, color.g, color.b));
         manager.NewPlayer(this);
     }
 
@@ -132,14 +136,14 @@ public class PlayerController : MonoBehaviour
     [PunRPC]
     public void ConfigDice_CMD()
     {
-        if (player.IsLocal)
+        if (!botController)
         {
             this.btnThrowDice.interactable = true;
             this.btnThrowDice.gameObject.SetActive(true);
 
             this.btnThrowDice.onClick.RemoveAllListeners();
-            this.btnThrowDice.onClick.AddListener(() => {
-
+            this.btnThrowDice.onClick.AddListener(() =>
+            {
                 int dice1 = ThrowDice();
                 int dice2 = ThrowDice();
 
@@ -150,6 +154,22 @@ public class PlayerController : MonoBehaviour
                 this.btnThrowDice.gameObject.SetActive(false);
             });
             this.btnThrowDice.image.color = mainColor;
+        }
+        else
+        {
+            //BOT
+            StartCoroutine(botController.ExecuteAction(() =>
+            {
+
+                int dice1 = ThrowDice();
+                int dice2 = ThrowDice();
+
+                StartCoroutine(manager.RollDice(dice1, dice2, playerNumber));
+
+                this.moveController.StartMovePlayer(dice1, dice2);
+                this.btnThrowDice.interactable = false;
+                this.btnThrowDice.gameObject.SetActive(false);
+            }));
         }
     }
 
@@ -178,7 +198,7 @@ public class PlayerController : MonoBehaviour
     {
         var newRot = this.transform.localEulerAngles;
         var startY = newRot.y;
-        var desiredAngle = Quaternion.Euler(newRot.x, newRot.y - 90, newRot.z);
+        var desiredAngle = Quaternion.Euler(newRot.x, newRot.y + 90, newRot.z);
 
         yield return new WaitUntil(() =>
         {
@@ -260,6 +280,21 @@ public class PlayerController : MonoBehaviour
         {
             aux.Owner = null;
         }
+    }
+
+    public void Animate_Walk()
+    {
+        animator.SetTrigger("_move");
+    }
+
+    public void Animate_Bad()
+    {
+        animator.SetTrigger("_bad");
+    }
+
+    public void Animate_Cheer()
+    {
+        animator.SetTrigger("_cheer");
     }
 
     [PunRPC]

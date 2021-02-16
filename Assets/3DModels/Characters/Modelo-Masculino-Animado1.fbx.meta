@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 34e18d43d37171a4ba95a4459166a165
 ModelImporter:
-  serializedVersion: 21100
+  serializedVersion: 20101
   internalIDToNameTable:
   - first:
       74: -3100369314251171874
@@ -445,7 +445,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.01
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
@@ -455,7 +455,6 @@ ModelImporter:
   animationType: 2
   humanoidOversampling: 1
   avatarSetup: 0
-  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

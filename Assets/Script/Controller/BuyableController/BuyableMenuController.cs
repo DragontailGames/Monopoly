@@ -18,7 +18,10 @@ public class BuyableMenuController : MonoBehaviour
 
     public IEnumerator SetupMenu(TileController_Buyable tile, PlayerController player)
     {
-        focusPanel.SetActive(true);
+        if (!player.botController)
+        {
+            focusPanel.SetActive(true);
+        }
         if (tile.GetType() == typeof(TileController_Country))
         {
             if (tile.Owner == player || tile.Owner == null)

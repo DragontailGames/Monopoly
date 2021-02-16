@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
         {
             if (networkManager.IsMaster)
             {
-                aux.photonView.RPC("SetCurrentTile_CMD", Photon.Pun.RpcTarget.All, networkManager.startTile.GetComponent<TileController>().index);
+                aux.photonView.RPC("SetCurrentTile_CMD", RpcTarget.All, networkManager.startTile.GetComponent<TileController>().index);
                 StartCoroutine(aux.moveController.RepositionInTile(aux.playerNumber, players.Count));
             }
         }
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
     {
         PlayerController player = players[currentPlayer];
 
-        if(!player.player.IsLocal)
+        if(!player.player.IsLocal && !player.botController)
         {
             yield break;
         }
@@ -254,11 +254,8 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator RollDice(int dice1Value, int dice2Value, int playerNumber)
     {
-        Debug.Log("Rolou " + playerNumber);
-
         int yStart =315;
         float correction = 90 * (playerNumber - 1);
-        Debug.Log(correction);
         dices.transform.rotation = Quaternion.Euler(new Vector3(0,yStart - correction, 0));
 
         Animator dice1Animator = dice1.GetComponentInChildren<Animator>();
@@ -269,7 +266,7 @@ public class GameManager : MonoBehaviour
         dice2.SetActive(true);
         dice2Animator.SetInteger("RollNumber", dice2Value);
 
-        yield return new WaitForSeconds(0.4f * (dice1Value + dice2Value));
+        yield return new WaitForSeconds(0.4f * (dice1Value + dice2Value) + 1.0f);
 
         dice1.SetActive(false);
         dice2.SetActive(false);

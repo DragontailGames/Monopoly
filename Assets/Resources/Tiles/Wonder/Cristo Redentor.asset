@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameTile: Cristo Redentor
   price: 200000
-  icon: {fileID: 21300000, guid: 1ce693c26a163624c9dceaa0c0c0e89a, type: 3}
+  icon: {fileID: 21300000, guid: 647188ce14f7d374a93e7a9d525a9d9e, type: 3}

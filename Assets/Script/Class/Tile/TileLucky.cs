@@ -13,4 +13,10 @@ public class TileLucky : ScriptableObject
     public int value;
 
     public int percentage;
+
+    public EnumDt.luckType luckType;
+
+    public int tileIndex;
+
+    public bool ownerTileEffect;
 }

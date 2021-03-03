@@ -40,6 +40,12 @@ public class EnumDt : MonoBehaviour
         normal,
         rich
     };
+
+    public enum luckType
+    {
+        luck,
+        reverse
+    };
 }
 
 

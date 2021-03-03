@@ -134,25 +134,28 @@ public class PlayerMoveController : MonoBehaviour
         newPos.z += playerController.currentTile.offsetZ;
         newPos.y = this.transform.position.y;
 
+        Debug.Log("Player " + playerController.name + " - " + index);
+
         if (amount > 1)
         {
-            if (index % 2 == 0)
+            if (index < 3)
             {
-                newPos.z -= 0.2f;
+                newPos.x -= 0.2f;
             }
             else
             {
-                newPos.z += 0.2f;
+                newPos.x += 0.2f;
             }
+            
             if (amount > 2)
             {
-                if (index < 2)
+                if (index % 2 == 0)
                 {
-                    newPos.x -= 0.2f;
+                    newPos.z -= 0.2f;
                 }
                 else
                 {
-                    newPos.x += 0.2f;
+                    newPos.z += 0.2f;
                 }
             }
         }

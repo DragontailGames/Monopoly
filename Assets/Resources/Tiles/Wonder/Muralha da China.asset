@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameTile: Muralha da China
   price: 200000
-  icon: {fileID: 21300000, guid: fa574a6de7aa43d4e8e896cc1e717185, type: 3}
+  icon: {fileID: 21300000, guid: 7db149b4f7a8a30479a6bfefbf67bfb9, type: 3}

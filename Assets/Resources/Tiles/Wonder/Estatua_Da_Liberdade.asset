@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameTile: Estatua da Liberdade
   price: 200000
-  icon: {fileID: 21300000, guid: cfa09d4ac75bf5241bd15adddb7e2cf9, type: 3}
+  icon: {fileID: 21300000, guid: 9aa59b0f230388541b68602cd4687db0, type: 3}

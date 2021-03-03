@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameTile: Torre Eiffel
   price: 200000
-  icon: {fileID: 21300000, guid: 2651956199424b94cbfd4c0b37528bcc, type: 3}
+  icon: {fileID: 21300000, guid: 45c576aa8003ae94f8653f63aee9ef81, type: 3}

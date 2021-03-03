@@ -69,12 +69,24 @@ public class TileController : MonoBehaviour
         }
     }
 
+    public void SetupPropertieLucky(PlayerController player, UnityAction<TileController> action, bool ownerTile)
+    {
+        if (player.properties.Contains(this as TileController_Buyable) == ownerTile)
+        {
+            onClickAction = () => action.Invoke(this);
+        }
+        else
+        {
+            SetupOffTiles();
+        }
+    }
+
     public void SetupOffTiles()
     {
         if (!this.transform.Find("Plataforma"))
             return;
 
-        Material[] mtList = this.transform.Find("Plataforma").GetComponent<MeshRenderer>().sharedMaterials;
+        Material[] mtList = this.transform.Find("Base").GetComponent<MeshRenderer>().sharedMaterials;
         List<Material> newList = new List<Material>();
 
         foreach (var auxMaterial in mtList)
@@ -86,15 +98,15 @@ public class TileController : MonoBehaviour
             newList.Add(mat);
         }
 
-        this.transform.Find("Plataforma").GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
+        this.transform.Find("Base").GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
     }
 
     public void ResetTile()
     {
-        if (!this.transform.Find("Plataforma"))
+        if (!this.transform.Find("Base"))
             return;
 
-        Material[] mtList = this.transform.Find("Plataforma").GetComponent<MeshRenderer>().sharedMaterials;
+        Material[] mtList = this.transform.Find("Base").GetComponent<MeshRenderer>().sharedMaterials;
         List<Material> newList = new List<Material>();
 
         foreach (var auxMaterial in mtList)
@@ -106,7 +118,7 @@ public class TileController : MonoBehaviour
             newList.Add(mat);
         }
 
-        this.transform.Find("Plataforma").GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
+        this.transform.Find("Base").GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
     }
 
     public Vector3 GetPosition()
@@ -115,5 +127,15 @@ public class TileController : MonoBehaviour
         newPos.y = 0.35f;
 
         return newPos;
+    }
+
+    public virtual void OnTurnStart()
+    {
+
+    }
+
+    public virtual void OnTurnEnd()
+    {
+
     }
 }

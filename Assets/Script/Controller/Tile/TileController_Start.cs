@@ -9,6 +9,7 @@ public class TileController_Start : TileController
     public override IEnumerator OnPlayerPass(PlayerController player)
     {
         base.OnPlayerPass(player);
+
         if(!player.firstBuy)
         {
             var manager = player.manager;
@@ -19,7 +20,10 @@ public class TileController_Start : TileController
             player.photonView.RPC("NextPlayer_CMD", Photon.Pun.RpcTarget.All);
             yield break;
         }
-        player.walletController.CreditValue(startMoney);
+
+        if (!player.fakeTravel)
+            player.walletController.CreditValue(startMoney);
+
         yield return player.TurnCorner();
     }
 

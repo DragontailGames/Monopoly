@@ -19,7 +19,7 @@ public class JailMenuController : MonoBehaviour
 
         clicked = false;
 
-        btnPayJailPrice.GetComponentInChildren<TextMeshProUGUI>().text = "Pay<br><size=32>" + MathDt.ConfigureMoney(MathDt.jailPrice) + "</size>";
+        btnPayJailPrice.GetComponentInChildren<TextMeshProUGUI>().text = MathDt.ConfigureMoney(MathDt.jailPrice);
         btnPayJailPrice.interactable = playerController.walletController.currentMoney >= MathDt.jailPrice;
 
         btnPayJailPrice.onClick.RemoveAllListeners();

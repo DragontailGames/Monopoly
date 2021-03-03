@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
             if (player.canTravel)
             {
                 board.SetupTravelBoard(player);
-                player.btnThrowDice.image.color = player.GetComponent<MeshRenderer>().materials[0].color;
+               // player.btnThrowDice.image.color = player.GetComponent<MeshRenderer>().materials[0].color;
             }
             else
             {
@@ -135,7 +135,7 @@ public class GameManager : MonoBehaviour
 
         if (!doubleDice && !playerDefetead)
         {
-            player.playerController.photonView.RPC("NextPlayer_CMD", Photon.Pun.RpcTarget.All);
+            player.playerController.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
         }
         else
         {

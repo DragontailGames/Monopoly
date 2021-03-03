@@ -8,6 +8,10 @@ public class TileController_Country : TileController_Buyable
 
     private Transform buildingParent;
 
+    public int multiplier = 100;
+
+    public int roundsWithMultiplier = 0;
+
     public void Start()
     {
         buildingParent = this.transform.Find("Building");
@@ -83,5 +87,18 @@ public class TileController_Country : TileController_Buyable
         }
 
         obj.GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
+    }
+
+    public override void OnTurnEnd()
+    {
+        base.OnTurnEnd();
+        if(roundsWithMultiplier>0)
+        {
+            roundsWithMultiplier--;
+        }
+        if(roundsWithMultiplier<=0)
+        {
+            multiplier = 100;
+        }
     }
 }

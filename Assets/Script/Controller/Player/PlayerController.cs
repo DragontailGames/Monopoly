@@ -63,6 +63,12 @@ public class PlayerController : MonoBehaviour
 
     private Animator animator;
 
+    public bool freeBoat = false;
+
+    public bool fakeTravel = false;
+
+    public bool stayAway = false;
+
     public void SetupStart(Player player, bool isBot = false, int botNumber = 0)
     {
         this.GetComponent<PhotonView>().RPC("SetupStart_CMD", RpcTarget.All, player, isBot, botNumber);
@@ -116,7 +122,7 @@ public class PlayerController : MonoBehaviour
         List<Material> mats = new List<Material>() { newMat };
         this.GetComponent<MeshRenderer>().sharedMaterials = mats.ToArray();
 
-        btnThrowDice.image.color = this.mainColor;
+        //btnThrowDice.image.color = this.mainColor;
 
         canvasController.icon.color = this.mainColor;
     }
@@ -129,13 +135,23 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator ConfigDice()
     {
+        MessageManager.Instance.HiddenText();
         yield return new WaitForSeconds(0.2f);
         photonView.RPC("ConfigDice_CMD", RpcTarget.All);
     }
 
+    public int dice1special, dice2special;
+
     [PunRPC]
     public void ConfigDice_CMD()
     {
+        if (stayAway)
+        {
+            Debug.Log("Stay Away");
+            this.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
+            return;
+        }
+
         if (!botController)
         {
             this.btnThrowDice.interactable = true;
@@ -144,8 +160,8 @@ public class PlayerController : MonoBehaviour
             this.btnThrowDice.onClick.RemoveAllListeners();
             this.btnThrowDice.onClick.AddListener(() =>
             {
-                int dice1 = ThrowDice();
-                int dice2 = ThrowDice();
+                int dice1 = dice1special;//ThrowDice();
+                int dice2 = dice2special;//ThrowDice();
 
                 StartCoroutine(manager.RollDice(dice1, dice2, playerNumber));
 
@@ -153,16 +169,15 @@ public class PlayerController : MonoBehaviour
                 this.btnThrowDice.interactable = false;
                 this.btnThrowDice.gameObject.SetActive(false);
             });
-            this.btnThrowDice.image.color = mainColor;
+            //this.btnThrowDice.image.color = mainColor;
         }
         else
         {
             //BOT
             StartCoroutine(botController.ExecuteAction(() =>
             {
-
-                int dice1 = ThrowDice();
-                int dice2 = ThrowDice();
+                int dice1 = dice1special;//ThrowDice();
+                int dice2 = dice2special;//ThrowDice();
 
                 StartCoroutine(manager.RollDice(dice1, dice2, playerNumber));
 
@@ -227,6 +242,7 @@ public class PlayerController : MonoBehaviour
 
     public void TravelPlayer(TileController tile)
     {
+
         if (canTravel == false)
             return;
 
@@ -260,6 +276,11 @@ public class PlayerController : MonoBehaviour
         photonView.RPC("SetCurrentTile_CMD", RpcTarget.All, boardController.jail.index);
         photonView.RPC("TeleportToJail_CMD", RpcTarget.All);
         moveController.position = boardController.jail.index;
+
+        if(freeBoat)
+        {
+            this.inJail = false;
+        }
     }
 
     [PunRPC]
@@ -269,6 +290,26 @@ public class PlayerController : MonoBehaviour
         newPos.y = this.transform.position.y;
         this.transform.position = newPos;
 
+        MessageManager.Instance.ShowMessage("[u]"+player.NickName + "[/u] se perdeu no triangulo das bermudas");
+
+        StartCoroutine(manager.TestPlayerOnSameHouse(this.moveController));
+    }
+
+    public void GotoTile(TileController tile)
+    {
+        photonView.RPC("TeleportToTile_CMD", RpcTarget.All, tile.index);
+    }
+
+    [PunRPC]
+    public void TeleportToTile_CMD(int tileIndex)
+    {
+        TileController tile = manager.board.tileControllers.Find(n => n.index == tileIndex);
+        Vector3 newPos = tile.transform.position;
+        newPos.y = this.transform.position.y;
+        this.transform.position = newPos;
+
+        MessageManager.Instance.ShowMessage("[u]" + player.NickName + "[/u] foi para " + tile.tile.nameTile);
+
         StartCoroutine(manager.TestPlayerOnSameHouse(this.moveController));
     }
 
@@ -276,6 +317,9 @@ public class PlayerController : MonoBehaviour
     {
         manager.players.Remove(this);
         canvasController.DeclareBankruptcy();
+
+        MessageManager.Instance.ShowMessage("[u]" + player.NickName + "[/u] declarou falencia");
+
         foreach (var aux in properties)
         {
             aux.Owner = null;
@@ -306,6 +350,8 @@ public class PlayerController : MonoBehaviour
     public void WinGame()
     {
         //Debug.Log((new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name);
+
+        MessageManager.Instance.ShowMessage("[u]" + player.NickName + "[/u] ganhou o jogo");
         Debug.Log("Player win game " + this.transform.name);
     }
 }

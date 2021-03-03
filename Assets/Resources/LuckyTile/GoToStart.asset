@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0b2dfc2cf3a99b4cb421d5bf1ae5f0c, type: 3}
-  m_Name: Piramides_Do_Egito
+  m_Script: {fileID: 11500000, guid: ebd04d32f788815408a4fc0b4898c449, type: 3}
+  m_Name: GoToStart
   m_EditorClassIdentifier: 
-  nameTile: Piramides do Egito
-  price: 200000
-  icon: {fileID: 21300000, guid: c6771ace1c252e2429184e85e4d7c85b, type: 3}
+  text: Volte para o inicio
+  method: GoTo
+  value: 0
+  percentage: 0
+  luckType: 1
+  tileIndex: 0

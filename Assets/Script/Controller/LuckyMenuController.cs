@@ -10,12 +10,18 @@ public class LuckyMenuController : MonoBehaviour
 
     bool clicked = false;
 
+    public Sprite iconLuck, iconReverse;
+
+    public Image icon;
+
     public IEnumerator LuckyStart(TileLucky lucky, PlayerController player)
     {
         if(!player.botController)
             this.gameObject.SetActive(true);
 
         clicked = false;
+
+        icon.sprite = lucky.luckType == EnumDt.luckType.luck ? iconLuck : iconReverse;
 
         luckyDescription.text = lucky.text;
 

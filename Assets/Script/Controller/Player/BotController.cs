@@ -40,11 +40,11 @@ public class BotController : MonoBehaviour
 
     public void WhenUpdateMoney()
     {
-        if(player.walletController.currentMoney < MathDt.startMoney * 0.2f)
+        if(player.walletController.currentMoney < MathDt.startMoney * 0.4f)
         {
             botBehavior = EnumDt.botBehavior.economic;
         }
-        else if (player.walletController.currentMoney < MathDt.startMoney * 0.7f)
+        else if (player.walletController.currentMoney < MathDt.startMoney * 0.9f)
         {
             botBehavior = EnumDt.botBehavior.normal;
         }

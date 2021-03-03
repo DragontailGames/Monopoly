@@ -122,6 +122,9 @@ public class PlayerWalletController : MonoBehaviour
     {
         TileController_Buyable tile = controller.manager.board.tileControllers.Find(n => n.index == index) as TileController_Buyable;
 
+        if(!controller.player.IsLocal)
+            MessageManager.Instance.ShowMessage(controller.name + " comprou uma propriedade.");
+
         tile.Owner = controller;
         controller.properties.Add(tile);
 

@@ -84,7 +84,7 @@ public class BuyableHouseMenuController : MonoBehaviour
 
                 Transform title = content.transform.Find("Title");
                 Transform icon = content.transform.Find("Icon");
-                Transform rentRate = content.transform.Find("Taxa de Aluguel");
+                Transform rentRate = content.transform.Find("Rent Rate");
                 Transform buy = content.transform.Find("Buy");
 
                 title.GetComponent<TextMeshProUGUI>().text = constructionName[i];

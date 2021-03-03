@@ -16,3 +16,6 @@ MonoBehaviour:
   method: PayToBank
   value: 0
   percentage: 30
+  luckType: 1
+  tileIndex: 0
+  ownerTileEffect: 0

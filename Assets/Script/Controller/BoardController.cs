@@ -40,6 +40,8 @@ public class BoardController : MonoBehaviour
     public void SetupTravelBoard(PlayerController player)
     {
         //BOT
+
+        MessageManager.Instance.ShowMessage("Selecione um terreno para viajar");
         if (!player.botController)
         {
             foreach (var aux in tileControllers)
@@ -101,6 +103,10 @@ public class BoardController : MonoBehaviour
         {
             probability = 2;
         }
+        else
+        {
+
+        }
 
         var filtredList = tileCanTeleport.FindAll(n => n.probability == probability);
 
@@ -111,9 +117,18 @@ public class BoardController : MonoBehaviour
 
     public void SetupMortgageBoard(PlayerController player)
     {
+        MessageManager.Instance.ShowMessage("Selecione uma de suas propriedades para hipotecar");
         foreach (var aux in tileControllers)
         {
             aux.SetupMortgage(player);
+        }
+    }
+
+    public void SetupPropertieLucky(PlayerController player, UnityEngine.Events.UnityAction<TileController> action, bool ownerTile)
+    {
+        foreach(var aux in tileControllers)
+        {
+            aux.SetupPropertieLucky(player, action, ownerTile);
         }
     }
 

@@ -18,4 +18,5 @@ MonoBehaviour:
   percentage: 0
   luckType: 1
   tileIndex: 0
-  ownerTileEffect: 0
+  tileName: 
+  ownerTileEffect: 1

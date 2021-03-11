@@ -18,3 +18,5 @@ MonoBehaviour:
   percentage: 0
   luckType: 1
   tileIndex: 8
+  tileName: Cadeia
+  ownerTileEffect: 0

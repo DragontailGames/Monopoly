@@ -12,9 +12,14 @@ public class TileController_Country : TileController_Buyable
 
     public int roundsWithMultiplier = 0;
 
+    private GameObject bonus, down;
+
     public void Start()
     {
         buildingParent = this.transform.Find("Building");
+
+        bonus = Instantiate(boardController.bonus, this.gameObject.transform);
+        down = Instantiate(boardController.down, this.gameObject.transform);
     }
 
     public void UpgradeLevel(int level, PlayerController player)
@@ -56,12 +61,12 @@ public class TileController_Country : TileController_Buyable
             if (owner != null)
             {
                 ChangeTileColor(aux.gameObject,owner, owner.mainColor);
-                transform.Find("CountryFlag").gameObject.SetActive(false);
+                transform.Find("ExtraMaterials").gameObject.SetActive(false);
             }
             else
             {
                 ChangeTileColor(aux.gameObject, owner, baseColor);
-                transform.Find("CountryFlag").gameObject.SetActive(true);
+                transform.Find("ExtraMaterials").gameObject.SetActive(true);
             }
         }
     }
@@ -100,5 +105,12 @@ public class TileController_Country : TileController_Buyable
         {
             multiplier = 100;
         }
+    }
+
+    private void Update()
+    {
+        bonus.SetActive(multiplier > 100);
+
+        down.SetActive(multiplier < 100);
     }
 }

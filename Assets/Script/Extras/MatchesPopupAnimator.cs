@@ -29,7 +29,7 @@ public class MatchesPopupAnimator : MonoBehaviour
         {
             aux.Play("Left", -1, 0f);
         }*/
-        if (gameType.gameSelected - 1 > 0)
+        if (gameType.gameSelected - 1 >= 0)
         {
             gameType.gameSelected--;
         }

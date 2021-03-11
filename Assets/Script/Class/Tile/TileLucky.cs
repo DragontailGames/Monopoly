@@ -18,5 +18,7 @@ public class TileLucky : ScriptableObject
 
     public int tileIndex;
 
+    public string tileName;
+
     public bool ownerTileEffect;
 }

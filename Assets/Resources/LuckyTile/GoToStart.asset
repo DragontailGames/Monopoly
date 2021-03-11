@@ -18,3 +18,5 @@ MonoBehaviour:
   percentage: 0
   luckType: 1
   tileIndex: 0
+  tileName: inicio
+  ownerTileEffect: 0

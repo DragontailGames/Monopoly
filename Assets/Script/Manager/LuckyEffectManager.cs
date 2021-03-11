@@ -8,9 +8,12 @@ public class LuckyEffectManager : MonoBehaviour
     public BoardController board;
 
     private TileLucky tileLucky;
+
     private PlayerController playerController;
 
-    public void StartLucky(PlayerController player, TileLucky tile)
+    private bool clicked;
+
+    public IEnumerator StartLucky(PlayerController player, TileLucky tile)
     {
         tileLucky = tile;
         playerController = player;
@@ -21,38 +24,40 @@ public class LuckyEffectManager : MonoBehaviour
                 {
                     Debug.Log("Sorte ou revez PayToBank " + tile.text);
                     PayToBank(player, tile.value, tile.percentage);
-                    return;
+                    break ;
                 }
             case "GoTo":
                 {
                     Debug.Log("Sorte ou revez GOTO " + tile.tileIndex);
                     TileController tileController = board.tileControllers.Find(n => n.index.Equals(tile.tileIndex));
-                    GoTo(player, tileController);
-                    return;
+                    GoTo(player, tileController, tile.tileName);
+                    break;
                 }
             case "FreeBoat":
                 {
                     Debug.Log("Sorte ou revez Barquinho " + tile.text);
                     FreeBoat(player);
-                    return;
+                    break;
                 }
             case "ChooseProperty":
                 {
                     Debug.Log("Sorte ou revez Propertie " + tile.text);
                     ChooseProperty(player);
-                    return;
+                    break;
                 }
             case "StayAway":
                 {
                     player.stayAway = true;
-                    return;
+                    break;
                 }
             default:
                 {
                     Debug.LogError("Metodo nao encontrado");
-                    return;
+                    break;
                 }
         }
+
+        yield return new WaitUntil(() => clicked == true);
     }
 
     private void PayToBank(PlayerController player, int value, int percentage)
@@ -65,45 +70,75 @@ public class LuckyEffectManager : MonoBehaviour
         {
             player.walletController.DebitValue((int)(player.walletController.currentMoney * ((float)percentage/100)));
         }
+
+        clicked = true;
     }
 
-    private void GoTo(PlayerController player, TileController tile)
+    private void GoTo(PlayerController player, TileController tile, string tileName)
     {
-        player.GotoTile(tile);
+        player.GotoTile(tile, tileName);
+
+        clicked = true;
     }
 
     private void FreeBoat(PlayerController player)
     {
         player.freeBoat = true;
+
+        clicked = true;
     }
 
     private void ChooseProperty(PlayerController player)
     {
-        UnityAction<TileController> action;
-        if (tileLucky.percentage != 0)
+        if (player.properties.Count > 0)
         {
-            action = ChooseProperty_ChancheValueByTime;
+            UnityAction<TileController> action;
+            bool onlyCountry = false;
+            if (tileLucky.percentage != 0)
+            {
+                action = ChooseProperty_ChangeValueByTime;
+                onlyCountry = true;
+            }
+            else
+            {
+                action = ChooseProperty_BackToBank;
+            }
+            board.SetupPropertieLucky(player, action, tileLucky.ownerTileEffect, onlyCountry);
         }
         else
         {
-            action = ChooseProperty_BackToBank;
+            clicked = true;
         }
-        board.SetupPropertieLucky(player, action, tileLucky.ownerTileEffect);
     }
 
-    private void ChooseProperty_ChancheValueByTime(TileController tile)
+    private void ChooseProperty_ChangeValueByTime(TileController tile)
     {
-        if(tileLucky.percentage != 0)
-        {
-            TileController_Country countryTile = (TileController_Country)tile;
-            countryTile.multiplier = tileLucky.percentage;
+        if(tile)
+        { 
+            if (tileLucky.percentage != 0)
+            {
+                TileController_Country countryTile = (TileController_Country)tile;
+                countryTile.roundsWithMultiplier = 3;
+                countryTile.multiplier = tileLucky.percentage;
+            }
         }
+
+        board.ResetBoard();
+        clicked = true;
     }
 
     private void ChooseProperty_BackToBank(TileController tile)
     {
-        TileController_Country countryTile = (TileController_Country)tile;
-        countryTile.Owner = null;
-        countryTile.UpgradeLevel(0, playerController);
+        if (tile)
+        {
+            TileController_Country countryTile = (TileController_Country)tile;
+            countryTile.Owner = null;
+            countryTile.UpgradeLevel(0, playerController);
+            countryTile.multiplier = 100;
+            countryTile.roundsWithMultiplier = 0;
+        }
+
+        board.ResetBoard();
+        clicked = true;
     }
 }

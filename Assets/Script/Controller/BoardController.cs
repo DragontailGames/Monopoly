@@ -19,6 +19,8 @@ public class BoardController : MonoBehaviour
 
     public TileController_Jail jail;
 
+    public GameObject bonus, down;
+
     private void Start()
     {
         foreach(TileController aux in board.transform.GetComponentsInChildren<TileController>())
@@ -124,11 +126,27 @@ public class BoardController : MonoBehaviour
         }
     }
 
-    public void SetupPropertieLucky(PlayerController player, UnityEngine.Events.UnityAction<TileController> action, bool ownerTile)
+    public void SetupPropertieLucky(PlayerController player, UnityEngine.Events.UnityAction<TileController> action, bool ownerTile, bool onlyCountry)
     {
+        List<TileController> tiles = new List<TileController>();
         foreach(var aux in tileControllers)
         {
-            aux.SetupPropertieLucky(player, action, ownerTile);
+            var tile = aux.SetupPropertieLucky(player, action, ownerTile, player.botController, onlyCountry);
+            if(tile)
+            {
+                tiles.Add(tile);
+            }
+        }
+
+        if(player.botController != null)
+        {
+            StartCoroutine(player.botController.ExecuteAction(() => { action.Invoke(tiles[UnityEngine.Random.Range(0, tiles.Count)]) ; }));
+        }
+
+        if(tiles.Count<=0)
+        {
+            MessageManager.Instance.ShowMessage("Nenhuma propriedade para aplicar esse efeito");
+            action.Invoke(null);
         }
     }
 
@@ -187,7 +205,7 @@ public class BoardController : MonoBehaviour
 
                         //aux.GetComponent<SpriteRenderer>().color = backcolor;
                         aux.Find("Price").GetComponent<TextMesh>().text = MathDt.ConfigureMoney((int)tile.price);
-                        aux.Find("CountryFlag").GetComponent<SpriteRenderer>().sprite = tile.flag;
+                        aux.Find("ExtraMaterials").GetComponent<SpriteRenderer>().sprite = tile.flag;
                     }
 
                 }

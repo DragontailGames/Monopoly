@@ -295,20 +295,20 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(manager.TestPlayerOnSameHouse(this.moveController));
     }
 
-    public void GotoTile(TileController tile)
+    public void GotoTile(TileController tile, string tileName)
     {
-        photonView.RPC("TeleportToTile_CMD", RpcTarget.All, tile.index);
+        photonView.RPC("TeleportToTile_CMD", RpcTarget.All, tile.index, tileName);
     }
 
     [PunRPC]
-    public void TeleportToTile_CMD(int tileIndex)
+    public void TeleportToTile_CMD(int tileIndex, string tileName)
     {
         TileController tile = manager.board.tileControllers.Find(n => n.index == tileIndex);
         Vector3 newPos = tile.transform.position;
         newPos.y = this.transform.position.y;
         this.transform.position = newPos;
 
-        MessageManager.Instance.ShowMessage("[u]" + player.NickName + "[/u] foi para " + tile.tile.nameTile);
+        MessageManager.Instance.ShowMessage("[u]" + player.NickName + "[/u] foi para " + tileName);
 
         StartCoroutine(manager.TestPlayerOnSameHouse(this.moveController));
     }

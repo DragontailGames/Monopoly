@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject dice1, dice2, dices;
 
+    private int roundCount = 0;
+
     public void Start()
     {
         board.manager = this;
@@ -29,17 +31,16 @@ public class GameManager : MonoBehaviour
     {
         players.Add(newPlayer);
 
-        foreach (var aux in players)
-        {
-            if (networkManager.IsMaster)
-            {
-                aux.photonView.RPC("SetCurrentTile_CMD", RpcTarget.All, networkManager.startTile.GetComponent<TileController>().index);
-                StartCoroutine(aux.moveController.RepositionInTile(aux.playerNumber, players.Count));
-            }
-        }
-
         if (players.Count == networkManager.GetPlayerNetworkCount)
         {
+            foreach (var aux in players)
+            {
+                if (networkManager.IsMaster)
+                {
+                    aux.photonView.RPC("SetCurrentTile_CMD", RpcTarget.All, networkManager.startTile.GetComponent<TileController>().index);
+                    StartCoroutine(aux.moveController.RepositionInTile(aux.playerNumber, players.Count));
+                }
+            }
             StartGame();
         }
     }
@@ -85,6 +86,19 @@ public class GameManager : MonoBehaviour
             players[0].WinGame();
             yield break; 
         }
+
+        if (players[currentPlayer].transform.Find("Icon").gameObject.activeSelf)
+        {
+            var otherPlayers = players.FindAll(n => n != players[currentPlayer] && n.currentTile == players[currentPlayer].currentTile);
+            for (int i = 0; i < otherPlayers.Count; i++)
+            {
+                StartCoroutine(otherPlayers[i].moveController.SetupIcons(i+2));
+            }
+
+            players[currentPlayer].transform.Find("Model").gameObject.SetActive(true);
+            players[currentPlayer].transform.Find("Icon").gameObject.SetActive(false);
+        }
+
         if (player.inJail)
         {
             player.jailRow++;
@@ -166,7 +180,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator TestPlayerOnSameHouse(PlayerMoveController newPlayer)
     {
         //Op1 Movimento no mesmo bloco
-        var playersInSamePos = players.FindAll(n => n.moveController.position == newPlayer.position);
+        var playersInSamePos = players.FindAll(n => n.currentTile == newPlayer.playerController.currentTile);
         if(playersInSamePos.Count>1)
         {
             for (int i = 0; i < playersInSamePos.Count; i++)
@@ -181,6 +195,24 @@ public class GameManager : MonoBehaviour
     public void NextPlayer()
     {
         currentPlayer = currentPlayer + 1 < (players.Count) ? currentPlayer + 1 : 0;
+
+        if(currentPlayer==0)
+        {
+            NextRound();
+        }
+    }
+
+    public void NextRound()
+    {
+        roundCount++;
+        foreach(var aux in board.tileControllers)
+        {
+            if(aux.GetType() == typeof(TileController_Country))
+            {
+                var tile = aux as TileController_Country;
+                tile.roundsWithMultiplier = Mathf.Clamp((tile.roundsWithMultiplier-1), 0, 3);
+            }
+        }
     }
     
     public void CheckWinSide(PlayerController playerController)

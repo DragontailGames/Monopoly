@@ -10,6 +10,8 @@ public class TileController : MonoBehaviour
 
     public Tile tile;
 
+    private bool colorChanged = false;
+
     public bool tileIsTeleported = true;
 
     public BoardController boardController;
@@ -69,41 +71,55 @@ public class TileController : MonoBehaviour
         }
     }
 
-    public void SetupPropertieLucky(PlayerController player, UnityAction<TileController> action, bool ownerTile)
+    public TileController SetupPropertieLucky(PlayerController player, UnityAction<TileController> action, bool ownerTile, bool toBot, bool onlyCountry)
     {
-        if (player.properties.Contains(this as TileController_Buyable) == ownerTile)
+        if (player.properties.Contains(this as TileController_Buyable) == ownerTile  &&
+            (this.GetType() == typeof(TileController_Country) ||
+            (this.GetType() == typeof(TileController_Wonders) && !onlyCountry)))
+
         {
+            if (!ownerTile && (this as TileController_Buyable).Owner == null)
+            {
+                SetupOffTiles();
+                return null;
+            }
             onClickAction = () => action.Invoke(this);
+            return this;
         }
         else
         {
-            SetupOffTiles();
+            if(!toBot)
+                SetupOffTiles();
+            return null;
         }
     }
 
     public void SetupOffTiles()
     {
-        if (!this.transform.Find("Plataforma"))
-            return;
-
         Material[] mtList = this.transform.Find("Base").GetComponent<MeshRenderer>().sharedMaterials;
-        List<Material> newList = new List<Material>();
+
+        List <Material> newList = new List<Material>();
 
         foreach (var auxMaterial in mtList)
         {
             var mat = new Material(auxMaterial);
             var color = mat.color;
+
+            color = color / 3;
             color.a = 0.1f;
+
             mat.color = color;
             newList.Add(mat);
         }
+
+        colorChanged = true;
 
         this.transform.Find("Base").GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
     }
 
     public void ResetTile()
     {
-        if (!this.transform.Find("Base"))
+        if (!colorChanged)
             return;
 
         Material[] mtList = this.transform.Find("Base").GetComponent<MeshRenderer>().sharedMaterials;
@@ -113,6 +129,7 @@ public class TileController : MonoBehaviour
         {
             var mat = new Material(auxMaterial);
             var color = mat.color;
+            color = color * 3;
             color.a = 1.0f;
             mat.color = color;
             newList.Add(mat);

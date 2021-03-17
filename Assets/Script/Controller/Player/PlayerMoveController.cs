@@ -200,7 +200,7 @@ public class PlayerMoveController : MonoBehaviour
     public IEnumerator SetupIcons(int index)
     {
         playerController.transform.position = GetRepositionInTile(0, 1);
-        float offsetY = 2.5f;
+        float offsetY = 2.6f;
 
         playerController.transform.Find("Model").gameObject.SetActive(false);
 

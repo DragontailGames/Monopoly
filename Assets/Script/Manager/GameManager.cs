@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     private int roundCount = 0;
 
+    public Color[] playerColors = new Color[4];
+
     public void Start()
     {
         board.manager = this;

@@ -20,6 +20,8 @@ public class TileController : MonoBehaviour
 
     public float offsetZ = -0.17f;
 
+    public float cornerRotation = 5;
+
     public virtual IEnumerator OnPlayerPass(PlayerController player)
     {
         yield return new WaitForSeconds(0.05f);

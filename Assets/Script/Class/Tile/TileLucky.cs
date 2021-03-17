@@ -21,4 +21,6 @@ public class TileLucky : ScriptableObject
     public string tileName;
 
     public bool ownerTileEffect;
+
+    public bool vacation = false;
 }

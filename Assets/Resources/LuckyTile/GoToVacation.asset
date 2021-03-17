@@ -20,3 +20,4 @@ MonoBehaviour:
   tileIndex: 16
   tileName: ferias
   ownerTileEffect: 0
+  vacation: 1

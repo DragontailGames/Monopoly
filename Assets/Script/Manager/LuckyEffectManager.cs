@@ -48,11 +48,13 @@ public class LuckyEffectManager : MonoBehaviour
             case "StayAway":
                 {
                     player.stayAway = true;
+                    clicked = true;
                     break;
                 }
             default:
                 {
                     Debug.LogError("Metodo nao encontrado");
+                    clicked = true;
                     break;
                 }
         }
@@ -76,7 +78,7 @@ public class LuckyEffectManager : MonoBehaviour
 
     private void GoTo(PlayerController player, TileController tile, string tileName)
     {
-        player.GotoTile(tile, tileName);
+        player.GotoTile(tile, tileName, tileLucky.vacation);
 
         clicked = true;
     }

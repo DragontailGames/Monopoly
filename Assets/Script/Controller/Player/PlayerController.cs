@@ -69,6 +69,11 @@ public class PlayerController : MonoBehaviour
 
     public bool stayAway = false;
 
+    private void Update()
+    {
+        canvasController.freeBoatIcon.SetActive(freeBoat);
+    }
+
     public void SetupStart(Player player, bool isBot = false, int botNumber = 0)
     {
         this.GetComponent<PhotonView>().RPC("SetupStart_CMD", RpcTarget.All, player, isBot, botNumber);
@@ -104,10 +109,8 @@ public class PlayerController : MonoBehaviour
 
         btnThrowDice = manager.canvasManager.btnThrow;
 
-        Color color = new Color(
-            Random.Range(0.0f, 1.0f),
-            Random.Range(0.0f, 1.0f),
-            Random.Range(0.0f, 1.0f));
+        Color color = manager.playerColors[playerNumber - 1];
+
         photonView.RPC("SetupMaterial", RpcTarget.All, new Vector3(color.r, color.g, color.b));
         manager.NewPlayer(this);
     }
@@ -135,7 +138,11 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator ConfigDice()
     {
-        MessageManager.Instance.HiddenText();
+        if (MessageManager.Instance.TextShowing())
+        {
+            yield return new WaitForSeconds(3.0f);
+            MessageManager.Instance.HiddenText();
+        }
         yield return new WaitForSeconds(0.2f);
         photonView.RPC("ConfigDice_CMD", RpcTarget.All);
     }
@@ -147,7 +154,7 @@ public class PlayerController : MonoBehaviour
     {
         if (stayAway)
         {
-            Debug.Log("Stay Away");
+            stayAway = false;
             this.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
             return;
         }
@@ -242,12 +249,13 @@ public class PlayerController : MonoBehaviour
 
     public void TravelPlayer(TileController tile)
     {
-
         if (canTravel == false)
             return;
 
         int value = 0;
         canTravel = false;
+
+        moveController.position = currentTile.index;
 
         if (moveController.position>tile.index)
         {
@@ -295,18 +303,26 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(manager.TestPlayerOnSameHouse(this.moveController));
     }
 
-    public void GotoTile(TileController tile, string tileName)
+    public void GotoTile(TileController tile, string tileName, bool travel = false)
     {
-        photonView.RPC("TeleportToTile_CMD", RpcTarget.All, tile.index, tileName);
+        photonView.RPC("TeleportToTile_CMD", RpcTarget.All, tile.index, tileName, travel);
     }
 
     [PunRPC]
-    public void TeleportToTile_CMD(int tileIndex, string tileName)
+    public void TeleportToTile_CMD(int tileIndex, string tileName, bool travel = false)
     {
         TileController tile = manager.board.tileControllers.Find(n => n.index == tileIndex);
+        currentTile = tile;
         Vector3 newPos = tile.transform.position;
         newPos.y = this.transform.position.y;
         this.transform.position = newPos;
+
+        moveController.position = tile.index;
+        canTravel = travel;
+
+        var rot = this.transform.rotation.eulerAngles;
+        rot.y = tile.cornerRotation!=5?tile.cornerRotation:rot.y;
+        this.transform.rotation = Quaternion.Euler(rot);
 
         MessageManager.Instance.ShowMessage("[u]" + player.NickName + "[/u] foi para " + tileName);
 

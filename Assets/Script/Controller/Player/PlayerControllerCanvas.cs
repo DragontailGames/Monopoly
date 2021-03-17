@@ -16,6 +16,8 @@ public class PlayerControllerCanvas : MonoBehaviour
 
     int interateValue = 3000;
 
+    public GameObject freeBoatIcon;
+
     public void ConfigureUI(Sprite icon, string playerName, int money)
     {
         //this.icon.sprite = icon;

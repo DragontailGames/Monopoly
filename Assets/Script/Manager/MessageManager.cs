@@ -50,4 +50,9 @@ public class MessageManager : MonoBehaviour
         this.GetComponent<Image>().enabled = false;
         this.transform.GetChild(0).gameObject.SetActive(false);
     }
+
+    public bool TextShowing()
+    {
+        return this.GetComponent<Image>().enabled;
+    }
 }

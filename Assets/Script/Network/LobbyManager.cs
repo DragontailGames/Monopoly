@@ -173,13 +173,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         actions?.onPlayerEnteredRoom?.Invoke();
-        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
+        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount + fakeBots == PhotonNetwork.CurrentRoom.MaxPlayers)
         {
             GotoAdventurePhoton();
         }
         else
         {
             StopCoroutine(botAutoJoin);
+            StartCoroutine(botAutoJoin);
         }
     }
 

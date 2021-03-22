@@ -76,12 +76,6 @@ public class PlayerController : MonoBehaviour
         canvasController.freeBoatIcon.SetActive(freeBoat);
     }
 
-    [PunRPC]
-    public void StartGame_CMD()
-    {
-        manager.StartGame();
-    }
-
     public void SetupStart(Player player, bool isBot = false, int botNumber = 0, string botName = "")
     {
         this.GetComponent<PhotonView>().RPC("SetupStart_CMD", RpcTarget.All, player, isBot, botNumber, botName);

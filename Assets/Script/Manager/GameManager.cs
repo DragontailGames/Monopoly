@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     {
         if(!setup && players.Count == networkManager.GetPlayerNetworkCount)
         {
+            Debug.Log("Setup");
             foreach (var aux in players)
             {
                 aux.photonView.RPC("SetCurrentTile_CMD", RpcTarget.All, networkManager.startTile.GetComponent<TileController>().index);
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        Debug.Log("Start game");
         players.Sort((a, b) => a.playerNumber.CompareTo(b.playerNumber));
 
         foreach (var aux in board.tileControllers)

@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        players.Sort((a, b) => (a.playerNumber.CompareTo(b.playerNumber)));
+        players.Sort((a, b) => { return a.playerNumber.CompareTo(b.playerNumber); });
 
         foreach (var aux in board.tileControllers)
         {

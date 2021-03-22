@@ -60,7 +60,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             player = PhotonNetwork.LocalPlayer;
         }
-        playerController.SetupStart(player, isBot, botNumber);
+        playerController.SetupStart(player, isBot, botNumber, isBot? Names.GetName() : "");
 
         //Player test = SaveAndLoad.instance.ConfigPlayer(SaveAndLoad.instance.PlayerFromJson((string)player.CustomProperties["Player"]));
 

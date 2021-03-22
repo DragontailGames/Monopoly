@@ -76,21 +76,21 @@ public class PlayerController : MonoBehaviour
         canvasController.freeBoatIcon.SetActive(freeBoat);
     }
 
-    public void SetupStart(Player player, bool isBot = false, int botNumber = 0)
+    public void SetupStart(Player player, bool isBot = false, int botNumber = 0, string botName = "")
     {
-        this.GetComponent<PhotonView>().RPC("SetupStart_CMD", RpcTarget.All, player, isBot, botNumber);
+        this.GetComponent<PhotonView>().RPC("SetupStart_CMD", RpcTarget.All, player, isBot, botNumber, botName);
 
         int index = Random.Range(0, manager.availablePlayers.Count);
         photonView.RPC("SetupPlayerDg_CMD", RpcTarget.All, index);
     }
     
     [PunRPC]
-    public void SetupStart_CMD(Player player, bool isBot, int botNumber)
+    public void SetupStart_CMD(Player player, bool isBot, int botNumber, string botName)
     {
         photonView = this.GetComponent<PhotonView>();
 
         this.player = player;
-        string nickname = string.IsNullOrEmpty(player?.NickName) ? Names.GetName() : player.NickName;
+        string nickname = string.IsNullOrEmpty(player?.NickName) ? botName : player.NickName;
 
         playerNumber = isBot ? botNumber : photonView.ControllerActorNr;
         this.transform.name = nickname;

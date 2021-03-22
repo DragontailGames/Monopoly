@@ -216,7 +216,7 @@ public class PlayerMoveController : MonoBehaviour
         GameObject icon = playerController.transform.Find("Icon").gameObject;
         icon.SetActive(true);
 
-        icon.transform.localPosition = Vector3.up * ((index - 1) * offsetY);
+        icon.transform.localPosition = Vector3.up * ((index) * offsetY);
     }
 
     [PunRPC]

@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
             var otherPlayers = players.FindAll(n => n != players[currentPlayer] && n.currentTile == players[currentPlayer].currentTile);
             for (int i = 0; i < otherPlayers.Count; i++)
             {
-                yield return otherPlayers[i].moveController.SetupIcons(i+2);
+                yield return otherPlayers[i].moveController.SetupIcons(i+1);
             }
 
             player.photonView.RPC("EnableModel_CMD", RpcTarget.All);

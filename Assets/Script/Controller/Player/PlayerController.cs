@@ -172,21 +172,12 @@ public class PlayerController : MonoBehaviour
             MessageManager.Instance.HiddenText();
         }
         yield return new WaitForSeconds(0.2f);
-        photonView.RPC("ConfigDice_CMD", RpcTarget.All);
-    }
 
-    public int dice1special, dice2special;
-
-    [PunRPC]
-    public void ConfigDice_CMD()
-    {
-
-        Debug.Log("Teste 3 ");
         if (stayAway)
         {
             stayAway = false;
             this.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
-            return;
+            yield break;
         }
 
         if (!botController)
@@ -226,6 +217,8 @@ public class PlayerController : MonoBehaviour
             }));
         }
     }
+
+    public int dice1special, dice2special;
 
     public void MortgagePropertie(TileController tileController)
     {

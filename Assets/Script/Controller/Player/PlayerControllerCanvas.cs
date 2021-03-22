@@ -18,11 +18,15 @@ public class PlayerControllerCanvas : MonoBehaviour
 
     public GameObject freeBoatIcon;
 
-    public void ConfigureUI(Sprite icon, string playerName, int money)
+    public void ConfigureUI(string playerName, int money)
     {
-        //this.icon.sprite = icon;
         this.playerName.text = playerName;
         this.playerMoney.text = "$" + MathDt.ConfigureMoney(money);
+    }
+
+    public void ConfigureSprite(Sprite icon)
+    {
+        this.icon.sprite = icon;
     }
 
     public IEnumerator DebitAnimation(int value, int totalValue, IEnumerator startBefore = null)

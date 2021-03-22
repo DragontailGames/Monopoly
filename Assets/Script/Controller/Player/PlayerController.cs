@@ -69,6 +69,8 @@ public class PlayerController : MonoBehaviour
 
     public bool stayAway = false;
 
+    public PlayerDg playerDg;
+
     private void Update()
     {
         canvasController.freeBoatIcon.SetActive(freeBoat);
@@ -102,10 +104,8 @@ public class PlayerController : MonoBehaviour
         GameObject objCanvas = manager.canvasManager.playerCanvas[playerNumber-1];
         objCanvas.SetActive(true);
         canvasController = objCanvas.GetComponent<PlayerControllerCanvas>();
-        canvasController.ConfigureUI(null, nickname, walletController.currentMoney);
+        canvasController.ConfigureUI(nickname, walletController.currentMoney);
         canvasController.player = this;
-
-        animator = this.transform.GetChild(0).GetComponent<Animator>();
 
         btnThrowDice = manager.canvasManager.btnThrow;
 
@@ -113,6 +113,30 @@ public class PlayerController : MonoBehaviour
 
         photonView.RPC("SetupMaterial", RpcTarget.All, new Vector3(color.r, color.g, color.b));
         manager.NewPlayer(this);
+    }
+
+    [PunRPC]
+    public void SetupPlayerDg_CMD(int index)
+    {
+        this.playerDg = manager.availablePlayers[index];
+
+        Vector3 modelPos = this.transform.Find("Model").position;
+        Vector3 modelScale = this.transform.Find("Model").localScale;
+        Quaternion modelRot = this.transform.Find("Model").rotation;
+
+        Destroy(this.transform.Find("Model").gameObject);
+        var model = Instantiate(playerDg.model, modelPos, modelRot, this.transform);
+        model.transform.localScale = modelScale;
+        model.name = "Model";
+        model.transform.SetSiblingIndex(0);
+
+        animator = model.GetComponent<Animator>();
+
+        Transform icon = this.transform.Find("Icon");
+        icon.GetComponent<SpriteRenderer>().sprite = playerDg.icon;
+        icon.GetChild(0).GetComponent<SpriteRenderer>().color = mainColor;
+
+        canvasController.ConfigureSprite(playerDg.icon);
     }
 
     [PunRPC]
@@ -126,8 +150,6 @@ public class PlayerController : MonoBehaviour
         this.GetComponent<MeshRenderer>().sharedMaterials = mats.ToArray();
 
         //btnThrowDice.image.color = this.mainColor;
-
-        canvasController.icon.color = this.mainColor;
     }
 
     public int ThrowDice()
@@ -172,7 +194,8 @@ public class PlayerController : MonoBehaviour
 
                 StartCoroutine(manager.RollDice(dice1, dice2, playerNumber));
 
-                this.moveController.StartMovePlayer(dice1, dice2);
+                photonView.RPC("StartMovePlayer_CMD", RpcTarget.All, dice1, dice2);
+                //this.moveController.StartMovePlayer(dice1, dice2);
                 this.btnThrowDice.interactable = false;
                 this.btnThrowDice.gameObject.SetActive(false);
             });
@@ -188,7 +211,8 @@ public class PlayerController : MonoBehaviour
 
                 StartCoroutine(manager.RollDice(dice1, dice2, playerNumber));
 
-                this.moveController.StartMovePlayer(dice1, dice2);
+                photonView.RPC("StartMovePlayer_CMD", RpcTarget.All, dice1, dice2);
+                //this.moveController.StartMovePlayer(dice1, dice2);
                 this.btnThrowDice.interactable = false;
                 this.btnThrowDice.gameObject.SetActive(false);
             }));
@@ -369,5 +393,13 @@ public class PlayerController : MonoBehaviour
 
         MessageManager.Instance.ShowMessage("[u]" + player.NickName + "[/u] ganhou o jogo");
         Debug.Log("Player win game " + this.transform.name);
+    }
+
+
+    [PunRPC]
+    public void EnableModel_CMD()
+    {
+        this.transform.Find("Model").gameObject.SetActive(true);
+        this.transform.Find("Icon").gameObject.SetActive(false);
     }
 }

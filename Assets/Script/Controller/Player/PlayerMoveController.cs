@@ -22,7 +22,8 @@ public class PlayerMoveController : MonoBehaviour
         }
     }
 
-    public void StartMovePlayer(int dice1, int dice2)
+    [PunRPC]
+    public void StartMovePlayer_CMD(int dice1, int dice2)
     {
         doubleDice = dice1 == dice2;
 
@@ -53,6 +54,12 @@ public class PlayerMoveController : MonoBehaviour
         {
             StartCoroutine(playerController.manager.OnMovePlayer(this, MovePlayer(valueDice), doubleDice));
         }
+    }
+
+    [PunRPC]
+    public void MovePlayer_CMD(int valueDice)
+    {
+        StartCoroutine(MovePlayer(valueDice));
     }
 
     public IEnumerator MovePlayer(int valueDice)
@@ -91,21 +98,15 @@ public class PlayerMoveController : MonoBehaviour
         int counts = 0;
         while (Vector3.Distance(transform.position, targetPos) > 0.01f)
         {
-            if(counts>200 && Vector3.Distance(transform.position, targetPos) > 0.1f)
+            if(counts>200 || Vector3.Distance(transform.position, targetPos) < 0.1f)
             {
                 break;
             }
-            playerController.photonView.RPC("Move_CMD", RpcTarget.All, targetPos);
+            float step = 3.5f * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
             counts++;
             yield return new WaitForSeconds(0.001f);
         }
-    }
-
-    [PunRPC]
-    public void Move_CMD(Vector3 targetPos)
-    {
-        float step = 3.5f * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
     }
 
     public IEnumerator RepositionInTile(int index, int amount)
@@ -200,9 +201,9 @@ public class PlayerMoveController : MonoBehaviour
     public IEnumerator SetupIcons(int index)
     {
         playerController.transform.position = GetRepositionInTile(0, 1);
-        float offsetY = 2.6f;
+        float offsetY = 3f;
 
-        playerController.transform.Find("Model").gameObject.SetActive(false);
+        this.transform.Find("Model").gameObject.SetActive(false);
 
         GameObject icon = playerController.transform.Find("Icon").gameObject;
         icon.SetActive(true);

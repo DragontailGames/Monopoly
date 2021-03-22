@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
 
     public Color[] playerColors = new Color[4];
 
+    public List<PlayerDg> availablePlayers = new List<PlayerDg>();
+
     public void Start()
     {
         board.manager = this;
@@ -32,16 +34,15 @@ public class GameManager : MonoBehaviour
     public void NewPlayer(PlayerController newPlayer)
     {
         players.Add(newPlayer);
+        int index = UnityEngine.Random.Range(0, availablePlayers.Count);
+        newPlayer.photonView.RPC("SetupPlayerDg_CMD", RpcTarget.All, index);
 
         if (players.Count == networkManager.GetPlayerNetworkCount)
         {
             foreach (var aux in players)
             {
-                if (networkManager.IsMaster)
-                {
-                    aux.photonView.RPC("SetCurrentTile_CMD", RpcTarget.All, networkManager.startTile.GetComponent<TileController>().index);
-                    StartCoroutine(aux.moveController.RepositionInTile(aux.playerNumber, players.Count));
-                }
+                aux.photonView.RPC("SetCurrentTile_CMD", RpcTarget.All, networkManager.startTile.GetComponent<TileController>().index);
+                StartCoroutine(aux.moveController.RepositionInTile(aux.playerNumber, players.Count));
             }
             StartGame();
         }
@@ -97,8 +98,7 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(otherPlayers[i].moveController.SetupIcons(i+2));
             }
 
-            players[currentPlayer].transform.Find("Model").gameObject.SetActive(true);
-            players[currentPlayer].transform.Find("Icon").gameObject.SetActive(false);
+            player.photonView.RPC("EnableModel_CMD", RpcTarget.All);
         }
 
         if (player.inJail)

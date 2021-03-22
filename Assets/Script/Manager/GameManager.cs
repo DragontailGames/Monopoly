@@ -84,12 +84,13 @@ public class GameManager : MonoBehaviour
     public IEnumerator StartRound()
     {
         PlayerController player = players[currentPlayer];
-        Debug.Log("Teste " + player.name);
 
         if (!player.player.IsLocal && !player.botController)
         {
             yield break;
         }
+
+        Debug.Log("Teste " + player.name);
 
         if (players.Count == 1)
         {

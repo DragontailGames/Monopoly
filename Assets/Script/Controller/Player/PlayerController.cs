@@ -165,6 +165,7 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator ConfigDice()
     {
+        Debug.Log("Teste 2 ");
         if (MessageManager.Instance.TextShowing())
         {
             yield return new WaitForSeconds(3.0f);
@@ -179,6 +180,8 @@ public class PlayerController : MonoBehaviour
     [PunRPC]
     public void ConfigDice_CMD()
     {
+
+        Debug.Log("Teste 3 ");
         if (stayAway)
         {
             stayAway = false;

@@ -48,7 +48,8 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        players.Sort((a, b) => { return a.playerNumber.CompareTo(b.playerNumber); });
+        //players.Sort((a, b) => a.playerNumber.CompareTo(b.playerNumber));
+        OrderPlayers();
 
         foreach (var aux in board.tileControllers)
         {
@@ -71,6 +72,16 @@ public class GameManager : MonoBehaviour
         }
 
         StartCoroutine(StartRound());
+    }
+
+    public void OrderPlayers()
+    {
+        List<PlayerController> playersAux = new List<PlayerController>();
+        for(int i = 1;i<=players.Count;i++)
+        {
+            playersAux.Add(players[i]);
+        }
+        players = playersAux;
     }
 
     public IEnumerator StartRound()

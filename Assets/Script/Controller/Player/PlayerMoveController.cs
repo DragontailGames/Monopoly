@@ -200,6 +200,14 @@ public class PlayerMoveController : MonoBehaviour
 
     public IEnumerator SetupIcons(int index)
     {
+        playerController.photonView.RPC("EnableIcon", RpcTarget.All, index);
+
+        yield return new WaitForEndOfFrame();
+    }
+
+    [PunRPC]
+    public void EnableIcon(int index)
+    {
         playerController.transform.position = GetRepositionInTile(0, 1);
         float offsetY = 3f;
 
@@ -208,9 +216,7 @@ public class PlayerMoveController : MonoBehaviour
         GameObject icon = playerController.transform.Find("Icon").gameObject;
         icon.SetActive(true);
 
-        icon.transform.localPosition = Vector3.up * ((index-1) * offsetY);
-
-        yield return new WaitForEndOfFrame();
+        icon.transform.localPosition = Vector3.up * ((index - 1) * offsetY);
     }
 
     [PunRPC]

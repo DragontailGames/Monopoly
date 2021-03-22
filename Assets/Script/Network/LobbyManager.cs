@@ -97,9 +97,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
 
 
-    public void JoinRoom()
+    public void JoinRoom(bool force = false)
     {
-        if (PhotonNetwork.CountOfRooms > 0)
+        if (PhotonNetwork.CountOfRooms > 0 && !force)
         {
             PhotonNetwork.JoinRandomRoom();
             return;
@@ -228,7 +228,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         Debug.Log("<color=red>Erro ao tentar entrar em sala aleatoria " + message + "</color>");
-        popupWaitingPlayers.SetActive(false);
+        JoinRoom(true);
+        //popupWaitingPlayers.SetActive(false);
     }
 
 

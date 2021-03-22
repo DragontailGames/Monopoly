@@ -34,8 +34,6 @@ public class GameManager : MonoBehaviour
     public void NewPlayer(PlayerController newPlayer)
     {
         players.Add(newPlayer);
-        int index = UnityEngine.Random.Range(0, availablePlayers.Count);
-        newPlayer.photonView.RPC("SetupPlayerDg_CMD", RpcTarget.All, index);
 
         if (players.Count == networkManager.GetPlayerNetworkCount)
         {

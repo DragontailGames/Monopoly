@@ -79,6 +79,9 @@ public class PlayerController : MonoBehaviour
     public void SetupStart(Player player, bool isBot = false, int botNumber = 0)
     {
         this.GetComponent<PhotonView>().RPC("SetupStart_CMD", RpcTarget.All, player, isBot, botNumber);
+
+        int index = Random.Range(0, manager.availablePlayers.Count);
+        photonView.RPC("SetupPlayerDg_CMD", RpcTarget.All, index);
     }
     
     [PunRPC]

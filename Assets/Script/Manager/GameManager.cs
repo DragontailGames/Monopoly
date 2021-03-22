@@ -80,7 +80,9 @@ public class GameManager : MonoBehaviour
         List<PlayerController> playersAux = new List<PlayerController>();
         for(int i = 1;i<=players.Count;i++)
         {
-            playersAux.Add(players.Find(n => n.playerNumber == i));
+            var temp = players.Find(n => n.playerNumber == i);
+            Debug.Log("Jogador  " + i + " - " + temp.name); 
+            playersAux.Add(temp); ;
         }
         players = playersAux;
     }

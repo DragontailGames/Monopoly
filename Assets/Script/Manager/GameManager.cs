@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         //players.Sort((a, b) => a.playerNumber.CompareTo(b.playerNumber));
+
         OrderPlayers();
 
         foreach (var aux in board.tileControllers)
@@ -79,7 +80,7 @@ public class GameManager : MonoBehaviour
         List<PlayerController> playersAux = new List<PlayerController>();
         for(int i = 1;i<=players.Count;i++)
         {
-            playersAux.Add(players[i]);
+            playersAux.Add(players.Find(n => n.playerNumber == i));
         }
         players = playersAux;
     }

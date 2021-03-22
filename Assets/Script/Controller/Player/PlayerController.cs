@@ -115,6 +115,8 @@ public class PlayerController : MonoBehaviour
         Color color = manager.playerColors[playerNumber - 1];
 
         photonView.RPC("SetupMaterial", RpcTarget.All, new Vector3(color.r, color.g, color.b));
+
+        if (isBot && !PhotonNetwork.IsMasterClient) Manager.instance.bots++;
         manager.NewPlayer(this);
     }
 

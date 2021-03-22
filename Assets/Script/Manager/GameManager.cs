@@ -35,7 +35,14 @@ public class GameManager : MonoBehaviour
     {
         players.Add(newPlayer);
 
-        if (players.Count == networkManager.GetPlayerNetworkCount)
+        
+    }
+
+    bool setup = false;
+
+    public void Update()
+    {
+        if(!setup && players.Count == networkManager.GetPlayerNetworkCount)
         {
             foreach (var aux in players)
             {
@@ -43,14 +50,13 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(aux.moveController.RepositionInTile(aux.playerNumber, players.Count));
             }
             StartGame();
+            setup = true;
         }
     }
 
     public void StartGame()
     {
-        //players.Sort((a, b) => a.playerNumber.CompareTo(b.playerNumber));
-
-        OrderPlayers();
+        players.Sort((a, b) => a.playerNumber.CompareTo(b.playerNumber));
 
         foreach (var aux in board.tileControllers)
         {
@@ -75,28 +81,16 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartRound());
     }
 
-    public void OrderPlayers()
-    {
-        List<PlayerController> playersAux = new List<PlayerController>();
-        for(int i = 1;i<=players.Count;i++)
-        {
-            var temp = players.Find(n => n.playerNumber == i);
-            Debug.Log("Jogador  " + i + " - " + temp.name); 
-            playersAux.Add(temp); ;
-        }
-        players = playersAux;
-    }
-
     public IEnumerator StartRound()
     {
         PlayerController player = players[currentPlayer];
 
-        if(!player.player.IsLocal && !player.botController)
+        if (!player.player.IsLocal && !player.botController)
         {
             yield break;
         }
 
-        if (players.Count == 1 && PhotonNetwork.CurrentLobby.Name != "BotGame")
+        if (players.Count == 1)
         {
             players[0].WinGame();
             yield break; 

@@ -22,4 +22,6 @@ public class Manager : MonoBehaviour
     #endregion
 
     public bool isMultiplayer = false;
+
+    public int bots;
 }

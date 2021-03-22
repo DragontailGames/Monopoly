@@ -19,7 +19,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public int GetPlayerNetworkCount
     {
-        get { return PhotonNetwork.PlayerList.Length + PlayerPrefs.GetInt("Bots"); }
+        get { return PhotonNetwork.PlayerList.Length + Manager.instance.bots; }
     }
 
     public bool IsMaster
@@ -33,7 +33,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         if(PhotonNetwork.IsMasterClient)
         {
-            var bots = PlayerPrefs.GetInt("Bots");
+            var bots = Manager.instance.bots;
             var count = PhotonNetwork.PlayerList.Length + 1;
             while(bots>0)
             {

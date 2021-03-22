@@ -198,7 +198,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void GotoAdventurePhoton()
     {
-        PlayerPrefs.SetInt("Bots", fakeBots);
+        Manager.instance.bots = fakeBots;
 
         PhotonNetwork.CurrentRoom.IsVisible = false;
         PhotonNetwork.LoadLevel("GameScene");

@@ -44,10 +44,11 @@ public class GameManager : MonoBehaviour
     {
         if(!setup && players.Count == networkManager.GetPlayerNetworkCount)
         {
-            foreach (var aux in players)
+            for (int i = 0; i < players.Count; i++)
             {
+                PlayerController aux = players[i];
                 aux.photonView.RPC("SetCurrentTile_CMD", RpcTarget.All, networkManager.startTile.GetComponent<TileController>().index);
-                StartCoroutine(aux.moveController.RepositionInTile(aux.playerNumber, players.Count));
+                //StartCoroutine(aux.moveController.RepositionInTile(i-1, players.Count));
             }
             StartGame();
             setup = true;
@@ -96,16 +97,17 @@ public class GameManager : MonoBehaviour
             yield break; 
         }
 
-        if (players[currentPlayer].transform.Find("Icon").gameObject.activeSelf)
+        var playersInSamePos = players.FindAll(n => n.currentTile == player.currentTile);
+        if (playersInSamePos.Count > 1)
         {
-            var otherPlayers = players.FindAll(n => n != players[currentPlayer] && n.currentTile == players[currentPlayer].currentTile);
-            for (int i = 0; i < otherPlayers.Count; i++)
+            for (int i = 0; i < playersInSamePos.Count; i++)
             {
-                yield return otherPlayers[i].moveController.SetupIcons(i+1);
+                PlayerController aux = (PlayerController)playersInSamePos[i];
+                yield return aux.moveController.RepositionInTile(i-1, playersInSamePos.Count);
             }
-
-            player.photonView.RPC("EnableModel_CMD", RpcTarget.All);
         }
+
+        player.photonView.RPC("EnableModel_CMD", RpcTarget.All);
 
         if (player.inJail)
         {

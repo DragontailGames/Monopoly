@@ -113,6 +113,7 @@ public class PlayerMoveController : MonoBehaviour
     {
         if(amount == 2)
         {
+            playerController.photonView.RPC("EnableModel_CMD", RpcTarget.All);
             yield return Move(GetRepositionInTile(index,amount));
         }
         else if(amount > 2)

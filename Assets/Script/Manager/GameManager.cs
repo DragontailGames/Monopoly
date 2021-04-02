@@ -90,8 +90,6 @@ public class GameManager : MonoBehaviour
             yield break;
         }
 
-        Debug.Log("Teste " + player.name);
-
         if (players.Count == 1)
         {
             players[0].WinGame();

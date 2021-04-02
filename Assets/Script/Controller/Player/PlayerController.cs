@@ -165,7 +165,6 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator ConfigDice()
     {
-        Debug.Log("Teste 2 ");
         if (MessageManager.Instance.TextShowing())
         {
             yield return new WaitForSeconds(3.0f);
@@ -402,5 +401,11 @@ public class PlayerController : MonoBehaviour
     {
         this.transform.Find("Model").gameObject.SetActive(true);
         this.transform.Find("Icon").gameObject.SetActive(false);
+    }
+
+    [PunRPC]
+    public void SetupFreeBoat_CMD(bool state)
+    {
+        this.freeBoat = state;
     }
 }

@@ -85,7 +85,7 @@ public class LuckyEffectManager : MonoBehaviour
 
     private void FreeBoat(PlayerController player)
     {
-        player.freeBoat = true;
+        player.photonView.RPC("SetupFreeBoat_CMD", Photon.Pun.RpcTarget.All, true);
 
         clicked = true;
     }

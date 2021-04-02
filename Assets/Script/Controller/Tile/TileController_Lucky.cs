@@ -17,6 +17,7 @@ public class TileController_Lucky : TileController
             TileLucky lucky = GetLuckyCard();
             yield return luckyMenuController.LuckyStart(lucky, player);
             yield return luckyEffect.StartLucky(player, lucky);
+            Debug.Log("EndLuckyTile");
         }
     }
 

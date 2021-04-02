@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
 
         ResetTransparentMaterial();
 
-        if (!doubleDice && !playerDefetead)
+        if (!doubleDice && !playerDefetead && player.playerController.player.IsLocal)
         {
             player.playerController.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
         }

@@ -19084,7 +19084,7 @@ MonoBehaviour:
   cornerRotation: 180
   luckyEffect: {fileID: 236681037}
   luckyMenuController: {fileID: 1537900030}
-  forceLucky: 1
+  forceLucky: 6
 --- !u!65 &990958781
 BoxCollider:
   m_ObjectHideFlags: 0

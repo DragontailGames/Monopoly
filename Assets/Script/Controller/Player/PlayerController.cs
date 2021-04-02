@@ -348,7 +348,7 @@ public class PlayerController : MonoBehaviour
         rot.y = tile.cornerRotation!=5?tile.cornerRotation:rot.y;
         this.transform.rotation = Quaternion.Euler(rot);
 
-        MessageManager.Instance.ShowMessage("[u]" + player.NickName + "[/u] foi para " + tileName);
+        MessageManager.Instance.ShowMessage("<u>" + this.transform.name + "</u> foi para " + tileName);
 
         StartCoroutine(manager.TestPlayerOnSameHouse(this.moveController));
     }

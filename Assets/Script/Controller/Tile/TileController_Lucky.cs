@@ -8,9 +8,11 @@ public class TileController_Lucky : TileController
 
     public LuckyMenuController luckyMenuController;
 
+    public int forceLucky = 6;
+
     public override IEnumerator OnPlayerStop(PlayerController player)
     {
-        if(player.player.IsLocal)
+        if(player.player.IsLocal || player.botController)
         {
             TileLucky lucky = GetLuckyCard();
             yield return luckyMenuController.LuckyStart(lucky, player);
@@ -27,6 +29,7 @@ public class TileController_Lucky : TileController
             tileLucky.Add(aux as TileLucky);
         }
 
-        return tileLucky[Random.Range(0, tileLucky.Count)];
+        return tileLucky[forceLucky];
+        //return tileLucky[Random.Range(0, tileLucky.Count)];
     }
 }

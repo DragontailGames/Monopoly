@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
             yield break; 
         }
 
-        var playersInSamePos = players.FindAll(n => n.currentTile == player.currentTile);
+        var playersInSamePos = ListTurnOrderPlayers().FindAll(n => n.currentTile == player.currentTile);
         if (playersInSamePos.Count > 1)
         {
             for (int i = 0; i < playersInSamePos.Count; i++)
@@ -190,7 +190,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator TestPlayerOnSameHouse(PlayerMoveController newPlayer)
     {
         //Op1 Movimento no mesmo bloco
-        var playersInSamePos = players.FindAll(n => n.currentTile == newPlayer.playerController.currentTile);
+        var playersInSamePos = ListTurnOrderPlayers().FindAll(n => n.currentTile == newPlayer.playerController.currentTile);
         if(playersInSamePos.Count>1)
         {
             for (int i = 0; i < playersInSamePos.Count; i++)
@@ -312,5 +312,22 @@ public class GameManager : MonoBehaviour
 
         dice1.SetActive(false);
         dice2.SetActive(false);
+    }
+
+    public List<PlayerController> ListTurnOrderPlayers()
+    {
+        List<PlayerController> pTempList = new List<PlayerController>();
+
+        for(int i =0;i<players.Count;i++)
+        {
+            int offsetIndex = currentPlayer + i;
+            if(offsetIndex>players.Count-1)
+            {
+                offsetIndex -= players.Count;
+            }
+            pTempList.Add(players[offsetIndex]);
+        }
+
+        return pTempList;
     }
 }

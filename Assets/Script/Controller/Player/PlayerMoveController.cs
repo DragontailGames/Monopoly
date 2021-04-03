@@ -56,12 +56,6 @@ public class PlayerMoveController : MonoBehaviour
         }
     }
 
-    [PunRPC]
-    public void MovePlayer_CMD(int valueDice)
-    {
-        StartCoroutine(MovePlayer(valueDice));
-    }
-
     public IEnumerator MovePlayer(int valueDice)
     {
         int dest = valueDice + position;
@@ -89,7 +83,10 @@ public class PlayerMoveController : MonoBehaviour
             yield return tile.OnPlayerPass(playerController);
         }
 
-        yield return playerController.currentTile.OnPlayerStop(playerController);
+        if (playerController.player.IsLocal)
+        {
+            yield return playerController.currentTile.OnPlayerStop(playerController);
+        }
 
     }
 

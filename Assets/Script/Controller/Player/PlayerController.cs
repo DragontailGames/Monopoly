@@ -187,8 +187,8 @@ public class PlayerController : MonoBehaviour
             this.btnThrowDice.onClick.RemoveAllListeners();
             this.btnThrowDice.onClick.AddListener(() =>
             {
-                int dice1 = dice1special;//ThrowDice();
-                int dice2 = dice2special;//ThrowDice();
+                int dice1 = ThrowDice();//dice1special;
+                int dice2 = ThrowDice();//dice2special;
 
                 StartCoroutine(manager.RollDice(dice1, dice2, playerNumber));
 

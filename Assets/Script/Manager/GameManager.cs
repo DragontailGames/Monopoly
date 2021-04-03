@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
     {
         PlayerController player = players[currentPlayer];
 
-        if (player.player == null && !player.player.IsLocal && !player.botController)
+        if (player.player == null || (!player.player.IsLocal && !player.botController))
         {
             yield break;
         }

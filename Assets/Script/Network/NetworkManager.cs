@@ -80,4 +80,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             }
         }
     }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        var p = manager.players.Find(n => n.player == otherPlayer);
+        p.DeclareBankruptcy();
+    }
 }

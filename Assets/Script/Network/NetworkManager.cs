@@ -48,37 +48,30 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void CreatePlayer(Vector3 position, bool isBot = false, int botNumber = 0)
     {
+        ///NAO USAR O INSTATIATE
+        ///https://forum.photonengine.com/discussion/16808/ai-bots-destroying-when-master-client-leaves-from-room
         Player player = null;
         position.y = 0.35f;
-        GameObject playerGO = PhotonNetwork.Instantiate("Prefabs/Player", position, Quaternion.Euler(new Vector3(0,180,0)));
-        PlayerController playerController = playerGO.GetComponent<PlayerController>();
+        GameObject playerGO = null;
+        PlayerController playerController = null;
 
         if (isBot)
         {
+            playerGO = PhotonNetwork.InstantiateRoomObject ("Prefabs/Player", position, Quaternion.Euler(new Vector3(0, 180, 0)));
+            playerController = playerGO.GetComponent<PlayerController>();
             playerGO.AddComponent<BotController>();
             player = new Player(botNumber);
         }
         else
         {
+            playerGO = PhotonNetwork.Instantiate("Prefabs/Player", position, Quaternion.Euler(new Vector3(0, 180, 0)));
+            playerController = playerGO.GetComponent<PlayerController>();
             player = PhotonNetwork.LocalPlayer;
         }
         playerController.SetupStart(player, isBot, botNumber, isBot? Names.GetName() : "");
 
         //Player test = SaveAndLoad.instance.ConfigPlayer(SaveAndLoad.instance.PlayerFromJson((string)player.CustomProperties["Player"]));
 
-    }
-
-    public override void OnMasterClientSwitched(Player newMasterClient)
-    {
-        base.OnMasterClientSwitched(newMasterClient);
-
-        foreach(var aux in manager.players)
-        {
-            if(aux.botController)
-            {
-                aux.photonView.TransferOwnership(newMasterClient);
-            }
-        }
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)

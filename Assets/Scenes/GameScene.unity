@@ -27679,6 +27679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startTile: {fileID: 560841914}
+  manager: {fileID: 1420617876}
 --- !u!4 &1440335783
 Transform:
   m_ObjectHideFlags: 0

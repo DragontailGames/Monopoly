@@ -12,6 +12,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 {
     public Transform startTile;
 
+    public GameManager manager;
+
     public Player[] GetPlayerList
     {
         get { return PhotonNetwork.PlayerList; }
@@ -64,5 +66,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         //Player test = SaveAndLoad.instance.ConfigPlayer(SaveAndLoad.instance.PlayerFromJson((string)player.CustomProperties["Player"]));
 
+    }
+
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        base.OnMasterClientSwitched(newMasterClient);
+
+        foreach(var aux in manager.players)
+        {
+            if(aux.botController)
+            {
+                aux.photonView.TransferOwnership(newMasterClient);
+            }
+        }
     }
 }

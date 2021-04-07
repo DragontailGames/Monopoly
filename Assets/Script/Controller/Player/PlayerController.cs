@@ -190,8 +190,7 @@ public class PlayerController : MonoBehaviour
                 int dice1 = ThrowDice();//dice1special;
                 int dice2 = ThrowDice();//dice2special;
 
-                StartCoroutine(manager.RollDice(dice1, dice2, playerNumber));
-
+                photonView.RPC("RollDice_CMD", RpcTarget.All, dice1, dice2);
                 photonView.RPC("StartMovePlayer_CMD", RpcTarget.All, dice1, dice2);
                 //this.moveController.StartMovePlayer(dice1, dice2);
                 this.btnThrowDice.interactable = false;
@@ -204,11 +203,10 @@ public class PlayerController : MonoBehaviour
             //BOT
             StartCoroutine(botController.ExecuteAction(() =>
             {
-                int dice1 = dice1special;//ThrowDice();
-                int dice2 = dice2special;//ThrowDice();
+                int dice1 = ThrowDice();//ThrowDice();
+                int dice2 = ThrowDice();//ThrowDice();
 
-                StartCoroutine(manager.RollDice(dice1, dice2, playerNumber));
-
+                photonView.RPC("RollDice_CMD", RpcTarget.All, dice1, dice2);
                 photonView.RPC("StartMovePlayer_CMD", RpcTarget.All, dice1, dice2);
                 //this.moveController.StartMovePlayer(dice1, dice2);
                 this.btnThrowDice.interactable = false;
@@ -322,7 +320,7 @@ public class PlayerController : MonoBehaviour
         newPos.y = this.transform.position.y;
         this.transform.position = newPos;
 
-        MessageManager.Instance.ShowMessage("[u]"+player.NickName + "[/u] se perdeu no triangulo das bermudas");
+        MessageManager.Instance.ShowMessage("<u>"+player.NickName + "</u> se perdeu no triangulo das bermudas");
 
         StartCoroutine(manager.TestPlayerOnSameHouse(this.moveController));
     }
@@ -358,7 +356,7 @@ public class PlayerController : MonoBehaviour
         manager.players.Remove(this);
         canvasController.DeclareBankruptcy();
 
-        MessageManager.Instance.ShowMessage("[u]" + player.NickName + "[/u] declarou falencia");
+        MessageManager.Instance.ShowMessage("<u>" + transform.name + "</u> declarou falencia");
 
         foreach (var aux in properties)
         {
@@ -391,7 +389,7 @@ public class PlayerController : MonoBehaviour
     {
         //Debug.Log((new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name);
 
-        MessageManager.Instance.ShowMessage("[u]" + player.NickName + "[/u] ganhou o jogo");
+        MessageManager.Instance.ShowMessage("<u>" + this.transform.name + "</u> ganhou o jogo");
         Debug.Log("Player win game " + this.transform.name);
     }
 
@@ -407,5 +405,11 @@ public class PlayerController : MonoBehaviour
     public void SetupFreeBoat_CMD(bool state)
     {
         this.freeBoat = state;
+    }
+
+    [PunRPC]
+    public void RollDice_CMD(int dice1, int dice2)
+    {
+        StartCoroutine(manager.RollDice(dice1, dice2, playerNumber));
     }
 }

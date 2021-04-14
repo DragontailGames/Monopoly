@@ -187,8 +187,8 @@ public class PlayerController : MonoBehaviour
             this.btnThrowDice.onClick.RemoveAllListeners();
             this.btnThrowDice.onClick.AddListener(() =>
             {
-                int dice1 = ThrowDice();//dice1special;
-                int dice2 = ThrowDice();//dice2special;
+                int dice1 = dice1special;//dice1special;
+                int dice2 = dice2special;//dice2special;
 
                 photonView.RPC("RollDice_CMD", RpcTarget.All, dice1, dice2);
                 photonView.RPC("StartMovePlayer_CMD", RpcTarget.All, dice1, dice2);
@@ -274,18 +274,24 @@ public class PlayerController : MonoBehaviour
         if (canTravel == false)
             return;
 
-        int value = 0;
+        photonView.RPC("TravelPlayer_CMD", RpcTarget.All, tile.index);
+    }
+
+    [PunRPC]
+    public void TravelPlayer_CMD(int index)
+    {
         canTravel = false;
+        int value = 0;
 
         moveController.position = currentTile.index;
 
-        if (moveController.position>tile.index)
+        if (moveController.position > index)
         {
-            value = (boardController.tileControllers.Count - moveController.position) + (tile.index -1) ;
+            value = (boardController.tileControllers.Count - moveController.position) + (index - 1);
         }
         else
         {
-            value = tile.index - moveController.position;
+            value = index - moveController.position;
         }
         boardController.ResetBoard();
 
@@ -325,13 +331,13 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(manager.TestPlayerOnSameHouse(this.moveController));
     }
 
-    public void GotoTile(TileController tile, string tileName, bool travel = false)
+    public void GotoTile(TileController tile, string tileName, bool vacation = false)
     {
-        photonView.RPC("TeleportToTile_CMD", RpcTarget.All, tile.index, tileName, travel);
+        photonView.RPC("TeleportToTile_CMD", RpcTarget.All, tile.index, tileName, vacation);
     }
 
     [PunRPC]
-    public void TeleportToTile_CMD(int tileIndex, string tileName, bool travel = false)
+    public void TeleportToTile_CMD(int tileIndex, string tileName, bool vacation = false)
     {
         TileController tile = manager.board.tileControllers.Find(n => n.index == tileIndex);
         currentTile = tile;
@@ -340,7 +346,7 @@ public class PlayerController : MonoBehaviour
         this.transform.position = newPos;
 
         moveController.position = tile.index;
-        canTravel = travel;
+        canTravel = vacation;
 
         var rot = this.transform.rotation.eulerAngles;
         rot.y = tile.cornerRotation!=5?tile.cornerRotation:rot.y;

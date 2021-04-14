@@ -80,10 +80,7 @@ public class PlayerMoveController : MonoBehaviour
 
             position = i;
             playerController.photonView.RPC("SetCurrentTile_CMD", RpcTarget.All, tile.index);
-            if (playerController.player != null && playerController.player.IsLocal || playerController.botController)
-            {
-                yield return tile.OnPlayerPass(playerController);
-            }
+            yield return tile.OnPlayerPass(playerController);
         }
 
         if (playerController.player != null && playerController.player.IsLocal || playerController.botController)

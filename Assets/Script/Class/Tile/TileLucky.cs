@@ -23,4 +23,6 @@ public class TileLucky : ScriptableObject
     public bool ownerTileEffect;
 
     public bool vacation = false;
+
+    public bool jail = false;
 }

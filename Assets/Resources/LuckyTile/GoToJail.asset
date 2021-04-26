@@ -20,3 +20,5 @@ MonoBehaviour:
   tileIndex: 8
   tileName: Cadeia
   ownerTileEffect: 0
+  vacation: 0
+  jail: 1

@@ -78,7 +78,7 @@ public class LuckyEffectManager : MonoBehaviour
 
     private void GoTo(PlayerController player, TileController tile, string tileName)
     {
-        player.GotoTile(tile, tileName, tileLucky.vacation);
+        player.GotoTile(tile, tileName, tileLucky.vacation, tileLucky.jail);
 
         clicked = true;
     }

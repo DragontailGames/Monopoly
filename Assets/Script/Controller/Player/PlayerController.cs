@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetupStart(Player player, bool isBot = false, int botNumber = 0, string botName = "")
     {
+        Debug.Log(isBot + " - " + botNumber + " - " + botName);
         this.GetComponent<PhotonView>().RPC("SetupStart_CMD", RpcTarget.All, player, isBot, botNumber, botName);
 
         int index = Random.Range(0, manager.availablePlayers.Count);
@@ -326,18 +327,18 @@ public class PlayerController : MonoBehaviour
         newPos.y = this.transform.position.y;
         this.transform.position = newPos;
 
-        MessageManager.Instance.ShowMessage("<u>"+player.NickName + "</u> se perdeu no triangulo das bermudas");
+        MessageManager.Instance.ShowMessage("<u>"+this.transform.name + "</u> se perdeu no triangulo das bermudas");
 
         StartCoroutine(manager.TestPlayerOnSameHouse(this.moveController));
     }
 
-    public void GotoTile(TileController tile, string tileName, bool vacation = false)
+    public void GotoTile(TileController tile, string tileName, bool vacation = false, bool jail = false)
     {
-        photonView.RPC("TeleportToTile_CMD", RpcTarget.All, tile.index, tileName, vacation);
+        photonView.RPC("TeleportToTile_CMD", RpcTarget.All, tile.index, tileName, vacation, jail);
     }
 
     [PunRPC]
-    public void TeleportToTile_CMD(int tileIndex, string tileName, bool vacation = false)
+    public void TeleportToTile_CMD(int tileIndex, string tileName, bool vacation = false, bool jail = false)
     {
         TileController tile = manager.board.tileControllers.Find(n => n.index == tileIndex);
         currentTile = tile;
@@ -347,12 +348,20 @@ public class PlayerController : MonoBehaviour
 
         moveController.position = tile.index;
         canTravel = vacation;
+        inJail = jail;
 
         var rot = this.transform.rotation.eulerAngles;
         rot.y = tile.cornerRotation!=5?tile.cornerRotation:rot.y;
         this.transform.rotation = Quaternion.Euler(rot);
 
-        MessageManager.Instance.ShowMessage("<u>" + this.transform.name + "</u> foi para " + tileName);
+        if (!inJail)
+        {
+            MessageManager.Instance.ShowMessage("<u>" + this.transform.name + "</u> foi para " + tileName);
+        }
+        else
+        {
+            MessageManager.Instance.ShowMessage("<u>" + this.transform.name + "</u> se perdeu no triangulo das bermudas");
+        }
 
         StartCoroutine(manager.TestPlayerOnSameHouse(this.moveController));
     }

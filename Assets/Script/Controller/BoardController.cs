@@ -138,7 +138,7 @@ public class BoardController : MonoBehaviour
             }
         }
 
-        if(player.botController != null)
+        if(player.botController != null && tiles.Count > 0)
         {
             StartCoroutine(player.botController.ExecuteAction(() => { action.Invoke(tiles[UnityEngine.Random.Range(0, tiles.Count)]) ; }));
         }

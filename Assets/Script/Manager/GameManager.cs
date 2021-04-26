@@ -191,10 +191,12 @@ public class GameManager : MonoBehaviour
     {
         //Op1 Movimento no mesmo bloco
         var playersInSamePos = ListTurnOrderPlayers().FindAll(n => n.currentTile == newPlayer.playerController.currentTile);
+        Debug.Log("players in same pos " + playersInSamePos.Count);
         if(playersInSamePos.Count>1)
         {
             for (int i = 0; i < playersInSamePos.Count; i++)
             {
+                Debug.Log("players " + playersInSamePos[i].name);
                 PlayerController aux = (PlayerController)playersInSamePos[i];
                 yield return aux.moveController.RepositionInTile(i, playersInSamePos.Count);
             }

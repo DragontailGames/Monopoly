@@ -59,7 +59,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             playerGO = PhotonNetwork.InstantiateRoomObject ("Prefabs/Player", position, Quaternion.Euler(new Vector3(0, 180, 0)));
             playerController = playerGO.GetComponent<PlayerController>();
-            playerGO.AddComponent<BotController>();
             player = new Player(botNumber);
         }
         else

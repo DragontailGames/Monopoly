@@ -89,6 +89,11 @@ public class PlayerController : MonoBehaviour
     {
         photonView = this.GetComponent<PhotonView>();
 
+        if(isBot)
+        {
+            this.gameObject.AddComponent<BotController>();
+        }
+
         this.player = player;
         string nickname = string.IsNullOrEmpty(player?.NickName) ? botName : player.NickName;
 

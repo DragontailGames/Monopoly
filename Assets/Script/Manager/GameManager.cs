@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Photon.Pun;
+using Dragontailgames.Utils;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class GameManager : MonoBehaviour
     public Color[] playerColors = new Color[4];
 
     public List<PlayerDg> availablePlayers = new List<PlayerDg>();
+
+    public GameObject backtoMenu;
 
     public void Start()
     {
@@ -196,11 +199,10 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < playersInSamePos.Count; i++)
             {
-                Debug.Log("players " + playersInSamePos[i].name);
                 PlayerController aux = (PlayerController)playersInSamePos[i];
                 yield return aux.moveController.RepositionInTile(i, playersInSamePos.Count);
             }
-            yield return newPlayer.RepositionInTile(playersInSamePos.Count-1, playersInSamePos.Count);
+            //yield return newPlayer.RepositionInTile(playersInSamePos.Count-1, playersInSamePos.Count);
         }
     }
 
@@ -331,5 +333,15 @@ public class GameManager : MonoBehaviour
         }
 
         return pTempList;
+    }
+
+    public void EndGame()
+    {
+        backtoMenu.SetActive(true);
+    }
+
+    public void GotoMenu()
+    {
+        SceneLoadManager.instance.gotoMenu();
     }
 }

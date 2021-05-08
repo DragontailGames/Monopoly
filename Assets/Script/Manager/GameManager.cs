@@ -89,6 +89,8 @@ public class GameManager : MonoBehaviour
     {
         PlayerController player = players[currentPlayer];
 
+        Debug.Log("StartRound " + currentPlayer);
+
         if (player.player == null || (!player.player.IsLocal && !player.botController))
         {
             yield break;
@@ -160,7 +162,7 @@ public class GameManager : MonoBehaviour
 
         ResetTransparentMaterial();
 
-        if ((!doubleDice && !playerDefetead && player.playerController.player != null && player.playerController.player.IsLocal) || player.playerController.botController)
+        if (!doubleDice && !playerDefetead && player.playerController.player != null && (player.playerController.player.IsLocal || player.playerController.botController))
         {
             player.playerController.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
         }
@@ -194,7 +196,6 @@ public class GameManager : MonoBehaviour
     {
         //Op1 Movimento no mesmo bloco
         var playersInSamePos = ListTurnOrderPlayers().FindAll(n => n.currentTile == newPlayer.playerController.currentTile);
-        Debug.Log("players in same pos " + playersInSamePos.Count);
         if(playersInSamePos.Count>1)
         {
             for (int i = 0; i < playersInSamePos.Count; i++)

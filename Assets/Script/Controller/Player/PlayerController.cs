@@ -192,8 +192,8 @@ public class PlayerController : MonoBehaviour
             this.btnThrowDice.onClick.RemoveAllListeners();
             this.btnThrowDice.onClick.AddListener(() =>
             {
-                int dice1 = dice1special;//dice1special;
-                int dice2 = dice2special;//dice2special;
+                int dice1 = ThrowDice();//dice1special;
+                int dice2 = ThrowDice();//dice2special;
 
                 photonView.RPC("RollDice_CMD", RpcTarget.All, dice1, dice2);
                 photonView.RPC("StartMovePlayer_CMD", RpcTarget.All, dice1, dice2);
@@ -213,9 +213,6 @@ public class PlayerController : MonoBehaviour
 
                 photonView.RPC("RollDice_CMD", RpcTarget.All, dice1, dice2);
                 photonView.RPC("StartMovePlayer_CMD", RpcTarget.All, dice1, dice2);
-                //this.moveController.StartMovePlayer(dice1, dice2);
-                this.btnThrowDice.interactable = false;
-                this.btnThrowDice.gameObject.SetActive(false);
             }));
         }
     }

@@ -11,9 +11,6 @@ public class PlayerMoveController : MonoBehaviour
     [HideInInspector]
     public int position = 0;
 
-    [HideInInspector]
-    public bool doubleDice = false;
-
     public void Awake()
     {
         if(!playerController)
@@ -25,7 +22,7 @@ public class PlayerMoveController : MonoBehaviour
     [PunRPC]
     public void StartMovePlayer_CMD(int dice1, int dice2)
     {
-        doubleDice = dice1 == dice2;
+        bool doubleDice = dice1 == dice2;
 
         if(doubleDice)
         {

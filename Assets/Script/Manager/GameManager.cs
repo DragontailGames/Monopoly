@@ -162,16 +162,25 @@ public class GameManager : MonoBehaviour
 
         ResetTransparentMaterial();
 
-        if (!doubleDice && !playerDefetead && player.playerController.player != null && (player.playerController.player.IsLocal || player.playerController.botController))
+        Debug.Log(doubleDice + " - " + player.playerController.player);
+
+        if (!doubleDice && !playerDefetead && player.playerController.player != null && player.playerController.player.IsLocal) 
         {
-            if(player.playerController.player.IsLocal || player.playerController.botController)
-                player.playerController.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
+             player.playerController.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
         }
-        if (playerDefetead)
+        else if (player.playerController.botController)
+        {
+            player.playerController.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
+        }
+        else if (playerDefetead)
         {
             playerDefetead = false;
             DestroyImmediate(player.gameObject);
             StartCoroutine(StartRound());
+        }
+        else
+        {
+            player.playerController.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
         }
     }
 

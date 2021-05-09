@@ -164,15 +164,13 @@ public class GameManager : MonoBehaviour
 
         if (!doubleDice && !playerDefetead && player.playerController.player != null && (player.playerController.player.IsLocal || player.playerController.botController))
         {
-            player.playerController.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
+            if(player.playerController.player.IsLocal || player.playerController.botController)
+                player.playerController.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
         }
-        else
+        if (playerDefetead)
         {
-            if (playerDefetead)
-            {
-                playerDefetead = false;
-                DestroyImmediate(player.gameObject);
-            }
+            playerDefetead = false;
+            DestroyImmediate(player.gameObject);
             StartCoroutine(StartRound());
         }
     }

@@ -173,7 +173,6 @@ public class GameManager : MonoBehaviour
                 playerDefetead = false;
                 DestroyImmediate(player.gameObject);
             }
-            Debug.Log("Mais um round");
             StartCoroutine(StartRound());
         }
     }

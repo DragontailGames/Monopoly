@@ -219,6 +219,8 @@ public class PlayerMoveController : MonoBehaviour
     {
         playerController.manager.NextPlayer();
         StartCoroutine(playerController.manager.StartRound());
+
+        Debug.Log("Round no next");
     }
 
 }

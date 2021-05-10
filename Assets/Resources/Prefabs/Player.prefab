@@ -334,7 +334,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 6836158312323646949}
   position: 0
-  doubleDice: 0
 --- !u!114 &6836158312323646951
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -89,8 +89,6 @@ public class GameManager : MonoBehaviour
     {
         PlayerController player = players[currentPlayer];
 
-        Debug.Log("StartRound " + currentPlayer);
-
         if (player.player == null || (!player.player.IsLocal && !player.botController))
         {
             yield break;
@@ -154,6 +152,7 @@ public class GameManager : MonoBehaviour
         {
             aux.ChangeMaterial(true);
         }
+
         yield return move;
 
         yield return player.playerController.walletController.CheckBankruptcy();
@@ -162,25 +161,20 @@ public class GameManager : MonoBehaviour
 
         ResetTransparentMaterial();
 
-        Debug.Log(doubleDice + " - " + player.playerController.player);
-
-        if (!doubleDice && !playerDefetead && player.playerController.player != null && player.playerController.player.IsLocal) 
+        if (!doubleDice && !playerDefetead) 
         {
-             player.playerController.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
+            if((player.playerController.player != null && player.playerController.player.IsLocal) || player.playerController.botController)
+                player.playerController.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
         }
-        else if (player.playerController.botController)
+        else if(doubleDice)
         {
-            player.playerController.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
+            StartCoroutine(player.playerController.manager.StartRound());
         }
         else if (playerDefetead)
         {
             playerDefetead = false;
             DestroyImmediate(player.gameObject);
             StartCoroutine(StartRound());
-        }
-        else
-        {
-            player.playerController.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
         }
     }
 

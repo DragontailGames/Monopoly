@@ -87,7 +87,7 @@ public class PlayerWalletController : MonoBehaviour
                 controller.boardController.SetupMortgageBoard(controller);
             else
             {
-                controller.manager.PlayerDefeated();
+                controller.manager.playerDefetead = true;
                 controller.boardController.ResetBoard();
                 controller.DeclareBankruptcy();
                 testedBankruptcy = true;

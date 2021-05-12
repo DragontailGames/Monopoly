@@ -196,8 +196,7 @@ public class PlayerController : MonoBehaviour
                 int dice2 = ThrowDice();//dice2special;
 
                 photonView.RPC("RollDice_CMD", RpcTarget.All, dice1, dice2);
-                photonView.RPC("StartMovePlayer_CMD", RpcTarget.All, dice1, dice2);
-                //this.moveController.StartMovePlayer(dice1, dice2);
+                this.moveController.StartMovePlayer(dice1, dice2);
                 this.btnThrowDice.interactable = false;
                 this.btnThrowDice.gameObject.SetActive(false);
             });
@@ -208,11 +207,11 @@ public class PlayerController : MonoBehaviour
             //BOT
             StartCoroutine(botController.ExecuteAction(() =>
             {
-                int dice1 = ThrowDice();//ThrowDice();
-                int dice2 = ThrowDice();//ThrowDice();
+                int dice1 = 7;//ThrowDice();//ThrowDice();
+                int dice2 = 9;//ThrowDice();//ThrowDice();
 
                 photonView.RPC("RollDice_CMD", RpcTarget.All, dice1, dice2);
-                photonView.RPC("StartMovePlayer_CMD", RpcTarget.All, dice1, dice2);
+                this.moveController.StartMovePlayer(dice1, dice2);
             }));
         }
     }
@@ -305,7 +304,7 @@ public class PlayerController : MonoBehaviour
         this.jailInTotal++;
         if (this.jailInTotal > 4)
         {
-            manager.PlayerDefeated();
+            manager.playerDefetead = true;
             DeclareBankruptcy();
         }
         this.inJail = true;

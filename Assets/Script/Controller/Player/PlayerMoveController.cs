@@ -19,8 +19,7 @@ public class PlayerMoveController : MonoBehaviour
         }
     }
 
-    [PunRPC]
-    public void StartMovePlayer_CMD(int dice1, int dice2)
+    public void StartMovePlayer(int dice1, int dice2)
     {
         bool doubleDice = dice1 == dice2;
 
@@ -80,15 +79,16 @@ public class PlayerMoveController : MonoBehaviour
             yield return tile.OnPlayerPass(playerController);
         }
 
-        if (playerController.player != null && playerController.player.IsLocal || playerController.botController)
-        {
-            yield return playerController.currentTile.OnPlayerStop(playerController);
-        }
+        yield return playerController.currentTile.OnPlayerStop(playerController);
 
     }
 
     public IEnumerator Move(Vector3 targetPos)
     {
+        if(playerController.player.IsLocal)
+        {
+            playerController.photonView.RPC("Move_CMD", RpcTarget.Others, targetPos);
+        }
         int counts = 0;
         while (Vector3.Distance(transform.position, targetPos) > 0.01f)
         {
@@ -101,6 +101,12 @@ public class PlayerMoveController : MonoBehaviour
             counts++;
             yield return new WaitForSeconds(0.001f);
         }
+    }
+
+    [PunRPC]
+    public void Move_CMD(Vector3Int targetPos)
+    {
+        StartCoroutine(Move(targetPos));
     }
 
     public IEnumerator RepositionInTile(int index, int amount)

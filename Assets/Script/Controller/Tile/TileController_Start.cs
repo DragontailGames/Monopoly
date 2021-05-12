@@ -10,23 +10,18 @@ public class TileController_Start : TileController
     {
         base.OnPlayerPass(player);
 
-
-        if (player.player != null && player.player.IsLocal || player.botController)
+        if (!player.firstBuy)
         {
-            if (!player.firstBuy)
-            {
-                var manager = player.manager;
-                player.DeclareBankruptcy();
+            var manager = player.manager;
+            player.DeclareBankruptcy();
 
-                StopAllCoroutines();
-                manager.ResetTransparentMaterial();
-                player.photonView.RPC("NextPlayer_CMD", Photon.Pun.RpcTarget.All);
-                yield break;
-            }
-
-            if (!player.fakeTravel)
-                player.walletController.CreditValue(startMoney);
+            StopAllCoroutines();
+            manager.ResetTransparentMaterial();
+            yield break;
         }
+
+        if (!player.fakeTravel)
+            player.walletController.CreditValue(startMoney);
 
         yield return player.TurnCorner();
     }

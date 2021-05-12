@@ -12,13 +12,9 @@ public class TileController_Lucky : TileController
 
     public override IEnumerator OnPlayerStop(PlayerController player)
     {
-        if(player.player != null && (player.player.IsLocal || player.botController))
-        {
-            TileLucky lucky = GetLuckyCard();
-            yield return luckyMenuController.LuckyStart(lucky, player);
-            yield return luckyEffect.StartLucky(player, lucky);
-            Debug.Log("EndLuckyTile");
-        }
+        TileLucky lucky = GetLuckyCard();
+        yield return luckyMenuController.LuckyStart(lucky, player);
+        yield return luckyEffect.StartLucky(player, lucky);
     }
 
     public TileLucky GetLuckyCard()

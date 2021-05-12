@@ -163,8 +163,7 @@ public class GameManager : MonoBehaviour
 
         if (!doubleDice && !playerDefetead) 
         {
-            if((player.playerController.player != null && player.playerController.player.IsLocal) || player.playerController.botController)
-                player.playerController.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
+            player.playerController.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
         }
         else if(doubleDice)
         {
@@ -178,12 +177,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    bool playerDefetead = false;
-
-    public void PlayerDefeated()
-    {
-        playerDefetead = true;
-    }
+    public bool playerDefetead = false;
 
     public void ResetTransparentMaterial()
     {

@@ -42,10 +42,9 @@ public class BoardController : MonoBehaviour
     public void SetupTravelBoard(PlayerController player)
     {
         //BOT
-
-        MessageManager.Instance.ShowMessage("Selecione um terreno para viajar");
         if (!player.botController)
         {
+            MessageManager.Instance.ShowMessage("Selecione um terreno para viajar");
             foreach (var aux in tileControllers)
             {
                 aux.SetupTravel(player);
@@ -61,10 +60,10 @@ public class BoardController : MonoBehaviour
                 {
                     int probability = 3;
 
-                    if (aux.GetType() == typeof(TileController_Buyable))
+                    if (aux.GetType() == typeof(TileController_Country))
                     {
                         var b = aux as TileController_Buyable;
-                        if(b.Owner == null)
+                        if(b.Owner == null && player.currentTile.index < aux.index)
                         {
                             probability = 1;
                         }
@@ -97,17 +96,13 @@ public class BoardController : MonoBehaviour
         int randomProbability = UnityEngine.Random.Range(0, 100);
         int probability = 1;
 
-        if(randomProbability<10)
+        if(randomProbability<10 && tileCanTeleport.FindAll(n => n.probability == 3).Count > 0)
         {
             probability = 3;
         }
-        else if(randomProbability<30)
+        else if(randomProbability<30 && tileCanTeleport.FindAll(n => n.probability == 2).Count>0)
         {
             probability = 2;
-        }
-        else
-        {
-
         }
 
         var filtredList = tileCanTeleport.FindAll(n => n.probability == probability);

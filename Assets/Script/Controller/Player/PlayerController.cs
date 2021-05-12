@@ -207,8 +207,8 @@ public class PlayerController : MonoBehaviour
             //BOT
             StartCoroutine(botController.ExecuteAction(() =>
             {
-                int dice1 = 7;//ThrowDice();//ThrowDice();
-                int dice2 = 9;//ThrowDice();//ThrowDice();
+                int dice1 = ThrowDice();//ThrowDice();
+                int dice2 = ThrowDice();//ThrowDice();
 
                 photonView.RPC("RollDice_CMD", RpcTarget.All, dice1, dice2);
                 this.moveController.StartMovePlayer(dice1, dice2);
@@ -241,6 +241,10 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator TurnCorner()
     {
+        if (player != null && (botController || player.IsLocal))
+        {
+            photonView.RPC("TurnCorner_CMD", RpcTarget.Others);
+        }
         var newRot = this.transform.localEulerAngles;
         var startY = newRot.y;
         var desiredAngle = Quaternion.Euler(newRot.x, newRot.y + 90, newRot.z);
@@ -254,6 +258,13 @@ public class PlayerController : MonoBehaviour
             }
             return false;
         });
+    }
+
+
+    [PunRPC]
+    public void TurnCorner_CMD(Vector3 targetPos)
+    {
+        StartCoroutine(TurnCorner());
     }
 
     public void ChangeMaterial(bool transparent)

@@ -57,10 +57,6 @@ public class PlayerMoveController : MonoBehaviour
         int dest = valueDice + position;
         for (int i = position + 1; i <= dest; i++)
         {
-            if (i < dest)
-            {
-                playerController.Animate_Walk();
-            }
             TileController tile = playerController.boardController.tileControllers.Find(t => t.index == i);
 
             if (i + 1 >= playerController.boardController.tileControllers.Count)
@@ -85,10 +81,11 @@ public class PlayerMoveController : MonoBehaviour
 
     public IEnumerator Move(Vector3 targetPos)
     {
-        if(playerController.player.IsLocal || playerController.botController)
+        if(playerController.player != null && (playerController.botController || playerController.player.IsLocal))
         {
             playerController.photonView.RPC("Move_CMD", RpcTarget.Others, targetPos);
         }
+        playerController.Animate_Walk();
         int counts = 0;
         while (Vector3.Distance(transform.position, targetPos) > 0.01f)
         {

@@ -85,7 +85,7 @@ public class PlayerMoveController : MonoBehaviour
 
     public IEnumerator Move(Vector3 targetPos)
     {
-        if(playerController.player.IsLocal)
+        if(playerController.player.IsLocal || playerController.botController)
         {
             playerController.photonView.RPC("Move_CMD", RpcTarget.Others, targetPos);
         }
@@ -104,7 +104,7 @@ public class PlayerMoveController : MonoBehaviour
     }
 
     [PunRPC]
-    public void Move_CMD(Vector3Int targetPos)
+    public void Move_CMD(Vector3 targetPos)
     {
         StartCoroutine(Move(targetPos));
     }

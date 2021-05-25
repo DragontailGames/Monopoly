@@ -38,7 +38,7 @@ public class BuyableWonderMenuController : MonoBehaviour
         {
             clicked = true;
             player.walletController.DebitValue(price);
-            tile.BuyTile(player);
+            tile.BuyTile(player, $"{tile.tile.nameTile} e agora possui {player.wondersInControl + 1} maravilhas!");//MESSAGE WONDER
             player.firstBuy = true;
             player.wondersInControl++;
 
@@ -59,7 +59,7 @@ public class BuyableWonderMenuController : MonoBehaviour
             {
                 clicked = true;
                 player.walletController.DebitValue(price);
-                tile.BuyTile(player);
+                tile.BuyTile(player, $"{tile.tile.nameTile} e agora possui {player.wondersInControl + 1} maravilhas!");//MESSAGE WONDER
                 player.firstBuy = true;
                 player.wondersInControl++;
 

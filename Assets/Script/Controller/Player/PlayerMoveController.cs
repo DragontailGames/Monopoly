@@ -68,24 +68,32 @@ public class PlayerMoveController : MonoBehaviour
 
             Vector3 newPos = tile.GetPosition();
 
-            yield return Move(OffsetRotation(newPos));
+            yield return Move(OffsetRotation(newPos), i == dest);
 
             position = i;
             playerController.photonView.RPC("SetCurrentTile_CMD", RpcTarget.All, tile.index);
             yield return tile.OnPlayerPass(playerController);
         }
 
+        playerController.Stop_Walk();
+
         yield return playerController.currentTile.OnPlayerStop(playerController);
 
     }
 
-    public IEnumerator Move(Vector3 targetPos)
+    public IEnumerator Move(Vector3 targetPos, bool lastMove = false)
     {
         if(playerController.player != null && (playerController.botController || playerController.player.IsLocal))
         {
             playerController.photonView.RPC("Move_CMD", RpcTarget.Others, targetPos);
         }
-        playerController.Animate_Walk();
+        if(lastMove == false)
+            playerController.Animate_Walk();
+        else
+        {
+            playerController.Stop_Walk();
+        }
+
         int counts = 0;
         while (Vector3.Distance(transform.position, targetPos) > 0.01f)
         {
@@ -129,7 +137,7 @@ public class PlayerMoveController : MonoBehaviour
 
         newPos.y = this.transform.position.y;
 
-        float fixPos = 0.25f;
+        float fixPos = 0.3f;
 
         if (amount == 2)
         {

@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
 
     public TileController currentTile;
 
-    [HideInInspector]
     public List<TileController_Buyable> properties = new List<TileController_Buyable>();
 
     [HideInInspector]
@@ -262,7 +261,7 @@ public class PlayerController : MonoBehaviour
 
 
     [PunRPC]
-    public void TurnCorner_CMD(Vector3 targetPos)
+    public void TurnCorner_CMD()
     {
         StartCoroutine(TurnCorner());
     }
@@ -403,6 +402,10 @@ public class PlayerController : MonoBehaviour
     public void Animate_Cheer()
     {
         animator.SetTrigger("_cheer");
+    }
+    public void Stop_Walk()
+    {
+        animator.SetTrigger("_stopMove");
     }
 
     [PunRPC]

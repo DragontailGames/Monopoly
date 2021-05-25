@@ -26039,7 +26039,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1379702200
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26811,16 +26811,17 @@ MonoBehaviour:
   dice2: {fileID: 1499671778}
   dices: {fileID: 1269625812}
   playerColors:
-  - {r: 0.8301887, g: 0.003915994, b: 0.003915994, a: 1}
-  - {r: 0.8679245, g: 0.7387952, b: 0.07778566, a: 1}
-  - {r: 0.868414, g: 0.046991818, b: 0.9056604, a: 1}
-  - {r: 0.058823522, g: 0.2956452, b: 0.8039216, a: 1}
+  - {r: 0.9528302, g: 0.3460751, b: 0.36371657, a: 1}
+  - {r: 0.9716981, g: 0.8774177, b: 0.3987629, a: 1}
+  - {r: 0.9346499, g: 0.38581347, b: 0.9622642, a: 1}
+  - {r: 0.3216002, g: 0.5149779, b: 0.9339623, a: 1}
   availablePlayers:
   - model: {fileID: 3708285461539506311, guid: 89f43dacf06930b4cbe2c45037753428, type: 3}
     icon: {fileID: 21300000, guid: 554dd5e2441459940948a1fb132bb83f, type: 3}
   - model: {fileID: 6079627793931199779, guid: 47f31e32febcc6142beed8edb394961d, type: 3}
     icon: {fileID: 21300000, guid: ff21293dd23e19b4ca7ebe1d3528f383, type: 3}
   backtoMenu: {fileID: 2003451345}
+  playerDefetead: 0
 --- !u!4 &1420617877
 Transform:
   m_ObjectHideFlags: 0

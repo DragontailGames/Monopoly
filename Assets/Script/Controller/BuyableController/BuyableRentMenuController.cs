@@ -52,6 +52,7 @@ public class BuyableRentMenuController : MonoBehaviour
             clicked = true;
             int creditValue = (int)MathDt.GetContructionPrice(tileBuyable.price, tile.level);
             player.walletController.TransferMoney(hostilePrice, creditValue, tile.Owner);
+            tile.Owner.properties.Remove(tile.Owner.properties.Find(n => n.index == tile.index));
             tile.Owner = player;
 
             this.gameObject.SetActive(false);
@@ -74,6 +75,7 @@ public class BuyableRentMenuController : MonoBehaviour
                 clicked = true;
                 int creditValue = (int)MathDt.GetContructionPrice(tileBuyable.price, tile.level);
                 player.walletController.TransferMoney(hostilePrice, creditValue, tile.Owner);
+                tile.Owner.properties.Remove(tile.Owner.properties.Find(n => n.index == tile.index));
                 tile.Owner = player;
             });
         }

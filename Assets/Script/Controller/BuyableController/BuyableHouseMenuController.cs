@@ -31,7 +31,7 @@ public class BuyableHouseMenuController : MonoBehaviour
 
                 clicked = true;
                 player.walletController.DebitValue(fullPrice);
-                tile.BuyTile(player);
+                tile.BuyTile(player, $" um(a) {level} no(a) {tile.name}");
                 player.firstBuy = true;
                 tile.UpgradeLevel(level, player);
 
@@ -54,7 +54,7 @@ public class BuyableHouseMenuController : MonoBehaviour
 
                 clicked = true;
                 player.walletController.DebitValue(fullPrice);
-                tile.BuyTile(player);
+                tile.BuyTile(player, $" um(a) {BabelDt.TileLevelName(level)} no(a) {tile.tile.nameTile}");
                 player.firstBuy = true;
                 tile.UpgradeLevel(level, player);
             });
@@ -101,7 +101,7 @@ public class BuyableHouseMenuController : MonoBehaviour
                 {
                     clicked = true;
                     player.walletController.DebitValue(fullPrice);
-                    tile.BuyTile(player);
+                    tile.BuyTile(player, $" um(a) {BabelDt.TileLevelName(level)} no(a) {tile.tile.nameTile}");//Message casa
                     player.firstBuy = true;
                     tile.UpgradeLevel(level, player);
 

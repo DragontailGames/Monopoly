@@ -16,9 +16,9 @@ public class TileController_Buyable : TileController
         yield return canvas.buyableMenu.SetupMenu(this, player);
     }
 
-    public void BuyTile(PlayerController owner)
+    public void BuyTile(PlayerController owner, string text)
     {
-        owner.photonView.RPC("BuyTile_CMD", RpcTarget.All, this.index);
+        owner.photonView.RPC("BuyTile_CMD", RpcTarget.All, this.index, text);
     }
 
     public virtual void OnBuy(PlayerController owner)

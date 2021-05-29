@@ -25,4 +25,6 @@ public class TileLucky : ScriptableObject
     public bool vacation = false;
 
     public bool jail = false;
+
+    public string feedbackText;
 }

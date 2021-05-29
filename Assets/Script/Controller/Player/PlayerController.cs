@@ -191,8 +191,8 @@ public class PlayerController : MonoBehaviour
             this.btnThrowDice.onClick.RemoveAllListeners();
             this.btnThrowDice.onClick.AddListener(() =>
             {
-                int dice1 = ThrowDice();//dice1special;
-                int dice2 = ThrowDice();//dice2special;
+                int dice1 = dice1special; //ThrowDice();//dice1special;
+                int dice2 = dice2special; //ThrowDice();//dice2special;
 
                 photonView.RPC("RollDice_CMD", RpcTarget.All, dice1, dice2);
                 this.moveController.StartMovePlayer(dice1, dice2);
@@ -206,8 +206,8 @@ public class PlayerController : MonoBehaviour
             //BOT
             StartCoroutine(botController.ExecuteAction(() =>
             {
-                int dice1 = ThrowDice();//ThrowDice();
-                int dice2 = ThrowDice();//ThrowDice();
+                int dice1 = dice1special; //ThrowDice();//dice1special;
+                int dice2 = dice2special; //ThrowDice();//dice2special;
 
                 photonView.RPC("RollDice_CMD", RpcTarget.All, dice1, dice2);
                 this.moveController.StartMovePlayer(dice1, dice2);
@@ -323,11 +323,6 @@ public class PlayerController : MonoBehaviour
         photonView.RPC("SetCurrentTile_CMD", RpcTarget.All, boardController.jail.index);
         photonView.RPC("TeleportToJail_CMD", RpcTarget.All);
         moveController.position = boardController.jail.index;
-
-        if(freeBoat)
-        {
-            this.inJail = false;
-        }
     }
 
     [PunRPC]
@@ -440,5 +435,17 @@ public class PlayerController : MonoBehaviour
     public void RollDice_CMD(int dice1, int dice2)
     {
         StartCoroutine(manager.RollDice(dice1, dice2, playerNumber));
+    }
+
+    public void LogMessagePlayer(string message)
+    {
+        photonView.RPC("LogMessagePlayer_RPC", RpcTarget.All, message);
+    }
+
+    [PunRPC]
+    public void LogMessagePlayer_RPC(string message)
+    {
+        if ((this.player != null && !this.player.IsLocal) || this.botController)
+            MessageManager.Instance.ShowMessage($"{message}");
     }
 }

@@ -6,7 +6,7 @@ public static class BabelDt
 {
     public static string terrain_br = "Terreno";
     public static string house_br = "Casa";
-    public static string mansion_br = "Mansão";
+    public static string mansion_br = "Mansao";
     public static string hotel_br = "Hotel";
 
     public static string TileLevelName(int level)

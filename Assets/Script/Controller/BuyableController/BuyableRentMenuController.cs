@@ -54,6 +54,7 @@ public class BuyableRentMenuController : MonoBehaviour
             player.walletController.TransferMoney(hostilePrice, creditValue, tile.Owner);
             tile.Owner.properties.Remove(tile.Owner.properties.Find(n => n.index == tile.index));
             tile.Owner = player;
+            tile.Owner.properties.Add(tile);
 
             this.gameObject.SetActive(false);
         });
@@ -77,6 +78,7 @@ public class BuyableRentMenuController : MonoBehaviour
                 player.walletController.TransferMoney(hostilePrice, creditValue, tile.Owner);
                 tile.Owner.properties.Remove(tile.Owner.properties.Find(n => n.index == tile.index));
                 tile.Owner = player;
+                tile.Owner.properties.Add(tile);
             });
         }
 

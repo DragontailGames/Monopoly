@@ -37,8 +37,6 @@ public class GameManager : MonoBehaviour
     public void NewPlayer(PlayerController newPlayer)
     {
         players.Add(newPlayer);
-
-        
     }
 
     bool setup = false;

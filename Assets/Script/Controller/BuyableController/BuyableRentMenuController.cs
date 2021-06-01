@@ -36,6 +36,7 @@ public class BuyableRentMenuController : MonoBehaviour
         {
             clicked = true;
             player.walletController.TransferMoney(rentPrice, rentPrice, tile.Owner);
+            player.LogMessagePlayer($"{player.name} pagou {rentPrice} para {tile.Owner} em: {tile.tile.nameTile}", true);
             this.gameObject.SetActive(false);
         });
 
@@ -53,6 +54,7 @@ public class BuyableRentMenuController : MonoBehaviour
             int creditValue = (int)MathDt.GetContructionPrice(tileBuyable.price, tile.level);
             player.walletController.TransferMoney(hostilePrice, creditValue, tile.Owner);
             tile.Owner.properties.Remove(tile.Owner.properties.Find(n => n.index == tile.index));
+            player.LogMessagePlayer($"{player.name} realizou uma aquisição hostil em: {tileBuyable.nameTile}. Sendo {tileBuyable.price} para {tile.Owner.name} e {tileBuyable.price} em impostos.", true);
             tile.Owner = player;
             tile.Owner.properties.Add(tile);
 
@@ -77,6 +79,7 @@ public class BuyableRentMenuController : MonoBehaviour
                 int creditValue = (int)MathDt.GetContructionPrice(tileBuyable.price, tile.level);
                 player.walletController.TransferMoney(hostilePrice, creditValue, tile.Owner);
                 tile.Owner.properties.Remove(tile.Owner.properties.Find(n => n.index == tile.index));
+                player.LogMessagePlayer($"{player.name} realizou uma aquisição hostil em: {tileBuyable.nameTile}. Sendo {creditValue} para {tile.Owner.name} e {creditValue} em impostos.", true);
                 tile.Owner = player;
                 tile.Owner.properties.Add(tile);
             });

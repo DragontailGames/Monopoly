@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebd04d32f788815408a4fc0b4898c449, type: 3}
   m_Name: BackEnemieToBank
   m_EditorClassIdentifier: 
-  text: "Sorte! [Jogador] Pode escolher uma propriedade advers\xE1ria para ser devolvida
-    ao banco!"
+  text: Escolha uma das propriedades adversarias para devolver ao banco
   method: ChooseProperty
   value: 0
   percentage: 0
@@ -23,3 +22,4 @@ MonoBehaviour:
   ownerTileEffect: 0
   vacation: 0
   jail: 0
+  feedbackText: 

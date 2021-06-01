@@ -292,7 +292,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public IEnumerator RollDice(int dice1Value, int dice2Value, int playerNumber)
+    public IEnumerator RollDice(int dice1Value, int dice2Value, int playerNumber, UnityEngine.Events.UnityAction afterDiceRoll = null)
     {
         int yStart =315;
         float correction = 90 * (playerNumber - 1);
@@ -310,6 +310,8 @@ public class GameManager : MonoBehaviour
 
         dice1.SetActive(false);
         dice2.SetActive(false);
+
+        afterDiceRoll?.Invoke();
     }
 
     public List<PlayerController> ListTurnOrderPlayers()

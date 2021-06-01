@@ -163,8 +163,8 @@ public class PlayerController : MonoBehaviour
 
     public int ThrowDice()
     {
-        //return 6;
-        return Random.Range(1, 7);
+        return 6;
+        //return Random.Range(1, 7);
     }
 
     public IEnumerator ConfigDice()
@@ -282,27 +282,25 @@ public class PlayerController : MonoBehaviour
 
     public void TravelPlayer(TileController tile)
     {
-        if (canTravel == false)
+        if(!canTravel)
+        {
             return;
+        }
 
-        photonView.RPC("TravelPlayer_CMD", RpcTarget.All, tile.index);
-    }
-
-    [PunRPC]
-    public void TravelPlayer_CMD(int index)
-    {
         canTravel = false;
         int value = 0;
 
         moveController.position = currentTile.index;
 
-        if (moveController.position > index)
+        LogMessagePlayer($"{name} Está de férias e viajou para {tile.tile.nameTile}",false);
+
+        if (moveController.position > tile.index)
         {
-            value = (boardController.tileControllers.Count - moveController.position) + (index - 1);
+            value = (boardController.tileControllers.Count - moveController.position) + (tile.index - 1);
         }
         else
         {
-            value = index - moveController.position;
+            value = tile.index - moveController.position;
         }
         boardController.ResetBoard();
 
@@ -437,15 +435,44 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(manager.RollDice(dice1, dice2, playerNumber));
     }
 
-    public void LogMessagePlayer(string message)
+    public void LogMessagePlayer(string message, bool toAll, bool hasDelay = false)
     {
-        photonView.RPC("LogMessagePlayer_RPC", RpcTarget.All, message);
+        photonView.RPC("LogMessagePlayer_RPC", RpcTarget.All, message, toAll, hasDelay);
     }
 
     [PunRPC]
-    public void LogMessagePlayer_RPC(string message)
+    public void LogMessagePlayer_RPC(string message, bool toAll, bool hasDelay = false)
     {
-        if ((this.player != null && !this.player.IsLocal) || this.botController)
+        if (hasDelay)
+        {
+            StartCoroutine(LogMessagePlayerWithDelay(message, toAll));
+        }
+        else 
+        { 
+            if (toAll)
+            {
+                MessageManager.Instance.ShowMessage($"{message}");
+            }
+            else
+            {
+                if ((this.player != null && !this.player.IsLocal) || this.botController)
+                    MessageManager.Instance.ShowMessage($"{message}");
+            }
+        }
+
+    }
+
+    public IEnumerator LogMessagePlayerWithDelay(string message, bool toAll)
+    {
+        yield return new WaitForSeconds(1.0f);
+        if (toAll)
+        {
             MessageManager.Instance.ShowMessage($"{message}");
+        }
+        else
+        {
+            if ((this.player != null && !this.player.IsLocal) || this.botController)
+                MessageManager.Instance.ShowMessage($"{message}");
+        }
     }
 }

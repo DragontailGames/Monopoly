@@ -26,6 +26,7 @@ public class PlayerMoveController : MonoBehaviour
         if(doubleDice)
         {
             playerController.doubleRow++;
+            playerController.LogMessagePlayer($"{playerController.name} tirou dados repetidos e pode jogar de novo!", true, true);
             if(playerController.doubleRow>2)
             {
                 playerController.doubleRow = 0;

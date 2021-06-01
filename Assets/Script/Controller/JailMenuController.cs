@@ -18,6 +18,8 @@ public class JailMenuController : MonoBehaviour
     {
         objFreeBoat.SetActive(false);
 
+        yield return new WaitForSeconds(2.0f);
+
         if (playerController.freeBoat)
         {
             ConfigFreeBoat(playerController);
@@ -39,7 +41,7 @@ public class JailMenuController : MonoBehaviour
         {
             clicked = true;
             playerController.walletController.DebitValue(MathDt.jailPrice);
-            playerController.LogMessagePlayer($"{playerController.name} pagou por um resgate urgente para sair da prisão!");
+            playerController.LogMessagePlayer($"{playerController.name} pagou por um resgate urgente para sair da prisão!", false);
             playerController.inJail = false;
             this.gameObject.SetActive(false);
         });
@@ -47,14 +49,29 @@ public class JailMenuController : MonoBehaviour
         btnTryDice.onClick.RemoveAllListeners();
         btnTryDice.onClick.AddListener(() =>
         {
-            clicked = true;
             int dice1 = playerController.ThrowDice();
             int dice2 = playerController.ThrowDice();
 
-            StartCoroutine(playerController.manager.RollDice(dice1, dice2, playerController.playerNumber));
+            this.transform.GetChild(0).gameObject.SetActive(false);
 
-            playerController.inJail = dice1 != dice2;
-            this.gameObject.SetActive(false);
+            UnityEngine.Events.UnityAction afterEvent = () =>
+            {
+                if (dice1 == dice2)
+                {
+                    playerController.LogMessagePlayer($"{playerController.name} Saiu da prisao", true);//Pedro
+                    playerController.inJail = false;
+                }
+                else
+                {
+                    playerController.LogMessagePlayer($"{playerController.name} está perdido no triângulo das bermudas! Restam {3 - playerController.jailRow} turnos para ser resgatado!", true);
+                }
+
+                clicked = true;
+                this.transform.GetChild(0).gameObject.SetActive(true);
+                this.gameObject.SetActive(false);
+            };
+
+            StartCoroutine(playerController.manager.RollDice(dice1, dice2, playerController.playerNumber, afterEvent));
         });
 
         //BOT
@@ -67,8 +84,7 @@ public class JailMenuController : MonoBehaviour
                     clicked = true;
                     playerController.inJail = false;
                     playerController.freeBoat = false;
-                    Debug.Log("Teste");
-                    playerController.LogMessagePlayer($"{playerController.name} utilizou um sinalizador para sair da prisão!");
+                    playerController.LogMessagePlayer($"{playerController.name} utilizou um sinalizador para sair da prisão!", false);
                 });
             }
             else
@@ -81,12 +97,20 @@ public class JailMenuController : MonoBehaviour
 
                     StartCoroutine(playerController.manager.RollDice(dice1, dice2, playerController.playerNumber));
 
-                    playerController.inJail = dice1 != dice2;
+                    if(dice1 == dice2)
+                    {
+                        playerController.LogMessagePlayer($"{playerController.name} ", true);//Pedro
+                        playerController.inJail = false;
+                    }
+                    else
+                    {
+                        playerController.LogMessagePlayer($"{playerController.name} está perdido no triângulo das bermudas! Restam {3 - playerController.jailRow} turnos para ser resgatado!", true);
+                    }
                 }, null, () =>
                 {
                     clicked = true;
                     playerController.walletController.DebitValue(MathDt.jailPrice);
-                    playerController.LogMessagePlayer($"{playerController.name} pagou por um resgate urgente para sair da prisão!");
+                    playerController.LogMessagePlayer($"{playerController.name} pagou por um resgate urgente para sair da prisão!", false);
                     playerController.inJail = false;
                 });
             }
@@ -105,7 +129,7 @@ public class JailMenuController : MonoBehaviour
             clicked = true;
             playerController.inJail = false;
             playerController.freeBoat = false;
-            playerController.LogMessagePlayer($"{playerController.name} utilizou um sinalizador para sair da prisão!");
+            playerController.LogMessagePlayer($"{playerController.name} utilizou um sinalizador para sair da prisão!", false);
             this.gameObject.SetActive(false);
         });
     }

@@ -29,19 +29,25 @@ public class MessageManager : MonoBehaviour
         _instance = this;
     }
 
+    Coroutine delayHidden;
+
     public void ShowMessage(string text, bool hiddenAfterDelay = true)
     {
-        StopCoroutine(DelayHiddenText());
+        if (delayHidden != null)
+        {
+            StopCoroutine(delayHidden);
+        }
         this.GetComponent<Image>().enabled = true;
         this.transform.GetChild(0).gameObject.SetActive(true);
         this.GetComponentInChildren<TextMeshProUGUI>().text = text;
         if(hiddenAfterDelay)
-            StartCoroutine(DelayHiddenText());
+            delayHidden = StartCoroutine(DelayHiddenText(text));
     }
 
-    public IEnumerator DelayHiddenText()
+    public IEnumerator DelayHiddenText(string text)
     {
-        yield return new WaitForSeconds(3.0f);
+        int tSize = text.Split(' ').Length;
+        yield return new WaitForSeconds(tSize * 6);
         HiddenText();
     }
 

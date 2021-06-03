@@ -22,3 +22,4 @@ MonoBehaviour:
   ownerTileEffect: 0
   vacation: 0
   jail: 1
+  feedbackText: "Rev\xE9s! [Jogador] se perdeu no Tri\xE2ngulo das Bermudas!"

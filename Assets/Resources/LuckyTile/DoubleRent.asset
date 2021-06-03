@@ -18,4 +18,8 @@ MonoBehaviour:
   percentage: 200
   luckType: 0
   tileIndex: 0
+  tileName: 
   ownerTileEffect: 1
+  vacation: 0
+  jail: 0
+  feedbackText: Sorte!  [Jogador] Pode aumentar o aluguel em 50% de uma propriedade!

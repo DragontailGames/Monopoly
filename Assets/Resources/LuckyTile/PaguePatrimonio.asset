@@ -18,4 +18,8 @@ MonoBehaviour:
   percentage: 30
   luckType: 1
   tileIndex: 0
+  tileName: 
   ownerTileEffect: 0
+  vacation: 0
+  jail: 0
+  feedbackText: "Rev\xE9s! [Jogador] tem de pagar 30% de seu patrimonio em impostos!"

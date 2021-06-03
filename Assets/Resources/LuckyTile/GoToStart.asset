@@ -20,3 +20,6 @@ MonoBehaviour:
   tileIndex: 0
   tileName: inicio
   ownerTileEffect: 0
+  vacation: 0
+  jail: 0
+  feedbackText: "Rev\xE9s! [Jogador] deve voltar ao inicio!"

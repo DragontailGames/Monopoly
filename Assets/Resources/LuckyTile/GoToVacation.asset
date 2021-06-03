@@ -21,3 +21,5 @@ MonoBehaviour:
   tileName: ferias
   ownerTileEffect: 0
   vacation: 1
+  jail: 0
+  feedbackText: "Sorte! [Jogador] ganhou uma viagem de f\xE9rias!"

@@ -22,4 +22,5 @@ MonoBehaviour:
   ownerTileEffect: 0
   vacation: 0
   jail: 0
-  feedbackText: 
+  feedbackText: "Sorte! [Jogador] Pode escolher uma propriedade advers\xE1ria para
+    ser devolvida ao banco!"

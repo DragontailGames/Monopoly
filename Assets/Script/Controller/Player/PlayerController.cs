@@ -374,7 +374,7 @@ public class PlayerController : MonoBehaviour
         manager.players.Remove(this);
         canvasController.DeclareBankruptcy();
 
-        MessageManager.Instance.ShowMessage("<u>" + transform.name + "</u> declarou falencia");
+        LogMessagePlayer($"{name} declarou falência e não pode mais jogar!",true);
 
         foreach (var aux in properties)
         {

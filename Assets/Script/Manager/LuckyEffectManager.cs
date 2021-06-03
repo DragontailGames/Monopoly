@@ -59,6 +59,9 @@ public class LuckyEffectManager : MonoBehaviour
                 }
         }
 
+        string msg = tile.feedbackText.Replace("[Jogador]", $"{player.name}");
+        player.LogMessagePlayer(msg, false);
+
         yield return new WaitUntil(() => clicked == true);
     }
 

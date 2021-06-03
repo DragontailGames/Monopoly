@@ -18,3 +18,9 @@ MonoBehaviour:
   percentage: 0
   luckType: 0
   tileIndex: 0
+  tileName: 
+  ownerTileEffect: 0
+  vacation: 0
+  jail: 0
+  feedbackText: "Sorte! [Jogador] Ganhou um sinalizador e agora pode sair do Tri\xE2ngulo
+    das Bermudas"

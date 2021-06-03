@@ -84,7 +84,10 @@ public class PlayerWalletController : MonoBehaviour
         if (ExitingDoubts())
         {
             if (controller.properties.Count > 0)
+            {
                 controller.boardController.SetupMortgageBoard(controller);
+                controller.LogMessagePlayer($"{controller.name} não possui dinheiro e deve hipotecar uma propriedade!",true);
+            }
             else
             {
                 controller.manager.playerDefetead = true;

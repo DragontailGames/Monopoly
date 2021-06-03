@@ -31,23 +31,23 @@ public class MessageManager : MonoBehaviour
 
     Coroutine delayHidden;
 
-    public void ShowMessage(string text, bool hiddenAfterDelay = true)
+    public void ShowMessage(string text)
     {
         if (delayHidden != null)
         {
             StopCoroutine(delayHidden);
+            HiddenText();
         }
         this.GetComponent<Image>().enabled = true;
         this.transform.GetChild(0).gameObject.SetActive(true);
         this.GetComponentInChildren<TextMeshProUGUI>().text = text;
-        if(hiddenAfterDelay)
-            delayHidden = StartCoroutine(DelayHiddenText(text));
+        delayHidden = StartCoroutine(DelayHiddenText(text));
     }
 
     public IEnumerator DelayHiddenText(string text)
     {
         int tSize = text.Split(' ').Length;
-        yield return new WaitForSeconds(tSize * 6);
+        yield return new WaitForSeconds(tSize * 0.5f);
         HiddenText();
     }
 

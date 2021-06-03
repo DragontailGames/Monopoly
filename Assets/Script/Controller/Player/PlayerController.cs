@@ -169,7 +169,7 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator ConfigDice()
     {
-        if (MessageManager.Instance.TextShowing())
+        if (MessageManager.Instance.TextShowing() && !botController)
         {
             yield return new WaitForSeconds(3.0f);
             MessageManager.Instance.HiddenText();

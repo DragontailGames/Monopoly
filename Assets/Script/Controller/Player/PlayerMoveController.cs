@@ -82,7 +82,7 @@ public class PlayerMoveController : MonoBehaviour
 
     }
 
-    public IEnumerator Move(Vector3 targetPos, bool lastMove = false)
+    public IEnumerator Move(Vector3 targetPos, bool lastMove)
     {
         if(playerController.player != null && (playerController.botController || playerController.player.IsLocal))
         {
@@ -124,7 +124,7 @@ public class PlayerMoveController : MonoBehaviour
         if (amount == 2)
         {
             playerController.photonView.RPC("EnableModel_CMD", RpcTarget.All);
-            yield return Move(GetRepositionInTile(index,amount));
+            yield return Move(GetRepositionInTile(index,amount), true);
         }
         else if(amount > 2)
         {

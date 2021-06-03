@@ -163,17 +163,13 @@ public class PlayerController : MonoBehaviour
 
     public int ThrowDice()
     {
-        return 6;
-        //return Random.Range(1, 7);
+        //return 6;
+        return Random.Range(1, 7);
     }
 
     public IEnumerator ConfigDice()
     {
-        if (MessageManager.Instance.TextShowing() && !botController)
-        {
-            yield return new WaitForSeconds(3.0f);
-            MessageManager.Instance.HiddenText();
-        }
+       
         yield return new WaitForSeconds(0.2f);
 
         if (stayAway)
@@ -191,8 +187,8 @@ public class PlayerController : MonoBehaviour
             this.btnThrowDice.onClick.RemoveAllListeners();
             this.btnThrowDice.onClick.AddListener(() =>
             {
-                int dice1 = dice1special; //ThrowDice();//dice1special;
-                int dice2 = dice2special; //ThrowDice();//dice2special;
+                int dice1 = ThrowDice();//dice1special;
+                int dice2 = ThrowDice();//dice2special;
 
                 photonView.RPC("RollDice_CMD", RpcTarget.All, dice1, dice2);
                 this.moveController.StartMovePlayer(dice1, dice2);
@@ -206,8 +202,8 @@ public class PlayerController : MonoBehaviour
             //BOT
             StartCoroutine(botController.ExecuteAction(() =>
             {
-                int dice1 = dice1special; //ThrowDice();//dice1special;
-                int dice2 = dice2special; //ThrowDice();//dice2special;
+                int dice1 = ThrowDice();//dice1special;
+                int dice2 = ThrowDice();//dice2special;
 
                 photonView.RPC("RollDice_CMD", RpcTarget.All, dice1, dice2);
                 this.moveController.StartMovePlayer(dice1, dice2);

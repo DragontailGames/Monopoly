@@ -92,6 +92,13 @@ public class GameManager : MonoBehaviour
             yield break;
         }
 
+        if (MessageManager.Instance.TextShowing())
+        {
+            yield return new WaitForSeconds(3.0f);
+            if (!player.botController)
+            { MessageManager.Instance.HiddenText(); }
+        }
+
         if (players.Count == 1)
         {
             players[0].WinGame();

@@ -86,7 +86,7 @@ public class PlayerMoveController : MonoBehaviour
     {
         if(playerController.player != null && (playerController.botController || playerController.player.IsLocal))
         {
-            playerController.photonView.RPC("Move_CMD", RpcTarget.Others, targetPos);
+            playerController.photonView.RPC("Move_CMD", RpcTarget.Others, targetPos, lastMove);
         }
         if(lastMove == false)
             playerController.Animate_Walk();
@@ -110,14 +110,18 @@ public class PlayerMoveController : MonoBehaviour
     }
 
     [PunRPC]
-    public void Move_CMD(Vector3 targetPos)
+    public void Move_CMD(Vector3 targetPos, bool lastMove)
     {
-        StartCoroutine(Move(targetPos));
+        StartCoroutine(Move(targetPos, lastMove));
     }
 
     public IEnumerator RepositionInTile(int index, int amount)
     {
-        if(amount == 2)
+        if (playerController.player != null && (playerController.botController || playerController.player.IsLocal))
+        {
+            playerController.photonView.RPC("RepositionInTile_CMD", RpcTarget.Others, index, amount);
+        }
+        if (amount == 2)
         {
             playerController.photonView.RPC("EnableModel_CMD", RpcTarget.All);
             yield return Move(GetRepositionInTile(index,amount));
@@ -130,6 +134,12 @@ public class PlayerMoveController : MonoBehaviour
         {
             yield break;
         }
+    }
+
+    [PunRPC]
+    public void RepositionInTile_CMD(int index, int amount)
+    {
+        StartCoroutine(RepositionInTile(index, amount));
     }
 
     public Vector3 GetRepositionInTile(int index, int amount)

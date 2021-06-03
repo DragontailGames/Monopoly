@@ -60,18 +60,18 @@ public class TileController_Country : TileController_Buyable
         {
             if (owner != null)
             {
-                ChangeTileColor(aux.gameObject,owner, owner.mainColor);
+                ChangeTileColor(aux.gameObject, owner.mainColor);
                 transform.Find("ExtraMaterials").gameObject.SetActive(false);
             }
             else
             {
-                ChangeTileColor(aux.gameObject, owner, baseColor);
+                ChangeTileColor(aux.gameObject, baseColor);
                 transform.Find("ExtraMaterials").gameObject.SetActive(true);
             }
         }
     }
 
-    public void ChangeTileColor(GameObject obj, PlayerController owner, Color color)
+    public void ChangeTileColor(GameObject obj, Color color)
     {
         var mtList = obj.GetComponent<MeshRenderer>().sharedMaterials;
         List<Material> newList = new List<Material>();

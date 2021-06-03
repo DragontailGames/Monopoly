@@ -27,13 +27,17 @@ public class BuyableHouseMenuController : MonoBehaviour
             {
                 int level = startValue + 1;
 
-                int fullPrice = (int)MathDt.GetContructionPrice(tileBuyable.price, level, tile.level);
+                if (level < 4)
+                {
+                    int fullPrice = (int)MathDt.GetContructionPrice(tileBuyable.price, level, tile.level);
+
+                    player.walletController.DebitValue(fullPrice);
+                    tile.BuyTile(player, $"{BabelDt.TileLevelName(level)} em: {tile.tile.nameTile}");
+                    player.firstBuy = true;
+                    tile.UpgradeLevel(level, player);
+                }
 
                 clicked = true;
-                player.walletController.DebitValue(fullPrice);
-                tile.BuyTile(player, $"{BabelDt.TileLevelName(level)} em: {tile.tile.nameTile}");
-                player.firstBuy = true;
-                tile.UpgradeLevel(level, player);
 
             }, null, () =>
             {

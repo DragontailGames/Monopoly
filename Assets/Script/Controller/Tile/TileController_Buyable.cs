@@ -9,7 +9,7 @@ public class TileController_Buyable : TileController
 
     public CanvasManager canvas;
 
-    public PlayerController Owner { get => this.owner; set { this.owner = value; OnBuy(this.owner); } }
+    public PlayerController Owner { get => this.owner; set => this.owner = value; }
 
     public override IEnumerator OnPlayerStop(PlayerController player)
     {

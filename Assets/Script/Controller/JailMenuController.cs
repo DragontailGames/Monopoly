@@ -27,7 +27,7 @@ public class JailMenuController : MonoBehaviour
 
         if (!playerController.botController)
         {
-            this.gameObject.SetActive(true);
+            this.transform.GetChild(0).gameObject.SetActive(true);
             LayoutRebuilder.ForceRebuildLayoutImmediate(this.GetComponent<RectTransform>());
         }
 
@@ -43,7 +43,7 @@ public class JailMenuController : MonoBehaviour
             playerController.walletController.DebitValue(MathDt.jailPrice);
             playerController.LogMessagePlayer($"{playerController.name} pagou por um resgate urgente para sair da prisão!", false);
             playerController.inJail = false;
-            this.gameObject.SetActive(false);
+            this.transform.GetChild(0).gameObject.SetActive(false);
         });
 
         btnTryDice.onClick.RemoveAllListeners();
@@ -68,7 +68,7 @@ public class JailMenuController : MonoBehaviour
 
                 clicked = true;
                 this.transform.GetChild(0).gameObject.SetActive(true);
-                this.gameObject.SetActive(false);
+                this.transform.GetChild(0).gameObject.SetActive(false);
             };
 
             StartCoroutine(playerController.manager.RollDice(dice1, dice2, playerController.playerNumber, afterEvent));
@@ -130,7 +130,7 @@ public class JailMenuController : MonoBehaviour
             playerController.inJail = false;
             playerController.freeBoat = false;
             playerController.LogMessagePlayer($"{playerController.name} utilizou um sinalizador para sair da prisão!", false);
-            this.gameObject.SetActive(false);
+            this.transform.GetChild(0).gameObject.SetActive(false);
         });
     }
 }

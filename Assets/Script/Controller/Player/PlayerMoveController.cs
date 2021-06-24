@@ -88,7 +88,7 @@ public class PlayerMoveController : MonoBehaviour
         {
             if (reposition)
             {
-                playerController.photonView.RPC("Move_CMD", RpcTarget.All, targetPos, lastMove, reposition);
+                playerController.photonView.RPC("Move_CMD", RpcTarget.All, targetPos, lastMove, false);
             }
             else
             {

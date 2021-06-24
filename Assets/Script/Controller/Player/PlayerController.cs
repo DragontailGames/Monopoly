@@ -288,7 +288,7 @@ public class PlayerController : MonoBehaviour
 
         moveController.position = currentTile.index;
 
-        LogMessagePlayer($"{name} Está de férias e viajou para {tile.tile.nameTile}",false);
+        LogMessagePlayer($"{this.transform.name} Está de férias e viajou para {tile.tile.nameTile}",false);
 
         if (moveController.position > tile.index)
         {
@@ -325,6 +325,10 @@ public class PlayerController : MonoBehaviour
         Vector3 newPos = boardController.jail.transform.position;
         newPos.y = this.transform.position.y;
         this.transform.position = newPos;
+
+        Vector3 rot = this.transform.rotation.eulerAngles;
+        rot.y = 270;
+        this.transform.rotation = Quaternion.Euler(rot);
 
         MessageManager.Instance.ShowMessage("<u>"+this.transform.name + "</u> se perdeu no triangulo das bermudas");
 

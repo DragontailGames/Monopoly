@@ -121,12 +121,21 @@ public class PlayerWalletController : MonoBehaviour
     }
 
     [PunRPC]
-    public void BuyTile_CMD(int index, string txt)
+    public void BuyTile_CMD(int index, string txt, bool hostile)
     {
         TileController_Buyable tile = controller.manager.board.tileControllers.Find(n => n.index == index) as TileController_Buyable;
 
         if ((controller.player != null && !controller.player.IsLocal) || controller.botController)
-            MessageManager.Instance.ShowMessage($"{controller.name} comprou {txt}");
+        {
+            if (hostile)
+            {
+                MessageManager.Instance.ShowMessage($"{txt}");
+            }
+            else
+            {
+                MessageManager.Instance.ShowMessage($"{controller.name} comprou {txt}");
+            }
+        }
 
         tile.Owner = controller;
         controller.properties.Add(tile);

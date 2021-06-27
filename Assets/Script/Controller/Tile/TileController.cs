@@ -98,6 +98,11 @@ public class TileController : MonoBehaviour
 
     public void SetupOffTiles()
     {
+        if (boardController.manager.players[boardController.manager.currentPlayer].botController == null)
+        {
+            return;
+        }
+
         Material[] mtList = this.transform.Find("Base").GetComponent<MeshRenderer>().sharedMaterials;
 
         List <Material> newList = new List<Material>();
@@ -121,6 +126,11 @@ public class TileController : MonoBehaviour
 
     public void ResetTile()
     {
+        if (boardController.manager.players[boardController.manager.currentPlayer].botController == null)
+        {
+            return;
+        }
+
         if (!colorChanged)
             return;
 

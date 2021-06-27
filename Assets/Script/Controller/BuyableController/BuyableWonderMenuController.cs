@@ -17,6 +17,9 @@ public class BuyableWonderMenuController : MonoBehaviour
 
         clicked = false;
 
+        var backgroundHeader = this.transform.Find("BackgroundHeader");
+        backgroundHeader.GetChild(0).GetComponent<TextMeshProUGUI>().text = tile.tile.nameTile;
+
         var tileWonder = tile.tile as TileBuyable_Wonder;
 
         var content = wonderPanel.transform.GetChild(0);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CanvasManager : MonoBehaviour
 {
@@ -14,4 +15,11 @@ public class CanvasManager : MonoBehaviour
     public JailMenuController jailMenuController;
 
     public GameObject[] playerCanvas;
+
+    public GameObject endOfGame;
+
+    public void GotoMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 }

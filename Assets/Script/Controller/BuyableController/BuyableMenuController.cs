@@ -36,11 +36,11 @@ public class BuyableMenuController : MonoBehaviour
         else
         {
 
-            if (tile.Owner == player || tile.Owner == null)
+            if (tile.Owner == null)
             {
                 yield return buyableWonderMenuController.SetupWonderTile(tile as TileController_Wonders, player);
             }
-            else
+            else if (tile.Owner != player)
             {
                 yield return buyableRentWonderMenuController.SetupRentWonderTile(tile as TileController_Wonders, player);
             }

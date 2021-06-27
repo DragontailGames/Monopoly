@@ -318,8 +318,8 @@ MonoBehaviour:
   playerDg:
     model: {fileID: 0}
     icon: {fileID: 0}
-  dice1special: 5
-  dice2special: 6
+  dice1special: 0
+  dice2special: 0
 --- !u!114 &6836158312323646948
 MonoBehaviour:
   m_ObjectHideFlags: 0

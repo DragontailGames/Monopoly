@@ -63,9 +63,16 @@ public class BoardController : MonoBehaviour
                     if (aux.GetType() == typeof(TileController_Country))
                     {
                         var b = aux as TileController_Buyable;
-                        if(b.Owner == null && player.currentTile.index < aux.index)
+                        if(b.Owner == null)
                         {
-                            probability = 1;
+                            if (player.currentTile.index > aux.index)
+                            {
+                                probability = 1;
+                            }
+                            else
+                            {
+                                probability = 2;
+                            }
                         }
                         else if(b.Owner == player)
                         {
@@ -147,9 +154,12 @@ public class BoardController : MonoBehaviour
 
     public void ResetBoard()
     {
-        foreach (var aux in tileControllers)
+        if (manager.players[manager.currentPlayer].botController != null)
         {
-            aux.ResetTile();
+            foreach (var aux in tileControllers)
+            {
+                aux.ResetTile();
+            }
         }
     }
 

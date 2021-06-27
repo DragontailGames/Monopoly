@@ -8,11 +8,13 @@ public class TileController_Country : TileController_Buyable
 
     private Transform buildingParent;
 
-    public int multiplier = 100;
+    private int multiplier = 100;
 
     public int roundsWithMultiplier = 0;
 
     private GameObject bonus, down;
+
+    public int Multiplier { get => this.multiplier; }
 
     public void Start()
     {
@@ -48,6 +50,10 @@ public class TileController_Country : TileController_Buyable
             newFlag.transform.localScale = flag.transform.localScale;
 
             Destroy(flag.gameObject);
+        }
+        else
+        {
+            transform.Find("ExtraMaterials").gameObject.SetActive(true);
         }
     }
 
@@ -112,5 +118,18 @@ public class TileController_Country : TileController_Buyable
         bonus.SetActive(multiplier > 100);
 
         down.SetActive(multiplier < 100);
+    }
+
+    public void SetupMultiplier(int multiplier, PlayerController player)
+    {
+        if(player != null)
+        {
+            player.SetupTileMultipler(this.index, multiplier);
+        }
+        else
+        {
+            this.multiplier = multiplier;
+        }
+
     }
 }

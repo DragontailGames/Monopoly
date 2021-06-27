@@ -20,6 +20,9 @@ public class BuyableHouseMenuController : MonoBehaviour
         var tileBuyable = tile.tile as TileBuyable_Country;
         int startValue = tile.level;
 
+        var backgroundHeader = this.transform.Find("BackgroundHeader");
+        backgroundHeader.GetChild(0).GetComponent<TextMeshProUGUI>().text = tile.tile.nameTile;
+
         if (player.botController)
         {
             //BOT
@@ -63,13 +66,13 @@ public class BuyableHouseMenuController : MonoBehaviour
                 tile.UpgradeLevel(level, player);
             });
         }
-        else
+        else if(tile.level<3)
         {
             this.gameObject.SetActive(true);
 
             clicked = false;
 
-            if (tile.level < 4 && tile.Owner != null && tile.level > 0)
+            if (tile.level < 3 && tile.Owner != null && tile.level > 0)
             {
                 startValue++;
             }
@@ -117,6 +120,10 @@ public class BuyableHouseMenuController : MonoBehaviour
                 else
                     buyButton.interactable = true;
             }
+        }
+        else
+        {
+            clicked = true;
         }
         yield return new WaitUntil(() => clicked == true);
     }

@@ -26,7 +26,7 @@ public class TileController_Lucky : TileController
             tileLucky.Add(aux as TileLucky);
         }
 
-        //return tileLucky[forceLucky];
-        return tileLucky[Random.Range(0, tileLucky.Count)];
+        return tileLucky[forceLucky];
+        //return tileLucky[Random.Range(0, tileLucky.Count)];
     }
 }

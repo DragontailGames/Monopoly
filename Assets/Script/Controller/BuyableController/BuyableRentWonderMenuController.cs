@@ -29,6 +29,10 @@ public class BuyableRentWonderMenuController : MonoBehaviour
 
         Button rentButton = payRent.GetComponentInChildren<Button>();
 
+        var backgroundHeader = this.transform.Find("BackgroundHeader");
+        backgroundHeader.GetComponent<Image>().color = tile.Owner.mainColor;
+        backgroundHeader.GetChild(0).GetComponent<TextMeshProUGUI>().text = tile.tile.nameTile;
+
         rentButton.onClick.RemoveAllListeners();
         rentButton.onClick.AddListener(() =>
         {

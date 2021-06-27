@@ -24,10 +24,14 @@ public class BuyableRentMenuController : MonoBehaviour
 
         var tileBuyable = tile.tile as TileBuyable_Country;
 
-        int rentPrice = (int)MathDt.GetRentPrice(tileBuyable.price, tile.level) * (tile.multiplier/100);
+        int rentPrice = (int)MathDt.GetRentPrice(tileBuyable.price, tile.level) * (tile.Multiplier/100);
 
         Transform payRent = rentPanel.transform.GetChild(0).Find("Pay");
         payRent.GetComponentInChildren<TextMeshProUGUI>().text = "Pagar aluguel de $" + MathDt.ConfigureMoney(rentPrice);
+
+        var backgroundHeader = this.transform.Find("BackgroundHeader");
+        backgroundHeader.GetComponent<Image>().color = tile.Owner.mainColor;
+        backgroundHeader.GetChild(0).GetComponent<TextMeshProUGUI>().text = tile.tile.nameTile;
 
         Button rentButton = payRent.GetComponentInChildren<Button>();
 

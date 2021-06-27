@@ -87,6 +87,8 @@ public class GameManager : MonoBehaviour
     {
         PlayerController player = players[currentPlayer];
 
+        Debug.Log("Start round " + player.transform.name);
+
         if (player.player == null || (!player.player.IsLocal && !player.botController))
         {
             yield break;

@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour
 
     public List<TileController_Buyable> properties = new List<TileController_Buyable>();
 
-    [HideInInspector]
     public int wondersInControl;
 
     public bool canTravel = false;
@@ -187,8 +186,8 @@ public class PlayerController : MonoBehaviour
             this.btnThrowDice.onClick.RemoveAllListeners();
             this.btnThrowDice.onClick.AddListener(() =>
             {
-                int dice1 = ThrowDice();//dice1special;
-                int dice2 = ThrowDice();//dice2special;
+                int dice1 = dice1special == 0 ? ThrowDice() : dice1special;
+                int dice2 = dice2special == 0 ? ThrowDice() : dice2special;
 
                 photonView.RPC("RollDice_CMD", RpcTarget.All, dice1, dice2);
                 this.moveController.StartMovePlayer(dice1, dice2);
@@ -202,8 +201,8 @@ public class PlayerController : MonoBehaviour
             //BOT
             StartCoroutine(botController.ExecuteAction(() =>
             {
-                int dice1 = ThrowDice();//dice1special;
-                int dice2 = ThrowDice();//dice2special;
+                int dice1 = dice1special == 0 ? ThrowDice() : dice1special;
+                int dice2 = dice2special == 0 ? ThrowDice() : dice2special;
 
                 photonView.RPC("RollDice_CMD", RpcTarget.All, dice1, dice2);
                 this.moveController.StartMovePlayer(dice1, dice2);
@@ -298,7 +297,9 @@ public class PlayerController : MonoBehaviour
         {
             value = tile.index - moveController.position;
         }
-        boardController.ResetBoard();
+
+        if(!botController)
+            boardController.ResetBoard();
 
         StartCoroutine(manager.OnMovePlayer(moveController, moveController.MovePlayer(value), false));
     }
@@ -371,15 +372,24 @@ public class PlayerController : MonoBehaviour
 
     public void DeclareBankruptcy()
     {
+        photonView.RPC("DeclareBankruptcy_CMD", RpcTarget.All);
+        LogMessagePlayer($"{name} declarou falência e não pode mais jogar!",true);
+    }
+
+    [PunRPC]
+    public void DeclareBankruptcy_CMD()
+    {
         manager.players.Remove(this);
         canvasController.DeclareBankruptcy();
-
-        LogMessagePlayer($"{name} declarou falência e não pode mais jogar!",true);
 
         foreach (var aux in properties)
         {
             aux.Owner = null;
         }
+
+        manager.canvasManager.endOfGame.SetActive(true);
+
+        Destroy(this.gameObject, 0.3f);
     }
 
     public void Animate_Walk()
@@ -474,6 +484,12 @@ public class PlayerController : MonoBehaviour
             if ((this.player != null && !this.player.IsLocal) || this.botController)
                 MessageManager.Instance.ShowMessage($"{message}");
         }
+    }
+
+    [PunRPC]
+    public void SetupTileMultipler(int index, int multiplier)
+    {
+        manager.board.tileControllers.Find(n => n.index == index).GetComponent<TileController_Country>().SetupMultiplier(multiplier, null);
     }
 
 }

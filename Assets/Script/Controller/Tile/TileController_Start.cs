@@ -17,6 +17,8 @@ public class TileController_Start : TileController
 
             StopAllCoroutines();
             manager.ResetTransparentMaterial();
+            StartCoroutine(manager.StartRound());
+            //player.photonView.RPC("NextPlayer_CMD", Photon.Pun.RpcTarget.All);
             yield break;
         }
 

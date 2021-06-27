@@ -107,7 +107,7 @@ public static class MathDt
 
     public static int GetWonderRentPrice(int wonders)
     {
-        return 50000 * wonders;
+        return 50000 * Mathf.Clamp(wonders,1,6);
     }
 
     internal static int GetMortgagePrice(TileController_Buyable btile)

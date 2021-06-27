@@ -124,7 +124,8 @@ public class LuckyEffectManager : MonoBehaviour
             {
                 TileController_Country countryTile = (TileController_Country)tile;
                 countryTile.roundsWithMultiplier = 3;
-                countryTile.multiplier = tileLucky.percentage;
+
+                countryTile.SetupMultiplier(tileLucky.percentage, countryTile.Owner);
             }
         }
 
@@ -137,9 +138,9 @@ public class LuckyEffectManager : MonoBehaviour
         if (tile)
         {
             TileController_Country countryTile = (TileController_Country)tile;
+            countryTile.SetupMultiplier(100, countryTile.Owner);
             countryTile.Owner = null;
             countryTile.UpgradeLevel(0, playerController);
-            countryTile.multiplier = 100;
             countryTile.roundsWithMultiplier = 0;
         }
 

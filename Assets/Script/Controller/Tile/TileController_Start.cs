@@ -13,6 +13,10 @@ public class TileController_Start : TileController
         if (!player.firstBuy)
         {
             var manager = player.manager;
+            if(player.playerNumber==manager.players.Count)
+            {
+                manager.NextPlayer();
+            }
             player.DeclareBankruptcy();
 
             StopAllCoroutines();

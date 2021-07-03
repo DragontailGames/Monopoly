@@ -379,6 +379,11 @@ public class PlayerController : MonoBehaviour
     [PunRPC]
     public void DeclareBankruptcy_CMD()
     {
+        if (!botController || player.IsLocal)
+        {
+            manager.canvasManager.endOfGame.SetActive(true);
+        }
+
         manager.players.Remove(this);
         canvasController.DeclareBankruptcy();
 
@@ -387,9 +392,7 @@ public class PlayerController : MonoBehaviour
             aux.Owner = null;
         }
 
-        manager.canvasManager.endOfGame.SetActive(true);
-
-        Destroy(this.gameObject, 0.3f);
+        Destroy(this.gameObject, 0.2f);
     }
 
     public void Animate_Walk()

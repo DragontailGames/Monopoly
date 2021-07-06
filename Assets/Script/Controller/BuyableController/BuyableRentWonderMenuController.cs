@@ -57,6 +57,9 @@ public class BuyableRentWonderMenuController : MonoBehaviour
             clicked = true;
             player.walletController.DebitValue(hostilePrice);
             tile.Owner.walletController.CreditValue(MathDt.wonderPrice);
+
+            tile.BuyTile(player, $"{player.name} realizou uma aquisição hostil em: {tile.tile.nameTile}. Sendo {MathDt.wonderPrice} para {tile.Owner.name} e {hostilePrice} em impostos. e agora possui {player.wondersInControl + 1} maravilhas!", true);
+
             tile.Owner = player;
 
             this.gameObject.SetActive(false);

@@ -125,7 +125,7 @@ public class PlayerWalletController : MonoBehaviour
     {
         TileController_Buyable tile = controller.manager.board.tileControllers.Find(n => n.index == index) as TileController_Buyable;
 
-        if ((controller.player != null && !controller.player.IsLocal) || controller.botController)
+        if (((controller.player != null && !controller.player.IsLocal) || controller.botController) && txt != "")
         {
             if (hostile)
             {

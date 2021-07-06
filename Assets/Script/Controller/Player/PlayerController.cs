@@ -373,22 +373,22 @@ public class PlayerController : MonoBehaviour
     public void DeclareBankruptcy()
     {
         photonView.RPC("DeclareBankruptcy_CMD", RpcTarget.All);
+        if (!botController)
+        {
+            manager.canvasManager.endOfGame.SetActive(true);
+        }
         LogMessagePlayer($"{name} declarou falência e não pode mais jogar!",true);
     }
 
     [PunRPC]
     public void DeclareBankruptcy_CMD()
     {
-        if (!botController || player.IsLocal)
-        {
-            manager.canvasManager.endOfGame.SetActive(true);
-        }
-
         manager.players.Remove(this);
         canvasController.DeclareBankruptcy();
 
         foreach (var aux in properties)
         {
+            aux.OnBuy(null);
             aux.Owner = null;
         }
 

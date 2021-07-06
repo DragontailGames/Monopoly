@@ -29,6 +29,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         get { return PhotonNetwork.IsMasterClient; }
     }
 
+    public void Leave()
+    {
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.LeaveLobby();
+        PhotonNetwork.Disconnect();
+    }
+
     void Start()
     {
         CreatePlayer(startTile.position);
@@ -76,6 +83,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         var p = manager.players.Find(n => n.player == otherPlayer);
-        p.DeclareBankruptcy();
+        p.LogMessagePlayer($"{p.name} declarou falência e não pode mais jogar!", true);
+
+        p.photonView.RPC("DeclareBankruptcy_CMD", RpcTarget.All);
     }
 }

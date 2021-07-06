@@ -24,13 +24,18 @@ public class TileController_Country : TileController_Buyable
         down = Instantiate(boardController.down, this.gameObject.transform);
     }
 
-    public void UpgradeLevel(int level, PlayerController player)
+    public void UpgradeLevel(int level, PlayerController player, bool hasOwner = true)
     {
-        player.photonView.RPC("UpgradeLevel_CMD", Photon.Pun.RpcTarget.All, level, this.index);
+        player.photonView.RPC("UpgradeLevel_CMD", Photon.Pun.RpcTarget.All, level, this.index, hasOwner);
     }
 
-    public void SetupBuilding()
+    public void SetupBuilding(bool hasOwner)
     {
+        if(!hasOwner)
+        {
+            Owner = null;
+        }
+
         foreach(Transform aux in buildingParent)
         {
             aux.gameObject.SetActive(false);

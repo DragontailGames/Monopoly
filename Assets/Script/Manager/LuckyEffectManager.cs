@@ -140,7 +140,7 @@ public class LuckyEffectManager : MonoBehaviour
             TileController_Country countryTile = (TileController_Country)tile;
             countryTile.SetupMultiplier(100, countryTile.Owner);
             countryTile.Owner = null;
-            countryTile.UpgradeLevel(0, playerController);
+            countryTile.UpgradeLevel(0, playerController, false);
             countryTile.roundsWithMultiplier = 0;
         }
 

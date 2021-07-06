@@ -145,12 +145,12 @@ public class PlayerWalletController : MonoBehaviour
     }
 
     [PunRPC]
-    public void UpgradeLevel_CMD(int level, int index)
+    public void UpgradeLevel_CMD(int level, int index, bool hasOwner)
     {
         TileController_Country tile = controller.manager.board.tileControllers.Find(n => n.index == index) as TileController_Country;
 
         tile.level = level;
 
-        tile.SetupBuilding();
+        tile.SetupBuilding(hasOwner);
     }
 }

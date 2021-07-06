@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
             yield return canvasManager.jailMenuController.ShowCanvasPlayer(player);
             if (player.inJail)
             {
-                player.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
+                player.photonView.RPC("NextPlayer_CMD", RpcTarget.All, true);
             }
             else
             {
@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
 
         if (!doubleDice && !playerDefetead) 
         {
-            player.playerController.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
+            player.playerController.photonView.RPC("NextPlayer_CMD", RpcTarget.All, true);
         }
         else if(doubleDice)
         {

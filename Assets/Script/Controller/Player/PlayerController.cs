@@ -174,7 +174,7 @@ public class PlayerController : MonoBehaviour
         if (stayAway)
         {
             stayAway = false;
-            this.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
+            this.photonView.RPC("NextPlayer_CMD", RpcTarget.All, true);
             yield break;
         }
 

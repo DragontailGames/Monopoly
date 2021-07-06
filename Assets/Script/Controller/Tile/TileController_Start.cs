@@ -13,16 +13,11 @@ public class TileController_Start : TileController
         if (!player.firstBuy)
         {
             var manager = player.manager;
-            if(player.playerNumber==manager.players.Count)
-            {
-                manager.NextPlayer();
-            }
-            player.DeclareBankruptcy();
 
             StopAllCoroutines();
             manager.ResetTransparentMaterial();
-            StartCoroutine(manager.StartRound());
-            //player.photonView.RPC("NextPlayer_CMD", Photon.Pun.RpcTarget.All);
+            player.DeclareBankruptcy();
+            player.photonView.RPC("NextPlayer_CMD", Photon.Pun.RpcTarget.All, player.playerNumber == manager.players.Count);
             yield break;
         }
 

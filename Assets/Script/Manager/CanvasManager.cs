@@ -21,11 +21,6 @@ public class CanvasManager : MonoBehaviour
     public void GotoMenu()
     {
         gameManager.networkManager.Leave();
-        Invoke("LoadSceneMenu", 1.0f);
-    }
-
-    private void LoadSceneMenu()
-    {
         SceneManager.LoadScene(0);
     }
 }

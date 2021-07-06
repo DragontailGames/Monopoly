@@ -83,8 +83,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         var p = manager.players.Find(n => n.player == otherPlayer);
-        p.LogMessagePlayer($"{p.name} declarou falência e não pode mais jogar!", true);
 
-        p.photonView.RPC("DeclareBankruptcy_CMD", RpcTarget.All);
+        p?.photonView.RPC("DeclareBankruptcy_CMD", RpcTarget.All);
     }
 }

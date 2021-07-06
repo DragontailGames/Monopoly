@@ -32,7 +32,7 @@ public class PlayerMoveController : MonoBehaviour
                 playerController.doubleRow = 0;
                 playerController.GotoJail();
 
-                playerController.photonView.RPC("NextPlayer_CMD", RpcTarget.All);
+                playerController.photonView.RPC("NextPlayer_CMD", RpcTarget.All, true);
                 return;
             }
         }
@@ -234,9 +234,10 @@ public class PlayerMoveController : MonoBehaviour
     }
 
     [PunRPC]
-    public void NextPlayer_CMD() 
+    public void NextPlayer_CMD(bool trueNext) 
     {
-        playerController.manager.NextPlayer();
+        if(trueNext)
+            playerController.manager.NextPlayer();
         StartCoroutine(playerController.manager.StartRound());
     }
 

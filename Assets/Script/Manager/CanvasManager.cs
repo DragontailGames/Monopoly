@@ -21,11 +21,18 @@ public class CanvasManager : MonoBehaviour
     public void GotoMenu()
     {
         gameManager.networkManager.Leave();
-        Invoke("LoadSceneMenu", 1.0f);
+        StartCoroutine(LoadSceneMenu());
     }
 
-    private void LoadSceneMenu()
+    private IEnumerator LoadSceneMenu()
     {
+        yield return new WaitForSeconds(0.5f);
+
+        var objects = FindObjectsOfType<GameObject>();
+
+        Destroy(Manager.instance.gameObject);
+
+        yield return new WaitForSeconds(1.0f);
         SceneManager.LoadScene(0);
     }
 }

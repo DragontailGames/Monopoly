@@ -168,7 +168,7 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator ConfigDice()
     {
-       
+        Debug.Log("Config dice marotao");
         yield return new WaitForSeconds(0.2f);
 
         if (stayAway)

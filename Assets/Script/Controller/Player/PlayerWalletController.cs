@@ -153,4 +153,12 @@ public class PlayerWalletController : MonoBehaviour
 
         tile.SetupBuilding(hasOwner);
     }
+
+    [PunRPC]
+    public void ResetWonder_CMD(int index)
+    {
+        TileController_Wonders tile = controller.manager.board.tileControllers.Find(n => n.index == index) as TileController_Wonders;
+
+        tile.Owner = null;
+    }
 }

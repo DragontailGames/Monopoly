@@ -87,18 +87,15 @@ public class GameManager : MonoBehaviour
     {
         PlayerController player = players[currentPlayer];
 
-        Debug.Log("Start round " + player.transform.name);
-
         if (player.player == null || (!player.player.IsLocal && !player.botController))
         {
             yield break;
         }
 
-        if (MessageManager.Instance.TextShowing())
+        if (MessageManager.Instance.TextShowing() && !player.botController)
         {
             yield return new WaitForSeconds(3.0f);
-            if (!player.botController)
-            { MessageManager.Instance.HiddenText(); }
+            MessageManager.Instance.HiddenText();
         }
 
         if (players.Count == 1)

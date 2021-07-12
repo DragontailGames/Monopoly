@@ -39,6 +39,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         else
         {
             Debug.Log("We are connected already.");
+            PhotonNetwork.JoinLobby(lobby);
         }
     }
 

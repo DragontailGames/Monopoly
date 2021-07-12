@@ -96,9 +96,11 @@ public class TileController : MonoBehaviour
         }
     }
 
+    public List<Color> originalColor;
+
     public void SetupOffTiles()
     {
-        if (boardController.manager.players[boardController.manager.currentPlayer].botController == null)
+        if (boardController.manager.players[boardController.manager.currentPlayer].botController)
         {
             return;
         }
@@ -106,11 +108,14 @@ public class TileController : MonoBehaviour
         Material[] mtList = this.transform.Find("Base").GetComponent<MeshRenderer>().sharedMaterials;
 
         List <Material> newList = new List<Material>();
+        originalColor = new List<Color>();
 
         foreach (var auxMaterial in mtList)
         {
             var mat = new Material(auxMaterial);
             var color = mat.color;
+
+            originalColor.Add(mat.color);
 
             color = color / 3;
             color.a = 0.1f;
@@ -126,28 +131,42 @@ public class TileController : MonoBehaviour
 
     public void ResetTile()
     {
-        if (boardController.manager.players[boardController.manager.currentPlayer].botController == null)
+        /*if (boardController.manager.players[boardController.manager.currentPlayer].botController)
         {
             return;
         }
 
         if (!colorChanged)
-            return;
+            return;*/
 
-        Material[] mtList = this.transform.Find("Base").GetComponent<MeshRenderer>().sharedMaterials;
-        List<Material> newList = new List<Material>();
-
-        foreach (var auxMaterial in mtList)
+        try
         {
-            var mat = new Material(auxMaterial);
-            var color = mat.color;
-            color = color * 3;
-            color.a = 1.0f;
-            mat.color = color;
-            newList.Add(mat);
-        }
+            if (originalColor.Count > 0)
+            {
+                Material[] mtList = this.transform.Find("Base").GetComponent<MeshRenderer>().sharedMaterials;
+                List<Material> newList = new List<Material>();
 
-        this.transform.Find("Base").GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
+                Debug.Log("t1 " + mtList.Length);
+
+                for (int i = 0; i < mtList.Length; i++)
+                {
+                    Debug.Log("t2 " + i);
+                    Material auxMaterial = mtList[i];
+                    Debug.Log("t3 " + i);
+                    var mat = new Material(auxMaterial);
+                    Debug.Log("t4 " + i);
+                    mat.color = originalColor[i];
+                    Debug.Log("t5 " + i);
+                    newList.Add(mat);
+                }
+
+                this.transform.Find("Base").GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
+            }
+        }
+        catch(Exception e)
+        {
+            Debug.Log("Deu algum erro estranho mais depois eu resolvo (" + e + ")");
+        }
     }
 
     public Vector3 GetPosition()

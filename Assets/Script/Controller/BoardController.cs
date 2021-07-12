@@ -142,24 +142,23 @@ public class BoardController : MonoBehaviour
 
         if(player.botController != null && tiles.Count > 0)
         {
-            StartCoroutine(player.botController.ExecuteAction(() => { action.Invoke(tiles[UnityEngine.Random.Range(0, tiles.Count)]) ; }));
+            StartCoroutine(player.botController.ExecuteAction(() => { action.Invoke(tiles[UnityEngine.Random.Range(0, tiles.Count)]) ; ResetBoard(); }));
         }
 
         if(tiles.Count<=0)
         {
+            Debug.Log("Reseting");
             MessageManager.Instance.ShowMessage("Nenhuma propriedade para aplicar esse efeito");
             action.Invoke(null);
+            ResetBoard();
         }
     }
 
     public void ResetBoard()
     {
-        if (manager.players[manager.currentPlayer].botController != null)
+        foreach (var aux in tileControllers)
         {
-            foreach (var aux in tileControllers)
-            {
-                aux.ResetTile();
-            }
+            aux?.ResetTile();
         }
     }
 

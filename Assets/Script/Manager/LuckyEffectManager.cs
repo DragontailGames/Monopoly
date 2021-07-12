@@ -95,25 +95,18 @@ public class LuckyEffectManager : MonoBehaviour
 
     private void ChooseProperty(PlayerController player)
     {
-        if (player.properties.Count > 0)
+        UnityAction<TileController> action;
+        bool onlyCountry = false;
+        if (tileLucky.percentage != 0)
         {
-            UnityAction<TileController> action;
-            bool onlyCountry = false;
-            if (tileLucky.percentage != 0)
-            {
-                action = ChooseProperty_ChangeValueByTime;
-                onlyCountry = true;
-            }
-            else
-            {
-                action = ChooseProperty_BackToBank;
-            }
-            board.SetupPropertieLucky(player, action, tileLucky.ownerTileEffect, onlyCountry);
+            action = ChooseProperty_ChangeValueByTime;
+            onlyCountry = true;
         }
         else
         {
-            clicked = true;
+            action = ChooseProperty_BackToBank;
         }
+        board.SetupPropertieLucky(player, action, tileLucky.ownerTileEffect, onlyCountry);
     }
 
     private void ChooseProperty_ChangeValueByTime(TileController tile)
@@ -137,11 +130,20 @@ public class LuckyEffectManager : MonoBehaviour
     {
         if (tile)
         {
-            TileController_Country countryTile = (TileController_Country)tile;
-            countryTile.SetupMultiplier(100, countryTile.Owner);
-            countryTile.Owner = null;
-            countryTile.UpgradeLevel(0, playerController, false);
-            countryTile.roundsWithMultiplier = 0;
+            if (tile.GetType() == typeof(TileController_Country))
+            {
+                TileController_Country countryTile = (TileController_Country)tile;
+                countryTile.SetupMultiplier(100, countryTile.Owner);
+                countryTile.Owner = null;
+                countryTile.UpgradeLevel(0, playerController, false);
+                countryTile.roundsWithMultiplier = 0;
+            }
+            else
+            {
+                TileController_Wonders countryTile = (TileController_Wonders)tile;
+                countryTile.Owner = null;
+                playerController.photonView.RPC("playerController.walletController.ResetWonder_CMD", Photon.Pun.RpcTarget.All);
+            }
         }
 
         board.ResetBoard();

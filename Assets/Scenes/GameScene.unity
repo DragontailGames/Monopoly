@@ -816,6 +816,7 @@ MonoBehaviour:
   boardController: {fileID: 0}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
 --- !u!65 &45083636
 BoxCollider:
@@ -2733,6 +2734,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
   level: 0
   roundsWithMultiplier: 0
@@ -2953,7 +2955,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 115}
-  m_SizeDelta: {x: 368.66602, y: 128.811}
+  m_SizeDelta: {x: 484.7671, y: 112.97905}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &183517648
 MonoBehaviour:
@@ -4947,8 +4949,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 106.2}
+  m_SizeDelta: {x: 0, y: -212.37558}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &266309406
 MonoBehaviour:
@@ -4997,15 +4999,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 100
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 100
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 5
   m_wordSpacing: 0
@@ -5033,7 +5035,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 70, y: 50, z: 70, w: 170}
+  m_margin: {x: 70, y: 50, z: 70, w: 50}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5253,6 +5255,7 @@ MonoBehaviour:
   boardController: {fileID: 0}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
 --- !u!65 &282867492
 BoxCollider:
@@ -5558,6 +5561,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
   level: 0
   roundsWithMultiplier: 0
@@ -5753,6 +5757,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
   level: 0
   roundsWithMultiplier: 0
@@ -9095,6 +9100,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
   level: 0
   roundsWithMultiplier: 0
@@ -9511,6 +9517,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
   level: 0
   roundsWithMultiplier: 0
@@ -12428,6 +12435,7 @@ MonoBehaviour:
   boardController: {fileID: 0}
   offsetZ: 0.2
   cornerRotation: 180
+  originalColor: []
   startMoney: 400000
 --- !u!65 &560841916
 BoxCollider:
@@ -13060,6 +13068,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
   level: 0
   roundsWithMultiplier: 0
@@ -14110,6 +14119,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
   level: 0
   roundsWithMultiplier: 0
@@ -14351,6 +14361,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
   level: 0
   roundsWithMultiplier: 0
@@ -17589,6 +17600,7 @@ MonoBehaviour:
   boardController: {fileID: 0}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
 --- !u!65 &849500757
 BoxCollider:
@@ -18649,6 +18661,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
   level: 0
   roundsWithMultiplier: 0
@@ -18926,7 +18939,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 726.151, y: 493.55566}
+  m_SizeDelta: {x: 980.7208, y: 675.0497}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &929827185
 MonoBehaviour:
@@ -20116,6 +20129,7 @@ MonoBehaviour:
   boardController: {fileID: 0}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
 --- !u!65 &974903388
 BoxCollider:
@@ -20473,6 +20487,7 @@ MonoBehaviour:
   boardController: {fileID: 0}
   offsetZ: 0.2
   cornerRotation: 180
+  originalColor: []
   luckyEffect: {fileID: 236681037}
   luckyMenuController: {fileID: 1537900030}
   forceLucky: 0
@@ -24493,6 +24508,7 @@ MonoBehaviour:
   boardController: {fileID: 0}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
 --- !u!65 &1196906003
 BoxCollider:
@@ -26422,6 +26438,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
   level: 0
   roundsWithMultiplier: 0
@@ -26865,6 +26882,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 90
+  originalColor: []
 --- !u!65 &1341263036
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28327,6 +28345,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
   level: 0
   roundsWithMultiplier: 0
@@ -28397,6 +28416,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
   level: 0
   roundsWithMultiplier: 0
@@ -29188,6 +29208,7 @@ MonoBehaviour:
   boardController: {fileID: 0}
   offsetZ: 0.2
   cornerRotation: 180
+  originalColor: []
   luckyEffect: {fileID: 236681037}
   luckyMenuController: {fileID: 1537900030}
   forceLucky: 0
@@ -30031,6 +30052,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 270
+  originalColor: []
 --- !u!65 &1482467707
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30623,6 +30645,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
   level: 0
   roundsWithMultiplier: 0
@@ -32683,6 +32706,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
   level: 0
   roundsWithMultiplier: 0
@@ -33740,7 +33764,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.5
+  m_fontSize: 38.1
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -33776,7 +33800,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 15, y: 15, z: 15, w: 15}
+  m_margin: {x: 50, y: 15, z: 50, w: 15}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -36295,6 +36319,7 @@ MonoBehaviour:
   boardController: {fileID: 0}
   offsetZ: 0.2
   cornerRotation: 180
+  originalColor: []
   luckyEffect: {fileID: 236681037}
   luckyMenuController: {fileID: 1537900030}
   forceLucky: 0
@@ -36807,6 +36832,7 @@ MonoBehaviour:
   boardController: {fileID: 0}
   offsetZ: 0.2
   cornerRotation: 0
+  originalColor: []
   board: {fileID: 0}
 --- !u!65 &1821049081
 BoxCollider:
@@ -37323,6 +37349,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
   level: 0
   roundsWithMultiplier: 0
@@ -38402,6 +38429,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
   level: 0
   roundsWithMultiplier: 0
@@ -38642,6 +38670,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
   level: 0
   roundsWithMultiplier: 0
@@ -39786,6 +39815,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
   level: 0
   roundsWithMultiplier: 0
@@ -40465,6 +40495,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
   level: 0
   roundsWithMultiplier: 0
@@ -40691,6 +40722,7 @@ MonoBehaviour:
   boardController: {fileID: 479801770}
   offsetZ: 0.2
   cornerRotation: 5
+  originalColor: []
   canvas: {fileID: 1757711527}
   level: 0
   roundsWithMultiplier: 0

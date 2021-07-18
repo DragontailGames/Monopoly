@@ -80,10 +80,15 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        StartCoroutine(StartRound());
+        StartRound();
     }
 
-    public IEnumerator StartRound()
+    public void StartRound()
+    {
+        StartCoroutine(AsyncStartRound());
+    }
+
+    public IEnumerator AsyncStartRound()
     {
         PlayerController player = players[currentPlayer];
 
@@ -92,7 +97,7 @@ public class GameManager : MonoBehaviour
             yield break;
         }
 
-        if (MessageManager.Instance.TextShowing() && !player.botController)
+        if (MessageManager.Instance.TextShowing())
         {
             yield return new WaitForSeconds(3.0f);
             MessageManager.Instance.HiddenText();
@@ -122,7 +127,7 @@ public class GameManager : MonoBehaviour
             if(player.jailRow>2)
             {
                 player.inJail = false;
-                StartCoroutine(StartRound());
+                StartRound();
                 yield break;
             }
             yield return canvasManager.jailMenuController.ShowCanvasPlayer(player);
@@ -132,7 +137,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                StartCoroutine(StartRound());
+                StartRound();
             }
         }
         else
@@ -171,13 +176,13 @@ public class GameManager : MonoBehaviour
         }
         else if(doubleDice)
         {
-            StartCoroutine(player.playerController.manager.StartRound());
+            player.playerController.manager.StartRound();
         }
         else if (playerDefetead)
         {
             playerDefetead = false;
             DestroyImmediate(player.gameObject);
-            StartCoroutine(StartRound());
+            StartRound();
         }
     }
 

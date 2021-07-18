@@ -168,7 +168,6 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator ConfigDice()
     {
-        Debug.Log("Config dice marotao");
         yield return new WaitForSeconds(0.2f);
 
         if (stayAway)
@@ -391,8 +390,9 @@ public class PlayerController : MonoBehaviour
             aux.OnBuy(null);
             aux.Owner = null;
         }
-
-        Destroy(this.gameObject, 0.2f);
+        this.transform.GetChild(0).gameObject.SetActive(false);
+        //Destroy(this.GetComponent<PlayerMoveController>());
+        Destroy(this.gameObject, 0.3f);
     }
 
     public void Animate_Walk()
@@ -423,7 +423,7 @@ public class PlayerController : MonoBehaviour
     public void WinGame()
     {
         //Debug.Log((new System.Diagnostics.StackTrace()).GetFrame(1).GetMethod().Name);
-
+        manager.canvasManager.SetupEndOfGameWin(this.name);
         MessageManager.Instance.ShowMessage("<u>" + this.transform.name + "</u> ganhou o jogo");
         Debug.Log("Player win game " + this.transform.name);
     }

@@ -238,7 +238,7 @@ public class PlayerMoveController : MonoBehaviour
     {
         if(trueNext)
             playerController.manager.NextPlayer();
-        StartCoroutine(playerController.manager.StartRound());
+        playerController.manager.StartRound();
     }
 
 }

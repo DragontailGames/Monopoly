@@ -14,10 +14,11 @@ public class TileController_Start : TileController
         {
             var manager = player.manager;
 
-            //StopAllCoroutines();
+            StopAllCoroutines();
             manager.ResetTransparentMaterial();
             player.DeclareBankruptcy();
-            player.photonView.RPC("NextPlayer_CMD", Photon.Pun.RpcTarget.All, player.playerNumber == manager.players.Count);
+            Debug.Log("Pedro " + manager.currentPlayer + " - " + manager.players.Count);
+            player.photonView.RPC("NextPlayer_CMD", Photon.Pun.RpcTarget.All, manager.currentPlayer == manager.players.Count);
             yield break;
         }
 

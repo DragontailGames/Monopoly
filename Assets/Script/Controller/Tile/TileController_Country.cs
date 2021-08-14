@@ -118,12 +118,7 @@ public class TileController_Country : TileController_Buyable
         }
     }
 
-    private void Update()
-    {
-        bonus.SetActive(multiplier > 100);
-
-        down.SetActive(multiplier < 100);
-    }
+    private Color basePriceColor;
 
     public void SetupMultiplier(int multiplier, PlayerController player)
     {
@@ -134,6 +129,75 @@ public class TileController_Country : TileController_Buyable
         else
         {
             this.multiplier = multiplier;
+            if (multiplier > 100)
+            {
+                bonus.SetActive(true);
+                var mats = this.transform.GetChild(0).GetComponent<MeshRenderer>().sharedMaterials;
+                List<Material> newList = new List<Material>();
+
+                foreach (var auxMaterial in mats)
+                {
+                    if (auxMaterial.name == "PriceBase")
+                    {
+                        var mat = new Material(auxMaterial);
+                        basePriceColor = mat.color;
+                        mat.color = boardController.colorBonus;
+                        newList.Add(mat);
+                    }
+                    else
+                    {
+                        newList.Add(auxMaterial);
+                    }
+                }
+
+                this.transform.GetChild(0).GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
+            }
+            else if (multiplier < 100)
+            {
+                down.SetActive(true);
+                var mats = this.transform.GetChild(0).GetComponent<MeshRenderer>().sharedMaterials;
+                List<Material> newList = new List<Material>();
+
+                foreach (var auxMaterial in mats)
+                {
+                    if (auxMaterial.name == "PriceBase")
+                    {
+                        var mat = new Material(auxMaterial);
+                        basePriceColor = mat.color;
+                        mat.color = boardController.colorDown;
+                        newList.Add(mat);
+                    }
+                    else
+                    {
+                        newList.Add(auxMaterial);
+                    }
+                }
+
+                this.transform.GetChild(0).GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
+            }
+            else
+            {
+                bonus.SetActive(false);
+                down.SetActive(false);
+                var mats = this.transform.GetChild(0).GetComponent<MeshRenderer>().sharedMaterials;
+                List<Material> newList = new List<Material>();
+
+                foreach (var auxMaterial in mats)
+                {
+                    if (auxMaterial.name == "PriceBase")
+                    {
+                        var mat = new Material(auxMaterial);
+                        mat.color = basePriceColor;
+                        newList.Add(mat);
+                    }
+                    else
+                    {
+                        newList.Add(auxMaterial);
+                    }
+                }
+
+                this.transform.GetChild(0).GetComponent<MeshRenderer>().sharedMaterials = newList.ToArray();
+            }
         }
 
     }

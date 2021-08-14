@@ -21,6 +21,8 @@ public class BoardController : MonoBehaviour
 
     public GameObject bonus, down;
 
+    public Color32 colorBonus, colorDown;
+
     private void Start()
     {
         foreach(TileController aux in board.transform.GetComponentsInChildren<TileController>())

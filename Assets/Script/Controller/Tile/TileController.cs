@@ -146,17 +146,11 @@ public class TileController : MonoBehaviour
                 Material[] mtList = this.transform.Find("Base").GetComponent<MeshRenderer>().sharedMaterials;
                 List<Material> newList = new List<Material>();
 
-                Debug.Log("t1 " + mtList.Length);
-
                 for (int i = 0; i < mtList.Length; i++)
                 {
-                    Debug.Log("t2 " + i);
                     Material auxMaterial = mtList[i];
-                    Debug.Log("t3 " + i);
                     var mat = new Material(auxMaterial);
-                    Debug.Log("t4 " + i);
                     mat.color = originalColor[i];
-                    Debug.Log("t5 " + i);
                     newList.Add(mat);
                 }
 

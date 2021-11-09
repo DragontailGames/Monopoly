@@ -1515,7 +1515,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\rPay to get out of jail immediately"
+  m_text: Pague para sair imediatamente
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
   m_sharedMaterial: {fileID: -615998057318200296, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
@@ -3612,7 +3612,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &215220380
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3705,7 +3705,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hostile Takeover
+  m_text: "Aquisi\xE7\xE3o Hostil"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
   m_sharedMaterial: {fileID: -615998057318200296, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
@@ -4384,7 +4384,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pay Rent
+  m_text: Pague o Aluguel
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
   m_sharedMaterial: {fileID: -615998057318200296, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
@@ -4944,7 +4944,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Voce declarou falencia...
+  m_text: "Voce declarou fal\xEAncia..."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
   m_sharedMaterial: {fileID: -615998057318200296, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
@@ -6541,7 +6541,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pay the rent of the property
+  m_text: Pagar o aluguel da propriedade.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
   m_sharedMaterial: {fileID: -615998057318200296, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
@@ -7558,7 +7558,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -143}
-  m_SizeDelta: {x: 0, y: 60}
+  m_SizeDelta: {x: -30.000092, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &376146657
 MonoBehaviour:
@@ -7580,7 +7580,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rent rate: <b>$25k</b>'
+  m_text: 'Taxa de aluguel: <b>$25k</b>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
   m_sharedMaterial: {fileID: -615998057318200296, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
@@ -7607,7 +7607,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.95
+  m_fontSize: 38.75
   m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7885,7 +7885,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PAY
+  m_text: Pagar resgate
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
   m_sharedMaterial: {fileID: -615998057318200296, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
@@ -9921,7 +9921,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -143}
-  m_SizeDelta: {x: 0, y: 60}
+  m_SizeDelta: {x: -30.000092, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &477549467
 MonoBehaviour:
@@ -9943,7 +9943,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rent rate: <b>$25k</b>'
+  m_text: 'Taxa de aluguel: <b>$25k</b>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
   m_sharedMaterial: {fileID: -615998057318200296, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
@@ -9970,7 +9970,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.95
+  m_fontSize: 38.75
   m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10733,7 +10733,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -143}
-  m_SizeDelta: {x: 0, y: 60}
+  m_SizeDelta: {x: -30.000092, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &513592614
 MonoBehaviour:
@@ -10755,7 +10755,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rent rate: <b>$25k</b>'
+  m_text: 'Taxa de aluguel: <b>$25k</b>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
   m_sharedMaterial: {fileID: -615998057318200296, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
@@ -10782,7 +10782,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.95
+  m_fontSize: 38.75
   m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -15626,6 +15626,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 1499671779}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 044711b911abdbc459bfb07dd70a1ee2, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 044711b911abdbc459bfb07dd70a1ee2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 100.00004
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 044711b911abdbc459bfb07dd70a1ee2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 100.00004
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 044711b911abdbc459bfb07dd70a1ee2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -15636,6 +15648,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 044711b911abdbc459bfb07dd70a1ee2, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 044711b911abdbc459bfb07dd70a1ee2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 044711b911abdbc459bfb07dd70a1ee2, type: 3}
       propertyPath: m_LocalRotation.x
@@ -15650,14 +15666,6 @@ PrefabInstance:
       value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 044711b911abdbc459bfb07dd70a1ee2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071067
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 044711b911abdbc459bfb07dd70a1ee2, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 044711b911abdbc459bfb07dd70a1ee2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -15668,14 +15676,6 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 044711b911abdbc459bfb07dd70a1ee2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 044711b911abdbc459bfb07dd70a1ee2, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 100.00004
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 044711b911abdbc459bfb07dd70a1ee2, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 100.00004
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 044711b911abdbc459bfb07dd70a1ee2, type: 3}
       propertyPath: m_Name
@@ -16493,7 +16493,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rent rate: <b>$25k</b>'
+  m_text: 'Taxa de aluguel: <b>$25k</b>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
   m_sharedMaterial: {fileID: -615998057318200296, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
@@ -18685,7 +18685,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: RESCUE BOAT
+  m_text: Usar Sinalizador
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
   m_sharedMaterial: {fileID: -615998057318200296, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
@@ -18712,7 +18712,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 43.45
+  m_fontSize: 37.05
   m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -21049,7 +21049,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -143}
-  m_SizeDelta: {x: 0, y: 60}
+  m_SizeDelta: {x: -30.000092, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1015628395
 MonoBehaviour:
@@ -21071,7 +21071,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rent rate: <b>$25k</b>'
+  m_text: 'Taxa de aluguel: <b>$25k</b>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
   m_sharedMaterial: {fileID: -615998057318200296, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
@@ -21098,7 +21098,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.95
+  m_fontSize: 38.75
   m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -22707,7 +22707,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1096089426
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23222,12 +23222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1 &1133289479
 GameObject:
   m_ObjectHideFlags: 0
@@ -23441,7 +23435,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DOUBLE DICE
+  m_text: Dados Repetidos
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
   m_sharedMaterial: {fileID: -615998057318200296, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
@@ -23468,7 +23462,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 43.45
+  m_fontSize: 36.85
   m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -25413,7 +25407,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pay the rent of the property
+  m_text: Pague o aluguel desta propriedade
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
   m_sharedMaterial: {fileID: -615998057318200296, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
@@ -26234,7 +26228,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Try equal dice to get out of jail immediately
+  m_text: Tente rolar dados repetidos para sair
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
   m_sharedMaterial: {fileID: -615998057318200296, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
@@ -26955,7 +26949,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Use or boat to leave jail
+  m_text: Utilize o sinalizador para sair
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
   m_sharedMaterial: {fileID: -615998057318200296, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
@@ -26982,7 +26976,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37.2
+  m_fontSize: 36.85
   m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -28480,8 +28474,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffcc608ca21bcda42a545d7baa9eb28a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newFont: {fileID: 0}
-  newFontTMP: {fileID: 0}
+  newFont: {fileID: 12800000, guid: 5f7641079eac1af4b844422d85aebcb7, type: 3}
+  newFontTMP: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
 --- !u!1 &1421682376
 GameObject:
   m_ObjectHideFlags: 0
@@ -29573,10 +29567,10 @@ MonoBehaviour:
   - {fileID: 56189057}
   - {fileID: 1664856160}
   constructionName:
-  - TERRAIN
-  - HOUSE
-  - MANSION
-  - HOTEL
+  - Terreno
+  - Casa
+  - "Mans\xE3o"
+  - Hotel
   iconHouse:
   - {fileID: 21300000, guid: b3327f1e5330a4d4b911d4ead8828a62, type: 3}
   - {fileID: 21300000, guid: e686ea7cc24adf34b9f7d1df8aece5a9, type: 3}
@@ -29814,7 +29808,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Luck or Reverse
+  m_text: "Sorte ou Rev\xE9s"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
   m_sharedMaterial: {fileID: -615998057318200296, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
@@ -29847,7 +29841,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 50
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -30984,7 +30978,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The rent of a wonder equals 50k per wonder obtained by the player
+  m_text: Compre esta Maravilha, a taxa de aluguel aumenta para cada Maravilha obtida.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
   m_sharedMaterial: {fileID: -615998057318200296, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
@@ -31118,7 +31112,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pay Rent
+  m_text: Pagar aluguel
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
   m_sharedMaterial: {fileID: -615998057318200296, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
@@ -35857,7 +35851,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 29
+  m_fontSize: 26.05
   m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -37720,7 +37714,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hostile Takeover
+  m_text: "Aquisi\xE7\xE3o Hostil"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
   m_sharedMaterial: {fileID: -615998057318200296, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
@@ -39403,7 +39397,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Purchase this property and its buildings
+  m_text: "Comprar propriedade  e constru\xE7\xF5es."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
   m_sharedMaterial: {fileID: -615998057318200296, guid: 9606d56a5b51ac94abd98653841dfc0f, type: 2}
@@ -41413,6 +41407,22 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 9e195807b6e8725418ebf8e89d10820d, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9e195807b6e8725418ebf8e89d10820d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 33.05681
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9e195807b6e8725418ebf8e89d10820d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 32.998764
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9e195807b6e8725418ebf8e89d10820d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9e195807b6e8725418ebf8e89d10820d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.124
       objectReference: {fileID: 0}
@@ -41423,6 +41433,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 9e195807b6e8725418ebf8e89d10820d, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.038
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9e195807b6e8725418ebf8e89d10820d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e195807b6e8725418ebf8e89d10820d, type: 3}
       propertyPath: m_LocalRotation.x
@@ -41437,14 +41451,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e195807b6e8725418ebf8e89d10820d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 9e195807b6e8725418ebf8e89d10820d, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 9e195807b6e8725418ebf8e89d10820d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -90
       objectReference: {fileID: 0}
@@ -41455,18 +41461,6 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 9e195807b6e8725418ebf8e89d10820d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 9e195807b6e8725418ebf8e89d10820d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 33.05681
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 9e195807b6e8725418ebf8e89d10820d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 32.998764
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 9e195807b6e8725418ebf8e89d10820d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9e195807b6e8725418ebf8e89d10820d, type: 3}
       propertyPath: m_Name
@@ -43932,6 +43926,10 @@ PrefabInstance:
       value: Dice
       objectReference: {fileID: 0}
     - target: {fileID: 3447002501606693666, guid: 332bc6c31e7db864f969e276832032d7, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3447002501606693666, guid: 332bc6c31e7db864f969e276832032d7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -43944,6 +43942,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3447002501606693666, guid: 332bc6c31e7db864f969e276832032d7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: 3447002501606693666, guid: 332bc6c31e7db864f969e276832032d7, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0.7071068
       objectReference: {fileID: 0}
@@ -43954,14 +43956,6 @@ PrefabInstance:
     - target: {fileID: 3447002501606693666, guid: 332bc6c31e7db864f969e276832032d7, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3447002501606693666, guid: 332bc6c31e7db864f969e276832032d7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071067
-      objectReference: {fileID: 0}
-    - target: {fileID: 3447002501606693666, guid: 332bc6c31e7db864f969e276832032d7, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3447002501606693666, guid: 332bc6c31e7db864f969e276832032d7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

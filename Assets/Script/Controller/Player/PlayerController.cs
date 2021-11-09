@@ -372,6 +372,7 @@ public class PlayerController : MonoBehaviour
     public void DeclareBankruptcy()
     {
         photonView.RPC("DeclareBankruptcy_CMD", RpcTarget.All);
+        Debug.Log("teste bankruptcy");
         if (!botController)
         {
             manager.canvasManager.endOfGame.SetActive(true);

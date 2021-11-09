@@ -12,9 +12,10 @@ public class TileController_Start : TileController
 
         if (!player.firstBuy)
         {
+            Debug.Log("Entrou no Player First Buy");
             var manager = player.manager;
 
-            StopAllCoroutines();
+          //  StopAllCoroutines();
             manager.ResetTransparentMaterial();
             player.DeclareBankruptcy();
             Debug.Log("Pedro " + manager.currentPlayer + " - " + manager.players.Count);

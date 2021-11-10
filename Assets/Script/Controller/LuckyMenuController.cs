@@ -14,6 +14,12 @@ public class LuckyMenuController : MonoBehaviour
 
     public Image icon;
 
+    public AudioClip luckyAudio;
+
+    public AudioClip reverseAudio;
+
+    public AudioSource audioSource;
+
     public IEnumerator LuckyStart(TileLucky lucky, PlayerController player)
     {
         if(!player.botController)
@@ -21,7 +27,18 @@ public class LuckyMenuController : MonoBehaviour
 
         clicked = false;
 
-        icon.sprite = lucky.luckType == EnumDt.luckType.luck ? iconLuck : iconReverse;
+        bool isLucky = lucky.luckType == EnumDt.luckType.luck;
+
+        icon.sprite = isLucky ? iconLuck : iconReverse;
+
+        if(isLucky)
+        {
+            audioSource.PlayOneShot(luckyAudio);
+        }
+        else
+        {
+            audioSource.PlayOneShot(reverseAudio);
+        }
 
         luckyDescription.text = lucky.text;
 

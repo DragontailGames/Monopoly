@@ -24,4 +24,6 @@ public class Manager : MonoBehaviour
     public bool isMultiplayer = false;
 
     public int bots;
+
+    public AudioManager audioManager;
 }

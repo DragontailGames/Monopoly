@@ -33,6 +33,7 @@ public class PlayerWalletController : MonoBehaviour
         StartCoroutine(controller.canvasController.DebitAnimation(value, currentMoney));
         currentMoney -= value;
         whenUpdateMoney?.Invoke();
+        Manager.instance.audioManager.PlayAudio(AudioType.pay);
     }
 
     public void CreditValue(int value)

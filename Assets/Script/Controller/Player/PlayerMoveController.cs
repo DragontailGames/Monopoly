@@ -71,6 +71,8 @@ public class PlayerMoveController : MonoBehaviour
 
             yield return Move(OffsetRotation(newPos), i == dest, false);
 
+            Manager.instance.audioManager.PlayAudio(AudioType.move);
+
             position = i;
             playerController.photonView.RPC("SetCurrentTile_CMD", RpcTarget.All, tile.index);
             yield return tile.OnPlayerPass(playerController);

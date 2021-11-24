@@ -22,4 +22,15 @@ public class SettingsManager : MonoBehaviour
     #endregion
 
     public ColorSettings colorSettings;
+
+    public void ChangeVolume(float newVolume)
+    {
+        PlayerPrefs.SetFloat("volume", newVolume);
+        AudioListener.volume = PlayerPrefs.GetFloat("volume");
+    }
+
+    private void Start()
+    {
+        AudioListener.volume = PlayerPrefs.GetFloat("volume");
+    }
 }
